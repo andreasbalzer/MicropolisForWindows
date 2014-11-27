@@ -1,0 +1,33 @@
+﻿<!--
+    // This file is part of Micropolis for WinRT.
+    // Copyright (C) 2014 Andreas Balzer, Felix Dietrich, Florian Thurnwald and Ivo Vutov
+    // Portions Copyright (C) MicropolisJ by Jason Long
+    // Portions Copyright (C) Micropolis Don Hopkins
+    // Portions Copyright (C) 1989-2007 Electronic Arts Inc.
+    //
+    // Micropolis for WinRT is free software; you can redistribute it and/or modify
+    // it under the terms of the GNU GPLv3, with Additional terms.
+    // See the README file, included in this distribution, for details.
+    // Project website: http://code.google.com/p/micropolis/
+    -->
+    <Application
+    x:Class="Micropolis.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converters="using:Micropolis.Converters"
+    xmlns:local="using:Micropolis">
+
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/resources/styles/colors.xaml"/>
+                <ResourceDictionary Source="/resources/styles/controls.xaml"/>
+                <ResourceDictionary Source="/resources/styles/pathicons.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            
+            <!--<FontFamily x:Key="ContentControlThemeFontFamily">/resources/fonts/dos437.ttf#Perfect DOS VGA 437 Win</FontFamily>-->
+
+            <converters:LocalizationProvider x:Key="Strings"/>            
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

@@ -1,0 +1,8 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Micropolis.resources.styles">
+    
+    <Color x:Key="BarBackgroundColor">#f0f0f0</Color>
+    <SolidColorBrush x:Key="BarBackgroundBrush" Color="{StaticResource BarBackgroundColor}"/>
+</ResourceDictionary>

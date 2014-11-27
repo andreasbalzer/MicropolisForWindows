@@ -1,0 +1,158 @@
+﻿<!--
+    // This file is part of Micropolis for WinRT.
+    // Copyright (C) 2014 Andreas Balzer, Felix Dietrich, Florian Thurnwald and Ivo Vutov
+    // Portions Copyright (C) MicropolisJ by Jason Long
+    // Portions Copyright (C) Micropolis Don Hopkins
+    // Portions Copyright (C) 1989-2007 Electronic Arts Inc.
+    //
+    // Micropolis for WinRT is free software; you can redistribute it and/or modify
+    // it under the terms of the GNU GPLv3, with Additional terms.
+    // See the README file, included in this distribution, for details.
+    // Project website: http://code.google.com/p/micropolis/
+    -->
+    <UserControl
+    x:Class="Micropolis.BudgetDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Micropolis"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="600"
+    d:DesignWidth="500">
+
+    <Border BorderBrush="White" BorderThickness="1" Background="Black">
+        <Grid Background="Black" Margin="5,5,5,5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBlock x:Name="titleTbl" Text="Einnahmen" FontSize="20" HorizontalAlignment="Center" Grid.Row="0"></TextBlock>
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.3*" />
+                    <ColumnDefinition Width="0.3*" />
+                    <ColumnDefinition Width="0.3*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock x:Name="tayTbl" Text="Steuerrate"  Grid.Row="0" Grid.Column="1" />
+                <TextBlock x:Name="yearlyIncomeTbl" Text="Jährliche Einkünfte"  Grid.Row="0" Grid.Column="2" />
+                <TextBlock x:Name="taxIncomeTbl" Text="Steuereinnahmen"  Grid.Row="1" Grid.Column="0" />
+                <Slider x:Name="taxRateEntry" Grid.Row="1" Grid.Column="1" Minimum="0" Maximum="20" />
+                <TextBlock x:Name="taxRevenueLbl" Text="$0"  Grid.Row="1" Grid.Column="2" />
+            </Grid>
+
+            <Grid Grid.Row="2">
+                <Border Height="1" BorderBrush="White" BorderThickness="1"></Border>
+            </Grid>
+
+            <Grid Grid.Row="3">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.25*" />
+                    <ColumnDefinition Width="0.25*" />
+                    <ColumnDefinition Width="0.25*" />
+                    <ColumnDefinition Width="0.25*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock x:Name="financingTbl" Text="Höhe der Finanzierung"  Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" />
+                <TextBlock x:Name="requestedTbl" Text="Angefordert"  Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right" />
+                <TextBlock x:Name="payedTbl" Text="Bezahlt"  Grid.Row="0" Grid.Column="3" HorizontalAlignment="Right" />
+
+                <TextBlock x:Name="trafficExpensesTbl" Text="Ausgaben Verkehr"  Grid.Row="1" Grid.Column="0" />
+                <Slider x:Name="roadFundEntry" Grid.Row="1" Grid.Column="1" Minimum="0" Maximum="100" />
+                <TextBlock x:Name="roadFundRequest" Text="$0"  Grid.Row="1" Grid.Column="2" HorizontalAlignment="Right" />
+                <TextBlock x:Name="roadFundAlloc" Text="$0"  Grid.Row="1" Grid.Column="3" HorizontalAlignment="Right" />
+
+                <TextBlock x:Name="policeExpensesTbl" Text="Ausgaben Polizei"  Grid.Row="2" Grid.Column="0" />
+                <Slider x:Name="policeFundEntry" Grid.Row="2" Grid.Column="1" Minimum="0" Maximum="100" />
+                <TextBlock x:Name="policeFundRequest" Text="$0"  Grid.Row="2" Grid.Column="2" HorizontalAlignment="Right" />
+                <TextBlock x:Name="policeFundAlloc" Text="$0"  Grid.Row="2" Grid.Column="3" HorizontalAlignment="Right" />
+
+                <TextBlock x:Name="fireExpensesTbl" Text="Ausgaben Feuerwehr"  Grid.Row="3" Grid.Column="0" />
+                <Slider x:Name="fireFundEntry" Grid.Row="3" Grid.Column="1" Minimum="0" Maximum="100"  />
+                <TextBlock x:Name="fireFundRequest" Text="$0"  Grid.Row="3" Grid.Column="2" HorizontalAlignment="Right" />
+                <TextBlock x:Name="fireFundAlloc" Text="$0"  Grid.Row="3" Grid.Column="3" HorizontalAlignment="Right" />
+            </Grid>
+
+            <Grid Grid.Row="4">
+                <Border Height="1" BorderBrush="White" BorderThickness="1"></Border>
+            </Grid>
+
+            <Grid Grid.Row="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.25*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="0.5*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <TextBlock x:Name="yearlyReportTbl" FontStyle="Italic" Text="Jahresabrechnung"  Grid.Row="0" Grid.Column="0" Foreground="DeepPink" />
+                <TextBlock x:Name="moneyAtBeginningOfYearTbl" Text="Geld am Anfang des Jahres"  Grid.Row="1" Grid.Column="0" />
+                <TextBlock x:Name="taxesMadeTbl" Text="Steuern erhoben"  Grid.Row="2" Grid.Column="0" />
+                <TextBlock x:Name="investionsTbl" Text="Investitionen"  Grid.Row="3" Grid.Column="0" />
+                <TextBlock x:Name="costsTbl" Text="Betriebskosten"  Grid.Row="4" Grid.Column="0" />
+                <TextBlock x:Name="moneyAtEndOfYearTbl" Text="Geld am Ende des Jahres"  Grid.Row="5" Grid.Column="0" />
+
+                <TextBlock x:Name="thLbl1" FontStyle="Italic" Grid.Row="0" Grid.Column="1" Text="" HorizontalAlignment="Right" Foreground="DeepPink" Margin="0,0,20,0" />
+                <TextBlock x:Name="previousBalanceLbl1" Text=""  Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" />
+                <TextBlock x:Name="taxIncomeLbl1" Text=""  Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right" />
+                <TextBlock x:Name="capExpensesLbl1" Text=""  Grid.Row="3" Grid.Column="1" HorizontalAlignment="Right" />
+                <TextBlock x:Name="opExpensesLbl1" Text=""  Grid.Row="4" Grid.Column="1" HorizontalAlignment="Right" />
+                <TextBlock x:Name="newBalanceLbl1" Text=""  Grid.Row="5" Grid.Column="1" HorizontalAlignment="Right" />
+
+                <TextBlock x:Name="thLbl2" FontStyle="Italic" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right" Text="" Foreground="DeepPink" />
+                <TextBlock x:Name="previousBalanceLbl2" Text=""  Grid.Row="1" Grid.Column="2" HorizontalAlignment="Right" />
+                <TextBlock x:Name="taxIncomeLbl2" Text=""  Grid.Row="2" Grid.Column="2" HorizontalAlignment="Right" />
+                <TextBlock x:Name="capExpensesLbl2" Text=""  Grid.Row="3" Grid.Column="2" HorizontalAlignment="Right" />
+                <TextBlock x:Name="opExpensesLbl2" Text=""  Grid.Row="4" Grid.Column="2" HorizontalAlignment="Right" />
+                <TextBlock x:Name="newBalanceLbl2" Text=""  Grid.Row="5" Grid.Column="2" HorizontalAlignment="Right" />
+            </Grid>
+
+            <Grid Grid.Row="6">
+                <Border Height="1" BorderBrush="White" BorderThickness="1"></Border>
+            </Grid>
+
+            <Grid Grid.Row="7">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <CheckBox x:Name="autoBudgetBtn" Grid.Column="0" Content="Automatischer Haushalt" />
+                <CheckBox x:Name="pauseBtn" Grid.Column="1"  Content="Spiel anhalten" />
+            </Grid>
+
+            <Grid Grid.Row="9">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Button x:Name="continueBtn" Grid.Column="0" Content="Weitermachen mit diesen Angaben" />
+                <Button x:Name="resetBtn" Grid.Column="1"  Content="Zurücksetzen auf Ursprungswerte" />
+            </Grid>
+        </Grid>
+    </Border>
+</UserControl>
