@@ -1225,14 +1225,14 @@ namespace Micropolis
             SaveButton.Text = Strings.GetString("menu.game.save");
             SaveAsButton.Text = Strings.GetString("menu.game.save_as");
 
-            SettingsButton.Label = Strings.GetString("menu.options");
-            DifficultyButton.Label = Strings.GetString("menu.difficulty");
+            SettingsButtonContent.Text = Strings.GetString("menu.options");
+            DifficultyButtonContent.Text = Strings.GetString("menu.difficulty");
             AutoBudgetCheckBox.Text = Strings.GetString("menu.options.auto_budget");
             AutoBulldozeCheckBox.Text = Strings.GetString("menu.options.auto_bulldoze");
             DisastersCheckBox.Text = Strings.GetString("menu.options.disasters");
             SoundCheckBox.Text = Strings.GetString("menu.options.sound");
 
-            DisasterButton.Label = Strings.GetString("menu.disasters");
+            DisasterButtonContent.Text = Strings.GetString("menu.disasters");
             MonsterButton.Text = Strings.GetString("menu.disasters.MONSTER");
             FireButton.Text = Strings.GetString("menu.disasters.FIRE");
             FloodButton.Text = Strings.GetString("menu.disasters.FLOOD");
@@ -1240,7 +1240,7 @@ namespace Micropolis
             TornadoButton.Text = Strings.GetString("menu.disasters.TORNADO");
             EarthquakeButton.Text = Strings.GetString("menu.disasters.EARTHQUAKE");
 
-            SpeedButton.Label = Strings.GetString("menu.speed");
+            SpeedButtonContent.Text = Strings.GetString("menu.speed");
             
             _difficultyMenuItems = new Dictionary<int, ToggleMenuFlyoutItem>();
             for (int i = GameLevel.MIN_LEVEL; i <= GameLevel.MAX_LEVEL; i++)
@@ -1285,9 +1285,9 @@ namespace Micropolis
             SpeedMenu.Items.Add(menuItemb);
             _priorityMenuItems.Add(Speeds.Speed["PAUSED"], menuItemb);
             
-            BudgetButton.Label = Strings.GetString("menu.windows.budget");
-            EvaluationButton.Label = Strings.GetString("menu.windows.evaluation");
-            GraphButton.Label = Strings.GetString("menu.windows.graph");
+            BudgetButton.Content = Strings.GetString("menu.windows.budget");
+            EvaluationButton.Content = Strings.GetString("menu.windows.evaluation");
+            GraphButton.Content = Strings.GetString("menu.windows.graph");
         }
 
 
@@ -1502,15 +1502,6 @@ namespace Micropolis
         public void ShowNewGameDialogPanel()
         {
             NewGameDialogPaneOuter.Visibility = Visibility.Visible;
-            HideAppBars();
-        }
-
-        /// <summary>
-        ///     Hides the application bars.
-        /// </summary>
-        private void HideAppBars()
-        {
-            BottomAppBar.IsOpen = false;
         }
 
         /// <summary>
@@ -1519,15 +1510,6 @@ namespace Micropolis
         public void HideNewGameDialogPanel()
         {
             NewGameDialogPaneOuter.Visibility = Visibility.Collapsed;
-            ShowAppBars();
-        }
-
-        /// <summary>
-        ///     Shows the application bars.
-        /// </summary>
-        private void ShowAppBars()
-        {
-            BottomAppBar.IsOpen = true;
         }
 
         /// <summary>
@@ -2201,7 +2183,6 @@ namespace Micropolis
         private void ShowBudgetDialog()
         {
             NewBudgetDialogPaneOuter.Visibility = Visibility.Visible;
-            BottomAppBar.IsOpen = false;
         }
 
         /// <summary>
@@ -2210,7 +2191,6 @@ namespace Micropolis
         public void HideBudgetDialog()
         {
             NewBudgetDialogPaneOuter.Visibility = Visibility.Collapsed;
-            BottomAppBar.IsOpen = true;
         }
 
         /// <summary>
@@ -2371,29 +2351,6 @@ namespace Micropolis
         internal float GetZoomFactor()
         {
             return DrawingAreaScroll.ZoomFactor;
-        }
-
-        /// <summary>
-        /// Handles the Click event of the UIVisibilityButton control to toggle control visibility.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
-        private void UIVisibilityButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (DemandInd.Visibility == Visibility.Visible)
-            {
-                DemandInd.Visibility = Visibility.Collapsed;
-                MiniMapPane.Visibility = Visibility.Collapsed;
-                //InformationBar.Visibility = Visibility.Collapsed;
-                MessagesScrollViewerPane.Visibility = Visibility.Collapsed;
-            }
-            else
-            {
-                DemandInd.Visibility = Visibility.Visible;
-                MiniMapPane.Visibility = Visibility.Visible;
-                //InformationBar.Visibility = Visibility.Visible;
-                MessagesScrollViewerPane.Visibility = Visibility.Visible;
-            }
         }
 
         public double HorizontalMapOffset { get { return DrawingAreaScroll.HorizontalOffset; }}

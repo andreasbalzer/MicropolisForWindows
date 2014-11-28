@@ -55,65 +55,6 @@
         </Style>
     </Page.Resources>
 
-    <Page.BottomAppBar>
-        <CommandBar x:Name="BottomAppBar" Background="#007ACC" BorderBrush="#007ACC">
-            <!--<CommandBar.SecondaryCommands>
-                <AppBarButton Icon="Document" Label="New" x:Name="NewButton" Click="NewButton_Click" />
-                <AppBarButton Icon="Home" Label="Load" x:Name="LoadButton" Click="LoadButton_Click" />
-                <AppBarButton Icon="Save" Label="Save" x:Name="SaveButton" Click="SaveButton_Click" />
-                <AppBarButton Icon="SaveLocal" Label="Save as" x:Name="SaveAsButton" Click="SaveAsButton_Click" />
-            </CommandBar.SecondaryCommands>-->
-
-
-            <AppBarButton x:Name="DifficultyButton" Icon="Emoji" Label="Difficulty">
-                <Button.Flyout>
-                    <MenuFlyout x:Name="LevelMenu" />
-                </Button.Flyout>
-            </AppBarButton>
-
-            <AppBarButton x:Name="SettingsButton" Icon="Setting" Label="Settings">
-                <Button.Flyout>
-                    <MenuFlyout>
-                        <ToggleMenuFlyoutItem x:Name="AutoBudgetCheckBox" Text="Auto Budget"
-                                              Click="AutoBudgetMenuItem_Click" />
-                        <ToggleMenuFlyoutItem x:Name="AutoBulldozeCheckBox" Text="Auto Bulldoze"
-                                              Click="AutoBulldozeCheckBox_Click" />
-                        <ToggleMenuFlyoutItem x:Name="DisastersCheckBox" Text="Disasters"
-                                              Click="DisastersCheckBox_Click" />
-                        <ToggleMenuFlyoutItem x:Name="SoundCheckBox" Text="Sounds" Click="SoundCheckBox_Click" />
-                    </MenuFlyout>
-                </Button.Flyout>
-            </AppBarButton>
-
-            <AppBarButton x:Name="DisasterButton" Icon="Add" Label="Disaster">
-                <Button.Flyout>
-                    <MenuFlyout>
-                        <MenuFlyoutItem x:Name="MonsterButton" Text="Monster" Click="MonsterButton_Click" />
-                        <MenuFlyoutItem x:Name="FireButton" Text="Fire" Click="FireButton_Click" />
-                        <MenuFlyoutItem x:Name="FloodButton" Text="Flood" Click="FloodButton_Click" />
-                        <MenuFlyoutItem x:Name="MeltdownButton" Text="Meltdown" Click="MeltdownButton_Click" />
-                        <MenuFlyoutItem x:Name="TornadoButton" Text="Tornado" Click="TornadoButton_Click" />
-                        <MenuFlyoutItem x:Name="EarthquakeButton" Text="Earthquake" Click="EarthquakeButton_Click" />
-                    </MenuFlyout>
-                </Button.Flyout>
-            </AppBarButton>
-
-            <AppBarButton x:Name="SpeedButton" Icon="Clock" Label="Speed">
-                <Button.Flyout>
-                    <MenuFlyout x:Name="SpeedMenu" />
-                </Button.Flyout>
-            </AppBarButton>
-
-            <AppBarSeparator />
-
-            <AppBarButton Icon="View" Label="Shrink UI" x:Name="UiVisibilityButton" Click="UIVisibilityButton_Click" />
-
-            <AppBarButton Icon="View" Label="Budget" x:Name="BudgetButton" Click="BudgetButton_Click" />
-            <AppBarButton Icon="View" Label="Evaluation" x:Name="EvaluationButton" Click="EvaluationButton_Click" />
-            <AppBarButton Icon="View" Label="Graphs" x:Name="GraphButton" Click="GraphButton_Click" />
-        </CommandBar>
-    </Page.BottomAppBar>
-
     <Grid Background="#6666E6">
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
@@ -192,7 +133,54 @@
         </Grid>
 
         <Grid x:Uid="BottomBar" Grid.Row="2" Background="{StaticResource BarBackgroundBrush}">
+            <StackPanel Orientation="Horizontal">
+                <Button x:Name="DifficultyButton" Style="{StaticResource BarButtonStyle}">
+                    <TextBlock x:Name="DifficultyButtonContent">Difficulty</TextBlock>
+                    <Button.Flyout>
+                        <MenuFlyout x:Name="LevelMenu" />
+                    </Button.Flyout>
+                </Button>
 
+                <Button x:Name="SettingsButton" Style="{StaticResource BarButtonStyle}">
+                    <TextBlock x:Name="SettingsButtonContent">Settings</TextBlock>
+                    <Button.Flyout>
+                        <MenuFlyout>
+                            <ToggleMenuFlyoutItem x:Name="AutoBudgetCheckBox" Text="Auto Budget"
+                                                  Click="AutoBudgetMenuItem_Click" />
+                            <ToggleMenuFlyoutItem x:Name="AutoBulldozeCheckBox" Text="Auto Bulldoze"
+                                                  Click="AutoBulldozeCheckBox_Click" />
+                            <ToggleMenuFlyoutItem x:Name="DisastersCheckBox" Text="Disasters"
+                                                  Click="DisastersCheckBox_Click" />
+                            <ToggleMenuFlyoutItem x:Name="SoundCheckBox" Text="Sounds" Click="SoundCheckBox_Click" />
+                        </MenuFlyout>
+                    </Button.Flyout>
+                </Button>
+
+                <Button x:Name="DisasterButton" Style="{StaticResource BarButtonStyle}">
+                    <TextBlock x:Name="DisasterButtonContent">Disaster</TextBlock>
+                    <Button.Flyout>
+                        <MenuFlyout>
+                            <MenuFlyoutItem x:Name="MonsterButton" Text="Monster" Click="MonsterButton_Click" />
+                            <MenuFlyoutItem x:Name="FireButton" Text="Fire" Click="FireButton_Click" />
+                            <MenuFlyoutItem x:Name="FloodButton" Text="Flood" Click="FloodButton_Click" />
+                            <MenuFlyoutItem x:Name="MeltdownButton" Text="Meltdown" Click="MeltdownButton_Click" />
+                            <MenuFlyoutItem x:Name="TornadoButton" Text="Tornado" Click="TornadoButton_Click" />
+                            <MenuFlyoutItem x:Name="EarthquakeButton" Text="Earthquake" Click="EarthquakeButton_Click" />
+                        </MenuFlyout>
+                    </Button.Flyout>
+                </Button>
+
+                <Button x:Name="SpeedButton" Style="{StaticResource BarButtonStyle}">
+                    <TextBlock x:Name="SpeedButtonContent">Speed</TextBlock>
+                    <Button.Flyout>
+                        <MenuFlyout x:Name="SpeedMenu" />
+                    </Button.Flyout>
+                </Button>
+
+                <Button Content="Budget" x:Name="BudgetButton" Click="BudgetButton_Click" Style="{StaticResource BarButtonStyle}" />
+                <Button Content="Evaluation" x:Name="EvaluationButton" Click="EvaluationButton_Click" Style="{StaticResource BarButtonStyle}" />
+                <Button Content="Graphs" x:Name="GraphButton" Click="GraphButton_Click" Style="{StaticResource BarButtonStyle}" />
+            </StackPanel>
         </Grid>
 
         <Grid Grid.Row="1">
