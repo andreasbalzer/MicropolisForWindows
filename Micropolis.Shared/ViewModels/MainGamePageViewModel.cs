@@ -26,6 +26,7 @@ namespace Micropolis.ViewModels
         public MainGamePageViewModel()
         {
             ToggleMiniMapCommand = new DelegateCommand(ToggleMiniMap);
+            ToggleMessagesCommand = new DelegateCommand(ToggleMessages);
         }
 
         public bool MessagesVisible
@@ -38,10 +39,7 @@ namespace Micropolis.ViewModels
             set
             {
                 this.SetProperty(ref this.messagesVisible, value);
-                if (value == true && MiniMapVisible)
-                {
-                    MiniMapVisible = false;
-                }
+                
             }
         }
 
@@ -55,18 +53,20 @@ namespace Micropolis.ViewModels
             set
             {
                 this.SetProperty(ref this.miniMapVisible, value);
-                if (value == true && MessagesVisible)
-                {
-                    MessagesVisible = false;
-                }
             }
         }
 
         public DelegateCommand ToggleMiniMapCommand { get; private set; }
+        public DelegateCommand ToggleMessagesCommand { get; private set; }
 
         private void ToggleMiniMap()
         {
             MiniMapVisible = !MiniMapVisible;
+        }
+
+        private void ToggleMessages()
+        {
+            MessagesVisible = !MessagesVisible;
         }
     }
 }

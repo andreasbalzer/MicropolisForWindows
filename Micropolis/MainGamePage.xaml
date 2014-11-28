@@ -117,6 +117,19 @@
                     </local:DemandIndicator>
                 </Grid>
 
+                <Button x:Uid="MessagesVisibilityButton" Command="{Binding ToggleMessagesCommand}" Style="{StaticResource BarButtonStyle}" Width="220">
+                    <Grid>
+                        <StackPanel Orientation="Horizontal" Visibility="{Binding MessagesVisible, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=inverted, FallbackValue=Collapsed}">
+                            <TextBlock FontSize="16" FontWeight="SemiLight" Text="Nachrichten einblenden" VerticalAlignment="Center"/>
+                            <TextBlock FontSize="16" Margin="12,0,0,0" Text="&#xE099;" VerticalAlignment="Center" FontFamily="Segoe UI Symbol"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Visibility="{Binding MessagesVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            <TextBlock FontSize="16" FontWeight="SemiLight" Text="Nachrichten ausblenden" VerticalAlignment="Center"/>
+                            <TextBlock FontSize="16" Margin="12,0,0,2" Text="&#xE098;" VerticalAlignment="Center" FontFamily="Segoe UI Symbol"/>
+                        </StackPanel>
+                    </Grid>
+                </Button>
+                
                 <Button x:Uid="MiniMapVisibilityButton" Command="{Binding ToggleMiniMapCommand}" Style="{StaticResource BarButtonStyle}" Width="220">
                     <Grid>
                         <StackPanel Orientation="Horizontal" Visibility="{Binding MiniMapVisible, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=inverted, FallbackValue=Collapsed}">
@@ -197,16 +210,23 @@
                 <local:Toolbar x:Name="ToolsPanel" Background="White" Margin="2" HorizontalAlignment="Left"/>
 
 
-                <Grid HorizontalAlignment="Right" Margin="0,0,-1,0" VerticalAlignment="Stretch" Visibility="{Binding MiniMapVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <Grid HorizontalAlignment="Right" Margin="0,0,-1,0" VerticalAlignment="Stretch">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="*" />
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="1" Orientation="Horizontal">
+                    <Border x:Name="MessagesScrollViewerPane" Background="White" BorderBrush="#2B2B2B"
+                    BorderThickness="1,0,1,1" HorizontalAlignment="Right" Margin="0,0,37,0" VerticalAlignment="Top"
+                    Height="100" Width="300" Visibility="{Binding MessagesVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <ScrollViewer x:Name="MessagesScrollViewer" Margin="12,6,12,5" HorizontalScrollMode="Disabled"
+                              Height="100" Width="300" VerticalScrollBarVisibility="Auto" VerticalScrollMode="Auto" />
+                    </Border>
 
-                    <Border Grid.Row="1" Background="White" BorderBrush="#2B2B2B" BorderThickness="0,1,1,0" HorizontalAlignment="Left"
-                        VerticalAlignment="Bottom">
+                    <Border Background="White" BorderBrush="#2B2B2B" BorderThickness="0,1,1,0" HorizontalAlignment="Left"
+                        VerticalAlignment="Bottom" Visibility="{Binding MiniMapVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
                         <StackPanel x:Name="MiniMapPane" Margin="0,-117,-117,0" RenderTransformOrigin="0,1">
                             <StackPanel.RenderTransform>
                                 <CompositeTransform ScaleX="0.65" ScaleY="0.65" />
@@ -215,11 +235,11 @@
                                VerticalAlignment="Top" />
                         </StackPanel>
                     </Border>
-                    
+                    </StackPanel>
                     <!--<Border   BorderBrush="#2B2B2B" BorderThickness="1" >-->
                     <!--</Border>-->
                     
-                    <Border Grid.Row="3" Background="White" BorderBrush="#2B2B2B" BorderThickness="1" HorizontalAlignment="Left">
+                    <Border Grid.Row="3" Background="White" BorderBrush="#2B2B2B" BorderThickness="1" HorizontalAlignment="Right">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="❕" FontWeight="Bold" FontSize="25" Foreground="Black" />
                             <StackPanel Margin="10,0,0,0">
@@ -244,12 +264,7 @@
 
             </Grid>
 
-            <Border x:Name="MessagesScrollViewerPane" Background="White" BorderBrush="#2B2B2B"
-                    BorderThickness="1,1,1,0" HorizontalAlignment="Right" Margin="0,0,37,0" VerticalAlignment="Bottom"
-                    Height="100" Width="300">
-                <ScrollViewer x:Name="MessagesScrollViewer" Margin="12,6,12,5" HorizontalScrollMode="Disabled"
-                              Height="100" Width="300" VerticalScrollBarVisibility="Auto" VerticalScrollMode="Auto" />
-            </Border>
+            
         </Grid>
 
         <!-- Overlays -->
