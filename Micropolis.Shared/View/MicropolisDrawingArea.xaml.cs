@@ -184,8 +184,8 @@ namespace Micropolis
 
         private void PaintComponentInView()
         {
-            int paintX = (int) _mainPage.HorizontalMapOffset/TILE_WIDTH;
-            int paintY = (int) _mainPage.VerticalMapOffset/TILE_HEIGHT;
+            int paintX = (int) (_mainPage.HorizontalMapOffset/_mainPage.ZoomFactor/TILE_WIDTH);
+            int paintY = (int) (_mainPage.VerticalMapOffset/_mainPage.ZoomFactor/TILE_HEIGHT);
             int paintXMax = (int) _mainPage.MapWidth/TILE_WIDTH;
             int paintYMax = (int) _mainPage.MapHeight/TILE_HEIGHT;
             PaintComponent(false, paintX, paintY, paintXMax, paintYMax);
