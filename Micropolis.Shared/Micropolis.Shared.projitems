@@ -34,13 +34,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Model\Entities\ConnectedView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Entities\EarthquakeStepper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Entities\ISupportsAppCommands.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Model\Entities\Menu\Author.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Model\Entities\Menu\Book.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Model\Entities\Menu\BookGroup.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Model\Entities\Menu\BookGroupGroup.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Model\Entities\Menu\Books.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Model\Entities\Menu\IAuthor.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Model\Entities\Menu\IBook.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Entities\Prefs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Entities\Strings.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Entities\TileImages.cs" />

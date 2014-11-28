@@ -142,9 +142,6 @@
     <Compile Include="MainGamePage.xaml.cs">
       <DependentUpon>MainGamePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="NonGamePages\LiteratureElementInformationWithGroup.xaml.cs">
-      <DependentUpon>LiteratureElementInformationWithGroup.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Screens\MainMenuPage.xaml.cs">
       <DependentUpon>MainMenuPage.xaml</DependentUpon>
@@ -197,10 +194,6 @@
     <Page Include="MainGamePage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="NonGamePages\LiteratureElementInformationWithGroup.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Screens\MainMenuPage.xaml">
       <SubType>Designer</SubType>
