@@ -23,6 +23,7 @@
     
     <Page.Resources>
         <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        <converters:SpeedButtonToBackgroundConverter x:Key="SpeedButtonToBackgroundConverter" />
         <Style x:Key="MenuFlyoutPresenterStyle1" TargetType="MenuFlyoutPresenter">
         	<Setter Property="RequestedTheme" Value="Light"/>
             <Setter Property="Background" Value="#E6E6E6"/>
@@ -89,7 +90,22 @@
                     </StackPanel>
                 </Button>
 
-                <Button Content="Spielgeschwindigkeit: Normal" Style="{StaticResource BarButtonStyle}"/>
+                <Button x:Name="SpeedPauseButton" Background="{Binding IsSpeedPause, Converter={StaticResource SpeedButtonToBackgroundConverter}}" Style="{StaticResource BarButtonStyle}" Command="{Binding SpeedPauseCommand}">
+                    <Image Source="/resources/UIButtons/Pause-Icon.png" />
+                </Button>
+                <Button x:Name="SpeedSlowButton" Background="{Binding IsSpeedSlow, Converter={StaticResource SpeedButtonToBackgroundConverter}}" Style="{StaticResource BarButtonStyle}" Command="{Binding SpeedSlowCommand}">
+                    <Image Source="/resources/UIButtons/Slow-Icon.png" />
+                </Button>
+                <Button x:Name="SpeedNormalButton" Background="{Binding IsSpeedNormal, Converter={StaticResource SpeedButtonToBackgroundConverter}}" Style="{StaticResource BarButtonStyle}" Command="{Binding SpeedNormalCommand}">
+                    <Image Source="/resources/UIButtons/Normal-Icon.png" />
+                </Button>
+                <Button x:Name="SpeedFastButton" Background="{Binding IsSpeedFast, Converter={StaticResource SpeedButtonToBackgroundConverter}}" Style="{StaticResource BarButtonStyle}" Command="{Binding SpeedFastCommand}">
+                    <Image Source="/resources/UIButtons/Fast-Icon.png" />
+                </Button>
+                <Button x:Name="SpeedSuperFastButton" Background="{Binding IsSpeedSuperFast, Converter={StaticResource SpeedButtonToBackgroundConverter}}" Style="{StaticResource BarButtonStyle}" Command="{Binding SpeedSuperFastCommand}">
+                    <Image Source="/resources/UIButtons/SuperFast-Icon.png" />
+                </Button>
+
 
                 <StackPanel Orientation="Horizontal" Margin="12,6" VerticalAlignment="Center">
                     <Path Height="12" Fill="#2B2B2B" Margin="20,-2,0,0" Stretch="Uniform"
@@ -119,11 +135,11 @@
 
                 <Button x:Uid="MessagesVisibilityButton" Command="{Binding ToggleMessagesCommand}" Style="{StaticResource BarButtonStyle}" Width="220">
                     <Grid>
-                        <StackPanel Orientation="Horizontal" Visibility="{Binding MessagesVisible, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=inverted, FallbackValue=Collapsed}">
+                        <StackPanel Orientation="Horizontal" Visibility="{Binding IsMessagesVisible, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=inverted, FallbackValue=Collapsed}">
                             <TextBlock FontSize="16" FontWeight="SemiLight" Text="Nachrichten einblenden" VerticalAlignment="Center"/>
                             <TextBlock FontSize="16" Margin="12,0,0,0" Text="&#xE099;" VerticalAlignment="Center" FontFamily="Segoe UI Symbol"/>
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal" Visibility="{Binding MessagesVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <StackPanel Orientation="Horizontal" Visibility="{Binding IsMessagesVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
                             <TextBlock FontSize="16" FontWeight="SemiLight" Text="Nachrichten ausblenden" VerticalAlignment="Center"/>
                             <TextBlock FontSize="16" Margin="12,0,0,2" Text="&#xE098;" VerticalAlignment="Center" FontFamily="Segoe UI Symbol"/>
                         </StackPanel>
@@ -132,11 +148,11 @@
                 
                 <Button x:Uid="MiniMapVisibilityButton" Command="{Binding ToggleMiniMapCommand}" Style="{StaticResource BarButtonStyle}" Width="220">
                     <Grid>
-                        <StackPanel Orientation="Horizontal" Visibility="{Binding MiniMapVisible, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=inverted, FallbackValue=Collapsed}">
+                        <StackPanel Orientation="Horizontal" Visibility="{Binding IsMiniMapVisible, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=inverted, FallbackValue=Collapsed}">
                             <TextBlock FontSize="16" FontWeight="SemiLight" Text="Karte einblenden" VerticalAlignment="Center"/>
                             <TextBlock FontSize="16" Margin="12,0,0,0" Text="&#xE099;" VerticalAlignment="Center" FontFamily="Segoe UI Symbol"/>
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal" Visibility="{Binding MiniMapVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <StackPanel Orientation="Horizontal" Visibility="{Binding IsMiniMapVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
                             <TextBlock FontSize="16" FontWeight="SemiLight" Text="Karte ausblenden" VerticalAlignment="Center"/>
                             <TextBlock FontSize="16" Margin="12,0,0,2" Text="&#xE098;" VerticalAlignment="Center" FontFamily="Segoe UI Symbol"/>
                         </StackPanel>
@@ -220,13 +236,13 @@
                     <StackPanel Grid.Row="1" Orientation="Horizontal">
                     <Border x:Name="MessagesScrollViewerPane" Background="White" BorderBrush="#2B2B2B"
                     BorderThickness="1,0,1,1" HorizontalAlignment="Right" Margin="0,0,37,0" VerticalAlignment="Top"
-                    Height="100" Width="300" Visibility="{Binding MessagesVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    Height="100" Width="300" Visibility="{Binding IsMessagesVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
                         <ScrollViewer x:Name="MessagesScrollViewer" Margin="12,6,12,5" HorizontalScrollMode="Disabled"
                               Height="100" Width="300" VerticalScrollBarVisibility="Auto" VerticalScrollMode="Auto" />
                     </Border>
 
                     <Border Background="White" BorderBrush="#2B2B2B" BorderThickness="0,1,1,0" HorizontalAlignment="Left"
-                        VerticalAlignment="Bottom" Visibility="{Binding MiniMapVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        VerticalAlignment="Bottom" Visibility="{Binding IsMiniMapVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
                         <StackPanel x:Name="MiniMapPane" Margin="0,-117,-117,0" RenderTransformOrigin="0,1">
                             <StackPanel.RenderTransform>
                                 <CompositeTransform ScaleX="0.65" ScaleY="0.65" />

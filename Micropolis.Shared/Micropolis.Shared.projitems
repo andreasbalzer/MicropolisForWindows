@@ -23,6 +23,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Controller\ThumbnailCreator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\LocalizationProvider.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\SpeedButtonToBackgroundConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\UppercaseTextConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Entities\City.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Entities\GraphDataPoint.cs" />
@@ -457,6 +458,11 @@
     <Content Include="$(MSBuildThisFileDirectory)resources\sounds\uhuh.wav" />
     <Content Include="$(MSBuildThisFileDirectory)resources\sounds\zombie-roar-5.wav" />
     <Content Include="$(MSBuildThisFileDirectory)resources\stadium.png" />
+    <Content Include="$(MSBuildThisFileDirectory)resources\UIButtons\Fast-Icon.png" />
+    <Content Include="$(MSBuildThisFileDirectory)resources\UIButtons\Normal-Icon.png" />
+    <Content Include="$(MSBuildThisFileDirectory)resources\UIButtons\Pause-Icon.png" />
+    <Content Include="$(MSBuildThisFileDirectory)resources\UIButtons\Slow-Icon.png" />
+    <Content Include="$(MSBuildThisFileDirectory)resources\UIButtons\SuperFast-Icon.png" />
     <Content Include="$(MSBuildThisFileDirectory)strings\CityMessages.properties" />
     <Content Include="$(MSBuildThisFileDirectory)strings\CityMessages_de.properties" />
     <Content Include="$(MSBuildThisFileDirectory)strings\CityMessages_sv.properties" />
