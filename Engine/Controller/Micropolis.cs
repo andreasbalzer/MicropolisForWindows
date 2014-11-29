@@ -77,10 +77,16 @@ namespace Engine
         /// </summary>
         public Random Prng { get; set; }
 
+        private bool _autoBudget;
+
         /// <summary>
         ///     The automatic budget setting
         /// </summary>
-        public bool AutoBudget = false;
+        public bool AutoBudget
+        {
+            get { return _autoBudget; }
+            set { _autoBudget = value; }
+        }
 
         /// <summary>
         ///     The automatic bulldoze setting

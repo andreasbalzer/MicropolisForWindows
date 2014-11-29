@@ -436,13 +436,18 @@ namespace Micropolis
             if (file != null)
             {
                 var newEngine = new Engine.Micropolis();
-                newEngine.Load(file);
-                SetEngine(newEngine);
-                if (useFileForSave)
+                newEngine.Load(file).ContinueWith((a) =>
                 {
-                    CurrentFile = file;
-                }
-                MakeClean();
+                    App.MainPageReference.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                    {
+                        SetEngine(newEngine);
+                        if (useFileForSave)
+                        {
+                            CurrentFile = file;
+                        }
+                        MakeClean();
+                    });
+                });
             }
         }
 
@@ -682,6 +687,8 @@ namespace Micropolis
             DrawingArea.ConfirmBar.Righted += ConfirmBar_Righted;
 
             DrawingArea.SetUpAfterBasicInit(engine, this);
+
+            NewBudgetDialog.SetupAfterBasicInit(this, engine);
 
             MakeMenu();
 
@@ -1876,7 +1883,7 @@ namespace Micropolis
         /// <summary>
         ///     Starts the timers.
         /// </summary>
-        private void StartTimer()
+        internal void StartTimer()
         {
             Engine.Micropolis engine = Engine;
             int count = engine.SimSpeed.SimStepsPerUpdate;
@@ -1948,7 +1955,7 @@ namespace Micropolis
         /// <summary>
         ///     Stops the simTimer.
         /// </summary>
-        private void StopTimer()
+        internal void StopTimer()
         {
             //assert isTimerActive();
 
@@ -1968,7 +1975,7 @@ namespace Micropolis
         ///     Determines whether the simTimer or shakeTimer is active.
         /// </summary>
         /// <returns>true, if any is active, otherwise false</returns>
-        private bool IsTimerActive()
+        internal bool IsTimerActive()
         {
             return _simTimer != null || _shakeTimer != null;
         }
@@ -2167,22 +2174,17 @@ namespace Micropolis
                 StopTimer();
             }
 
-            NewBudgetDialog.SetupAfterBasicInit(this, Engine);
-
-            ShowBudgetDialog();
-
-            if (timerEnabled)
-            {
-                StartTimer();
-            }
+            ShowBudgetDialog(timerEnabled);
         }
 
         /// <summary>
         ///     Shows the budget dialog.
         /// </summary>
-        private void ShowBudgetDialog()
+        private void ShowBudgetDialog(bool EnableTimerWhenClosing)
         {
+            NewBudgetDialog.SetEngine(Engine);
             NewBudgetDialogPaneOuter.Visibility = Visibility.Visible;
+            NewBudgetDialog.EnableTimerWhenClosing = EnableTimerWhenClosing;
         }
 
         /// <summary>

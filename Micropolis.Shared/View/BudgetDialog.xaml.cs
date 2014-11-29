@@ -44,6 +44,8 @@ namespace Micropolis
             SetupTextBlocks();
         }
 
+        public bool EnableTimerWhenClosing { get; set; }
+
         /// <summary>
         ///     Applies the changes entered by user into forms in the dialog.
         /// </summary>
@@ -96,7 +98,7 @@ namespace Micropolis
         /// <param name="engine">The engine.</param>
         public void SetupAfterBasicInit(MainGamePage mainPage, Engine.Micropolis engine)
         {
-            InitializeComponent();
+         
 
             _mainPage = mainPage;
             autoBudgetBtn.Content = Strings.GetString("budgetdlg.auto_budget");
@@ -123,6 +125,17 @@ namespace Micropolis
             resetBtn.Click += delegate { OnResetClicked(); };
 
 
+            LoadBudgetNumbers(true);
+
+            MakeFundingRatesPane();
+            MakeOptionsPane();
+            MakeTaxPane();
+            MakeBalancePane();
+        }
+
+        public void SetEngine(Engine.Micropolis engine)
+        {
+            this._engine = engine;
             LoadBudgetNumbers(true);
 
             MakeFundingRatesPane();
@@ -181,7 +194,9 @@ namespace Micropolis
             {
                 _engine.SetSpeed(Speeds.Speed["NORMAL"]);
             }
-
+            
+                _mainPage.StartTimer();
+            
             _mainPage.HideBudgetDialog();
         }
 
