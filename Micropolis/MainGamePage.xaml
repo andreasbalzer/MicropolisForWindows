@@ -299,10 +299,8 @@
                 </Grid.ColumnDefinitions>
                 <StackPanel x:Name="NewGameDialogPaneInner" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="1" />
             </Grid>
+            
+            <local:GraphsPane x:Name="GraphsPane" Visibility="Collapsed" />
         </Grid>
-
-        
-
-        <local:GraphsPane x:Name="GraphsPane" Visibility="Collapsed" />
     </Grid>
 </Page>
