@@ -369,9 +369,7 @@
                 ZonePlop((char) TileConstants.HOSPITAL);
                 City.NeedHospital = 0;
             }
-
-            //FIXME- should be 'else if'
-            if (City.NeedChurch > 0)
+            else if (City.NeedChurch > 0)
             {
                 ZonePlop((char) TileConstants.CHURCH);
                 City.NeedChurch = 0;
