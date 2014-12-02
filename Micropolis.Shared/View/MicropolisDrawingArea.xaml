@@ -26,7 +26,6 @@
         <Grid Background="White" x:Name="SPToRender" Height="20" Width="100">
             <TextBlock x:Name="TextBlockToRender" Foreground="Black" VerticalAlignment="Top" />
         </Grid>
-        <local:ConfirmationBar x:Name="ConfirmBar" Canvas.ZIndex="2" x:FieldModifier="public" Visibility="Collapsed" HorizontalAlignment="Left" VerticalAlignment="Top" />
         <Image x:Name="ImageOutput" Canvas.ZIndex="0" HorizontalAlignment="Left" VerticalAlignment="Top" />
         <Image x:Name="ImageCursor" IsHitTestVisible="False" Canvas.ZIndex="1" HorizontalAlignment="Left" VerticalAlignment="Top" />
     </Grid>

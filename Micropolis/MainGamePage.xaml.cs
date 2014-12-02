@@ -16,6 +16,7 @@ using Windows.UI.Popups;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Documents;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
@@ -567,65 +568,7 @@ namespace Micropolis
         /// <param name="e">The <see cref="PointerRoutedEventArgs"/> instance containing the event data.</param>
         private void onToolTouch(PointerRoutedEventArgs e)
         {
-            double mouseX = e.GetCurrentPoint(DrawingArea).Position.X;
-            double mouseY = e.GetCurrentPoint(DrawingArea).Position.Y;
-
-            float zoomFactor = DrawingAreaScroll.ZoomFactor;
-
-            if (DrawingArea.ConfirmBar.RenderTransform is TranslateTransform)
-            {
-                //check whether click occured within confirmbar in which case we don't move anything
-                var confPos = (TranslateTransform) DrawingArea.ConfirmBar.RenderTransform;
-                if (mouseX >= confPos.X/zoomFactor && mouseX <= DrawingArea.ConfirmBar.Width + confPos.X/zoomFactor &&
-                    mouseY >= confPos.Y/zoomFactor && mouseY <= DrawingArea.ConfirmBar.Height +
-                    confPos.Y/zoomFactor)
-                {
-                    return;
-                }
-            }
-
-            // move confirmation bar next to the point of usage
-            var translate = new TranslateTransform();
-            Size toolCursorSize = DrawingArea.GetToolCursorSizeInPixel();
-
-            //X-Position
-            double posX =
-                Math.Ceiling(mouseX/DrawingArea.TILE_WIDTH - Math.Ceiling(toolCursorSize.Width/DrawingArea.TILE_WIDTH/2))*
-                DrawingArea.TILE_WIDTH;
-            posX += toolCursorSize.Width;
-            posX *= zoomFactor;
-            if (posX + DrawingArea.ConfirmBar.ActualWidth - DrawingAreaScroll.HorizontalOffset >=
-                DrawingAreaScroll.ActualWidth)
-            {
-                // in case the bar is out of view, we'll move it to the opposite side of the toolCursor
-                posX =
-                    Math.Ceiling(mouseX/DrawingArea.TILE_WIDTH -
-                                 Math.Ceiling(toolCursorSize.Width/DrawingArea.TILE_WIDTH/2))*DrawingArea.TILE_WIDTH -
-                    DrawingArea.ConfirmBar.ActualWidth;
-                posX *= zoomFactor;
-            }
-            translate.X = posX;
-
-            //Y-Position
-            double posY =
-                Math.Ceiling(mouseY/DrawingArea.TILE_HEIGHT -
-                             Math.Ceiling(toolCursorSize.Height/DrawingArea.TILE_HEIGHT/2))*DrawingArea.TILE_HEIGHT;
-            posY += toolCursorSize.Height;
-            posY *= zoomFactor;
-            if (posY + DrawingArea.ConfirmBar.ActualHeight - DrawingAreaScroll.VerticalOffset >=
-                DrawingAreaScroll.ActualHeight)
-            {
-                posY =
-                    Math.Ceiling(mouseY/DrawingArea.TILE_HEIGHT -
-                                 Math.Ceiling(toolCursorSize.Height/DrawingArea.TILE_HEIGHT/2))*DrawingArea.TILE_HEIGHT -
-                    DrawingArea.ConfirmBar.ActualHeight;
-                posY *= zoomFactor;
-            }
-            translate.Y = posY;
-
-            //Actually moves the bar and shows it
-            DrawingArea.ConfirmBar.RenderTransform = translate;
-            DrawingArea.ConfirmBar.Visibility = Visibility.Visible;
+            ConfirmBar.Visibility = Visibility.Visible;
         }
 
         /// <summary>
@@ -679,12 +622,12 @@ namespace Micropolis
         {
             Engine = engine;
 
-            DrawingArea.ConfirmBar.Confirmed += ConfirmBar_Confirmed;
-            DrawingArea.ConfirmBar.Declined += ConfirmBar_Declined;
-            DrawingArea.ConfirmBar.Uped += ConfirmBar_Uped;
-            DrawingArea.ConfirmBar.Downed += ConfirmBar_Downed;
-            DrawingArea.ConfirmBar.Lefted += ConfirmBar_Lefted;
-            DrawingArea.ConfirmBar.Righted += ConfirmBar_Righted;
+            ConfirmBar.Confirmed += ConfirmBar_Confirmed;
+            ConfirmBar.Declined += ConfirmBar_Declined;
+            ConfirmBar.Uped += ConfirmBar_Uped;
+            ConfirmBar.Downed += ConfirmBar_Downed;
+            ConfirmBar.Lefted += ConfirmBar_Lefted;
+            ConfirmBar.Righted += ConfirmBar_Righted;
 
             DrawingArea.SetUpAfterBasicInit(engine, this);
 
@@ -853,7 +796,7 @@ namespace Micropolis
         /// <param name="resetToolPreview">if set to <c>true</c> tool gets canceled.</param>
         private void ResetConfirmationBar(bool resetToolPreview = true)
         {
-            DrawingArea.ConfirmBar.Visibility = Visibility.Collapsed; // hide confirmation bar
+            ConfirmBar.Visibility = Visibility.Collapsed; // hide confirmation bar
 
             if (resetToolPreview)
             {
@@ -873,9 +816,8 @@ namespace Micropolis
         {
             if (touchPointerRoutedEventArgsOfCurrentConfirmationPending != null)
             {
-                OnToolUp(touchPointerRoutedEventArgsOfCurrentConfirmationPending); // actually build the stuff
+                OnToolUp(touchPointerRoutedEventArgsOfCurrentConfirmationPending,false); // actually build the stuff
             }
-            DrawingArea.ConfirmBar.Visibility = Visibility.Collapsed; // hide confirmation bar
         }
 
 
@@ -1692,6 +1634,11 @@ namespace Micropolis
         /// <param name="ev">The <see cref="PointerRoutedEventArgs" /> instance containing the event data.</param>
         private void OnToolUp(PointerRoutedEventArgs ev)
         {
+            OnToolUp(ev,true);
+        }
+
+        private void OnToolUp(PointerRoutedEventArgs ev, bool resetConfirmationBar)
+        {
             if (_toolStroke != null)
             {
                 CityLocation loc = _toolStroke.GetLocation();
@@ -1703,7 +1650,7 @@ namespace Micropolis
                 _toolStroke = null;
             }
 
-            OnToolHover(ev);
+            OnToolHover(ev,resetConfirmationBar);
 
             if (_isAutoBudgetPending)
             {
@@ -1770,7 +1717,16 @@ namespace Micropolis
         /// <param name="ev">The <see cref="PointerRoutedEventArgs" /> instance containing the event data.</param>
         private void OnToolHover(PointerRoutedEventArgs ev)
         {
-            ResetConfirmationBar(!_isMouseDown);
+            OnToolHover(ev, true);
+        }
+
+        private void OnToolHover(PointerRoutedEventArgs ev, bool resetConfirmationBar)
+        {
+            if (resetConfirmationBar)
+            {
+                ResetConfirmationBar(!_isMouseDown);
+            }
+
             // if confirmation bar is shown and we hover but do not drag we send true, otherwise when we drag we send false
 
             if (ev.Pointer.PointerDeviceType != PointerDeviceType.Mouse)
@@ -1786,8 +1742,8 @@ namespace Micropolis
                 return;
             }
 
-            var posX = (int) ((ev.GetCurrentPoint(target).Position.X + DrawingAreaScroll.HorizontalOffset)/zoomFactor);
-            var posY = (int) ((ev.GetCurrentPoint(target).Position.Y + DrawingAreaScroll.VerticalOffset)/zoomFactor);
+            var posX = (int)((ev.GetCurrentPoint(target).Position.X + DrawingAreaScroll.HorizontalOffset) / zoomFactor);
+            var posY = (int)((ev.GetCurrentPoint(target).Position.Y + DrawingAreaScroll.VerticalOffset) / zoomFactor);
 
             CityLocation loc = DrawingArea.GetCityLocation(posX, posY);
             int x = loc.X;

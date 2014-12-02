@@ -62,8 +62,12 @@
             <RowDefinition />
             <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
 
-        <Grid x:Uid="TopBar" Background="{StaticResource BarBackgroundBrush}">
+        <Grid x:Uid="TopBar" Background="{StaticResource BarBackgroundBrush}" Grid.Column="0" Grid.ColumnSpan="2">
             <StackPanel Orientation="Horizontal">
                 <Button x:Name="MenuButton" Margin="0,0,40,0" Style="{StaticResource BarButtonStyle}">
                     <Button.Flyout>
@@ -161,7 +165,7 @@
             </StackPanel>
         </Grid>
 
-        <Grid x:Uid="BottomBar" Grid.Row="2" Background="{StaticResource BarBackgroundBrush}">
+        <Grid x:Uid="BottomBar" Grid.Row="2" Background="{StaticResource BarBackgroundBrush}" Grid.Column="0" Grid.ColumnSpan="2">
             <StackPanel Orientation="Horizontal">
                 <Button x:Name="DifficultyButton" Style="{StaticResource BarButtonStyle}">
                     <TextBlock x:Name="DifficultyButtonContent">Difficulty</TextBlock>
@@ -212,7 +216,7 @@
             </StackPanel>
         </Grid>
 
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1" Grid.Column="0">
             <Grid>
                 <MediaElement x:Name="SoundOutput" />
 
@@ -282,10 +286,14 @@
 
             
         </Grid>
-
+        
+        <Grid Grid.Row="1" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Right" Background="{StaticResource BarBackgroundBrush}">
+            <local:ConfirmationBar x:Name="ConfirmBar" x:FieldModifier="public" Visibility="Collapsed" HorizontalAlignment="Left" VerticalAlignment="Top" />
+        </Grid>
+        
         <!-- Overlays -->
         
-        <Grid Grid.RowSpan="3">
+        <Grid Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="2">
             <Grid x:Name="NewBudgetDialogPaneOuter" Visibility="Collapsed" Background="#7F000000"
               HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <Grid.RowDefinitions>
