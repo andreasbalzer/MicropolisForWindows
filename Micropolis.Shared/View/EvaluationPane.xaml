@@ -17,11 +17,14 @@
     xmlns:local="using:Micropolis"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:converters="using:Micropolis.Converters"
     mc:Ignorable="d"
     d:DesignHeight="200"
     d:DesignWidth="450"
     CacheMode="BitmapCache">
-    
+    <UserControl.Resources>
+        <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    </UserControl.Resources>
     <Grid Background="White">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -34,23 +37,32 @@
         </Grid.RowDefinitions>
         
             <StackPanel Grid.Row="0" Grid.Column="0" Background="LightGray">
-                <TextBlock x:Name="headerPublicOpinionLbl" Text="Public opinion"  FontWeight="SemiBold" FontSize="14" Margin="12,6" Foreground="#2B2B2B" />
+            <TextBlock x:Name="headerPublicOpinionLbl" Text="{Binding HeaderPublicOpinionTextBlockText}"  FontWeight="SemiBold" FontSize="14" Margin="12,6" Foreground="#2B2B2B" />
             </StackPanel>
         <StackPanel Grid.Row="1" Grid.Column="0" Margin="5">
-            <TextBlock x:Name="pubOp" Foreground="Black" Text="Good work?" FontWeight="Bold" />
+            <TextBlock x:Name="pubOp" Foreground="Black"  Text="{Binding PubOpTextBlockText}" FontWeight="Bold" />
             <StackPanel Orientation="Horizontal">
-                <TextBlock x:Name="pubOp3" Foreground="Black" Margin="0,0,0,0" Text="Yes:" />
-                <TextBlock x:Name="yesLbl" Foreground="Black" Margin="10,0,0,0" Text="Yes %" />
-                <TextBlock x:Name="pubOp4" Foreground="Black" Margin="20,0,0,0" Text="No: " />
-                <TextBlock x:Name="noLbl" Foreground="Black" Margin="10,0,0,0" Text="No %" />
+                <TextBlock x:Name="pubOp3" Foreground="Black" Margin="0,0,0,0" Text="{Binding PubOp3TextBlockText}" />
+                <TextBlock x:Name="yesLbl" Foreground="Black" Margin="10,0,0,0" Text="{Binding YesTextBlockText}" />
+                <TextBlock x:Name="pubOp4" Foreground="Black" Margin="20,0,0,0" Text="{Binding PubOp4TextBlockText}" />
+                <TextBlock x:Name="noLbl" Foreground="Black" Margin="10,0,0,0"  Text="{Binding NoTextBlockText}" />
 
             </StackPanel>
-            <TextBlock x:Name="pubOp2" Foreground="Black" Text="Worst problems?" FontWeight="Bold" />
-            <StackPanel x:Name="voterProblemSP" />
+            <TextBlock x:Name="pubOp2" Foreground="Black" Text="{Binding PubOp2TextBlockText}" FontWeight="Bold" />
+            <StackPanel x:Name="voterProblemSP">
+                <TextBlock x:Name="VoterProblem1" Text="{Binding VoterProblem1TextBlockText}" Visibility="{Binding VoterProblem1IsVisible, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                <TextBlock x:Name="VoterCount1" Text="{Binding VoterCount1TextBlockText}" Visibility="{Binding VoterCount1IsVisible, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                <TextBlock x:Name="VoterProblem2" Text="{Binding VoterProblem2TextBlockText}" Visibility="{Binding VoterProblem2IsVisible, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                <TextBlock x:Name="VoterCount2" Text="{Binding VoterCount2TextBlockText}" Visibility="{Binding VoterCount2IsVisible, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                <TextBlock x:Name="VoterProblem3" Text="{Binding VoterProblem3TextBlockText}" Visibility="{Binding VoterProblem3IsVisible, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                <TextBlock x:Name="VoterCount3" Text="{Binding VoterCount3TextBlockText}" Visibility="{Binding VoterCount3IsVisible, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                <TextBlock x:Name="VoterProblem4" Text="{Binding VoterProblem4TextBlockText}" Visibility="{Binding VoterProblem4IsVisible, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                <TextBlock x:Name="VoterCount4" Text="{Binding VoterCount4TextBlockText}" Visibility="{Binding VoterCount4IsVisible, Converter={StaticResource BooleanToVisibilityConverter}}" />
+            </StackPanel>
         </StackPanel>
 
         <StackPanel Grid.Row="0" Grid.Column="1" Background="LightGray">
-            <TextBlock x:Name="headerStatisticsLbl" Text="Public opinion"  FontWeight="SemiBold" FontSize="14" Margin="12,6" Foreground="#2B2B2B" />
+            <TextBlock x:Name="headerStatisticsLbl" Text="{Binding HeaderStatisticsTextBlockText}"  FontWeight="SemiBold" FontSize="14" Margin="12,6" Foreground="#2B2B2B" />
         </StackPanel>
         <Grid Grid.Row="1" Grid.Column="1" Margin="5">
             <Grid.ColumnDefinitions>
@@ -69,24 +81,24 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            
-            <TextBlock x:Name="statPop" Grid.Row="0" Grid.Column="0" Foreground="Black" Text="Population:" />
-            <TextBlock x:Name="popLbl" Foreground="Black" Grid.Row="0" Grid.Column="2" Text="population (int)" />
-            <TextBlock x:Name="statMig" Foreground="Black" Grid.Row="1" Grid.Column="0" Text="statMig" />
-            <TextBlock x:Name="deltaLbl" Foreground="Black" Grid.Row="1" Grid.Column="2" />
-            <TextBlock x:Name="statsLastYear" Foreground="Black" Grid.Row="2" Grid.Column="0" Text="statlastyear" />
-            <TextBlock x:Name="statsAssessedValue" Foreground="Black" Grid.Row="3" Grid.Column="0" Text="statsAssesV" />
-            <TextBlock x:Name="assessLbl" Grid.Row="3" Grid.Column="2" Foreground="Black" />
-            <TextBlock x:Name="statsCategory" Foreground="Black" Grid.Row="4" Grid.Column="0" Text="statsCat" />
-            <TextBlock x:Name="cityClassLbl" Foreground="Black"  Grid.Row="4" Grid.Column="2" />
-            <TextBlock x:Name="statsGameLevel" Foreground="Black" Grid.Row="5" Grid.Column="0" Text="game level" />
-            <TextBlock x:Name="gameLevelLbl" Foreground="Black" Grid.Row="5" Grid.Column="2" />
-            <TextBlock x:Name="cityScoreHeader" Margin="0,10,0,0" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="3" Foreground="Black" Text="City score header" />
-            <TextBlock x:Name="cityScoreCurrent" Foreground="Black" Grid.Row="7" Grid.Column="0" Text="city score:" />
-            <TextBlock x:Name="scoreLbl" Foreground="Black" Grid.Row="7" Grid.Column="2" Text="cty score (int)" />
-            <TextBlock x:Name="cityScoreChange" Foreground="Black" Grid.Row="8" Grid.Column="0" Text="score change" />
-            <TextBlock x:Name="scoreDeltaLbl" Foreground="Black" Grid.Row="8" Grid.Column="2" />
+
+            <TextBlock x:Name="statPop" Text="{Binding StatPopTextBlockText}" Grid.Row="0" Grid.Column="0" Foreground="Black" />
+            <TextBlock x:Name="popLbl" Text="{Binding PopTextBlockText}" Foreground="Black" Grid.Row="0" Grid.Column="2" />
+            <TextBlock x:Name="statMig" Text="{Binding StatMigTextBlockText}" Foreground="Black" Grid.Row="1" Grid.Column="0" />
+            <TextBlock x:Name="deltaLbl" Text="{Binding DeltaTextBlockText}" Foreground="Black" Grid.Row="1" Grid.Column="2" />
+            <TextBlock x:Name="statsLastYear" Text="{Binding StatsLastYearTextBlockText}" Foreground="Black" Grid.Row="2" Grid.Column="0" />
+            <TextBlock x:Name="statsAssessedValue" Text="{Binding StatsAssessedValueTextBlockText}" Foreground="Black" Grid.Row="3" Grid.Column="0" />
+            <TextBlock x:Name="assessLbl" Text="{Binding AssessTextBlockText}" Grid.Row="3" Grid.Column="2" Foreground="Black" />
+            <TextBlock x:Name="statsCategory" Text="{Binding StatsCategoryTextBlockText}" Foreground="Black" Grid.Row="4" Grid.Column="0" />
+            <TextBlock x:Name="cityClassLbl" Text="{Binding CityClassTextBlockText}" Foreground="Black"  Grid.Row="4" Grid.Column="2" />
+            <TextBlock x:Name="statsGameLevel" Text="{Binding StatsGameLevelTextBlockText}" Foreground="Black" Grid.Row="5" Grid.Column="0" />
+            <TextBlock x:Name="gameLevelLbl" Text="{Binding GameLevelTextBlockText}" Foreground="Black" Grid.Row="5" Grid.Column="2" />
+            <TextBlock x:Name="cityScoreHeader" Text="{Binding CityScoreHeaderTextBlockText}" Margin="0,10,0,0" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="3" Foreground="Black" />
+            <TextBlock x:Name="cityScoreCurrent" Text="{Binding CityScoreCurrentTextBlockText}" Foreground="Black" Grid.Row="7" Grid.Column="0"  />
+            <TextBlock x:Name="scoreLbl" Text="{Binding ScoreTextBlockText}" Foreground="Black" Grid.Row="7" Grid.Column="2" />
+            <TextBlock x:Name="cityScoreChange" Text="{Binding CityScoreChangeTextBlockText}" Foreground="Black" Grid.Row="8" Grid.Column="0" />
+            <TextBlock x:Name="scoreDeltaLbl" Text="{Binding ScoreDeltaTextBlockText}" Foreground="Black" Grid.Row="8" Grid.Column="2" />
             </Grid>
-        <Button x:Name="dismissBtn" Foreground="Black" Grid.Row="2" Content="Dismiss" Style="{StaticResource WhiteButtonStyle}" Margin="0,6,0,0" />
+        <Button x:Name="dismissBtn" Foreground="Black" Grid.Row="2" Content="{Binding DismissButtonText}" Command="{Binding DismissCommand}"  Style="{StaticResource WhiteButtonStyle}" Margin="0,6,0,0" />
     </Grid>
 </UserControl>

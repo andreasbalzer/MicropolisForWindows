@@ -637,7 +637,7 @@ namespace Micropolis
 
             GraphsPane.SetUpAfterBasicInit(engine, this);
 
-            EvaluationPane.SetupAfterBasicInit(this, engine);
+            EvaluationPane.ViewModel.SetupAfterBasicInit(this, engine);
 
             var mapViewContainer = new StackPanel();
             MiniMapPane.Children.Add(mapViewContainer);
@@ -852,7 +852,7 @@ namespace Micropolis
 
             DrawingArea.ViewModel.SetEngine(Engine);
             _mapView.SetEngine(Engine); //must change mapView after DrawingArea
-            EvaluationPane.SetEngine(Engine);
+            EvaluationPane.ViewModel.SetEngine(Engine);
             DemandInd.ViewModel.SetEngine(Engine);
             GraphsPane.SetEngine(Engine);
             ReloadFunds();
