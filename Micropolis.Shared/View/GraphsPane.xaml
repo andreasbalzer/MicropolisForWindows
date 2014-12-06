@@ -235,11 +235,11 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Row="0" Grid.Column="0">
-            <ToggleButton x:Name="TenYearsButton" Content="10 years" Click="TenYearsButton_Click" HorizontalAlignment="Stretch" />
-            <ToggleButton x:Name="OneTwentyYearsButton" Content="20 years" Click="OneTwentyYearsButton_Click"  HorizontalAlignment="Stretch" />
+            <ToggleButton x:Name="TenYearsButton" Content="{Binding TenYearsButtonText}" Command="{Binding TenYearsCommand}" IsChecked="{Binding TenYearsIsChecked, Mode=TwoWay}" HorizontalAlignment="Stretch" />
+            <ToggleButton x:Name="OneTwentyYearsButton" Content="{Binding OneTwentyYearsButtonText}" Command="{Binding OneTwentyYearsCommand}" IsChecked="{Binding OneTwentyYearsIsChecked, Mode=TwoWay}" HorizontalAlignment="Stretch" />
             <StackPanel x:Name="toolsPane" />
         </StackPanel>
         <local:GraphArea x:Name="graphArea" Grid.Row="0" Grid.Column="1" />
-        <Button x:Name="DismissButton" Content="Dismiss" Click="DismissButton_Click" Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" />
+        <Button x:Name="DismissButton" Content="{Binding DismissButtonText}" Command="{Binding DismissCommand}" Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" />
     </Grid>
 </UserControl>

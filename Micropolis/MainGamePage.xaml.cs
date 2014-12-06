@@ -635,7 +635,7 @@ namespace Micropolis
 
             MakeMenu();
 
-            GraphsPane.SetUpAfterBasicInit(engine, this);
+            GraphsPane.ViewModel.SetUpAfterBasicInit(engine, this);
 
             EvaluationPane.ViewModel.SetupAfterBasicInit(this, engine);
 
@@ -854,7 +854,7 @@ namespace Micropolis
             _mapView.SetEngine(Engine); //must change mapView after DrawingArea
             EvaluationPane.ViewModel.SetEngine(Engine);
             DemandInd.ViewModel.SetEngine(Engine);
-            GraphsPane.SetEngine(Engine);
+            GraphsPane.ViewModel.SetEngine(Engine);
             ReloadFunds();
             ReloadOptions();
 
@@ -2100,7 +2100,7 @@ namespace Micropolis
             GraphsPane.Visibility = GraphsPane.Visibility == Visibility.Collapsed
                 ? Visibility.Visible
                 : Visibility.Collapsed;
-            GraphsPane.Repaint();
+            GraphsPane.ViewModel.Repaint();
         }
 
         /// <summary>

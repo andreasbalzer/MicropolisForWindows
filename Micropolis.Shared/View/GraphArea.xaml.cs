@@ -7,6 +7,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Media;
 using Micropolis.Model.Entities;
+using Micropolis.ViewModels;
 using WinRTXamlToolkit.Controls.DataVisualization.Charting;
 
 namespace Micropolis
@@ -28,7 +29,7 @@ namespace Micropolis
     /// <remarks>ToDo: Paddings not yet implemented.</remarks>
     public sealed partial class GraphArea
     {
-        private GraphsPane _graphsPane;
+        private GraphsPaneViewModel _graphsPane;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="GraphArea" /> class.
@@ -50,7 +51,7 @@ namespace Micropolis
         ///     Sets up after basic initialize.
         /// </summary>
         /// <param name="pane">The pane.</param>
-        public void SetUpAfterBasicInit(GraphsPane pane)
+        public void SetUpAfterBasicInit(GraphsPaneViewModel pane)
         {
             _graphsPane = pane;
             Repaint();
@@ -68,8 +69,7 @@ namespace Micropolis
             }
             LineChart.Series.Clear();
 
-            bool isOneTwenty = _graphsPane.OneTwentyYearsButtonPublic.IsChecked.HasValue &&
-                               _graphsPane.OneTwentyYearsButtonPublic.IsChecked.Value;
+            bool isOneTwenty = _graphsPane.OneTwentyYearsIsChecked;
             int unitPeriod = isOneTwenty ? 12*Engine.Micropolis.CENSUS_RATE : Engine.Micropolis.CENSUS_RATE;
             int hashPeriod = isOneTwenty ? 10*unitPeriod : 12*unitPeriod;
             int startTime = ((_graphsPane.Engine.History.CityTime/unitPeriod) - 119)*unitPeriod;
