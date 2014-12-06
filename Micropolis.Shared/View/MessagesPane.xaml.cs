@@ -1,4 +1,6 @@
-﻿namespace Micropolis
+﻿using Micropolis.ViewModels;
+
+namespace Micropolis
 {
     // This file is part of Micropolis for WinRT.
     // Copyright (C) 2014 Andreas Balzer, Felix Dietrich, Florian Thurnwald and Ivo Vutov
@@ -20,44 +22,17 @@
 
     public sealed partial class MessagesPane
     {
+        private MessagesPaneViewModel _viewModel;
+        public MessagesPaneViewModel ViewModel { get { return _viewModel; } }
+
         /// <summary>
         /// Initiates a new instance of the MessagesPane control.
         /// </summary>
         public MessagesPane()
         {
             InitializeComponent();
-        }
-
-        /// <summary>
-        /// Adds a new message to the message pane.
-        /// </summary>
-        /// <param name="message">Message to add</param>
-        public void AppendCityMessage(MicropolisMessage message)
-        {
-            AppendMessageText(Strings.GetString(message.Name));
-        }
-
-        /// <summary>
-        /// Adds a new message to the message pane
-        /// </summary>
-        /// <param name="messageText">Message to add</param>
-        private void AppendMessageText(String messageText)
-        {
-            var tb = new TextBlock
-            {
-                Text = messageText,
-                Style = Application.Current.Resources["BodyTextBlockStyle"] as Style,
-                Foreground = new SolidColorBrush(Colors.Black)
-            };
-            messagesSP.Children.Insert(0, tb);
-
-            if (messagesSP.Children.Count > 6)
-            {
-                for (int pos = 6; pos < messagesSP.Children.Count; pos++)
-                {
-                    messagesSP.Children.RemoveAt(pos);
-                }
-            }
+            _viewModel=new MessagesPaneViewModel();
+            this.DataContext = _viewModel;
         }
     }
 }

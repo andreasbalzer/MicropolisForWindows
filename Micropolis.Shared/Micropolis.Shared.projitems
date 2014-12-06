@@ -49,6 +49,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\DemandIndicatorViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\EvaluationPaneViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\MainGamePageViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\MessagesPaneViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\MicropolisDrawingAreaViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)View\BudgetDialog.xaml.cs">
       <DependentUpon>BudgetDialog.xaml</DependentUpon>

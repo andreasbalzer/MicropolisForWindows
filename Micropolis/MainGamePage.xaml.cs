@@ -192,7 +192,7 @@ namespace Micropolis
         /// <param name="p">The location of the message. Can be null.</param>
         public void CityMessage(MicropolisMessage m, CityLocation p)
         {
-            _messagesPane.AppendCityMessage(m);
+            _messagesPane.ViewModel.AppendCityMessage(m);
 
             if (m.UseNotificationPane && p != null)
             {
@@ -1788,12 +1788,12 @@ namespace Micropolis
                 case ToolResult.NONE:
                     break;
                 case ToolResult.UH_OH:
-                    _messagesPane.AppendCityMessage(MicropolisMessages.BULLDOZE_FIRST);
+                    _messagesPane.ViewModel.AppendCityMessage(MicropolisMessages.BULLDOZE_FIRST);
                     CitySound(Sounds.Sound["UHUH"], loc);
                     break;
 
                 case ToolResult.INSUFFICIENT_FUNDS:
-                    _messagesPane.AppendCityMessage(MicropolisMessages.INSUFFICIENT_FUNDS);
+                    _messagesPane.ViewModel.AppendCityMessage(MicropolisMessages.INSUFFICIENT_FUNDS);
                     CitySound(Sounds.Sound["SORRY"], loc);
                     break;
 
@@ -2013,7 +2013,7 @@ namespace Micropolis
                 case Disaster.MELTDOWN:
                     if (!Engine.MakeMeltdown())
                     {
-                        _messagesPane.AppendCityMessage(MicropolisMessages.NO_NUCLEAR_PLANTS);
+                        _messagesPane.ViewModel.AppendCityMessage(MicropolisMessages.NO_NUCLEAR_PLANTS);
                     }
                     break;
                 case Disaster.TORNADO:

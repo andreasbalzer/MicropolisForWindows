@@ -21,7 +21,16 @@
     d:DesignHeight="300"
     d:DesignWidth="400">
     
-    <StackPanel x:Name="messagesSP" Orientation="Vertical">
-
-    </StackPanel>
+    <ItemsControl x:Name="MessagesListView" ItemsSource="{Binding Messages, Mode=TwoWay}">
+        <ItemsControl.ItemsPanel>
+            <ItemsPanelTemplate>
+                <StackPanel Orientation="Vertical" />
+            </ItemsPanelTemplate>
+        </ItemsControl.ItemsPanel>
+        <ItemsControl.ItemTemplate>
+            <DataTemplate>
+                <TextBlock Style="{StaticResource BodyTextBlockStyle}" Text="{Binding}" Foreground="Black" />
+            </DataTemplate>
+</ItemsControl.ItemTemplate>
+    </ItemsControl>
 </UserControl>
