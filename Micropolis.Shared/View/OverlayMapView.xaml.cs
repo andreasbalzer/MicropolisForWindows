@@ -1,4 +1,6 @@
-﻿namespace Micropolis
+﻿using Micropolis.ViewModels;
+
+namespace Micropolis
 {
     // This file is part of Micropolis for WinRT.
     // Copyright (C) 2014 Andreas Balzer, Felix Dietrich, Florian Thurnwald and Ivo Vutov
@@ -796,10 +798,10 @@
             var rawRect = new Rect(cv.ScrollPane.HorizontalOffset/zoomFactor, cv.ScrollPane.VerticalOffset/zoomFactor,
                 cv.ScrollPane.ViewportWidth/zoomFactor, cv.ScrollPane.ViewportHeight/zoomFactor);
             return new Rect(
-                rawRect.X*3/cv.View.GetTileSize(),
-                rawRect.Y*3/cv.View.GetTileSize(),
-                rawRect.Width*3/cv.View.GetTileSize(),
-                rawRect.Height*3/cv.View.GetTileSize()
+                rawRect.X*3/cv.ViewModel.GetTileSize(),
+                rawRect.Y*3/cv.ViewModel.GetTileSize(),
+                rawRect.Width*3/cv.ViewModel.GetTileSize(),
+                rawRect.Height*3/cv.ViewModel.GetTileSize()
                 );
         }
 
@@ -821,8 +823,8 @@
                 //Size mapSize = cv.scrollPane.getViewport().getViewSize();
 
             var np = new Point(
-                p.X*cv.View.GetTileSize()/3*cv.ScrollPane.ZoomFactor - d.Width/2,
-                p.Y*cv.View.GetTileSize()/3*cv.ScrollPane.ZoomFactor - d.Height/2
+                p.X*cv.ViewModel.GetTileSize()/3*cv.ScrollPane.ZoomFactor - d.Width/2,
+                p.Y*cv.ViewModel.GetTileSize()/3*cv.ScrollPane.ZoomFactor - d.Height/2
                 );
             np.X = Math.Max(0, Math.Min(np.X, mapSize.Width - d.Width));
             np.Y = Math.Max(0, Math.Min(np.Y, mapSize.Height - d.Height));
@@ -855,11 +857,11 @@
         /// </summary>
         /// <param name="view">view to connect to</param>
         /// <param name="scrollPane">connected scrollpane</param>
-        public void ConnectView(MicropolisDrawingArea view, ScrollViewer scrollPane)
+        public void ConnectView(MicropolisDrawingAreaViewModel viewModel, ScrollViewer scrollPane)
         {
-            var cv = new ConnectedView(view, scrollPane);
+            var cv = new ConnectedView(viewModel, scrollPane);
             _views.Add(cv);
-            view.Repaint();
+            viewModel.Repaint();
         }
 
         /// <summary>

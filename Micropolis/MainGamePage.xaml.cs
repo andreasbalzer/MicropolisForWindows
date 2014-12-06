@@ -236,7 +236,7 @@ namespace Micropolis
                 RectangleContainsPoint(
                     new Rect(DrawingAreaScroll.HorizontalOffset, DrawingAreaScroll.VerticalOffset,
                         DrawingAreaScroll.ViewportWidth, DrawingAreaScroll.ViewportHeight),
-                    DrawingArea.GetTileBoundsAsRect(loc.X, loc.Y));
+                    DrawingArea.ViewModel.GetTileBoundsAsRect(loc.X, loc.Y));
 
 
             if (sound == Sounds.Sound["HONKHONK_LOW"] && !isOnScreen)
@@ -334,7 +334,7 @@ namespace Micropolis
         /// <returns></returns>
         public WriteableBitmap GetLandscapeFromDrawingArea(int xpos, int ypos, Size viewportSize)
         {
-            return DrawingArea.GetLandscape(xpos, ypos, viewportSize);
+            return DrawingArea.ViewModel.GetLandscape(xpos, ypos, viewportSize);
         }
 
         /// <summary>
@@ -605,7 +605,7 @@ namespace Micropolis
                 var posX = (int) (args.GetCurrentPoint(DrawingArea).Position.X + DrawingAreaScroll.HorizontalOffset);
                 var posY = (int) (args.GetCurrentPoint(DrawingArea).Position.Y + DrawingAreaScroll.VerticalOffset);
 
-                CityLocation loc = DrawingArea.GetCityLocation(posX, posY);
+                CityLocation loc = DrawingArea.ViewModel.GetCityLocation(posX, posY);
                 onMouseWheelMoved(delta, new Point(posX, posY));
             }
             catch (Exception e)
@@ -629,7 +629,7 @@ namespace Micropolis
             ConfirmBar.Lefted += ConfirmBar_Lefted;
             ConfirmBar.Righted += ConfirmBar_Righted;
 
-            DrawingArea.SetUpAfterBasicInit(engine, this);
+            DrawingArea.ViewModel.SetUpAfterBasicInit(engine, this);
 
             NewBudgetDialog.SetupAfterBasicInit(this, engine);
 
@@ -689,7 +689,7 @@ namespace Micropolis
 
             _mapView = new OverlayMapView();
             _mapView.SetUpAfterBasicInit(engine);
-            _mapView.ConnectView(DrawingArea, DrawingAreaScroll);
+            _mapView.ConnectView(DrawingArea.ViewModel, DrawingAreaScroll);
             mapViewContainer.Children.Add(_mapView);
 
             SetMapState(MapState.ALL);
@@ -802,8 +802,8 @@ namespace Micropolis
             {
                 // remove old preview
                 _toolStroke = null;
-                DrawingArea.SetToolPreview(null);
-                DrawingArea.SetToolCursor(null);
+                DrawingArea.ViewModel.SetToolPreview(null);
+                DrawingArea.ViewModel.SetToolCursor(null);
             }
         }
 
@@ -850,7 +850,7 @@ namespace Micropolis
             }
             StopEarthquake();
 
-            DrawingArea.SetEngine(Engine);
+            DrawingArea.ViewModel.SetEngine(Engine);
             _mapView.SetEngine(Engine); //must change mapView after DrawingArea
             EvaluationPane.SetEngine(Engine);
             DemandInd.SetEngine(Engine);
@@ -1482,7 +1482,7 @@ namespace Micropolis
         /// <param name="mousePt">The mouse position to center at.</param>
         private void DoZoom(int dir, Point mousePt)
         {
-            int oldZoom = DrawingArea.GetTileSize();
+            int oldZoom = DrawingArea.ViewModel.GetTileSize();
             int newZoom = dir < 0 ? (oldZoom/2) : (oldZoom*2);
             if (newZoom <= 8)
             {
@@ -1500,7 +1500,7 @@ namespace Micropolis
                 var pos = new Point(DrawingAreaScroll.HorizontalOffset, DrawingAreaScroll.VerticalOffset);
                 var newX = (int) Math.Round(mousePt.X*zoomFactor - (mousePt.X - pos.X));
                 var newY = (int) Math.Round(mousePt.Y*zoomFactor - (mousePt.Y - pos.Y));
-                DrawingArea.SelectTileSize(newZoom);
+                DrawingArea.ViewModel.SelectTileSize(newZoom);
                 DrawingAreaScroll.ScrollToHorizontalOffset(newX);
                 DrawingAreaScroll.ScrollToVerticalOffset(newY);
             }
@@ -1551,7 +1551,7 @@ namespace Micropolis
                     (int) ((ev.GetCurrentPoint(target).Position.X + DrawingAreaScroll.HorizontalOffset)/zoomFactor);
                 var posY = (int) ((ev.GetCurrentPoint(target).Position.Y + DrawingAreaScroll.VerticalOffset)/zoomFactor);
 
-                CityLocation loc = DrawingArea.GetCityLocation(posX, posY);
+                CityLocation loc = DrawingArea.ViewModel.GetCityLocation(posX, posY);
 
                 DoQueryTool(loc.X, loc.Y);
                 return;
@@ -1566,7 +1566,7 @@ namespace Micropolis
             var posXb = (int) ((ev.GetCurrentPoint(target).Position.X + DrawingAreaScroll.HorizontalOffset)/zoomFactor);
             var posYb = (int) ((ev.GetCurrentPoint(target).Position.Y + DrawingAreaScroll.VerticalOffset)/zoomFactor);
 
-            CityLocation locb = DrawingArea.GetCityLocation(posXb, posYb);
+            CityLocation locb = DrawingArea.ViewModel.GetCityLocation(posXb, posYb);
             int x = locb.X;
             int y = locb.Y;
 
@@ -1602,7 +1602,7 @@ namespace Micropolis
             }
             else if(CurrentTool != null)
             {
-                DrawingArea.PositionToolCursor((x+1)*DrawingArea.TILE_WIDTH, (y+1)*DrawingArea.TILE_HEIGHT);
+                DrawingArea.ViewModel.PositionToolCursor((x+1)*DrawingArea.ViewModel.TILE_WIDTH, (y+1)*DrawingArea.ViewModel.TILE_HEIGHT);
                 _toolStroke = CurrentTool.BeginStroke(Engine, x, y);
                 PreviewTool();
             }
@@ -1618,8 +1618,8 @@ namespace Micropolis
             {
                 // cancel the current mouse operation
                 _toolStroke = null;
-                DrawingArea.SetToolPreview(null);
-                DrawingArea.SetToolCursor(null);
+                DrawingArea.ViewModel.SetToolPreview(null);
+                DrawingArea.ViewModel.SetToolCursor(null);
             }
             else
             {
@@ -1645,8 +1645,8 @@ namespace Micropolis
                 ToolResult tr = _toolStroke.Apply();
                 ShowToolResult(loc, tr);
 
-                DrawingArea.RepaintNow(true);
-                DrawingArea.SetToolPreview(null);
+                DrawingArea.ViewModel.RepaintNow(true);
+                DrawingArea.ViewModel.SetToolPreview(null);
                 _toolStroke = null;
             }
 
@@ -1664,11 +1664,11 @@ namespace Micropolis
         /// </summary>
         private void PreviewTool()
         {
-            DrawingArea.SetToolCursor(
+            DrawingArea.ViewModel.SetToolCursor(
                 _toolStroke.GetBounds(),
                 CurrentTool
                 );
-            DrawingArea.SetToolPreview(
+            DrawingArea.ViewModel.SetToolPreview(
                 _toolStroke.GetPreview()
                 );
         }
@@ -1690,7 +1690,7 @@ namespace Micropolis
             var posX = (int) ((ev.GetCurrentPoint(target).Position.X/zoomFactor + DrawingAreaScroll.HorizontalOffset));
             var posY = (int) ((ev.GetCurrentPoint(target).Position.Y/zoomFactor + DrawingAreaScroll.VerticalOffset));
 
-            CityLocation loc = DrawingArea.GetCityLocation(posX, posY);
+            CityLocation loc = DrawingArea.ViewModel.GetCityLocation(posX, posY);
 
             int x = loc.X;
             int y = loc.Y;
@@ -1738,14 +1738,14 @@ namespace Micropolis
             ScrollViewer target = DrawingAreaScroll;
             if (CurrentTool == null || CurrentTool == MicropolisTools.MicropolisTool["QUERY"])
             {
-                DrawingArea.SetToolCursor(null);
+                DrawingArea.ViewModel.SetToolCursor(null);
                 return;
             }
 
             var posX = (int)((ev.GetCurrentPoint(target).Position.X + DrawingAreaScroll.HorizontalOffset) / zoomFactor);
             var posY = (int)((ev.GetCurrentPoint(target).Position.Y + DrawingAreaScroll.VerticalOffset) / zoomFactor);
 
-            CityLocation loc = DrawingArea.GetCityLocation(posX, posY);
+            CityLocation loc = DrawingArea.ViewModel.GetCityLocation(posX, posY);
             int x = loc.X;
             int y = loc.Y;
             int w = CurrentTool.GetWidth();
@@ -1756,7 +1756,7 @@ namespace Micropolis
             if (h >= 3)
                 y--;
 
-            DrawingArea.SetToolCursor(new CityRect(x, y, w, h), CurrentTool);
+            DrawingArea.ViewModel.SetToolCursor(new CityRect(x, y, w, h), CurrentTool);
         }
 
         /// <summary>
@@ -1765,7 +1765,7 @@ namespace Micropolis
         /// <param name="ev">The <see cref="PointerRoutedEventArgs" /> instance containing the event data.</param>
         private void OnToolExited(PointerRoutedEventArgs ev)
         {
-            DrawingArea.SetToolCursor(null);
+            DrawingArea.ViewModel.SetToolCursor(null);
         }
 
         /// <summary>
@@ -1849,7 +1849,7 @@ namespace Micropolis
 
             if (_currentEarthquake != null)
             {
-                int interval = 3000/MicropolisDrawingArea.SHAKE_STEPS;
+                int interval = 3000/MicropolisDrawingAreaViewModel.SHAKE_STEPS;
                 _shakeTimer = new DispatcherTimer {Interval = new TimeSpan(0, 0, 0, 0, interval)};
                 _shakeTimer.Tick += delegate
                 {
@@ -1904,7 +1904,7 @@ namespace Micropolis
         /// </summary>
         private void StopEarthquake()
         {
-            DrawingArea.Shake(0);
+            DrawingArea.ViewModel.Shake(0);
             _currentEarthquake = null;
         }
 
@@ -1945,7 +1945,7 @@ namespace Micropolis
             {
                 StopTimer();
             }
-            DrawingArea.StopRendering();
+            DrawingArea.ViewModel.StopRendering();
         }
 
         /// <summary>
@@ -1959,7 +1959,7 @@ namespace Micropolis
                 StartTimer();
             }
 
-            DrawingArea.StartRendering();
+            DrawingArea.ViewModel.StartRendering();
         }
 
         /// <summary>

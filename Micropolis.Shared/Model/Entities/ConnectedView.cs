@@ -1,5 +1,6 @@
 ﻿using System;
 using Windows.UI.Xaml.Controls;
+using Micropolis.ViewModels;
 
 namespace Micropolis
 {
@@ -28,16 +29,16 @@ namespace Micropolis
         /// <summary>
         /// The MicropolisDrawingArea with game interface
         /// </summary>
-        public MicropolisDrawingArea View;
+        public MicropolisDrawingAreaViewModel ViewModel;
 
         /// <summary>
         /// Initiates a new instance of the ConnectedView class.
         /// </summary>
         /// <param name="view">The MicropolisDrawingArea with game interface.</param>
         /// <param name="scrollPane">The scrollpane surrounding the MicropolisDrawingArea</param>
-        public ConnectedView(MicropolisDrawingArea view, ScrollViewer scrollPane)
+        public ConnectedView(MicropolisDrawingAreaViewModel viewModel, ScrollViewer scrollPane)
         {
-            View = view;
+            ViewModel = viewModel;
             ScrollPane = scrollPane;
             scrollPane.ViewChanged += scrollPane_ViewChanged;
             //    .getViewport().addChangeListener(this);

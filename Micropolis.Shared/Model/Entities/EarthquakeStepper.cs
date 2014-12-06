@@ -1,4 +1,6 @@
-﻿namespace Micropolis
+﻿using Micropolis.ViewModels;
+
+namespace Micropolis
 {
     // This file is part of Micropolis for WinRT.
     // Copyright (C) 2014 Andreas Balzer, Felix Dietrich, Florian Thurnwald and Ivo Vutov
@@ -40,8 +42,8 @@
         /// </summary>
         public void OneStep()
         {
-            Count = (Count + 1)%MicropolisDrawingArea.SHAKE_STEPS;
-            _instance.DrawingArea.Shake(Count);
+            Count = (Count + 1)%MicropolisDrawingAreaViewModel.SHAKE_STEPS;
+            _instance.DrawingArea.ViewModel.Shake(Count);
         }
     }
 }
