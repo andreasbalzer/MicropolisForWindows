@@ -17,15 +17,30 @@
     xmlns:local="using:Micropolis"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:converters="using:Micropolis.Converters"
     mc:Ignorable="d"
     d:DesignHeight="47"
     d:DesignWidth="39"
     CacheMode="BitmapCache">
-    
+    <UserControl.Resources>
+        <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    </UserControl.Resources>
     <Grid x:Name="ImageSize" Height="47" Width="39">
         <Image x:Name="ImageOutput" Source="/resources/images/GameUI/demandg.png" VerticalAlignment="Top" HorizontalAlignment="Left" />
-        <Rectangle Fill="Green" Stroke="Black" StrokeThickness="1" x:Name="ResRectangle" Visibility="Collapsed" VerticalAlignment="Top" HorizontalAlignment="Left" />
-        <Rectangle Fill="Blue" Stroke="Black" StrokeThickness="1" x:Name="ComRectangle" Visibility="Collapsed" VerticalAlignment="Top" HorizontalAlignment="Left" />
-        <Rectangle Fill="Yellow" Stroke="Black" StrokeThickness="1" x:Name="IndRectangle" Visibility="Collapsed" VerticalAlignment="Top" HorizontalAlignment="Left" />
+        <Rectangle Fill="Green" Stroke="Black" StrokeThickness="1" x:Name="ResRectangle" Height="{Binding ResRectangleHeight}" Width="{Binding ResRectangleWidth}" Visibility="{Binding ResRectangleIsVisible, Converter={StaticResource BooleanToVisibilityConverter}}" VerticalAlignment="Top" HorizontalAlignment="Left">
+            <Rectangle.RenderTransform>
+                <TranslateTransform X="{Binding ResRectangleX}" Y="{Binding ResRectangleY}" />
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle Fill="Blue" Stroke="Black" StrokeThickness="1" x:Name="ComRectangle" Height="{Binding ComRectangleHeight}" Width="{Binding ComRectangleWidth}" Visibility="{Binding ComRectangleIsVisible, Converter={StaticResource BooleanToVisibilityConverter}}" VerticalAlignment="Top" HorizontalAlignment="Left">
+            <Rectangle.RenderTransform>
+                <TranslateTransform X="{Binding ComRectangleX}" Y="{Binding ComRectangleY}" />
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle Fill="Yellow" Stroke="Black" StrokeThickness="1" x:Name="IndRectangle" Height="{Binding IndRectangleHeight}" Width="{Binding IndRectangleWidth}" Visibility="{Binding IndRectangleIsVisible, Converter={StaticResource BooleanToVisibilityConverter}}" VerticalAlignment="Top" HorizontalAlignment="Left" >
+            <Rectangle.RenderTransform>
+                <TranslateTransform X="{Binding IndRectangleX}" Y="{Binding IndRectangleY}" />
+            </Rectangle.RenderTransform>
+        </Rectangle>
     </Grid>
 </UserControl>

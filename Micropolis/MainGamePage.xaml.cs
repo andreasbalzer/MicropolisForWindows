@@ -853,7 +853,7 @@ namespace Micropolis
             DrawingArea.ViewModel.SetEngine(Engine);
             _mapView.SetEngine(Engine); //must change mapView after DrawingArea
             EvaluationPane.SetEngine(Engine);
-            DemandInd.SetEngine(Engine);
+            DemandInd.ViewModel.SetEngine(Engine);
             GraphsPane.SetEngine(Engine);
             ReloadFunds();
             ReloadOptions();
