@@ -45,6 +45,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Model\States\ToolCursor.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\ThreadCancellation.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils\WriteableBitmapDrawExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\BudgetDialogViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\MainGamePageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\MicropolisDrawingAreaViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)View\BudgetDialog.xaml.cs">

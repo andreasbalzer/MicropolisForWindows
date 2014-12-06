@@ -631,7 +631,7 @@ namespace Micropolis
 
             DrawingArea.ViewModel.SetUpAfterBasicInit(engine, this);
 
-            NewBudgetDialog.SetupAfterBasicInit(this, engine);
+            NewBudgetDialog.ViewModel.SetupAfterBasicInit(this, engine);
 
             MakeMenu();
 
@@ -2138,9 +2138,9 @@ namespace Micropolis
         /// </summary>
         private void ShowBudgetDialog(bool EnableTimerWhenClosing)
         {
-            NewBudgetDialog.SetEngine(Engine);
+            NewBudgetDialog.ViewModel.SetEngine(Engine);
             NewBudgetDialogPaneOuter.Visibility = Visibility.Visible;
-            NewBudgetDialog.EnableTimerWhenClosing = EnableTimerWhenClosing;
+            NewBudgetDialog.ViewModel.EnableTimerWhenClosing = EnableTimerWhenClosing;
         }
 
         /// <summary>

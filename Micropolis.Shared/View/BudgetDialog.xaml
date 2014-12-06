@@ -35,7 +35,7 @@
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="Auto"></RowDefinition>
             </Grid.RowDefinitions>
-            <TextBlock x:Name="titleTbl" Text="Einnahmen" FontSize="20" HorizontalAlignment="Center" Grid.Row="0"></TextBlock>
+            <TextBlock x:Name="titleTbl" Text="{Binding TitleTextBlockText}" FontSize="20" HorizontalAlignment="Center" Grid.Row="0"></TextBlock>
             <Grid Grid.Row="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -46,11 +46,11 @@
                     <ColumnDefinition Width="0.3*" />
                     <ColumnDefinition Width="0.3*" />
                 </Grid.ColumnDefinitions>
-                <TextBlock x:Name="tayTbl" Text="Steuerrate"  Grid.Row="0" Grid.Column="1" />
-                <TextBlock x:Name="yearlyIncomeTbl" Text="Jährliche Einkünfte"  Grid.Row="0" Grid.Column="2" />
-                <TextBlock x:Name="taxIncomeTbl" Text="Steuereinnahmen"  Grid.Row="1" Grid.Column="0" />
-                <Slider x:Name="taxRateEntry" Grid.Row="1" Grid.Column="1" Minimum="0" Maximum="20" />
-                <TextBlock x:Name="taxRevenueLbl" Text="$0"  Grid.Row="1" Grid.Column="2" />
+                <TextBlock x:Name="tayTbl" Text="{Binding TayTextBlockText}"  Grid.Row="0" Grid.Column="1" />
+                <TextBlock x:Name="yearlyIncomeTbl" Text="{Binding YearlyIncomeTextBlockText}"  Grid.Row="0" Grid.Column="2" />
+                <TextBlock x:Name="taxIncomeTbl" Text="{Binding TaxIncomeTextBlockText}"  Grid.Row="1" Grid.Column="0" />
+                <Slider x:Name="taxRateEntry" Value="{Binding TaxRateEntry}" Grid.Row="1" Grid.Column="1" Minimum="0" Maximum="20" />
+                <TextBlock x:Name="taxRevenueLbl" Text="{Binding TaxRevenue}"  Grid.Row="1" Grid.Column="2" />
             </Grid>
 
             <Grid Grid.Row="2">
@@ -70,24 +70,24 @@
                     <ColumnDefinition Width="0.25*" />
                     <ColumnDefinition Width="0.25*" />
                 </Grid.ColumnDefinitions>
-                <TextBlock x:Name="financingTbl" Text="Höhe der Finanzierung"  Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" />
-                <TextBlock x:Name="requestedTbl" Text="Angefordert"  Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right" />
-                <TextBlock x:Name="payedTbl" Text="Bezahlt"  Grid.Row="0" Grid.Column="3" HorizontalAlignment="Right" />
+                <TextBlock x:Name="financingTbl" Text="{Binding FinancingTextBlockText}"  Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" />
+                <TextBlock x:Name="requestedTbl" Text="{Binding RequestedTextBlockText}"  Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right" />
+                <TextBlock x:Name="payedTbl" Text="{Binding PayedTextBlockText}"  Grid.Row="0" Grid.Column="3" HorizontalAlignment="Right" />
 
-                <TextBlock x:Name="trafficExpensesTbl" Text="Ausgaben Verkehr"  Grid.Row="1" Grid.Column="0" />
-                <Slider x:Name="roadFundEntry" Grid.Row="1" Grid.Column="1" Minimum="0" Maximum="100" />
-                <TextBlock x:Name="roadFundRequest" Text="$0"  Grid.Row="1" Grid.Column="2" HorizontalAlignment="Right" />
-                <TextBlock x:Name="roadFundAlloc" Text="$0"  Grid.Row="1" Grid.Column="3" HorizontalAlignment="Right" />
+                <TextBlock x:Name="trafficExpensesTbl" Text="{Binding TrafficExpensesTextBlockText}"  Grid.Row="1" Grid.Column="0" />
+                <Slider x:Name="roadFundEntry" Value="{Binding RoadFundEntry}" Grid.Row="1" Grid.Column="1" Minimum="0" Maximum="100" />
+                <TextBlock x:Name="roadFundRequest" Text="{Binding RoadFundRequest}"  Grid.Row="1" Grid.Column="2" HorizontalAlignment="Right" />
+                <TextBlock x:Name="roadFundAlloc" Text="{Binding RoadFundAlloc}"  Grid.Row="1" Grid.Column="3" HorizontalAlignment="Right" />
 
-                <TextBlock x:Name="policeExpensesTbl" Text="Ausgaben Polizei"  Grid.Row="2" Grid.Column="0" />
-                <Slider x:Name="policeFundEntry" Grid.Row="2" Grid.Column="1" Minimum="0" Maximum="100" />
-                <TextBlock x:Name="policeFundRequest" Text="$0"  Grid.Row="2" Grid.Column="2" HorizontalAlignment="Right" />
-                <TextBlock x:Name="policeFundAlloc" Text="$0"  Grid.Row="2" Grid.Column="3" HorizontalAlignment="Right" />
+                <TextBlock x:Name="policeExpensesTbl" Text="{Binding PoliceExpensesTextBlockText}"  Grid.Row="2" Grid.Column="0" />
+                <Slider x:Name="policeFundEntry" Value="{Binding PoliceFundEntry}" Grid.Row="2" Grid.Column="1" Minimum="0" Maximum="100" />
+                <TextBlock x:Name="policeFundRequest" Text="{Binding PoliceFundRequest}"  Grid.Row="2" Grid.Column="2" HorizontalAlignment="Right" />
+                <TextBlock x:Name="policeFundAlloc" Text="{Binding PoliceFundAlloc}"  Grid.Row="2" Grid.Column="3" HorizontalAlignment="Right" />
 
-                <TextBlock x:Name="fireExpensesTbl" Text="Ausgaben Feuerwehr"  Grid.Row="3" Grid.Column="0" />
-                <Slider x:Name="fireFundEntry" Grid.Row="3" Grid.Column="1" Minimum="0" Maximum="100"  />
-                <TextBlock x:Name="fireFundRequest" Text="$0"  Grid.Row="3" Grid.Column="2" HorizontalAlignment="Right" />
-                <TextBlock x:Name="fireFundAlloc" Text="$0"  Grid.Row="3" Grid.Column="3" HorizontalAlignment="Right" />
+                <TextBlock x:Name="fireExpensesTbl" Text="{Binding FireExpensesTextBlockText}"  Grid.Row="3" Grid.Column="0" />
+                <Slider x:Name="fireFundEntry" Value="{Binding FireFundEntry}"  Grid.Row="3" Grid.Column="1" Minimum="0" Maximum="100"  />
+                <TextBlock x:Name="fireFundRequest" Text="{Binding FireFundRequest}"  Grid.Row="3" Grid.Column="2" HorizontalAlignment="Right" />
+                <TextBlock x:Name="fireFundAlloc" Text="{Binding FireFundAlloc}"  Grid.Row="3" Grid.Column="3" HorizontalAlignment="Right" />
             </Grid>
 
             <Grid Grid.Row="4">
@@ -110,26 +110,26 @@
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
-                <TextBlock x:Name="yearlyReportTbl" FontStyle="Italic" Text="Jahresabrechnung"  Grid.Row="0" Grid.Column="0" Foreground="DeepPink" />
-                <TextBlock x:Name="moneyAtBeginningOfYearTbl" Text="Geld am Anfang des Jahres"  Grid.Row="1" Grid.Column="0" />
-                <TextBlock x:Name="taxesMadeTbl" Text="Steuern erhoben"  Grid.Row="2" Grid.Column="0" />
-                <TextBlock x:Name="investionsTbl" Text="Investitionen"  Grid.Row="3" Grid.Column="0" />
-                <TextBlock x:Name="costsTbl" Text="Betriebskosten"  Grid.Row="4" Grid.Column="0" />
-                <TextBlock x:Name="moneyAtEndOfYearTbl" Text="Geld am Ende des Jahres"  Grid.Row="5" Grid.Column="0" />
+                <TextBlock x:Name="yearlyReportTbl" FontStyle="Italic" Text="{Binding YearlyReportTextBlockText}"  Grid.Row="0" Grid.Column="0" Foreground="DeepPink" />
+                <TextBlock x:Name="moneyAtBeginningOfYearTbl" Text="{Binding MoneyAtBeginningOfYearTextBlockText}"  Grid.Row="1" Grid.Column="0" />
+                <TextBlock x:Name="taxesMadeTbl" Text="{Binding TaxesMadeTextBlockText}"  Grid.Row="2" Grid.Column="0" />
+                <TextBlock x:Name="investionsTbl" Text="{Binding InvestionsTextBlockText}"  Grid.Row="3" Grid.Column="0" />
+                <TextBlock x:Name="costsTbl" Text="{Binding CostsTextBlockText}"  Grid.Row="4" Grid.Column="0" />
+                <TextBlock x:Name="moneyAtEndOfYearTbl" Text="{Binding MoneyAtEndOfYearTextBlockText}"  Grid.Row="5" Grid.Column="0" />
 
-                <TextBlock x:Name="thLbl1" FontStyle="Italic" Grid.Row="0" Grid.Column="1" Text="" HorizontalAlignment="Right" Foreground="DeepPink" Margin="0,0,20,0" />
-                <TextBlock x:Name="previousBalanceLbl1" Text=""  Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" />
-                <TextBlock x:Name="taxIncomeLbl1" Text=""  Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right" />
-                <TextBlock x:Name="capExpensesLbl1" Text=""  Grid.Row="3" Grid.Column="1" HorizontalAlignment="Right" />
-                <TextBlock x:Name="opExpensesLbl1" Text=""  Grid.Row="4" Grid.Column="1" HorizontalAlignment="Right" />
-                <TextBlock x:Name="newBalanceLbl1" Text=""  Grid.Row="5" Grid.Column="1" HorizontalAlignment="Right" />
+                <TextBlock x:Name="thLbl1" FontStyle="Italic" Grid.Row="0" Grid.Column="1" Text="{Binding Th1TextBlockText}" HorizontalAlignment="Right" Foreground="DeepPink" Margin="0,0,20,0" />
+                <TextBlock x:Name="previousBalanceLbl1" Text="{Binding PreviousBalance1TextBlockText}"  Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" />
+                <TextBlock x:Name="taxIncomeLbl1" Text="{Binding TaxIncome1TextBlockText}"  Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right" />
+                <TextBlock x:Name="capExpensesLbl1" Text="{Binding CapExpenses1TextBlockText}"  Grid.Row="3" Grid.Column="1" HorizontalAlignment="Right" />
+                <TextBlock x:Name="opExpensesLbl1" Text="{Binding OpExpenses1TextBlockText}"  Grid.Row="4" Grid.Column="1" HorizontalAlignment="Right" />
+                <TextBlock x:Name="newBalanceLbl1" Text="{Binding NewBalance1TextBlockText}"  Grid.Row="5" Grid.Column="1" HorizontalAlignment="Right" />
 
-                <TextBlock x:Name="thLbl2" FontStyle="Italic" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right" Text="" Foreground="DeepPink" />
-                <TextBlock x:Name="previousBalanceLbl2" Text=""  Grid.Row="1" Grid.Column="2" HorizontalAlignment="Right" />
-                <TextBlock x:Name="taxIncomeLbl2" Text=""  Grid.Row="2" Grid.Column="2" HorizontalAlignment="Right" />
-                <TextBlock x:Name="capExpensesLbl2" Text=""  Grid.Row="3" Grid.Column="2" HorizontalAlignment="Right" />
-                <TextBlock x:Name="opExpensesLbl2" Text=""  Grid.Row="4" Grid.Column="2" HorizontalAlignment="Right" />
-                <TextBlock x:Name="newBalanceLbl2" Text=""  Grid.Row="5" Grid.Column="2" HorizontalAlignment="Right" />
+                <TextBlock x:Name="thLbl2" FontStyle="Italic" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right" Text="{Binding Th2TextBlockText}" Foreground="DeepPink" />
+                <TextBlock x:Name="previousBalanceLbl2" Text="{Binding PreviousBalance2TextBlockText}"  Grid.Row="1" Grid.Column="2" HorizontalAlignment="Right" />
+                <TextBlock x:Name="taxIncomeLbl2" Text="{Binding TaxIncome2TextBlockText}"  Grid.Row="2" Grid.Column="2" HorizontalAlignment="Right" />
+                <TextBlock x:Name="capExpensesLbl2" Text="{Binding CapExpenses2TextBlockText}"  Grid.Row="3" Grid.Column="2" HorizontalAlignment="Right" />
+                <TextBlock x:Name="opExpensesLbl2" Text="{Binding OpExpenses2TextBlockText}"  Grid.Row="4" Grid.Column="2" HorizontalAlignment="Right" />
+                <TextBlock x:Name="newBalanceLbl2" Text="{Binding NewBalance2TextBlockText}"  Grid.Row="5" Grid.Column="2" HorizontalAlignment="Right" />
             </Grid>
 
             <Grid Grid.Row="6">
@@ -141,8 +141,8 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <CheckBox x:Name="autoBudgetBtn" Grid.Column="0" Content="Automatischer Haushalt" />
-                <CheckBox x:Name="pauseBtn" Grid.Column="1"  Content="Spiel anhalten" />
+                <CheckBox x:Name="autoBudgetBtn" Grid.Column="0" Content="{Binding AutoBudgetButtonText}" IsChecked="{Binding IsAutoBudget}" />
+                <CheckBox x:Name="pauseBtn" Grid.Column="1"  Content="{Binding PauseButtonText}" IsDoubleTapEnabled="{Binding IsPause}" />
             </Grid>
 
             <Grid Grid.Row="9">
@@ -150,8 +150,8 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <Button x:Name="continueBtn" Grid.Column="0" Content="Weitermachen mit diesen Angaben" />
-                <Button x:Name="resetBtn" Grid.Column="1"  Content="Zurücksetzen auf Ursprungswerte" />
+                <Button x:Name="continueBtn" Grid.Column="0" Content="{Binding ContinueButtonText}" Command="{Binding ContinueCommand}" />
+                <Button x:Name="resetBtn" Grid.Column="1"  Content="{Binding ResetButtonText}" Command="{Binding ResetCommand}" />
             </Grid>
         </Grid>
     </Border>
