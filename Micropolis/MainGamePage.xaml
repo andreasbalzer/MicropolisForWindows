@@ -137,7 +137,7 @@
                     </local:DemandIndicator>
                 </Grid>
 
-                <Button x:Uid="MessagesVisibilityButton" Command="{Binding ToggleMessagesCommand}" Style="{StaticResource BarButtonStyle}" Width="220">
+                <Button x:Uid="MessagesVisibilityButton" Command="{Binding ToggleMessagesCommand}" Style="{StaticResource BarButtonStyle}" Width="230">
                     <Grid>
                         <StackPanel Orientation="Horizontal" Visibility="{Binding IsMessagesVisible, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=inverted, FallbackValue=Collapsed}">
                             <TextBlock FontSize="16" FontWeight="SemiLight" Text="Nachrichten einblenden" VerticalAlignment="Center"/>
