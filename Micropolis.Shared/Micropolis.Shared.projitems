@@ -48,6 +48,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\BudgetDialogViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\DemandIndicatorViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\EvaluationPaneViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\GraphAreaViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\GraphPaneToggleButtonViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\GraphsPaneViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\MainGamePageViewModel.cs" />

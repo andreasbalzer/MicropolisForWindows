@@ -29,7 +29,7 @@
                 <Charting:LinearAxis x:Name="VerticalAxis" FontSize="10" ShowGridLines="True" Orientation="Y"
                                      Location="Left" />
                 <Charting:LinearAxis x:Name="HorizontalAxis" FontSize="10" ShowGridLines="True" Orientation="X"
-                                     Location="Bottom" />
+                                     Location="Bottom" Maximum="{Binding HorizontalAxisMaximum}" Minimum="{Binding HorizontalAxisMinimum}" Interval="{Binding HorizontalAxisInterval}" />
             </Charting:Chart.Axes>
         </Charting:Chart>
     </Grid>

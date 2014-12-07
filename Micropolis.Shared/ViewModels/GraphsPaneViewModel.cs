@@ -15,7 +15,7 @@ namespace Micropolis.ViewModels
 {
     public class GraphsPaneViewModel : BindableBase, Engine.IListener
     {
-        private readonly GraphArea _graphArea;
+        private readonly GraphAreaViewModel _graphAreaViewModel;
 
         /// <summary>
         ///     Reference to game engine
@@ -34,10 +34,10 @@ namespace Micropolis.ViewModels
         private string _tenYearsButtonText;
         private bool _tenYearsIsChecked;
 
-        public GraphsPaneViewModel(GraphArea graphArea)
+        public GraphsPaneViewModel(GraphAreaViewModel graphAreaViewModel)
         {
             Buttons = new ObservableCollection<GraphPaneToggleButtonViewModel>();
-            _graphArea = graphArea;
+            _graphAreaViewModel = graphAreaViewModel;
             DismissCommand = new DelegateCommand(Dismiss);
             TenYearsCommand = new DelegateCommand(TenYearsButton_Click);
             OneTwentyYearsCommand = new DelegateCommand(OneTwentyYearsButton_Click);
@@ -86,7 +86,7 @@ namespace Micropolis.ViewModels
         public void SetUpAfterBasicInit(Engine.Micropolis engine, MainGamePage mainPage)
         {
             _mainPage = mainPage;
-            _graphArea.SetUpAfterBasicInit(this);
+            _graphAreaViewModel.SetUpAfterBasicInit(this);
             SetEngine(engine);
 
             DismissButtonText = Strings.GetString("dismiss_graph");
@@ -138,7 +138,7 @@ namespace Micropolis.ViewModels
             {
                 //new engine
                 Engine.AddListener(this);
-                _graphArea.Repaint();
+                _graphAreaViewModel.Repaint();
             }
         }
 
@@ -174,7 +174,7 @@ namespace Micropolis.ViewModels
             buttonViewModel.ClickCommand = new DelegateCommand(
                 () =>
                 {
-                    _graphArea.Repaint();
+                    _graphAreaViewModel.Repaint();
                 });
 
             if (graph == GraphData.MONEY || graph == GraphData.POLLUTION)
@@ -241,15 +241,15 @@ namespace Micropolis.ViewModels
         {
             TenYearsIsChecked = (period == TimePeriod.TEN_YEARS);
             OneTwentyYearsIsChecked = (period == TimePeriod.ONETWENTY_YEARS);
-            if (_graphArea != null)
+            if (_graphAreaViewModel != null)
             {
-                _graphArea.Repaint();
+                _graphAreaViewModel.Repaint();
             }
         }
 
         public void Repaint()
         {
-            _graphArea.Repaint();
+            _graphAreaViewModel.Repaint();
         }
 
         #region implements Micropolis.IListener
@@ -306,7 +306,7 @@ namespace Micropolis.ViewModels
         /// </summary>
         public void CensusChanged()
         {
-            _graphArea.Repaint();
+            _graphAreaViewModel.Repaint();
         }
 
         #endregion

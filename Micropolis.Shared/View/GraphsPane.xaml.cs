@@ -35,7 +35,7 @@ namespace Micropolis
         public GraphsPane()
         {
             InitializeComponent();
-            _viewModel=new GraphsPaneViewModel(graphArea);
+            _viewModel=new GraphsPaneViewModel(graphArea.ViewModel);
             this.DataContext = _viewModel;
         }
     }
