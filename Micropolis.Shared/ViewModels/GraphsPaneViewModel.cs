@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -13,28 +15,13 @@ namespace Micropolis.ViewModels
 {
     public class GraphsPaneViewModel : BindableBase, Engine.IListener
     {
-        public static readonly int LEFT_MARGIN = 4;
-        public static readonly int RIGHT_MARGIN = 4;
-        public static readonly int TOP_MARGIN = 2;
-        public static readonly int BOTTOM_MARGIN = 2;
-        public static readonly int LEGEND_PADDING = 6;
         private readonly GraphArea _graphArea;
-        private readonly ResourceDictionary _resources;
-        private readonly StackPanel _toolsPane;
-
 
         /// <summary>
         ///     Reference to game engine
         /// </summary>
         public Engine.Micropolis Engine;
 
-        private bool _dataBtnsComPopIsChecked;
-        private bool _dataBtnsCrimeIsChecked;
-        private bool _dataBtnsIndPopIsChecked;
-        private bool _dataBtnsMoneyIsChecked;
-        private bool _dataBtnsPollutionIsChecked;
-
-        private bool _dataBtnsResPopIsChecked;
         private string _dismissButtonText;
 
         /// <summary>
@@ -47,43 +34,18 @@ namespace Micropolis.ViewModels
         private string _tenYearsButtonText;
         private bool _tenYearsIsChecked;
 
-        public GraphsPaneViewModel(StackPanel toolsPane, GraphArea graphArea, ResourceDictionary resources)
+        public GraphsPaneViewModel(GraphArea graphArea)
         {
-            _toolsPane = toolsPane;
+            Buttons = new ObservableCollection<GraphPaneToggleButtonViewModel>();
             _graphArea = graphArea;
             DismissCommand = new DelegateCommand(Dismiss);
             TenYearsCommand = new DelegateCommand(TenYearsButton_Click);
             OneTwentyYearsCommand = new DelegateCommand(OneTwentyYearsButton_Click);
-            _resources = resources;
         }
 
         public DelegateCommand DismissCommand { get; private set; }
         public DelegateCommand TenYearsCommand { get; private set; }
         public DelegateCommand OneTwentyYearsCommand { get; private set; }
-
-        public bool DataBtnsResPopIsChecked
-        {
-            get { return _dataBtnsResPopIsChecked; }
-            set { SetProperty(ref _dataBtnsResPopIsChecked, value); }
-        }
-
-        public bool DataBtnsComPopIsChecked
-        {
-            get { return _dataBtnsComPopIsChecked; }
-            set { SetProperty(ref _dataBtnsComPopIsChecked, value); }
-        }
-
-        public bool DataBtnsIndPopIsChecked
-        {
-            get { return _dataBtnsIndPopIsChecked; }
-            set { SetProperty(ref _dataBtnsIndPopIsChecked, value); }
-        }
-
-        public bool DataBtnsCrimeIsChecked
-        {
-            get { return _dataBtnsCrimeIsChecked; }
-            set { SetProperty(ref _dataBtnsCrimeIsChecked, value); }
-        }
 
         public bool OneTwentyYearsIsChecked
         {
@@ -116,18 +78,6 @@ namespace Micropolis.ViewModels
             set { SetProperty(ref _oneTwentyYearsButtonText, value); }
         }
 
-        public bool DataBtnsMoneyIsChecked
-        {
-            get { return _dataBtnsMoneyIsChecked; }
-            set { SetProperty(ref _dataBtnsMoneyIsChecked, value); }
-        }
-
-        public bool DataBtnsPollutionIsChecked
-        {
-            get { return _dataBtnsPollutionIsChecked; }
-            set { SetProperty(ref _dataBtnsPollutionIsChecked, value); }
-        }
-
         /// <summary>
         ///     Sets up after basic initialize.
         /// </summary>
@@ -143,23 +93,18 @@ namespace Micropolis.ViewModels
             TenYearsButtonText = Strings.GetString("ten_years");
             OneTwentyYearsButtonText = Strings.GetString("onetwenty_years");
 
-            _toolsPane.Children.Add(MakeDataBtn(GraphData.RESPOP));
-            _toolsPane.Children.Add(MakeDataBtn(GraphData.COMPOP));
-            _toolsPane.Children.Add(MakeDataBtn(GraphData.INDPOP));
-            _toolsPane.Children.Add(MakeDataBtn(GraphData.MONEY));
-            _toolsPane.Children.Add(MakeDataBtn(GraphData.CRIME));
-            _toolsPane.Children.Add(MakeDataBtn(GraphData.POLLUTION));
-
-            DataBtnsResPopIsChecked = false;
-            DataBtnsComPopIsChecked = false;
-            DataBtnsIndPopIsChecked = false;
-            DataBtnsMoneyIsChecked = true;
-            DataBtnsCrimeIsChecked = false;
-            DataBtnsPollutionIsChecked = true;
+            MakeDataBtn(GraphData.RESPOP);
+            MakeDataBtn(GraphData.COMPOP);
+            MakeDataBtn(GraphData.INDPOP);
+            MakeDataBtn(GraphData.MONEY);
+            MakeDataBtn(GraphData.CRIME);
+            MakeDataBtn(GraphData.POLLUTION);
 
             SetTimePeriod(TimePeriod.TEN_YEARS);
         }
 
+        internal Dictionary<GraphData, GraphPaneToggleButtonViewModel> DataBtns = new Dictionary<GraphData, GraphPaneToggleButtonViewModel>();
+        public ObservableCollection<GraphPaneToggleButtonViewModel> Buttons { get; set; }
 
         /// <summary>
         ///     Handles the Click event of the TenYearsButton control when user wants graph to cover ten years.
@@ -210,8 +155,9 @@ namespace Micropolis.ViewModels
         /// </summary>
         /// <param name="graph">The graph.</param>
         /// <returns></returns>
-        private ToggleButton MakeDataBtn(GraphData graph)
+        private void MakeDataBtn(GraphData graph)
         {
+            GraphPaneToggleButtonViewModel buttonViewModel = new GraphPaneToggleButtonViewModel();
             String icon1Name = "ms-appx:///resources/images/GameUI/" + Strings.GetString("graph_button." + graph);
             String icon2Name = "ms-appx:///resources/images/GameUI/" +
                                Strings.GetString("graph_button." + graph + ".selected");
@@ -222,65 +168,23 @@ namespace Micropolis.ViewModels
             var icon1Brush = new ImageBrush {ImageSource = new BitmapImage(uri1)};
 
             var icon2Brush = new ImageBrush {ImageSource = new BitmapImage(uri2)};
+            buttonViewModel.UncheckedStateImageBrush = icon1Brush;
+            buttonViewModel.CheckedStateImageBrush = icon2Brush;
+            buttonViewModel.Text = " ";
+            buttonViewModel.ClickCommand = new DelegateCommand(
+                () =>
+                {
+                    _graphArea.Repaint();
+                });
 
-            var btn = new ToggleButton
+            if (graph == GraphData.MONEY || graph == GraphData.POLLUTION)
             {
-                Style = (Style) _resources["ToolBarToggleButtonStyle"],
-                Height = 32,
-                Width = 32,
-                Background = icon1Brush,
-                Content = " "
-            };
-
-            btn.Click += (s, e) => _graphArea.Repaint();
-            btn.Checked += (o, e) => ToolbarButtonCheckChange(o, icon2Brush);
-            btn.Unchecked += (o, e) => ToolbarButtonCheckChange(o, icon1Brush);
-
-
-            var myBinding = new Binding();
-            myBinding.Source = this;
-
-            myBinding.Mode = BindingMode.TwoWay;
-            myBinding.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
-
-
-            if (graph == GraphData.RESPOP)
-            {
-                myBinding.Path = new PropertyPath("DataBtnsResPopIsChecked");
+                buttonViewModel.IsChecked = true;
             }
-            if (graph == GraphData.COMPOP)
-            {
-                myBinding.Path = new PropertyPath("DataBtnsComPopIsChecked");
-            }
-            if (graph == GraphData.INDPOP)
-            {
-                myBinding.Path = new PropertyPath("DataBtnsIndPopIsChecked");
-            }
-            if (graph == GraphData.CRIME)
-            {
-                myBinding.Path = new PropertyPath("DataBtnsCrimeIsChecked");
-            }
-            if (graph == GraphData.MONEY)
-            {
-                myBinding.Path = new PropertyPath("DataBtnsMoneyIsChecked");
-            }
-            if (graph == GraphData.POLLUTION)
-            {
-                myBinding.Path = new PropertyPath("DataBtnsPollutionIsChecked");
-            }
-            BindingOperations.SetBinding(btn, ToggleButton.IsCheckedProperty, myBinding);
 
-            return btn;
-        }
+            DataBtns.Add(graph,buttonViewModel);
+            Buttons.Add(buttonViewModel);
 
-        /// <summary>
-        ///     Toolbars the button check change.
-        /// </summary>
-        /// <param name="o">The o.</param>
-        /// <param name="iconBrush">The icon brush.</param>
-        private void ToolbarButtonCheckChange(object o, ImageBrush iconBrush)
-        {
-            ((ToggleButton) o).Background = iconBrush;
         }
 
         /// <summary>

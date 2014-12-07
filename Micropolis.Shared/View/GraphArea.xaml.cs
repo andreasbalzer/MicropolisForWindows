@@ -61,7 +61,7 @@ namespace Micropolis
         ///     Paints the component.
         /// </summary>
         /// <returns>An awaitable task</returns>
-        public async Task PaintComponent()
+        public void PaintComponent()
         {
             if (_graphsPane.Engine == null || IsNotVisible())
             {
@@ -81,7 +81,7 @@ namespace Micropolis
 
             foreach (GraphData gd in (GraphData[]) Enum.GetValues(typeof (GraphData)))
             {
-                if (_graphsPane.DataBtns[gd].IsChecked.HasValue && _graphsPane.DataBtns[gd].IsChecked.Value)
+                if (_graphsPane.DataBtns[gd].IsChecked)
                 {
                     var graphData = new List<GraphDataPoint>();
 
@@ -119,9 +119,12 @@ namespace Micropolis
                     LineChart.Series.Add(lineSeries);
                 }
             }
-            HorizontalAxis.Minimum = minimum;
-            HorizontalAxis.Maximum = maximum;
-            HorizontalAxis.Interval = isOneTwenty ? 10 : 1;
+            if (maximum > minimum)
+            {
+                HorizontalAxis.Maximum = maximum;
+                HorizontalAxis.Minimum = minimum;
+                HorizontalAxis.Interval = isOneTwenty ? 10 : 1;
+            }
         }
 
         /// <summary>

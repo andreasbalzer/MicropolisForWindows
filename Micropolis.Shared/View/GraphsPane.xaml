@@ -237,7 +237,18 @@
         <StackPanel Grid.Row="0" Grid.Column="0">
             <ToggleButton x:Name="TenYearsButton" Content="{Binding TenYearsButtonText}" Command="{Binding TenYearsCommand}" IsChecked="{Binding TenYearsIsChecked, Mode=TwoWay}" HorizontalAlignment="Stretch" />
             <ToggleButton x:Name="OneTwentyYearsButton" Content="{Binding OneTwentyYearsButtonText}" Command="{Binding OneTwentyYearsCommand}" IsChecked="{Binding OneTwentyYearsIsChecked, Mode=TwoWay}" HorizontalAlignment="Stretch" />
-            <StackPanel x:Name="toolsPane" />
+            <ItemsControl x:Name="toolsPane" ItemsSource="{Binding Buttons, Mode=TwoWay}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Vertical" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <ToggleButton Style="{StaticResource ToolBarToggleButtonStyle}" Content="{Binding Text}" IsChecked="{Binding IsChecked, Mode=TwoWay}" Command="{Binding ClickCommand}" Width="32" Height="32" Foreground="Black" Background="{Binding CurrentStateImageBrush}" />
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
         </StackPanel>
         <local:GraphArea x:Name="graphArea" Grid.Row="0" Grid.Column="1" />
         <Button x:Name="DismissButton" Content="{Binding DismissButtonText}" Command="{Binding DismissCommand}" Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" />
