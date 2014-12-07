@@ -688,8 +688,8 @@ namespace Micropolis
             menuflyout.Items.Add(MakeMapStateMenuItem("menu.overlays.POLICE_OVERLAY", MapState.POLICE_OVERLAY));
 
             _mapView = new OverlayMapView();
-            _mapView.SetUpAfterBasicInit(engine);
-            _mapView.ConnectView(DrawingArea.ViewModel, DrawingAreaScroll);
+            _mapView.ViewModel.SetUpAfterBasicInit(engine);
+            _mapView.ViewModel.ConnectView(DrawingArea.ViewModel, DrawingAreaScroll);
             mapViewContainer.Children.Add(_mapView);
 
             SetMapState(MapState.ALL);
@@ -709,7 +709,7 @@ namespace Micropolis
             _isDoSounds = Prefs.GetBoolean("SOUNDS_PREF", true);
 
             // start things up
-            _mapView.SetEngine(engine);
+            _mapView.ViewModel.SetEngine(engine);
 
             engine.AddEarthquakeListener(this);
             ReloadFunds();
@@ -718,7 +718,7 @@ namespace Micropolis
             StartTimer();
             MakeClean();
 
-            DrawingAreaScroll.ViewChanging += _mapView.drawingAreaScroll_ViewChanging;
+            DrawingAreaScroll.ViewChanging += _mapView.ViewModel.drawingAreaScroll_ViewChanging;
 
             ToolsPanel.ViewModel.SetUpAfterBasicInit(this);
         }
@@ -851,7 +851,7 @@ namespace Micropolis
             StopEarthquake();
 
             DrawingArea.ViewModel.SetEngine(Engine);
-            _mapView.SetEngine(Engine); //must change mapView after DrawingArea
+            _mapView.ViewModel.SetEngine(Engine); //must change mapView after DrawingArea
             EvaluationPane.ViewModel.SetEngine(Engine);
             DemandInd.ViewModel.SetEngine(Engine);
             GraphsPane.ViewModel.SetEngine(Engine);
@@ -2172,9 +2172,9 @@ namespace Micropolis
         /// <param name="state">The state.</param>
         private void SetMapState(MapState state)
         {
-            _mapStateMenuItems[(_mapView.GetMapState())].IsChecked = false;
+            _mapStateMenuItems[(_mapView.ViewModel.GetMapState())].IsChecked = false;
             _mapStateMenuItems[(state)].IsChecked = true;
-            _mapView.SetMapState(state);
+            _mapView.ViewModel.SetMapState(state);
             SetMapLegend(state);
         }
 

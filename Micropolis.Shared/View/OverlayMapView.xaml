@@ -22,8 +22,14 @@
     d:DesignWidth="400"
     CacheMode="BitmapCache">
     
-    <Grid>
-        <Image x:Name="ImageOutput" VerticalAlignment="Top" HorizontalAlignment="Left" />
-        <Rectangle x:Name="ViewPortRectangle" Stroke="White" StrokeThickness="3" Fill="Transparent" IsHitTestVisible="False" VerticalAlignment="Top" HorizontalAlignment="Left" />
+    <Grid x:Name="LayoutRoot">
+        <Image x:Name="ImageOutput" Source="{Binding ImageOutputSource}" Height="{Binding ImageOutputHeight}" Width="{Binding ImageOutputWidth}" VerticalAlignment="Top" HorizontalAlignment="Left" />
+        <Rectangle x:Name="ViewPortRectangle" Height="{Binding ViewPortRectangleHeight}" Width="{Binding ViewPortRectangleWidth}" Stroke="White" StrokeThickness="3" Fill="Transparent" IsHitTestVisible="False" VerticalAlignment="Top" HorizontalAlignment="Left" >
+            
+            <Rectangle.RenderTransform>
+                <TranslateTransform X="{Binding ViewPortRectangleX}" Y="{Binding ViewPortRectangleY}"></TranslateTransform>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+                   
     </Grid>
 </UserControl>

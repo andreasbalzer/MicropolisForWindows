@@ -57,6 +57,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\MicropolisDrawingAreaViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\NewCityDialogViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\NotificationPaneViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\OverlayMapViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ToolbarButtonViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ToolbarViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)View\BudgetDialog.xaml.cs">

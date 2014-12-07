@@ -20,6 +20,7 @@ using Windows.UI.Xaml.Navigation;
 
 // Die Elementvorlage "Standardseite" ist unter http://go.microsoft.com/fwlink/?LinkId=234237 dokumentiert.
 using Micropolis.Utils;
+using Micropolis.ViewModels;
 
 namespace Micropolis.Screens
 {
@@ -151,7 +152,7 @@ namespace Micropolis.Screens
                             CoreDispatcherPriority.Normal,
                             () => { ProgressIn.Value += 1; });
                     });
-                Task t5 = OverlayMapView.Initialize(this._cancelToken).ContinueWith(
+                Task t5 = OverlayMapViewModel.Initialize(this._cancelToken).ContinueWith(
                     (e) =>
                     {
                         App.LoadPageReference.Dispatcher.RunAsync(

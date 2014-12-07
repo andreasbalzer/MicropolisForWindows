@@ -46,8 +46,8 @@
         public async Task Render(IStorageFile file)
         {
             await this._engine.Load((StorageFile)file);
-            this._renderer.RenderPane.SetEngine(this._engine);
-            this._renderer.RenderPane.PaintComponent();
+            this._renderer.RenderPane.ViewModel.SetEngine(this._engine);
+            this._renderer.RenderPane.ViewModel.PaintComponent();
 
         }
 

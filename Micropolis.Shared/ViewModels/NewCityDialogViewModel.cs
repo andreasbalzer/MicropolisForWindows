@@ -33,7 +33,7 @@ namespace Micropolis.ViewModels
             _engine = new Engine.Micropolis();
             new MapGenerator(_engine).GenerateNewCity();
             //mapPane = new OverlayMapView(engine);
-            _mapPane.SetUpAfterBasicInit(_engine);
+            _mapPane.ViewModel.SetUpAfterBasicInit(_engine);
 
 
             for (int lev = GameLevel.MIN_LEVEL; lev <= GameLevel.MAX_LEVEL; lev++)
@@ -118,7 +118,7 @@ namespace Micropolis.ViewModels
 
             _nextMaps.Push(_engine);
             _engine = _previousMaps.Pop();
-            _mapPane.SetEngine(_engine);
+            _mapPane.ViewModel.SetEngine(_engine);
 
             PreviousMapButtonIsEnabled = _previousMaps.Count != 0;
         }
@@ -137,7 +137,7 @@ namespace Micropolis.ViewModels
 
             _previousMaps.Push(_engine);
             _engine = _nextMaps.Pop();
-            _mapPane.SetEngine(_engine);
+            _mapPane.ViewModel.SetEngine(_engine);
 
             PreviousMapButtonIsEnabled = true;
         }
