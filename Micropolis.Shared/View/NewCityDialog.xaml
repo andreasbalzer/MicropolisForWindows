@@ -27,14 +27,25 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" x:Name="Title" HorizontalAlignment="Center" FontSize="20" TextWrapping="Wrap" Text="Willkommen zu Micropolis!" VerticalAlignment="Top"/>
+        <TextBlock Grid.Row="0" x:Name="Title" HorizontalAlignment="Center" FontSize="20" TextWrapping="Wrap" Text="{Binding TitleTextBlockText}" VerticalAlignment="Top"/>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.6*" />
                 <ColumnDefinition Width="0.3*" />
             </Grid.ColumnDefinitions>
             <local:OverlayMapView x:Name="mapPane" Grid.Column="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
-            <StackPanel Grid.Column="1" VerticalAlignment="Center" x:Name="levelBox" />
+            <ItemsControl Grid.Column="1" VerticalAlignment="Center" x:Name="levelBox" ItemsSource="{Binding Levels, Mode=TwoWay}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Vertical" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <RadioButton Content="{Binding Text}" Command="{Binding ClickCommand}" IsChecked="{Binding IsChecked, Mode=TwoWay}" />
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
         </Grid>
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
@@ -44,11 +55,11 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" x:Name="previousMapBtn" Content="Vorherige Karte" IsEnabled="False" />
-            <Button Grid.Column="1" x:Name="thisMapBtn" Content="Verwende diese Karte"/>
-            <Button Grid.Column="2" x:Name="nextMapBtn" Content="Nächste Karte"/>
-            <Button Grid.Column="3" x:Name="loadCityBtn" Content="Lade Stadt"/>
-            <Button Grid.Column="4" x:Name="cancelBtn" Content="Beenden"/>
+            <Button Grid.Column="0" x:Name="previousMapBtn" Command="{Binding PreviousMapCommand}" Content="{Binding PreviousMapButtonText}" IsEnabled="{Binding PreviousMapButtonIsEnabled}" />
+            <Button Grid.Column="1" x:Name="thisMapBtn" Command="{Binding ThisMapCommand}" Content="{Binding ThisMapButtonText}"/>
+            <Button Grid.Column="2" x:Name="nextMapBtn" Command="{Binding NextMapCommand}" Content="{Binding NextMapButtonText}"/>
+            <Button Grid.Column="3" x:Name="loadCityBtn" Command="{Binding LoadCityCommand}" Content="{Binding LoadCityButtonText}"/>
+            <Button Grid.Column="4" x:Name="cancelBtn" Command="{Binding CancelCommand}" Content="{Binding CancelButtonText}"/>
         </Grid>
         
     </Grid>
