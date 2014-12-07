@@ -196,7 +196,7 @@ namespace Micropolis
 
             if (m.UseNotificationPane && p != null)
             {
-                NotificationPanel.ShowMessage(m, p.X, p.Y);
+                NotificationPanel.ViewModel.ShowMessage(m, p.X, p.Y);
                 ShowNotificationPanel();
             }
         }
@@ -697,7 +697,7 @@ namespace Micropolis
             _messagesPane = new MessagesPane();
             MessagesScrollViewer.Content = _messagesPane;
 
-            NotificationPanel.SetUpAfterBasicInit(this);
+            NotificationPanel.ViewModel.SetUpAfterBasicInit(this);
 
             DrawingArea.KeyDown += DrawingArea_KeyDown;
             DrawingArea.PointerPressed += DrawingArea_PointerPressed;
@@ -1472,7 +1472,7 @@ namespace Micropolis
                 return;
 
             ZoneStatus z = Engine.QueryZoneStatus(xpos, ypos);
-            NotificationPanel.ShowZoneStatus(xpos, ypos, z);
+            NotificationPanel.ViewModel.ShowZoneStatus(xpos, ypos, z);
         }
 
         /// <summary>
