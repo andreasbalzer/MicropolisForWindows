@@ -17,66 +17,73 @@
     xmlns:local="using:Micropolis"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:converters="using:Micropolis.Converters"
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="50">
     <UserControl.Resources>
+
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-
                 <ResourceDictionary>
-                    <SolidColorBrush x:Key="RadioButtonBackgroundThemeBrush" Color="Red"></SolidColorBrush>
-                    <SolidColorBrush x:Key="RadioButtonPointerOverBackgroundThemeBrush" Color="Green"></SolidColorBrush>
-                    <SolidColorBrush x:Key="RadioButtonPressedBackgroundThemeBrush" Color="Yellow"></SolidColorBrush>
-                    <SolidColorBrush x:Key="RadioButtonDisabledBackgroundThemeBrush" Color="Blue"></SolidColorBrush>
+                    <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+                </ResourceDictionary>
+                <ResourceDictionary>
+                    <SolidColorBrush x:Key="RadioButtonBackgroundThemeBrush" Color="Red" />
+                    <SolidColorBrush x:Key="RadioButtonPointerOverBackgroundThemeBrush" Color="Green" />
+                    <SolidColorBrush x:Key="RadioButtonPressedBackgroundThemeBrush" Color="Yellow" />
+                    <SolidColorBrush x:Key="RadioButtonDisabledBackgroundThemeBrush" Color="Blue" />
                 </ResourceDictionary>
 
                 <ResourceDictionary x:Name="RadioButtonStyles">
                     <Style x:Key="ToolbarRadioButtonStyle" TargetType="RadioButton">
-                        <Setter Property="Background" Value="Transparent"/>
-                        <Setter Property="Foreground" Value="{StaticResource RadioButtonContentForegroundThemeBrush}"/>
-                        <Setter Property="Padding" Value="0,0,0,0"/>
-                        <Setter Property="HorizontalAlignment" Value="Stretch"/>
-                        <Setter Property="VerticalAlignment" Value="Center"/>
-                        <Setter Property="HorizontalContentAlignment" Value="Left"/>
-                        <Setter Property="VerticalContentAlignment" Value="Top"/>
-                        <Setter Property="FontFamily" Value="{StaticResource ContentControlThemeFontFamily}"/>
-                        <Setter Property="FontSize" Value="{StaticResource ControlContentThemeFontSize}"/>
+                        <Setter Property="Background" Value="Transparent" />
+                        <Setter Property="Foreground" Value="{StaticResource RadioButtonContentForegroundThemeBrush}" />
+                        <Setter Property="Padding" Value="0,0,0,0" />
+                        <Setter Property="HorizontalAlignment" Value="Stretch" />
+                        <Setter Property="VerticalAlignment" Value="Center" />
+                        <Setter Property="HorizontalContentAlignment" Value="Left" />
+                        <Setter Property="VerticalContentAlignment" Value="Top" />
+                        <Setter Property="FontFamily" Value="{StaticResource ContentControlThemeFontFamily}" />
+                        <Setter Property="FontSize" Value="{StaticResource ControlContentThemeFontSize}" />
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="RadioButton">
-                                    <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}">
+                                    <Border BorderBrush="{TemplateBinding BorderBrush}"
+                                            BorderThickness="{TemplateBinding BorderThickness}"
+                                            Background="{TemplateBinding Background}">
                                         <VisualStateManager.VisualStateGroups>
                                             <VisualStateGroup x:Name="CommonStates">
-                                                <VisualState x:Name="Normal"/>
-                                                <VisualState x:Name="PointerOver">
-                                                </VisualState>
-                                                <VisualState x:Name="Pressed">
-                                                </VisualState>
-                                                <VisualState x:Name="Disabled">
-                                                </VisualState>
+                                                <VisualState x:Name="Normal" />
+                                                <VisualState x:Name="PointerOver" />
+                                                <VisualState x:Name="Pressed" />
+                                                <VisualState x:Name="Disabled" />
                                             </VisualStateGroup>
                                             <VisualStateGroup x:Name="CheckStates">
-                                                <VisualState x:Name="Checked">
-                                                </VisualState>
-                                                <VisualState x:Name="Unchecked"/>
-                                                <VisualState x:Name="Indeterminate"/>
+                                                <VisualState x:Name="Checked" />
+                                                <VisualState x:Name="Unchecked" />
+                                                <VisualState x:Name="Indeterminate" />
                                             </VisualStateGroup>
                                             <VisualStateGroup x:Name="FocusStates">
-                                                <VisualState x:Name="Focused">
-                                                </VisualState>
-                                                <VisualState x:Name="Unfocused"/>
-                                                <VisualState x:Name="PointerFocused"/>
+                                                <VisualState x:Name="Focused" />
+                                                <VisualState x:Name="Unfocused" />
+                                                <VisualState x:Name="PointerFocused" />
                                             </VisualStateGroup>
                                         </VisualStateManager.VisualStateGroups>
                                         <Grid>
                                             <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="Auto"/>
-                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="*" />
                                             </Grid.ColumnDefinitions>
                                             <!--<Rectangle x:Name="FocusVisualWhite" Height="29" Opacity="0" StrokeDashOffset="1.5" StrokeEndLineCap="Square" Stroke="{StaticResource FocusVisualWhiteStrokeThemeBrush}" StrokeDashArray="1,1" VerticalAlignment="Top" Width="29"/>
                                             <Rectangle x:Name="FocusVisualBlack" Height="29" Opacity="0" StrokeDashOffset="0.5" StrokeEndLineCap="Square" Stroke="{StaticResource FocusVisualBlackStrokeThemeBrush}" StrokeDashArray="1,1" VerticalAlignment="Top" Width="29"/>-->
-                                            <ContentPresenter x:Name="ContentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" ContentTransitions="{TemplateBinding ContentTransitions}" Content="{TemplateBinding Content}" Grid.Column="1" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                            <ContentPresenter x:Name="ContentPresenter"
+                                                              ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                              ContentTransitions="{TemplateBinding ContentTransitions}"
+                                                              Content="{TemplateBinding Content}" Grid.Column="1"
+                                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                              Margin="{TemplateBinding Padding}"
+                                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
                                         </Grid>
                                     </Border>
                                 </ControlTemplate>
@@ -85,30 +92,36 @@
                     </Style>
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
-            <Style x:Key="ListViewItemStyle1" TargetType="ListViewItem">
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="ListViewItem">
-                            <ContentPresenter/>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" x:Name="ToolRow" />
-         </Grid.RowDefinitions>
-        <Button Background="White" x:Name="ToolBarExpandButton" Grid.Row="0" Foreground="Black" Content="▼" FontFamily="Segoe UI" Width="60" Height="60" Visibility="Collapsed" Click="ToolBarExpandButton_OnClick" />
-        <ListView Background="White" x:Name="toolBar" Grid.Row="1"  HorizontalAlignment="Left" ItemContainerStyle="{StaticResource ListViewItemStyle1}" Margin="0">
-            <ListView.ItemsPanel>
+            <RowDefinition Height="{Binding ToolRowHeight}" x:Name="ToolRow" />
+        </Grid.RowDefinitions>
+        <Button Background="White" x:Name="ToolBarExpandButton" Grid.Row="0" Foreground="Black"
+                Content="{Binding ToolBarExpandButtonText}" FontFamily="Segoe UI" Width="60" Height="60"
+                Visibility="{Binding ToolBarExpandButtonIsVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
+                Command="{Binding ExpandCommand}" />
+        <ItemsControl Background="White"
+                      Visibility="{Binding ToolBarIsVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
+                      x:Name="toolBar" Grid.Row="1" HorizontalAlignment="Left"
+                      Margin="0"
+                      ItemsSource="{Binding ToolBarItems}">
+            <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <WrapGrid Orientation="Vertical" VerticalAlignment="Stretch"  HorizontalChildrenAlignment="Left" Margin="0" />
+                    <WrapGrid Orientation="Vertical" VerticalAlignment="Stretch" HorizontalChildrenAlignment="Left"
+                              Margin="0" />
                 </ItemsPanelTemplate>
-            </ListView.ItemsPanel>
-
-        </ListView>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <RadioButton Style="{StaticResource ToolbarRadioButtonStyle}"
+                                 Background="{Binding CurrentStateImageBrush}" Content="{Binding Text}"
+                                 Command="{Binding ClickCommand}" IsChecked="{Binding IsChecked}" Height="{Binding Height}"
+                                 Width="{Binding Width}" />
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
     </Grid>
 </UserControl>

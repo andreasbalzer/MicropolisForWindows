@@ -389,7 +389,7 @@ namespace Micropolis
 
         void MainGamePage_VisualStateChanged(object sender, EventArgs e)
         {
-            ToolsPanel.Mode = (_state == "Snapped" || _state == "Narrow") ? ToolBarMode.FLYOUT : ToolBarMode.NORMAL;
+            ToolsPanel.ViewModel.Mode = (_state == "Snapped" || _state == "Narrow") ? ToolBarMode.FLYOUT : ToolBarMode.NORMAL;
         }
 
         /// <summary>
@@ -720,7 +720,7 @@ namespace Micropolis
 
             DrawingAreaScroll.ViewChanging += _mapView.drawingAreaScroll_ViewChanging;
 
-            ToolsPanel.SetUpAfterBasicInit(this);
+            ToolsPanel.ViewModel.SetUpAfterBasicInit(this);
         }
 
         /// <summary>
