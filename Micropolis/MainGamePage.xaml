@@ -342,17 +342,16 @@
                     </Border>
                 </Grid>
 
-                <Border Background="White" BorderBrush="#2B2B2B" BorderThickness="1,1,0,1" HorizontalAlignment="Right"
+                <Border Background="White" Visibility="{Binding NotificationPanelIsVisible, Converter={StaticResource BooleanToVisibilityConverter}}" BorderBrush="#2B2B2B" BorderThickness="1,1,0,1" HorizontalAlignment="Right"
                         VerticalAlignment="Center">
                     <local:NotificationPane x:Name="NotificationPanel"
-                                            Visibility="{Binding NotificationPanelIsVisible}" x:FieldModifier="public"
+                                             x:FieldModifier="public"
                                             Width="200" />
                 </Border>
 
-                <Border Background="White" BorderBrush="#2B2B2B" BorderThickness="0,1,1,1" HorizontalAlignment="Left"
+                <Border Background="White" Visibility="{Binding EvaluationPaneIsVisible, Converter={StaticResource BooleanToVisibilityConverter}}" BorderBrush="#2B2B2B" BorderThickness="0,1,1,1" HorizontalAlignment="Left"
                         VerticalAlignment="Center">
                     <local:EvaluationPane x:Name="EvaluationPane"
-                                          Visibility="{Binding EvaluationPaneIsVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
                                           x:FieldModifier="public"
                                           Width="450" Height="200" />
                 </Border>
@@ -405,9 +404,9 @@
                 </Grid.ColumnDefinitions>
                 <StackPanel x:Name="NewGameDialogPaneInner" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="1" />
             </Grid>
-
-            <local:GraphsPane x:Name="GraphsPane"
-                              Visibility="{Binding GraphsPaneIsVisible, Converter={StaticResource BooleanToVisibilityConverter}}" />
+            <Grid Visibility="{Binding GraphsPaneIsVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <local:GraphsPane x:Name="GraphsPane" />
+            </Grid>
         </Grid>
     </Grid>
 </Page>
