@@ -35,7 +35,19 @@ namespace Micropolis
                 EvaluationPane.ViewModel, MiniMapPane, DrawingAreaScroll, MessagesScrollViewer, DemandInd.ViewModel,
                 LevelMenu, SpeedMenu, NewGameDialogPaneInner);
             DataContext = _viewModel;
-            Loaded += _viewModel.MainPage_Loaded;
+            Loaded += MainGamePage_Loaded;
+        }
+
+        void MainGamePage_Loaded(object sender, RoutedEventArgs e)
+        {
+            _viewModel.MainPage_Loaded(this,null);
+            _viewModel.DrawingAreaScrollViewportHeight = DrawingAreaScroll.Height;
+            _viewModel.DrawingAreaScrollViewportWidth = DrawingAreaScroll.Width;
+            _viewModel.DrawingAreaActualWidth = DrawingArea.ActualWidth;
+            _viewModel.DrawingAreaActualHeight = DrawingArea.ActualHeight;
+            _viewModel.DrawingAreaScrollVerticalOffset = DrawingAreaScroll.VerticalOffset;
+            _viewModel.DrawingAreaScrollHorizontalOffset = DrawingAreaScroll.HorizontalOffset;
+            _viewModel.DrawingAreaScrollZoomFactor = DrawingAreaScroll.ZoomFactor;
         }
 
         public MainGamePageViewModel ViewModel
@@ -81,6 +93,8 @@ namespace Micropolis
         {
             _viewModel.DrawingAreaScrollViewportHeight = e.NewSize.Height;
             _viewModel.DrawingAreaScrollViewportWidth = e.NewSize.Width;
+            _viewModel.DrawingAreaActualWidth = DrawingArea.ActualWidth;
+            _viewModel.DrawingAreaActualHeight = DrawingArea.ActualHeight;
         }
 
         private void DrawingAreaScroll_OnViewChanged(object sender, ScrollViewerViewChangedEventArgs e)
