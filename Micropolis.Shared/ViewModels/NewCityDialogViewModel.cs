@@ -15,7 +15,7 @@ namespace Micropolis.ViewModels
     public class NewCityDialogViewModel : BindableBase
     {
          private readonly Dictionary<int, LevelButtonViewModel> _levelBtns = new Dictionary<int, LevelButtonViewModel>();
-        private readonly MainGamePage _mainPage;
+        private readonly MainGamePageViewModel _mainPageViewModel;
         private readonly Stack<Engine.Micropolis> _nextMaps = new Stack<Engine.Micropolis>();
         private readonly Stack<Engine.Micropolis> _previousMaps = new Stack<Engine.Micropolis>();
         private Engine.Micropolis _engine;
@@ -23,9 +23,9 @@ namespace Micropolis.ViewModels
 
         public ObservableCollection<LevelButtonViewModel> Levels { get; set; } 
 
-        public NewCityDialogViewModel(MainGamePage mainPage, OverlayMapView mapPane)
+        public NewCityDialogViewModel(MainGamePageViewModel mainPageViewModel, OverlayMapViewModel mapPaneViewModel)
         {
-            _mapPane = mapPane;
+            _mapPaneViewModel = mapPaneViewModel;
             Levels=new ObservableCollection<LevelButtonViewModel>();
             TitleTextBlockText = Strings.GetString("welcome.caption");
             //mapPane.Destroy();
@@ -33,7 +33,7 @@ namespace Micropolis.ViewModels
             _engine = new Engine.Micropolis();
             new MapGenerator(_engine).GenerateNewCity();
             //mapPane = new OverlayMapView(engine);
-            _mapPane.ViewModel.SetUpAfterBasicInit(_engine);
+            _mapPaneViewModel.SetUpAfterBasicInit(_engine);
 
 
             for (int lev = GameLevel.MIN_LEVEL; lev <= GameLevel.MAX_LEVEL; lev++)
@@ -51,7 +51,7 @@ namespace Micropolis.ViewModels
             ThisMapButtonText = Strings.GetString("welcome.play_this_map");
             ThisMapCommand = new DelegateCommand(() =>
             {
-                mainPage.HideNewGameDialogPanel();
+                mainPageViewModel.HideNewGameDialogPanel();
                 OnPlayClicked();
             });
             NextMapButtonText = Strings.GetString("welcome.next_map");
@@ -59,7 +59,7 @@ namespace Micropolis.ViewModels
             CancelButtonText = Strings.GetString("welcome.cancel");
             CancelCommand = new DelegateCommand(() =>
             {
-                mainPage.HideNewGameDialogPanel();
+                mainPageViewModel.HideNewGameDialogPanel();
                 OnCancelClicked();
             });
 
@@ -68,7 +68,7 @@ namespace Micropolis.ViewModels
             LoadCityCommand = new DelegateCommand(() => { OnLoadCityClicked(); });
 
 
-            _mainPage = mainPage;
+            _mainPageViewModel = mainPageViewModel;
         }
 
         private string _titleTextBlockText;
@@ -105,7 +105,7 @@ namespace Micropolis.ViewModels
         public DelegateCommand LoadCityCommand { get { return _loadCityCommand; } set { SetProperty(ref _loadCityCommand, value); } }
 
         private DelegateCommand _cancelCommand;
-        private OverlayMapView _mapPane;
+        private OverlayMapViewModel _mapPaneViewModel;
         public DelegateCommand CancelCommand { get { return _cancelCommand; } set { SetProperty(ref _cancelCommand, value); } }
 
         /// <summary>
@@ -118,7 +118,7 @@ namespace Micropolis.ViewModels
 
             _nextMaps.Push(_engine);
             _engine = _previousMaps.Pop();
-            _mapPane.ViewModel.SetEngine(_engine);
+            _mapPaneViewModel.SetEngine(_engine);
 
             PreviousMapButtonIsEnabled = _previousMaps.Count != 0;
         }
@@ -137,7 +137,7 @@ namespace Micropolis.ViewModels
 
             _previousMaps.Push(_engine);
             _engine = _nextMaps.Pop();
-            _mapPane.ViewModel.SetEngine(_engine);
+            _mapPaneViewModel.SetEngine(_engine);
 
             PreviousMapButtonIsEnabled = true;
         }
@@ -158,7 +158,7 @@ namespace Micropolis.ViewModels
                     Stream stream = await file.OpenStreamForReadAsync();
                     await newEngine.LoadFile(stream);
                     StartPlaying(newEngine, file);
-                    _mainPage.HideNewGameDialogPanel();
+                    _mainPageViewModel.HideNewGameDialogPanel();
                 }
             }
             catch (Exception e)
@@ -175,7 +175,7 @@ namespace Micropolis.ViewModels
         /// <param name="file">file to load and play</param>
         private void StartPlaying(Engine.Micropolis newEngine, StorageFile file)
         {
-            MainGamePage win = _mainPage;
+            MainGamePageViewModel win = _mainPageViewModel;
             win.SetEngine(newEngine);
             win.CurrentFile = file;
             win.MakeClean();
@@ -189,7 +189,7 @@ namespace Micropolis.ViewModels
             _engine.SetGameLevel(GetSelectedGameLevel());
             _engine.SetFunds(GameLevel.GetStartingFunds(_engine.GameLevel));
             StartPlaying(_engine, null);
-            MainGamePage win = _mainPage;
+            MainGamePageViewModel win = _mainPageViewModel;
             win.OnDifficultyClicked(GetSelectedGameLevel());
         }
 
@@ -198,7 +198,7 @@ namespace Micropolis.ViewModels
         /// </summary>
         private void OnCancelClicked()
         {
-            MainGamePage win = _mainPage;
+            MainGamePageViewModel win = _mainPageViewModel;
             win.HideNewGameDialogPanel();
         }
 

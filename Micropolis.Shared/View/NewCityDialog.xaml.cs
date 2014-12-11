@@ -43,10 +43,10 @@ namespace Micropolis
         /// Initiates a new instance of the NewCityDialog.
         /// </summary>
         /// <param name="mainPage">reference to mainPage</param>
-        public NewCityDialog(MainGamePage mainPage)
+        public NewCityDialog(MainGamePageViewModel mainPageViewModel)
             : this()
         {
-            _viewModel=new NewCityDialogViewModel(mainPage,mapPane);
+            _viewModel=new NewCityDialogViewModel(mainPageViewModel,mapPane.ViewModel);
             this.DataContext = _viewModel;
         }
 

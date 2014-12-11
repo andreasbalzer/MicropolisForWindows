@@ -27,7 +27,7 @@ namespace Micropolis.ViewModels
         /// <summary>
         ///     Reference to MainGamePage
         /// </summary>
-        private MainGamePage _mainPage;
+        private MainGamePageViewModel _mainPageViewModel;
 
         private string _oneTwentyYearsButtonText;
         private bool _oneTwentyYearsIsChecked;
@@ -83,9 +83,9 @@ namespace Micropolis.ViewModels
         /// </summary>
         /// <param name="engine">The engine.</param>
         /// <param name="mainPage">The main page.</param>
-        public void SetUpAfterBasicInit(Engine.Micropolis engine, MainGamePage mainPage)
+        public void SetUpAfterBasicInit(Engine.Micropolis engine, MainGamePageViewModel mainPageViewModel)
         {
-            _mainPage = mainPage;
+            _mainPageViewModel = mainPageViewModel;
             _graphAreaViewModel.SetUpAfterBasicInit(this);
             SetEngine(engine);
 
@@ -147,7 +147,7 @@ namespace Micropolis.ViewModels
         /// </summary>
         private void Dismiss()
         {
-            _mainPage.HideGraphsPane();
+            _mainPageViewModel.HideGraphsPane();
         }
 
         /// <summary>

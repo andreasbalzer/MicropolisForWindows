@@ -86,7 +86,7 @@ namespace Micropolis
         {
             if (MainPageReference != null)
             {
-                MainPageReference.OnWindowReopend();
+                MainPageReference.ViewModel.OnWindowReopend();
             }
         }
 
@@ -195,7 +195,7 @@ namespace Micropolis
 
             if (MainPageReference != null)
             {
-                MainPageReference.OnAppClosed();
+                MainPageReference.ViewModel.OnAppClosed();
             }
 
             deferral.Complete();

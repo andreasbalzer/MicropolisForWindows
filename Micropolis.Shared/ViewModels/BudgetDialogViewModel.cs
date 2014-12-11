@@ -21,7 +21,7 @@ namespace Micropolis.ViewModels
         private string _investionsTextBlockText;
         private bool _isAutoBudget;
         private bool _isPause;
-        private MainGamePage _mainPage;
+        private MainGamePageViewModel _mainPageViewModel;
         private string _moneyAtBeginningOfYearTextBlockText;
         private string _moneyAtEndOfYearTextBlockText;
         private string _newBalance1TextBlockText;
@@ -402,16 +402,16 @@ namespace Micropolis.ViewModels
                 FireFundEntry = (int) Math.Round(b.FirePercent*100.0);
             }
 
-            TaxRevenue = MainGamePage.FormatFunds(b.TaxIncome);
+            TaxRevenue = MainGamePageViewModel.FormatFunds(b.TaxIncome);
 
-            RoadFundRequest = MainGamePage.FormatFunds(b.RoadRequest);
-            RoadFundAlloc = MainGamePage.FormatFunds(b.RoadFunded);
+            RoadFundRequest = MainGamePageViewModel.FormatFunds(b.RoadRequest);
+            RoadFundAlloc = MainGamePageViewModel.FormatFunds(b.RoadFunded);
 
-            PoliceFundRequest = MainGamePage.FormatFunds(b.PoliceRequest);
-            PoliceFundAlloc = MainGamePage.FormatFunds(b.PoliceFunded);
+            PoliceFundRequest = MainGamePageViewModel.FormatFunds(b.PoliceRequest);
+            PoliceFundAlloc = MainGamePageViewModel.FormatFunds(b.PoliceFunded);
 
-            FireFundRequest = MainGamePage.FormatFunds(b.FireRequest);
-            FireFundAlloc = MainGamePage.FormatFunds(b.FireFunded);
+            FireFundRequest = MainGamePageViewModel.FormatFunds(b.FireRequest);
+            FireFundAlloc = MainGamePageViewModel.FormatFunds(b.FireFunded);
         }
 
         /// <summary>
@@ -419,9 +419,9 @@ namespace Micropolis.ViewModels
         /// </summary>
         /// <param name="mainPage">The main page.</param>
         /// <param name="engine">The engine.</param>
-        public void SetupAfterBasicInit(MainGamePage mainPage, Engine.Micropolis engine)
+        public void SetupAfterBasicInit(MainGamePageViewModel mainPageViewModel, Engine.Micropolis engine)
         {
-            _mainPage = mainPage;
+            _mainPageViewModel = mainPageViewModel;
             AutoBudgetButtonText = Strings.GetString("budgetdlg.auto_budget");
             PauseButtonText = Strings.GetString("budgetdlg.pause_game");
 
@@ -508,9 +508,9 @@ namespace Micropolis.ViewModels
                 _engine.SetSpeed(Speeds.Speed["NORMAL"]);
             }
 
-            _mainPage.StartTimer();
+            _mainPageViewModel.StartTimer();
 
-            _mainPage.HideBudgetDialog();
+            _mainPageViewModel.HideBudgetDialog();
         }
 
         /// <summary>
@@ -549,13 +549,13 @@ namespace Micropolis.ViewModels
             int capExpenses = -(cashFlow - f.TaxIncome + f.OperatingExpenses);
 
 
-            Th1TextBlockText = MainGamePage.FormatGameDate(f.CityTime - 1);
+            Th1TextBlockText = MainGamePageViewModel.FormatGameDate(f.CityTime - 1);
 
-            PreviousBalance1TextBlockText = MainGamePage.FormatFunds(fPrior.TotalFunds);
-            TaxIncome1TextBlockText = MainGamePage.FormatFunds(f.TaxIncome);
-            CapExpenses1TextBlockText = MainGamePage.FormatFunds(capExpenses);
-            OpExpenses1TextBlockText = MainGamePage.FormatFunds(f.OperatingExpenses);
-            NewBalance1TextBlockText = MainGamePage.FormatFunds(f.TotalFunds);
+            PreviousBalance1TextBlockText = MainGamePageViewModel.FormatFunds(fPrior.TotalFunds);
+            TaxIncome1TextBlockText = MainGamePageViewModel.FormatFunds(f.TaxIncome);
+            CapExpenses1TextBlockText = MainGamePageViewModel.FormatFunds(capExpenses);
+            OpExpenses1TextBlockText = MainGamePageViewModel.FormatFunds(f.OperatingExpenses);
+            NewBalance1TextBlockText = MainGamePageViewModel.FormatFunds(f.TotalFunds);
 
             if (2 >= _engine.FinancialHistory.Count)
             {
@@ -567,13 +567,13 @@ namespace Micropolis.ViewModels
             int capExpenses2 = -(cashFlow2 - f2.TaxIncome + f2.OperatingExpenses);
 
 
-            Th2TextBlockText = MainGamePage.FormatGameDate(f2.CityTime - 1);
+            Th2TextBlockText = MainGamePageViewModel.FormatGameDate(f2.CityTime - 1);
 
-            PreviousBalance2TextBlockText = MainGamePage.FormatFunds(fPrior2.TotalFunds);
-            TaxIncome2TextBlockText = MainGamePage.FormatFunds(f2.TaxIncome);
-            CapExpenses2TextBlockText = MainGamePage.FormatFunds(capExpenses2);
-            OpExpenses2TextBlockText = MainGamePage.FormatFunds(f2.OperatingExpenses);
-            NewBalance2TextBlockText = MainGamePage.FormatFunds(f2.TotalFunds);
+            PreviousBalance2TextBlockText = MainGamePageViewModel.FormatFunds(fPrior2.TotalFunds);
+            TaxIncome2TextBlockText = MainGamePageViewModel.FormatFunds(f2.TaxIncome);
+            CapExpenses2TextBlockText = MainGamePageViewModel.FormatFunds(capExpenses2);
+            OpExpenses2TextBlockText = MainGamePageViewModel.FormatFunds(f2.OperatingExpenses);
+            NewBalance2TextBlockText = MainGamePageViewModel.FormatFunds(f2.TotalFunds);
         }
     }
 }

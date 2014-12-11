@@ -10,7 +10,7 @@
     // See the README file, included in this distribution, for details.
     // Project website: http://code.google.com/p/micropolis/
     -->
-    
+
 <Page
     x:Class="Micropolis.MainGamePage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -20,47 +20,57 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-    
+
     <Page.Resources>
-        <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         <converters:SpeedButtonToBackgroundConverter x:Key="SpeedButtonToBackgroundConverter" />
         <Style x:Key="MenuFlyoutPresenterStyle1" TargetType="MenuFlyoutPresenter">
-        	<Setter Property="RequestedTheme" Value="Light"/>
-            <Setter Property="Background" Value="#E6E6E6"/>
-        	<Setter Property="BorderBrush" Value="{ThemeResource FlyoutBorderThemeBrush}"/>
-        	<Setter Property="BorderThickness" Value="0"/>
-        	<Setter Property="Padding" Value="{ThemeResource MenuFlyoutPresenterThemePadding}"/>
-        	<Setter Property="ScrollViewer.HorizontalScrollMode" Value="Disabled"/>
-        	<Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
-        	<Setter Property="ScrollViewer.VerticalScrollMode" Value="Auto"/>
-        	<Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
-        	<Setter Property="ScrollViewer.IsHorizontalRailEnabled" Value="False"/>
-        	<Setter Property="ScrollViewer.IsVerticalRailEnabled" Value="False"/>
-        	<Setter Property="ScrollViewer.ZoomMode" Value="Disabled"/>
-        	<Setter Property="MinWidth" Value="350"/>
-        	<Setter Property="MaxWidth" Value="{ThemeResource FlyoutThemeMaxWidth}"/>
-        	<Setter Property="MinHeight" Value="{ThemeResource FlyoutThemeMinHeight}"/>
-        	<Setter Property="MaxHeight" Value="{ThemeResource FlyoutThemeMaxHeight}"/>
-            <Setter Property="Margin" Value="-17,-5"/>
-        	<Setter Property="Template">
-        		<Setter.Value>
-        			<ControlTemplate TargetType="MenuFlyoutPresenter">
-        				<Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}">
-        					<ScrollViewer AutomationProperties.AccessibilityView="Raw" HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}" HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}" IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}" IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}" Padding="{TemplateBinding Padding}" VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}" VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}" ZoomMode="{TemplateBinding ScrollViewer.ZoomMode}">
-        						<ItemsPresenter/>
-        					</ScrollViewer>
-        				</Border>
-        			</ControlTemplate>
-        		</Setter.Value>
-        	</Setter>
+            <Setter Property="RequestedTheme" Value="Light" />
+            <Setter Property="Background" Value="#E6E6E6" />
+            <Setter Property="BorderBrush" Value="{ThemeResource FlyoutBorderThemeBrush}" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Padding" Value="{ThemeResource MenuFlyoutPresenterThemePadding}" />
+            <Setter Property="ScrollViewer.HorizontalScrollMode" Value="Disabled" />
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
+            <Setter Property="ScrollViewer.VerticalScrollMode" Value="Auto" />
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
+            <Setter Property="ScrollViewer.IsHorizontalRailEnabled" Value="False" />
+            <Setter Property="ScrollViewer.IsVerticalRailEnabled" Value="False" />
+            <Setter Property="ScrollViewer.ZoomMode" Value="Disabled" />
+            <Setter Property="MinWidth" Value="350" />
+            <Setter Property="MaxWidth" Value="{ThemeResource FlyoutThemeMaxWidth}" />
+            <Setter Property="MinHeight" Value="{ThemeResource FlyoutThemeMinHeight}" />
+            <Setter Property="MaxHeight" Value="{ThemeResource FlyoutThemeMaxHeight}" />
+            <Setter Property="Margin" Value="-17,-5" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="MenuFlyoutPresenter">
+                        <Border BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Background="{TemplateBinding Background}">
+                            <ScrollViewer AutomationProperties.AccessibilityView="Raw"
+                                          HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}"
+                                          HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
+                                          IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}"
+                                          IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}"
+                                          Padding="{TemplateBinding Padding}"
+                                          VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
+                                          VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}"
+                                          ZoomMode="{TemplateBinding ScrollViewer.ZoomMode}">
+                                <ItemsPresenter />
+                            </ScrollViewer>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
     </Page.Resources>
 
     <Grid Background="#6666E6">
         <Grid.RowDefinitions>
-            <RowDefinition Height="40"/>
+            <RowDefinition Height="40" />
             <RowDefinition />
-            <RowDefinition Height="40"/>
+            <RowDefinition Height="40" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -77,142 +87,191 @@
                             <AppBarButton Icon="Save" Label="Save" x:Name="" Click="SaveButton_Click" />
                             <AppBarButton Icon="SaveLocal" Label="Save as" x:Name="SaveAsButton" Click="SaveAsButton_Click" />-->
 
-                            <MenuFlyoutItem x:Name="NewButton" Padding="32,10,20,12" Text="Hallo" Click="NewButton_Click"/>
-                            <MenuFlyoutItem x:Name="LoadButton" Padding="32,10,20,12" Text="Hallo" Click="LoadButton_Click"/>
-                            <MenuFlyoutItem x:Name="SaveButton" Padding="32,10,20,12" Text="Hallo" Click="SaveButton_Click"/>
-                            <MenuFlyoutItem x:Name="SaveAsButton" Padding="32,10,20,12" Text="Hallo" Click="SaveAsButton_Click"/>
+                            <MenuFlyoutItem x:Name="NewButton" Padding="32,10,20,12" Text="{Binding NewButtonText}"
+                                            Command="{Binding NewCommand}" />
+                            <MenuFlyoutItem x:Name="LoadButton" Padding="32,10,20,12" Text="{Binding LoadButtonText}"
+                                            Command="{Binding LoadCommand}" />
+                            <MenuFlyoutItem x:Name="SaveButton" Padding="32,10,20,12" Text="{Binding SaveButtonText}"
+                                            Command="{Binding SaveCommmand}" />
+                            <MenuFlyoutItem x:Name="SaveAsButton" Padding="32,10,20,12"
+                                            Text="{Binding SaveAsButtonText}" Command="{Binding SaveAsCommand}" />
                         </MenuFlyout>
                     </Button.Flyout>
                     <StackPanel Orientation="Horizontal">
                         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <Rectangle Fill="Black" Height="3" Width="20"/>
-                            <Rectangle Fill="Black" Height="3" Margin="0,4,0,4" Width="20"/>
-                            <Rectangle Fill="Black" Height="3" Width="20"/>
+                            <Rectangle Fill="Black" Height="3" Width="20" />
+                            <Rectangle Fill="Black" Height="3" Margin="0,4,0,4" Width="20" />
+                            <Rectangle Fill="Black" Height="3" Width="20" />
                         </StackPanel>
 
-                        <TextBlock x:Name="Title" FontSize="20" FontWeight="SemiLight" Margin="12,0,0,1" Text="Micropolis" VerticalAlignment="Center"/>
+                        <TextBlock x:Name="Title" FontSize="20" FontWeight="SemiLight" Margin="12,0,0,1"
+                                   Text="{Binding TitleTextBlockText}" VerticalAlignment="Center" />
                     </StackPanel>
                 </Button>
 
-                <Button x:Name="SpeedPauseButton" Background="{Binding IsSpeedPause, Converter={StaticResource SpeedButtonToBackgroundConverter}}" Style="{StaticResource BarButtonStyle}" Command="{Binding SpeedPauseCommand}">
+                <Button x:Name="SpeedPauseButton"
+                        Background="{Binding IsSpeedPause, Converter={StaticResource SpeedButtonToBackgroundConverter}}"
+                        Style="{StaticResource BarButtonStyle}" Command="{Binding SpeedPauseCommand}">
                     <Image Source="/resources/UIButtons/Pause-Icon.png" />
                 </Button>
-                <Button x:Name="SpeedSlowButton" Background="{Binding IsSpeedSlow, Converter={StaticResource SpeedButtonToBackgroundConverter}}" Style="{StaticResource BarButtonStyle}" Command="{Binding SpeedSlowCommand}">
+                <Button x:Name="SpeedSlowButton"
+                        Background="{Binding IsSpeedSlow, Converter={StaticResource SpeedButtonToBackgroundConverter}}"
+                        Style="{StaticResource BarButtonStyle}" Command="{Binding SpeedSlowCommand}">
                     <Image Source="/resources/UIButtons/Slow-Icon.png" />
                 </Button>
-                <Button x:Name="SpeedNormalButton" Background="{Binding IsSpeedNormal, Converter={StaticResource SpeedButtonToBackgroundConverter}}" Style="{StaticResource BarButtonStyle}" Command="{Binding SpeedNormalCommand}">
+                <Button x:Name="SpeedNormalButton"
+                        Background="{Binding IsSpeedNormal, Converter={StaticResource SpeedButtonToBackgroundConverter}}"
+                        Style="{StaticResource BarButtonStyle}" Command="{Binding SpeedNormalCommand}">
                     <Image Source="/resources/UIButtons/Normal-Icon.png" />
                 </Button>
-                <Button x:Name="SpeedFastButton" Background="{Binding IsSpeedFast, Converter={StaticResource SpeedButtonToBackgroundConverter}}" Style="{StaticResource BarButtonStyle}" Command="{Binding SpeedFastCommand}">
+                <Button x:Name="SpeedFastButton"
+                        Background="{Binding IsSpeedFast, Converter={StaticResource SpeedButtonToBackgroundConverter}}"
+                        Style="{StaticResource BarButtonStyle}" Command="{Binding SpeedFastCommand}">
                     <Image Source="/resources/UIButtons/Fast-Icon.png" />
                 </Button>
-                <Button x:Name="SpeedSuperFastButton" Background="{Binding IsSpeedSuperFast, Converter={StaticResource SpeedButtonToBackgroundConverter}}" Style="{StaticResource BarButtonStyle}" Command="{Binding SpeedSuperFastCommand}">
+                <Button x:Name="SpeedSuperFastButton"
+                        Background="{Binding IsSpeedSuperFast, Converter={StaticResource SpeedButtonToBackgroundConverter}}"
+                        Style="{StaticResource BarButtonStyle}" Command="{Binding SpeedSuperFastCommand}">
                     <Image Source="/resources/UIButtons/SuperFast-Icon.png" />
                 </Button>
 
 
                 <StackPanel Orientation="Horizontal" Margin="12,6" VerticalAlignment="Center">
                     <Path Height="12" Fill="#2B2B2B" Margin="20,-2,0,0" Stretch="Uniform"
-                                  Style="{StaticResource DatePathStyle}" Width="12" />
-                    <TextBlock x:Name="DateLbl" Margin="7,0,0,0" MinWidth="65" Text="Jan 1900" FontSize="14"
-                                       Foreground="#2B2B2B" />
+                          Style="{StaticResource DatePathStyle}" Width="12" />
+                    <TextBlock x:Name="DateLbl" Margin="7,0,0,0" MinWidth="65" Text="{Binding DateLblTextBlockText}"
+                               FontSize="14"
+                               Foreground="#2B2B2B" />
 
                     <Path Height="12" Fill="#2B2B2B" Margin="10,-2,0,0" Stretch="Uniform"
-                                  Style="{StaticResource FundsPathStyle}" Width="12" />
-                    <TextBlock x:Name="FundsLbl" Margin="7,0,0,0" MinWidth="65" Text="10000 €" FontSize="14"
-                                       Foreground="#2B2B2B" />
+                          Style="{StaticResource FundsPathStyle}" Width="12" />
+                    <TextBlock x:Name="FundsLbl" Margin="7,0,0,0" MinWidth="65" Text="{Binding FundsLblTextBlockText}"
+                               FontSize="14"
+                               Foreground="#2B2B2B" />
 
                     <Path Height="14" Fill="#2B2B2B" Margin="10,-1,0,0" Stretch="Uniform"
-                                  Style="{StaticResource PopulationPathStyle}" Width="14" />
-                    <TextBlock x:Name="PopLbl" Margin="7,0,0,0" Text="0" FontSize="14" Foreground="#2B2B2B" />
+                          Style="{StaticResource PopulationPathStyle}" Width="14" />
+                    <TextBlock x:Name="PopLbl" Margin="7,0,0,0" Text="{Binding PopLblTextBlockText}" FontSize="14"
+                               Foreground="#2B2B2B" />
                 </StackPanel>
             </StackPanel>
 
             <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
                 <Grid Background="White">
-                    <local:DemandIndicator x:Name="DemandInd" Margin="-2,-5,-2,-5" VerticalAlignment="Center" Height="47" Width="39" RenderTransformOrigin="0.5,0.5">
+                    <local:DemandIndicator x:Name="DemandInd" Margin="-2,-5,-2,-5" VerticalAlignment="Center"
+                                           Height="47" Width="39" RenderTransformOrigin="0.5,0.5">
                         <local:DemandIndicator.RenderTransform>
-                            <CompositeTransform ScaleX="0.65" ScaleY="0.65"/>
+                            <CompositeTransform ScaleX="0.65" ScaleY="0.65" />
                         </local:DemandIndicator.RenderTransform>
                     </local:DemandIndicator>
                 </Grid>
 
-                <Button x:Uid="MessagesVisibilityButton" Command="{Binding ToggleMessagesCommand}" Style="{StaticResource BarButtonStyle}" Width="230">
+                <Button x:Uid="MessagesVisibilityButton" Command="{Binding ToggleMessagesCommand}"
+                        Style="{StaticResource BarButtonStyle}" Width="230">
                     <Grid>
-                        <StackPanel Orientation="Horizontal" Visibility="{Binding IsMessagesVisible, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=inverted, FallbackValue=Collapsed}">
-                            <TextBlock FontSize="16" FontWeight="SemiLight" Text="Nachrichten einblenden" VerticalAlignment="Center"/>
-                            <TextBlock FontSize="16" Margin="12,0,0,0" Text="&#xE099;" VerticalAlignment="Center" FontFamily="Segoe UI Symbol"/>
+                        <StackPanel Orientation="Horizontal"
+                                    Visibility="{Binding IsMessagesVisible, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=inverted, FallbackValue=Collapsed}">
+                            <TextBlock FontSize="16" FontWeight="SemiLight" Text="Nachrichten einblenden"
+                                       VerticalAlignment="Center" />
+                            <TextBlock FontSize="16" Margin="12,0,0,0" Text="&#xE099;" VerticalAlignment="Center"
+                                       FontFamily="Segoe UI Symbol" />
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal" Visibility="{Binding IsMessagesVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
-                            <TextBlock FontSize="16" FontWeight="SemiLight" Text="Nachrichten ausblenden" VerticalAlignment="Center"/>
-                            <TextBlock FontSize="16" Margin="12,0,0,2" Text="&#xE098;" VerticalAlignment="Center" FontFamily="Segoe UI Symbol"/>
+                        <StackPanel Orientation="Horizontal"
+                                    Visibility="{Binding IsMessagesVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            <TextBlock FontSize="16" FontWeight="SemiLight" Text="Nachrichten ausblenden"
+                                       VerticalAlignment="Center" />
+                            <TextBlock FontSize="16" Margin="12,0,0,2" Text="&#xE098;" VerticalAlignment="Center"
+                                       FontFamily="Segoe UI Symbol" />
                         </StackPanel>
                     </Grid>
                 </Button>
-                
-                <Button x:Uid="MiniMapVisibilityButton" Command="{Binding ToggleMiniMapCommand}" Style="{StaticResource BarButtonStyle}" Width="220">
+
+                <Button x:Uid="MiniMapVisibilityButton" Command="{Binding ToggleMiniMapCommand}"
+                        Style="{StaticResource BarButtonStyle}" Width="220">
                     <Grid>
-                        <StackPanel Orientation="Horizontal" Visibility="{Binding IsMiniMapVisible, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=inverted, FallbackValue=Collapsed}">
-                            <TextBlock FontSize="16" FontWeight="SemiLight" Text="Karte einblenden" VerticalAlignment="Center"/>
-                            <TextBlock FontSize="16" Margin="12,0,0,0" Text="&#xE099;" VerticalAlignment="Center" FontFamily="Segoe UI Symbol"/>
+                        <StackPanel Orientation="Horizontal"
+                                    Visibility="{Binding IsMiniMapVisible, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=inverted, FallbackValue=Collapsed}">
+                            <TextBlock FontSize="16" FontWeight="SemiLight" Text="Karte einblenden"
+                                       VerticalAlignment="Center" />
+                            <TextBlock FontSize="16" Margin="12,0,0,0" Text="&#xE099;" VerticalAlignment="Center"
+                                       FontFamily="Segoe UI Symbol" />
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal" Visibility="{Binding IsMiniMapVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
-                            <TextBlock FontSize="16" FontWeight="SemiLight" Text="Karte ausblenden" VerticalAlignment="Center"/>
-                            <TextBlock FontSize="16" Margin="12,0,0,2" Text="&#xE098;" VerticalAlignment="Center" FontFamily="Segoe UI Symbol"/>
+                        <StackPanel Orientation="Horizontal"
+                                    Visibility="{Binding IsMiniMapVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            <TextBlock FontSize="16" FontWeight="SemiLight" Text="Karte ausblenden"
+                                       VerticalAlignment="Center" />
+                            <TextBlock FontSize="16" Margin="12,0,0,2" Text="&#xE098;" VerticalAlignment="Center"
+                                       FontFamily="Segoe UI Symbol" />
                         </StackPanel>
                     </Grid>
-                </Button>                
+                </Button>
             </StackPanel>
         </Grid>
 
-        <Grid x:Uid="BottomBar" Grid.Row="2" Background="{StaticResource BarBackgroundBrush}" Grid.Column="0" Grid.ColumnSpan="2">
+        <Grid x:Uid="BottomBar" Grid.Row="2" Background="{StaticResource BarBackgroundBrush}" Grid.Column="0"
+              Grid.ColumnSpan="2">
             <StackPanel Orientation="Horizontal">
                 <Button x:Name="DifficultyButton" Style="{StaticResource BarButtonStyle}">
-                    <TextBlock x:Name="DifficultyButtonContent">Difficulty</TextBlock>
+                    <TextBlock x:Name="DifficultyButtonContent" Text="{Binding DifficultyButtonContentText}" />
                     <Button.Flyout>
                         <MenuFlyout x:Name="LevelMenu" />
                     </Button.Flyout>
                 </Button>
 
                 <Button x:Name="SettingsButton" Style="{StaticResource BarButtonStyle}">
-                    <TextBlock x:Name="SettingsButtonContent">Settings</TextBlock>
+                    <TextBlock x:Name="SettingsButtonContent" Text="{Binding SettingsButtonContentText}" />
                     <Button.Flyout>
                         <MenuFlyout>
-                            <ToggleMenuFlyoutItem x:Name="AutoBudgetCheckBox" Text="Auto Budget"
-                                                  Click="AutoBudgetMenuItem_Click" />
-                            <ToggleMenuFlyoutItem x:Name="AutoBulldozeCheckBox" Text="Auto Bulldoze"
-                                                  Click="AutoBulldozeCheckBox_Click" />
-                            <ToggleMenuFlyoutItem x:Name="DisastersCheckBox" Text="Disasters"
-                                                  Click="DisastersCheckBox_Click" />
-                            <ToggleMenuFlyoutItem x:Name="SoundCheckBox" Text="Sounds" Click="SoundCheckBox_Click" />
+                            <ToggleMenuFlyoutItem x:Name="AutoBudgetCheckBox" Text="{Binding AutoBudgetCheckBoxText}"
+                                                  Command="{Binding AutoBudgetCommand}"
+                                                  IsEnabled="{Binding AutoBudgetCheckBoxIsChecked, Mode=TwoWay}" />
+                            <ToggleMenuFlyoutItem x:Name="AutoBulldozeCheckBox"
+                                                  Text="{Binding AutoBulldozeCheckBoxText}"
+                                                  Command="{Binding AutoBulldozeCommand}"
+                                                  IsEnabled="{Binding AutoBulldozeCheckBoxIsChecked, Mode=TwoWay}" />
+                            <ToggleMenuFlyoutItem x:Name="DisastersCheckBox" Text="{Binding DisastersCheckBoxText}"
+                                                  IsEnabled="{Binding DisastersCheckBoxIsChecked, Mode=TwoWay}"
+                                                  Command="{Binding DisastersCommand}" />
+                            <ToggleMenuFlyoutItem x:Name="SoundCheckBox" Text="{Binding SoundCheckBoxText}"
+                                                  Command="{Binding SoundCommand}"
+                                                  IsEnabled="{Binding SoundCheckBoxIsChecked, Mode=TwoWay}" />
                         </MenuFlyout>
                     </Button.Flyout>
                 </Button>
 
                 <Button x:Name="DisasterButton" Style="{StaticResource BarButtonStyle}">
-                    <TextBlock x:Name="DisasterButtonContent">Disaster</TextBlock>
+                    <TextBlock x:Name="DisasterButtonContent" Text="{Binding DisasterButtonText}" />
                     <Button.Flyout>
                         <MenuFlyout>
-                            <MenuFlyoutItem x:Name="MonsterButton" Text="Monster" Click="MonsterButton_Click" />
-                            <MenuFlyoutItem x:Name="FireButton" Text="Fire" Click="FireButton_Click" />
-                            <MenuFlyoutItem x:Name="FloodButton" Text="Flood" Click="FloodButton_Click" />
-                            <MenuFlyoutItem x:Name="MeltdownButton" Text="Meltdown" Click="MeltdownButton_Click" />
-                            <MenuFlyoutItem x:Name="TornadoButton" Text="Tornado" Click="TornadoButton_Click" />
-                            <MenuFlyoutItem x:Name="EarthquakeButton" Text="Earthquake" Click="EarthquakeButton_Click" />
+                            <MenuFlyoutItem x:Name="MonsterButton" Text="{Binding MonsterButtonText}"
+                                            Command="{Binding MonsterCommand}" />
+                            <MenuFlyoutItem x:Name="FireButton" Text="{Binding FireButtonText}"
+                                            Command="{Binding FireCommand}" />
+                            <MenuFlyoutItem x:Name="FloodButton" Text="{Binding FloodButtonText}"
+                                            Command="{Binding FloodCommand}" />
+                            <MenuFlyoutItem x:Name="MeltdownButton" Text="{Binding MeltdownButtonText}"
+                                            Command="{Binding MeltdownCommand}" />
+                            <MenuFlyoutItem x:Name="TornadoButton" Text="{Binding TornadoButtonText}"
+                                            Command="{Binding TornadoCommand}" />
+                            <MenuFlyoutItem x:Name="EarthquakeButton" Text="{Binding EarthquakeButtonText}"
+                                            Command="{Binding EarthquakeCommand}" />
                         </MenuFlyout>
                     </Button.Flyout>
                 </Button>
 
                 <Button x:Name="SpeedButton" Style="{StaticResource BarButtonStyle}">
-                    <TextBlock x:Name="SpeedButtonContent">Speed</TextBlock>
+                    <TextBlock x:Name="SpeedButtonContent" Text="{Binding SpeedButtonText}" />
                     <Button.Flyout>
                         <MenuFlyout x:Name="SpeedMenu" />
                     </Button.Flyout>
                 </Button>
 
-                <Button Content="Budget" x:Name="BudgetButton" Click="BudgetButton_Click" Style="{StaticResource BarButtonStyle}" />
-                <Button Content="Evaluation" x:Name="EvaluationButton" Click="EvaluationButton_Click" Style="{StaticResource BarButtonStyle}" />
-                <Button Content="Graphs" x:Name="GraphButton" Click="GraphButton_Click" Style="{StaticResource BarButtonStyle}" />
+                <Button Content="{Binding BudgetButtonText}" x:Name="BudgetButton" Command="{Binding BudgetCommand}"
+                        Style="{StaticResource BarButtonStyle}" />
+                <Button Content="{Binding EvaluationButtonText}" x:Name="EvaluationButton"
+                        Command="{Binding EvaluationCommand}" Style="{StaticResource BarButtonStyle}" />
+                <Button Content="{Binding GraphButtonText}" x:Name="GraphButton" Command="{Binding GraphCommand}"
+                        Style="{StaticResource BarButtonStyle}" />
             </StackPanel>
         </Grid>
 
@@ -222,12 +281,13 @@
 
                 <ScrollViewer x:Name="DrawingAreaScroll" HorizontalScrollBarVisibility="Auto"
                               VerticalScrollBarVisibility="Auto" HorizontalScrollMode="Auto" VerticalScrollMode="Auto"
-                              MinZoomFactor="1">
+                              MinZoomFactor="1" SizeChanged="DrawingAreaScroll_OnSizeChanged"
+                              ViewChanged="DrawingAreaScroll_OnViewChanged">
                     <local:MicropolisDrawingArea x:Name="DrawingArea" VerticalAlignment="Top" x:FieldModifier="public"
                                                  HorizontalAlignment="Left" />
                 </ScrollViewer>
-                
-                <local:Toolbar x:Name="ToolsPanel" Background="White" Margin="2" HorizontalAlignment="Left"/>
+
+                <local:Toolbar x:Name="ToolsPanel" Background="White" Margin="2" HorizontalAlignment="Left" />
 
 
                 <Grid HorizontalAlignment="Right" Margin="0,0,-1,0" VerticalAlignment="Stretch">
@@ -238,64 +298,84 @@
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <StackPanel Grid.Row="1" Orientation="Horizontal">
-                    <Border x:Name="MessagesScrollViewerPane" Background="White" BorderBrush="#2B2B2B"
-                    BorderThickness="1,0,1,1" HorizontalAlignment="Right" Margin="0,0,37,0" VerticalAlignment="Top"
-                    Height="100" Width="300" Visibility="{Binding IsMessagesVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
-                        <ScrollViewer x:Name="MessagesScrollViewer" Margin="12,6,12,5" HorizontalScrollMode="Disabled"
-                              Height="100" Width="300" VerticalScrollBarVisibility="Auto" VerticalScrollMode="Auto" />
-                    </Border>
+                        <Border x:Name="MessagesScrollViewerPane" Background="White" BorderBrush="#2B2B2B"
+                                BorderThickness="1,0,1,1" HorizontalAlignment="Right" Margin="0,0,37,0"
+                                VerticalAlignment="Top"
+                                Height="100" Width="300"
+                                Visibility="{Binding IsMessagesVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            <ScrollViewer x:Name="MessagesScrollViewer" Margin="12,6,12,5"
+                                          HorizontalScrollMode="Disabled"
+                                          Height="100" Width="300" VerticalScrollBarVisibility="Auto"
+                                          VerticalScrollMode="Auto" />
+                        </Border>
 
-                    <Border Background="White" BorderBrush="#2B2B2B" BorderThickness="0,1,1,0" HorizontalAlignment="Left"
-                        VerticalAlignment="Bottom" Visibility="{Binding IsMiniMapVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
-                        <StackPanel x:Name="MiniMapPane" Margin="0,-117,-117,0" RenderTransformOrigin="0,1">
-                            <StackPanel.RenderTransform>
-                                <CompositeTransform ScaleX="0.65" ScaleY="0.65" />
-                            </StackPanel.RenderTransform>
-                            <Image x:Name="MapLegendLbl" MaxWidth="80" MaxHeight="20" HorizontalAlignment="Left"
-                               VerticalAlignment="Top" />
-                        </StackPanel>
-                    </Border>
+                        <Border Background="White" BorderBrush="#2B2B2B" BorderThickness="0,1,1,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Bottom"
+                                Visibility="{Binding IsMiniMapVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            <StackPanel x:Name="MiniMapPane" Margin="0,-117,-117,0" RenderTransformOrigin="0,1">
+                                <StackPanel.RenderTransform>
+                                    <CompositeTransform ScaleX="0.65" ScaleY="0.65" />
+                                </StackPanel.RenderTransform>
+                                <Image x:Name="MapLegendLbl" MaxWidth="80" MaxHeight="20" HorizontalAlignment="Left"
+                                       VerticalAlignment="Top" Source="{Binding MapLegendLblImageSource}"
+                                       Opacity="{Binding MapLegendLblOpacity}" />
+                            </StackPanel>
+                        </Border>
                     </StackPanel>
                     <!--<Border   BorderBrush="#2B2B2B" BorderThickness="1" >-->
                     <!--</Border>-->
-                    
-                    <Border Grid.Row="3" Background="White" BorderBrush="#2B2B2B" BorderThickness="1" HorizontalAlignment="Right">
+
+                    <Border Grid.Row="3" Background="White" BorderBrush="#2B2B2B" BorderThickness="1"
+                            HorizontalAlignment="Right">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="❕" FontWeight="Bold" FontSize="25" Foreground="Black" />
                             <StackPanel Margin="10,0,0,0">
                                 <TextBlock x:Name="CurrentToolLbl" Width="80" HorizontalAlignment="Left"
-                                           TextWrapping="Wrap" VerticalAlignment="Top" Foreground="Black" />
+                                           TextWrapping="Wrap" VerticalAlignment="Top" Foreground="Black"
+                                           Text="{Binding CurrentToolLblTextBlockText}" />
                                 <TextBlock x:Name="CurrentToolCostLbl" Width="45" HorizontalAlignment="Left"
-                                           TextWrapping="Wrap" VerticalAlignment="Top" Foreground="Black" />
+                                           TextWrapping="Wrap" VerticalAlignment="Top" Foreground="Black"
+                                           Text="{Binding CurrentToolCostLblTextBlockText}" />
                             </StackPanel>
                         </StackPanel>
                     </Border>
                 </Grid>
 
-                <Border Background="White" BorderBrush="#2B2B2B" BorderThickness="1,1,0,1" HorizontalAlignment="Right" VerticalAlignment="Center">
-                    <local:NotificationPane x:Name="NotificationPanel" Visibility="Collapsed" x:FieldModifier="public" Width="200" />
+                <Border Background="White" BorderBrush="#2B2B2B" BorderThickness="1,1,0,1" HorizontalAlignment="Right"
+                        VerticalAlignment="Center">
+                    <local:NotificationPane x:Name="NotificationPanel"
+                                            Visibility="{Binding NotificationPanelIsVisible}" x:FieldModifier="public"
+                                            Width="200" />
                 </Border>
 
                 <Border Background="White" BorderBrush="#2B2B2B" BorderThickness="0,1,1,1" HorizontalAlignment="Left"
                         VerticalAlignment="Center">
-                    <local:EvaluationPane x:Name="EvaluationPane" Visibility="Collapsed" x:FieldModifier="public"
+                    <local:EvaluationPane x:Name="EvaluationPane"
+                                          Visibility="{Binding EvaluationPaneIsVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                          x:FieldModifier="public"
                                           Width="450" Height="200" />
                 </Border>
 
             </Grid>
 
-            
+
         </Grid>
-        
-        <Grid Grid.Row="1" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Right" Background="{StaticResource BarBackgroundBrush}">
-            <local:ConfirmationBar x:Name="ConfirmBar" x:FieldModifier="public" Visibility="Collapsed" HorizontalAlignment="Left" VerticalAlignment="Top" />
+
+        <Grid Grid.Row="1" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Right"
+              Background="{StaticResource BarBackgroundBrush}">
+            <local:ConfirmationBar x:Name="ConfirmBar" x:FieldModifier="public"
+                                   Visibility="{Binding ConfirmBarIsVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                   HorizontalAlignment="Left" VerticalAlignment="Top" />
         </Grid>
-        
+
         <!-- Overlays -->
-        
+
         <Grid Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="2">
-            <Grid x:Name="NewBudgetDialogPaneOuter" Visibility="Collapsed" Background="#7F000000"
-              HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Grid x:Name="NewBudgetDialogPaneOuter"
+                  Visibility="{Binding NewBudgetDialogPaneOuterIsVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
+                  Background="#7F000000"
+                  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
                     <RowDefinition Height="Auto" />
@@ -309,8 +389,10 @@
                 <local:BudgetDialog x:Name="NewBudgetDialog" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="1" />
             </Grid>
 
-            <Grid x:Name="NewGameDialogPaneOuter" Visibility="Collapsed" Background="#7F000000"
-              HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Grid x:Name="NewGameDialogPaneOuter"
+                  Visibility="{Binding NewGameDialogPaneOuterIsVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
+                  Background="#7F000000"
+                  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
                     <RowDefinition Height="Auto" />
@@ -323,8 +405,9 @@
                 </Grid.ColumnDefinitions>
                 <StackPanel x:Name="NewGameDialogPaneInner" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="1" />
             </Grid>
-            
-            <local:GraphsPane x:Name="GraphsPane" Visibility="Collapsed" />
+
+            <local:GraphsPane x:Name="GraphsPane"
+                              Visibility="{Binding GraphsPaneIsVisible, Converter={StaticResource BooleanToVisibilityConverter}}" />
         </Grid>
     </Grid>
 </Page>

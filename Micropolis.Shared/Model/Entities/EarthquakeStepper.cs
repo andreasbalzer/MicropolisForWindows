@@ -21,7 +21,7 @@ namespace Micropolis
         /// <summary>
         /// reference to the MainGameGame
         /// </summary>
-        private readonly MainGamePage _instance;
+        private readonly MicropolisDrawingAreaViewModel _drawingAreaViewModel;
 
         /// <summary>
         /// Count of earthquake steps
@@ -31,10 +31,10 @@ namespace Micropolis
         /// <summary>
         /// Initiates a new instance of the EarthquakeStepper class.
         /// </summary>
-        /// <param name="instance"></param>
-        public EarthquakeStepper(MainGamePage instance)
+        /// <param name="drawingAreaViewModel"></param>
+        public EarthquakeStepper(MicropolisDrawingAreaViewModel drawingAreaViewModel)
         {
-            _instance = instance;
+            _drawingAreaViewModel = drawingAreaViewModel;
         }
 
         /// <summary>
@@ -43,7 +43,7 @@ namespace Micropolis
         public void OneStep()
         {
             Count = (Count + 1)%MicropolisDrawingAreaViewModel.SHAKE_STEPS;
-            _instance.DrawingArea.ViewModel.Shake(Count);
+            _drawingAreaViewModel.Shake(Count);
         }
     }
 }

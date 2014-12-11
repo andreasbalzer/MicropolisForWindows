@@ -12,7 +12,7 @@ namespace Micropolis.ViewModels
     {
      private Engine.Micropolis _engine;
 
-        private MainGamePage _mainPage;
+        private MainGamePageViewModel _mainPageViewModel;
         
         
         /// <summary>
@@ -46,7 +46,7 @@ namespace Micropolis.ViewModels
         /// </summary>
         private void OnDismissClicked()
         {
-            _mainPage.HideEvaluationPane();
+            _mainPageViewModel.HideEvaluationPane();
         }
 
         private string _headerPublicOpinionTextBlockText;
@@ -824,9 +824,9 @@ namespace Micropolis.ViewModels
             }
         }
 
-        internal void SetupAfterBasicInit(MainGamePage mainPage, Engine.Micropolis engine)
+        internal void SetupAfterBasicInit(MainGamePageViewModel mainPageViewModel, Engine.Micropolis engine)
         {
-            _mainPage = mainPage;
+            _mainPageViewModel = mainPageViewModel;
             DismissButtonText = Strings.GetString("dismiss-evaluation");
 
             MakePublicOpinionPane();

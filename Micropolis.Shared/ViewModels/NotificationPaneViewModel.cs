@@ -22,15 +22,15 @@ namespace Micropolis.ViewModels
 
         private static readonly Size VIEWPORT_SIZE = new Size(160, 160);
         private static readonly SolidColorBrush QUERY_COLOR = new SolidColorBrush(Color.FromArgb(255, 255, 165, 0));
-        private MainGamePage _mainPage;
+        private MainGamePageViewModel _mainPageViewModel;
 
         /// <summary>
         /// Sets up this instance after basic initialization.
         /// </summary>
         /// <param name="mainPage"></param>
-        public void SetUpAfterBasicInit(MainGamePage mainPage)
+        public void SetUpAfterBasicInit(MainGamePageViewModel mainPageViewModel)
         {
-            _mainPage = mainPage;
+            _mainPageViewModel = mainPageViewModel;
             DismissButtonText = Strings.GetString("notification.dismiss");
             DismissCommand = new DelegateCommand(() => { OnDismissClicked(); }); 
         }
@@ -47,7 +47,7 @@ namespace Micropolis.ViewModels
         /// </summary>
         private void OnDismissClicked()
         {
-            _mainPage.HideNotificationPanel();
+            _mainPageViewModel.HideNotificationPanel();
         }
 
         private WriteableBitmap _mapImage;
@@ -62,7 +62,7 @@ namespace Micropolis.ViewModels
         {
             Size sz = VIEWPORT_SIZE;
 
-            MapImage = _mainPage.GetLandscapeFromDrawingArea(xpos, ypos, sz);
+            MapImage = _mainPageViewModel.GetLandscapeFromDrawingArea(xpos, ypos, sz);
 
             
         }
@@ -140,7 +140,7 @@ namespace Micropolis.ViewModels
             PollutionStrTextBlockText = pollutionStr;
             NotificationGrowthTextBlockText = Strings.GetString("notification.growth_lbl");
             GrowthRateStrTextBlockText = growthRateStr;
-            _mainPage.ShowNotificationPanel();
+            _mainPageViewModel.ShowNotificationPanel();
         }
 
         private string _t1TextBlockText;

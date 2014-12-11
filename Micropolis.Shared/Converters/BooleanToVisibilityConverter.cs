@@ -13,7 +13,7 @@ namespace Micropolis.Converters
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            if (value == null && value is bool == false)
+            if (value == null || (value is bool) == false)
             {
                 throw new NotSupportedException("The value must be of type bool.");
             }

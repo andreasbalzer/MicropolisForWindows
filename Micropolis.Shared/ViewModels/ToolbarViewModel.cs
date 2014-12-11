@@ -13,7 +13,7 @@ namespace Micropolis.ViewModels
 {
     public class ToolbarViewModel : BindableBase
     {
-        private MainGamePage _mainPage;
+        private MainGamePageViewModel _mainPageViewModel;
         private Dictionary<MicropolisTool, ToolbarButtonViewModel> _toolBtns;
 
         private ToolBarMode _mode;
@@ -47,10 +47,10 @@ namespace Micropolis.ViewModels
         /// <summary>
         /// Sets up this instance after basic initalization.
         /// </summary>
-        /// <param name="mainPage">Reference to main page</param>
-        public void SetUpAfterBasicInit(MainGamePage mainPage)
+        /// <param name="mainPageViewModel">Reference to main page</param>
+        public void SetUpAfterBasicInit(MainGamePageViewModel mainPageViewModel)
         {
-            _mainPage = mainPage;
+            _mainPageViewModel = mainPageViewModel;
             MakeToolbar();
         }
 
@@ -188,17 +188,17 @@ namespace Micropolis.ViewModels
         private void SelectTool(MicropolisTool newTool)
         {
             _toolBtns[newTool].IsChecked = true;
-            if (newTool == _mainPage.CurrentTool)
+            if (newTool == _mainPageViewModel.CurrentTool)
             {
                 return;
             }
 
-            if (_mainPage.CurrentTool != null)
+            if (_mainPageViewModel.CurrentTool != null)
             {
-                _toolBtns[_mainPage.CurrentTool].IsChecked = false;
+                _toolBtns[_mainPageViewModel.CurrentTool].IsChecked = false;
             }
 
-            _mainPage.SelectTool(newTool);
+            _mainPageViewModel.SelectTool(newTool);
         }
 
         /// <summary>

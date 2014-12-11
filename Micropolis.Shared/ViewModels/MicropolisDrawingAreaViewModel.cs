@@ -46,7 +46,7 @@ namespace Micropolis.ViewModels
         private bool _initialized;
 
         private bool _isCurrentEarthquake;
-        private MainGamePage _mainPage;
+        private MainGamePageViewModel _mainPage;
 
         private bool blink;
         private DispatcherTimer blinkTimer;
@@ -141,7 +141,7 @@ namespace Micropolis.ViewModels
         /// </summary>
         /// <param name="engine"></param>
         /// <param name="mainPage"></param>
-        public void SetUpAfterBasicInit(Engine.Micropolis engine, MainGamePage mainPage)
+        public void SetUpAfterBasicInit(Engine.Micropolis engine, MainGamePageViewModel mainPage)
         {
             m = engine;
             _mainPage = mainPage;
