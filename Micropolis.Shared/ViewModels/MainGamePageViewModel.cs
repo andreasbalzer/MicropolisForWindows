@@ -204,12 +204,7 @@ namespace Micropolis.ViewModels
         private bool _newGameDialogPaneOuterIsVisible;
         private bool _notificationPanelIsVisible;
         private string _popLblTextBlockText;
-
-        /// <summary>
-        ///     The priorityMenuItems links speeds to their respective ToggleMenuFlyoutItems.
-        /// </summary>
-        private Dictionary<Speed, ToggleMenuFlyoutItem> _priorityMenuItems;
-
+        
         private string _saveAsButtonText;
         private string _saveButtonText;
         private string _settingsButtonContentText;
@@ -248,8 +243,7 @@ namespace Micropolis.ViewModels
             ToolbarViewModel toolsPanelViewModel, MicropolisDrawingArea drawingArea, ConfirmationBar confirmBar,
             BudgetDialogViewModel newBudgetDialogViewModel, GraphsPaneViewModel graphsPaneViewModel,
             EvaluationPaneViewModel evaluationPaneViewModel, StackPanel miniMapPane, ScrollViewer drawingAreaScroll,
-            ScrollViewer messagesScrollViewer, DemandIndicatorViewModel demandIndViewModel, MenuFlyout levelMenu,
-            MenuFlyout speedMenu, StackPanel newGameDialogPaneInner)
+            ScrollViewer messagesScrollViewer, DemandIndicatorViewModel demandIndViewModel, MenuFlyout levelMenu, StackPanel newGameDialogPaneInner)
         {
             BudgetCommand = new DelegateCommand(BudgetButton_Click);
             EvaluationCommand = new DelegateCommand(EvaluationButton_Click);
@@ -276,7 +270,6 @@ namespace Micropolis.ViewModels
 
             _newGameDialogPaneInner = newGameDialogPaneInner;
             _levelMenu = levelMenu;
-            _speedMenu = speedMenu;
             _demandIndViewModel = demandIndViewModel;
             _messagesScrollViewer = messagesScrollViewer;
             _drawingAreaScroll = drawingAreaScroll;
@@ -809,6 +802,7 @@ namespace Micropolis.ViewModels
             IsSpeedFast = false;
             IsSpeedSuperFast = false;
             IsSpeedPause = true;
+            SetSpeed(Speeds.Speed["PAUSED"]);
         }
 
         private void SpeedSlow()
@@ -818,6 +812,7 @@ namespace Micropolis.ViewModels
             IsSpeedFast = false;
             IsSpeedSuperFast = false;
             IsSpeedSlow = true;
+            SetSpeed(Speeds.Speed["SLOW"]);
         }
 
         private void SpeedNormal()
@@ -827,6 +822,7 @@ namespace Micropolis.ViewModels
             IsSpeedFast = false;
             IsSpeedSuperFast = false;
             IsSpeedNormal = true;
+            SetSpeed(Speeds.Speed["NORMAL"]);
         }
 
         private void SpeedFast()
@@ -836,6 +832,7 @@ namespace Micropolis.ViewModels
             IsSpeedNormal = false;
             IsSpeedSuperFast = false;
             IsSpeedFast = true;
+            SetSpeed(Speeds.Speed["FAST"]);
         }
 
         private void SpeedSuperFast()
@@ -845,6 +842,7 @@ namespace Micropolis.ViewModels
             IsSpeedNormal = false;
             IsSpeedFast = false;
             IsSpeedSuperFast = true;
+            SetSpeed(Speeds.Speed["SUPER_FAST"]);
         }
 
 
@@ -1729,39 +1727,7 @@ namespace Micropolis.ViewModels
                 _levelMenu.Items.Add(menuItemc);
                 _difficultyMenuItems.Add(level, menuItemc);
             }
-
-            _priorityMenuItems = new Dictionary<Speed, ToggleMenuFlyoutItem>();
-
-            var menuItemb = new ToggleMenuFlyoutItem {Text = Strings.GetString("menu.speed.SUPER_FAST")};
-            menuItemb.Click +=
-                (o, e) => OnPriorityClicked(Speeds.Speed["SUPER_FAST"], (ToggleMenuFlyoutItem) o);
-            _speedMenu.Items.Add(menuItemb);
-            _priorityMenuItems.Add(Speeds.Speed["SUPER_FAST"], menuItemb);
-
-            menuItemb = new ToggleMenuFlyoutItem {Text = Strings.GetString("menu.speed.FAST")};
-            menuItemb.Click +=
-                (o, e) => OnPriorityClicked(Speeds.Speed["FAST"], (ToggleMenuFlyoutItem) o);
-            _speedMenu.Items.Add(menuItemb);
-            _priorityMenuItems.Add(Speeds.Speed["FAST"], menuItemb);
-
-            menuItemb = new ToggleMenuFlyoutItem {Text = Strings.GetString("menu.speed.NORMAL"), IsChecked = true};
-            menuItemb.Click +=
-                (o, e) => OnPriorityClicked(Speeds.Speed["NORMAL"], (ToggleMenuFlyoutItem) o);
-            _speedMenu.Items.Add(menuItemb);
-            _priorityMenuItems.Add(Speeds.Speed["NORMAL"], menuItemb);
-
-            menuItemb = new ToggleMenuFlyoutItem {Text = Strings.GetString("menu.speed.SLOW")};
-            menuItemb.Click +=
-                (o, e) => OnPriorityClicked(Speeds.Speed["SLOW"], (ToggleMenuFlyoutItem) o);
-            _speedMenu.Items.Add(menuItemb);
-            _priorityMenuItems.Add(Speeds.Speed["SLOW"], menuItemb);
-
-            menuItemb = new ToggleMenuFlyoutItem {Text = Strings.GetString("menu.speed.PAUSED")};
-            menuItemb.Click +=
-                (o, e) => OnPriorityClicked(Speeds.Speed["PAUSED"], (ToggleMenuFlyoutItem) o);
-            _speedMenu.Items.Add(menuItemb);
-            _priorityMenuItems.Add(Speeds.Speed["PAUSED"], menuItemb);
-
+            
             BudgetButtonText = Strings.GetString("menu.windows.budget");
             EvaluationButtonText = Strings.GetString("menu.windows.evaluation");
             GraphButtonText = Strings.GetString("menu.windows.graph");
@@ -2504,11 +2470,8 @@ namespace Micropolis.ViewModels
                 item.Value.IsChecked = (item.Key.Equals(newDifficulty));
         }
 
-        /// <summary>
-        ///     Called when the user clicked on a speed button.
-        /// </summary>
-        /// <param name="newSpeed">The new speed.</param>
-        private void OnPriorityClicked(Speed newSpeed, ToggleMenuFlyoutItem sender)
+       
+        private void SetSpeed(Speed newSpeed)
         {
             if (IsTimerActive())
             {
@@ -2517,9 +2480,6 @@ namespace Micropolis.ViewModels
 
             Engine.SetSpeed(newSpeed);
             StartTimer();
-
-            foreach (ToggleMenuFlyoutItem item in _speedMenu.Items)
-                item.IsChecked = (item.Equals(sender)) ? true : false;
         }
 
         /// <summary>
@@ -2573,10 +2533,13 @@ namespace Micropolis.ViewModels
             AutoBulldozeCheckBoxIsChecked = (Engine.AutoBulldoze);
             DisastersCheckBoxIsChecked = (!Engine.NoDisasters);
             SoundCheckBoxIsChecked = (_isDoSounds);
-            foreach (Speed spd in _priorityMenuItems.Keys)
-            {
-                _priorityMenuItems[spd].IsChecked = (Engine.SimSpeed == spd);
-            }
+            
+            IsSpeedFast = Engine.SimSpeed == Speeds.Speed["FAST"];
+            IsSpeedSuperFast = Engine.SimSpeed == Speeds.Speed["SUPER_FAST"];
+            IsSpeedNormal = Engine.SimSpeed == Speeds.Speed["NORMAL"];
+            IsSpeedSlow = Engine.SimSpeed == Speeds.Speed["SLOW"];
+            IsSpeedPause = Engine.SimSpeed == Speeds.Speed["PAUSED"];
+
             for (int i = GameLevel.MIN_LEVEL; i <= GameLevel.MAX_LEVEL; i++)
             {
                 _difficultyMenuItems[i].IsChecked = (Engine.GameLevel == i);

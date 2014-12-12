@@ -259,13 +259,6 @@
                     </Button.Flyout>
                 </Button>
 
-                <Button x:Name="SpeedButton" Style="{StaticResource BarButtonStyle}">
-                    <TextBlock x:Name="SpeedButtonContent" Text="{Binding SpeedButtonText}" />
-                    <Button.Flyout>
-                        <MenuFlyout x:Name="SpeedMenu" />
-                    </Button.Flyout>
-                </Button>
-
                 <Button Content="{Binding BudgetButtonText}" x:Name="BudgetButton" Command="{Binding BudgetCommand}"
                         Style="{StaticResource BarButtonStyle}" />
                 <Button Content="{Binding EvaluationButtonText}" x:Name="EvaluationButton"
