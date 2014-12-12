@@ -25,7 +25,6 @@ using Windows.System;
 using Windows.UI.ApplicationSettings;
 using Windows.UI.Core;
 using Windows.UI.Popups;
-using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
@@ -56,7 +55,7 @@ namespace Micropolis.ViewModels
         private readonly MicropolisDrawingAreaViewModel _drawingAreaViewModel;
         private readonly EvaluationPaneViewModel _evaluationPaneViewModel;
         private readonly GraphsPaneViewModel _graphsPaneViewModel;
- 
+
 
         /// <summary>
         ///     The map state menu items contains map states linking to their respective ToggleMenuFlyoutItems.
@@ -64,15 +63,14 @@ namespace Micropolis.ViewModels
         private readonly Dictionary<MapState, LevelButtonViewModel> _mapStateMenuItems =
             new Dictionary<MapState, LevelButtonViewModel>();
 
+        private readonly OverlayMapViewModel _mapViewViewModel;
+
         private readonly ScrollViewer _messagesScrollViewer;
         private readonly BudgetDialogViewModel _newBudgetDialogViewModel;
         private readonly NotificationPaneViewModel _notificationPanelViewModel;
         private readonly MediaElement _soundOutput;
         private readonly MenuFlyout _speedMenu;
         private readonly ToolbarViewModel _toolsPanelViewModel;
-        public DelegateCommand AutoBudgetCommand { get; set; }
-        public DelegateCommand AutoBulldozeCommand { get; set; }
-        public DelegateCommand BudgetCommand { get; set; }
 
         /// <summary>
         ///     The current file loaded in the game.
@@ -83,21 +81,6 @@ namespace Micropolis.ViewModels
         ///     The current tool selected.
         /// </summary>
         public MicropolisTool CurrentTool;
-
-        public DelegateCommand DisastersCommand { get; set; }
-        public DelegateCommand EarthquakeCommand { get; set; }
-        public DelegateCommand EvaluationCommand { get; set; }
-        public DelegateCommand FireCommand { get; set; }
-        public DelegateCommand FloodCommand { get; set; }
-        public DelegateCommand GraphCommand { get; set; }
-        public DelegateCommand LoadCommand { get; set; }
-        public DelegateCommand MeltdownCommand { get; set; }
-        public DelegateCommand MonsterCommand { get; set; }
-        public DelegateCommand NewCommand { get; set; }
-        public DelegateCommand SaveAsCommand { get; set; }
-        public DelegateCommand SaveCommand { get; set; }
-        public DelegateCommand SoundCommand { get; set; }
-        public DelegateCommand TornadoCommand { get; set; }
 
         private bool _autoBudgetCheckBoxIsChecked;
         private string _autoBudgetCheckBoxText;
@@ -187,6 +170,8 @@ namespace Micropolis.ViewModels
         private string _loadButtonText;
         private ImageSource _mapLegendLblImageSource;
         private double _mapLegendLblOpacity;
+        private string _menuOverlaysHeaderButtonText;
+        private string _menuZonesHeaderButtonText;
 
         /// <summary>
         ///     The messages pane used to display game messages.
@@ -195,10 +180,11 @@ namespace Micropolis.ViewModels
 
         private bool _newBudgetDialogPaneOuterIsVisible;
         private string _newButtonText;
+        private NewCityDialogViewModel _newCityDialogViewModel;
         private bool _newGameDialogPaneOuterIsVisible;
         private bool _notificationPanelIsVisible;
         private string _popLblTextBlockText;
-        
+
         private string _saveAsButtonText;
         private string _saveButtonText;
         private string _settingsButtonContentText;
@@ -215,7 +201,7 @@ namespace Micropolis.ViewModels
 
         private bool _soundCheckBoxIsChecked;
         private string _soundCheckBoxText;
-        
+
         private string _titleTextBlockText;
 
         /// <summary>
@@ -231,27 +217,23 @@ namespace Micropolis.ViewModels
         /// </summary>
         private PointerRoutedEventArgs touchPointerRoutedEventArgsOfCurrentConfirmationPending;
 
-        private string _menuZonesHeaderButtonText;
-        private string _menuOverlaysHeaderButtonText;
-        private OverlayMapViewModel _mapViewViewModel;
-        private NewCityDialogViewModel _newCityDialogViewModel;
-
 
         public MainGamePageViewModel(NotificationPaneViewModel notificationPanelViewModel,
             MicropolisDrawingAreaViewModel drawingAreaViewModel,
             ToolbarViewModel toolsPanelViewModel, MicropolisDrawingArea drawingArea, ConfirmationBar confirmBar,
             BudgetDialogViewModel newBudgetDialogViewModel, GraphsPaneViewModel graphsPaneViewModel,
             EvaluationPaneViewModel evaluationPaneViewModel, ScrollViewer drawingAreaScroll,
-            ScrollViewer messagesScrollViewer, DemandIndicatorViewModel demandIndViewModel, OverlayMapViewModel mapViewViewModel, NewCityDialogViewModel newCityDialogViewModel)
+            ScrollViewer messagesScrollViewer, DemandIndicatorViewModel demandIndViewModel,
+            OverlayMapViewModel mapViewViewModel, NewCityDialogViewModel newCityDialogViewModel)
         {
             _newCityDialogViewModel = newCityDialogViewModel;
             _newCityDialogViewModel.MainPageViewModel = this;
             _mapViewViewModel = mapViewViewModel;
             MenuOverlaysHeaderButtonText = Strings.GetString("menu.overlays");
-            MenuZonesHeaderFlyoutItems=new ObservableCollection<LevelButtonViewModel>();
+            MenuZonesHeaderFlyoutItems = new ObservableCollection<LevelButtonViewModel>();
             MenuOverlaysHeaderFlyoutItems = new ObservableCollection<LevelButtonViewModel>();
             MenuZonesHeaderButtonText = Strings.GetString("menu.zones");
-            Levels=new ObservableCollection<LevelButtonViewModel>();
+            Levels = new ObservableCollection<LevelButtonViewModel>();
             BudgetCommand = new DelegateCommand(BudgetButton_Click);
             EvaluationCommand = new DelegateCommand(EvaluationButton_Click);
             GraphCommand = new DelegateCommand(GraphButton_Click);
@@ -275,7 +257,6 @@ namespace Micropolis.ViewModels
             SaveAsCommand = new DelegateCommand(SaveAsButton_Click);
 
 
-
             _demandIndViewModel = demandIndViewModel;
             _messagesScrollViewer = messagesScrollViewer;
             _drawingAreaScroll = drawingAreaScroll;
@@ -296,6 +277,24 @@ namespace Micropolis.ViewModels
             SpeedFastCommand = new DelegateCommand(SpeedFast);
             SpeedSuperFastCommand = new DelegateCommand(SpeedSuperFast);
         }
+
+        public DelegateCommand AutoBudgetCommand { get; set; }
+        public DelegateCommand AutoBulldozeCommand { get; set; }
+        public DelegateCommand BudgetCommand { get; set; }
+        public DelegateCommand DisastersCommand { get; set; }
+        public DelegateCommand EarthquakeCommand { get; set; }
+        public DelegateCommand EvaluationCommand { get; set; }
+        public DelegateCommand FireCommand { get; set; }
+        public DelegateCommand FloodCommand { get; set; }
+        public DelegateCommand GraphCommand { get; set; }
+        public DelegateCommand LoadCommand { get; set; }
+        public DelegateCommand MeltdownCommand { get; set; }
+        public DelegateCommand MonsterCommand { get; set; }
+        public DelegateCommand NewCommand { get; set; }
+        public DelegateCommand SaveAsCommand { get; set; }
+        public DelegateCommand SaveCommand { get; set; }
+        public DelegateCommand SoundCommand { get; set; }
+        public DelegateCommand TornadoCommand { get; set; }
 
         public bool IsMessagesVisible
         {
@@ -675,6 +674,24 @@ namespace Micropolis.ViewModels
             get { return DrawingAreaActualHeight; }
         }
 
+        public ObservableCollection<LevelButtonViewModel> MenuZonesHeaderFlyoutItems { get; set; }
+
+        public ObservableCollection<LevelButtonViewModel> MenuOverlaysHeaderFlyoutItems { get; set; }
+
+        public string MenuZonesHeaderButtonText
+        {
+            get { return _menuZonesHeaderButtonText; }
+            set { SetProperty(ref _menuZonesHeaderButtonText, value); }
+        }
+
+        public string MenuOverlaysHeaderButtonText
+        {
+            get { return _menuOverlaysHeaderButtonText; }
+            set { SetProperty(ref _menuOverlaysHeaderButtonText, value); }
+        }
+
+        public ObservableCollection<LevelButtonViewModel> Levels { get; set; }
+
         /// <summary>
         ///     Called when an earthquake has started. Pauses game simulation, does one earthquake step and restarts simulation.
         /// </summary>
@@ -750,20 +767,10 @@ namespace Micropolis.ViewModels
             try
             {
                 OnPlaySound(afile);
-                
             }
             catch (Exception e)
             {
                 //e.printStackTrace(System.err);
-            }
-        }
-
-        public event EventHandler<Uri> PlaySound;
-        private void OnPlaySound(Uri file)
-        {
-            if (PlaySound != null)
-            {
-                PlaySound(this, file);
             }
         }
 
@@ -787,6 +794,16 @@ namespace Micropolis.ViewModels
         /// </summary>
         public void EvaluationChanged()
         {
+        }
+
+        public event EventHandler<Uri> PlaySound;
+
+        private void OnPlaySound(Uri file)
+        {
+            if (PlaySound != null)
+            {
+                PlaySound(this, file);
+            }
         }
 
         private void ToggleMiniMap()
@@ -917,7 +934,6 @@ namespace Micropolis.ViewModels
 
             _firstRun = false;
 
-            
 
             //TODO: Map-Creation als Teil des Hauptmenüs!
         }
@@ -1186,22 +1202,25 @@ namespace Micropolis.ViewModels
             MenuZonesHeaderFlyoutItems.Add(MakeMapStateMenuItem("menu.zones.TRANSPORT", MapState.TRANSPORT));
 
 
-
-
-
-            MenuOverlaysHeaderFlyoutItems.Add(MakeMapStateMenuItem("menu.overlays.POPDEN_OVERLAY", MapState.POPDEN_OVERLAY));
-            MenuOverlaysHeaderFlyoutItems.Add(MakeMapStateMenuItem("menu.overlays.GROWTHRATE_OVERLAY", MapState.GROWTHRATE_OVERLAY));
-            MenuOverlaysHeaderFlyoutItems.Add(MakeMapStateMenuItem("menu.overlays.LANDVALUE_OVERLAY", MapState.LANDVALUE_OVERLAY));
+            MenuOverlaysHeaderFlyoutItems.Add(MakeMapStateMenuItem("menu.overlays.POPDEN_OVERLAY",
+                MapState.POPDEN_OVERLAY));
+            MenuOverlaysHeaderFlyoutItems.Add(MakeMapStateMenuItem("menu.overlays.GROWTHRATE_OVERLAY",
+                MapState.GROWTHRATE_OVERLAY));
+            MenuOverlaysHeaderFlyoutItems.Add(MakeMapStateMenuItem("menu.overlays.LANDVALUE_OVERLAY",
+                MapState.LANDVALUE_OVERLAY));
             MenuOverlaysHeaderFlyoutItems.Add(MakeMapStateMenuItem("menu.overlays.CRIME_OVERLAY", MapState.CRIME_OVERLAY));
-            MenuOverlaysHeaderFlyoutItems.Add(MakeMapStateMenuItem("menu.overlays.POLLUTE_OVERLAY", MapState.POLLUTE_OVERLAY));
-            MenuOverlaysHeaderFlyoutItems.Add(MakeMapStateMenuItem("menu.overlays.TRAFFIC_OVERLAY", MapState.TRAFFIC_OVERLAY));
+            MenuOverlaysHeaderFlyoutItems.Add(MakeMapStateMenuItem("menu.overlays.POLLUTE_OVERLAY",
+                MapState.POLLUTE_OVERLAY));
+            MenuOverlaysHeaderFlyoutItems.Add(MakeMapStateMenuItem("menu.overlays.TRAFFIC_OVERLAY",
+                MapState.TRAFFIC_OVERLAY));
             MenuOverlaysHeaderFlyoutItems.Add(MakeMapStateMenuItem("menu.overlays.POWER_OVERLAY", MapState.POWER_OVERLAY));
             MenuOverlaysHeaderFlyoutItems.Add(MakeMapStateMenuItem("menu.overlays.FIRE_OVERLAY", MapState.FIRE_OVERLAY));
-            MenuOverlaysHeaderFlyoutItems.Add(MakeMapStateMenuItem("menu.overlays.POLICE_OVERLAY", MapState.POLICE_OVERLAY));
-            
+            MenuOverlaysHeaderFlyoutItems.Add(MakeMapStateMenuItem("menu.overlays.POLICE_OVERLAY",
+                MapState.POLICE_OVERLAY));
+
             _mapViewViewModel.SetUpAfterBasicInit(engine);
             _mapViewViewModel.ConnectView(_drawingAreaViewModel, _drawingAreaScroll);
-            
+
 
             SetMapState(MapState.ALL);
 
@@ -1233,21 +1252,6 @@ namespace Micropolis.ViewModels
 
             _toolsPanelViewModel.SetUpAfterBasicInit(this);
         }
-
-        public ObservableCollection<LevelButtonViewModel> MenuZonesHeaderFlyoutItems { get; set; }
-
-        public ObservableCollection<LevelButtonViewModel> MenuOverlaysHeaderFlyoutItems { get; set; } 
-
-        public string MenuZonesHeaderButtonText {get { return _menuZonesHeaderButtonText; } set
-        {
-            SetProperty(ref _menuZonesHeaderButtonText, value);
-        }
-        }
-
-        public string MenuOverlaysHeaderButtonText { get { return _menuOverlaysHeaderButtonText; } set
-        {
-            SetProperty(ref _menuOverlaysHeaderButtonText, value);
-        } }
 
         /// <summary>
         ///     Handles the Righted event of the ConfirmBar control to move sprite to the right.
@@ -1718,13 +1722,12 @@ namespace Micropolis.ViewModels
                 _difficultyMenuItems.Add(level, menuItemc);
                 Levels.Add(menuItemc);
             }
-            
+
             BudgetButtonText = Strings.GetString("menu.windows.budget");
             EvaluationButtonText = Strings.GetString("menu.windows.evaluation");
             GraphButtonText = Strings.GetString("menu.windows.graph");
         }
 
-        public ObservableCollection<LevelButtonViewModel> Levels { get; set; } 
         /// <summary>
         ///     Called when automatic budget button clicked.
         /// </summary>
@@ -2458,7 +2461,7 @@ namespace Micropolis.ViewModels
                 item.Value.IsChecked = (item.Key.Equals(newDifficulty));
         }
 
-       
+
         private void SetSpeed(Speed newSpeed)
         {
             if (IsTimerActive())
@@ -2521,7 +2524,7 @@ namespace Micropolis.ViewModels
             AutoBulldozeCheckBoxIsChecked = (Engine.AutoBulldoze);
             DisastersCheckBoxIsChecked = (!Engine.NoDisasters);
             SoundCheckBoxIsChecked = (_isDoSounds);
-            
+
             IsSpeedFast = Engine.SimSpeed == Speeds.Speed["FAST"];
             IsSpeedSuperFast = Engine.SimSpeed == Speeds.Speed["SUPER_FAST"];
             IsSpeedNormal = Engine.SimSpeed == Speeds.Speed["NORMAL"];
@@ -2640,7 +2643,7 @@ namespace Micropolis.ViewModels
         private LevelButtonViewModel MakeMapStateMenuItem(String stringPrefix, MapState state)
         {
             String caption = Strings.GetString(stringPrefix);
-            var menuItem = new LevelButtonViewModel() {Text = caption};
+            var menuItem = new LevelButtonViewModel {Text = caption};
             menuItem.ClickCommand = new DelegateCommand(() => { SetMapState(state); });
             _mapStateMenuItems.Add(state, menuItem);
             return menuItem;
@@ -2747,7 +2750,7 @@ namespace Micropolis.ViewModels
         {
             if (DrawingAreaScrollChangeView != null)
             {
-                DrawingAreaScrollChangeView(this, new DrawingAreaScrollChangeCoordinates(x,y,zoomFactor));
+                DrawingAreaScrollChangeView(this, new DrawingAreaScrollChangeCoordinates(x, y, zoomFactor));
             }
         }
 
