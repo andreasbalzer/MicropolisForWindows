@@ -34,21 +34,15 @@ namespace Micropolis
             get { return _viewModel; }
         }
 
-        public NewCityDialog()
-        {
-            InitializeComponent();
-        }
-
         /// <summary>
         /// Initiates a new instance of the NewCityDialog.
         /// </summary>
         /// <param name="mainPage">reference to mainPage</param>
-        public NewCityDialog(MainGamePageViewModel mainPageViewModel)
-            : this()
+        public NewCityDialog()
         {
-            _viewModel=new NewCityDialogViewModel(mainPageViewModel,mapPane.ViewModel);
+            InitializeComponent();
+            _viewModel=new NewCityDialogViewModel(mapPane.ViewModel);
             this.DataContext = _viewModel;
         }
-
     }
 }

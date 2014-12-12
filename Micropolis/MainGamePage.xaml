@@ -88,13 +88,13 @@
                             <AppBarButton Icon="SaveLocal" Label="Save as" x:Name="SaveAsButton" Click="SaveAsButton_Click" />-->
 
                             <MenuFlyoutItem x:Name="NewButton" Padding="32,10,20,12" Text="{Binding NewButtonText}"
-                                            Command="{Binding NewCommand}" />
+                                            Command="{Binding NewCommand, Mode=OneWay}" />
                             <MenuFlyoutItem x:Name="LoadButton" Padding="32,10,20,12" Text="{Binding LoadButtonText}"
-                                            Command="{Binding LoadCommand}" />
+                                            Command="{Binding LoadCommand, Mode=OneWay}" />
                             <MenuFlyoutItem x:Name="SaveButton" Padding="32,10,20,12" Text="{Binding SaveButtonText}"
-                                            Command="{Binding SaveCommmand}" />
+                                            Command="{Binding SaveCommmand, Mode=OneWay}" />
                             <MenuFlyoutItem x:Name="SaveAsButton" Padding="32,10,20,12"
-                                            Text="{Binding SaveAsButtonText}" Command="{Binding SaveAsCommand}" />
+                                            Text="{Binding SaveAsButtonText}" Command="{Binding SaveAsCommand, Mode=OneWay}" />
                         </MenuFlyout>
                     </Button.Flyout>
                     <StackPanel Orientation="Horizontal">
@@ -455,7 +455,7 @@
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <StackPanel x:Name="NewGameDialogPaneInner" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="1" />
+                <StackPanel x:Name="NewGameDialogPaneInner" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="1" ><local:NewCityDialog x:Name="CityDialog" /></StackPanel>
             </Grid>
             <Grid Visibility="{Binding GraphsPaneIsVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
                 <local:GraphsPane x:Name="GraphsPane" />

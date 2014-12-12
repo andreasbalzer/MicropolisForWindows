@@ -15,7 +15,6 @@ namespace Micropolis.ViewModels
     public class NewCityDialogViewModel : BindableBase
     {
          private readonly Dictionary<int, LevelButtonViewModel> _levelBtns = new Dictionary<int, LevelButtonViewModel>();
-        private readonly MainGamePageViewModel _mainPageViewModel;
         private readonly Stack<Engine.Micropolis> _nextMaps = new Stack<Engine.Micropolis>();
         private readonly Stack<Engine.Micropolis> _previousMaps = new Stack<Engine.Micropolis>();
         private Engine.Micropolis _engine;
@@ -23,7 +22,7 @@ namespace Micropolis.ViewModels
 
         public ObservableCollection<LevelButtonViewModel> Levels { get; set; } 
 
-        public NewCityDialogViewModel(MainGamePageViewModel mainPageViewModel, OverlayMapViewModel mapPaneViewModel)
+        public NewCityDialogViewModel(OverlayMapViewModel mapPaneViewModel)
         {
             _mapPaneViewModel = mapPaneViewModel;
             Levels=new ObservableCollection<LevelButtonViewModel>();
@@ -49,26 +48,17 @@ namespace Micropolis.ViewModels
             PreviousMapButtonText = Strings.GetString("welcome.previous_map");
             PreviousMapCommand = new DelegateCommand(() => { OnPreviousMapClicked(); });
             ThisMapButtonText = Strings.GetString("welcome.play_this_map");
-            ThisMapCommand = new DelegateCommand(() =>
-            {
-                mainPageViewModel.HideNewGameDialogPanel();
-                OnPlayClicked();
-            });
             NextMapButtonText = Strings.GetString("welcome.next_map");
             NextMapCommand = new DelegateCommand(() => { OnNextMapClicked(); });
             CancelButtonText = Strings.GetString("welcome.cancel");
-            CancelCommand = new DelegateCommand(() =>
-            {
-                mainPageViewModel.HideNewGameDialogPanel();
-                OnCancelClicked();
-            });
+            
 
             LoadCityButtonText = Strings.GetString("welcome.load_city");
 
             LoadCityCommand = new DelegateCommand(() => { OnLoadCityClicked(); });
 
 
-            _mainPageViewModel = mainPageViewModel;
+            
         }
 
         private string _titleTextBlockText;
@@ -106,7 +96,22 @@ namespace Micropolis.ViewModels
 
         private DelegateCommand _cancelCommand;
         private OverlayMapViewModel _mapPaneViewModel;
+        private MainGamePageViewModel _mainPageViewModel;
         public DelegateCommand CancelCommand { get { return _cancelCommand; } set { SetProperty(ref _cancelCommand, value); } }
+        public MainGamePageViewModel MainPageViewModel { get { return _mainPageViewModel; } set
+        {
+            _mainPageViewModel = value; 
+            CancelCommand = new DelegateCommand(() =>
+            {
+                MainPageViewModel.HideNewGameDialogPanel();
+                OnCancelClicked();
+            });
+            ThisMapCommand = new DelegateCommand(() =>
+            {
+                MainPageViewModel.HideNewGameDialogPanel();
+                OnPlayClicked();
+            });
+        } }
 
         /// <summary>
         /// Called when user clicked previous map button to go to the preview map.
@@ -158,7 +163,7 @@ namespace Micropolis.ViewModels
                     Stream stream = await file.OpenStreamForReadAsync();
                     await newEngine.LoadFile(stream);
                     StartPlaying(newEngine, file);
-                    _mainPageViewModel.HideNewGameDialogPanel();
+                    MainPageViewModel.HideNewGameDialogPanel();
                 }
             }
             catch (Exception e)

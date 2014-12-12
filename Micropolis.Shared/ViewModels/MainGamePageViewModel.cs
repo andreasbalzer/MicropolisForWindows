@@ -66,14 +66,13 @@ namespace Micropolis.ViewModels
 
         private readonly ScrollViewer _messagesScrollViewer;
         private readonly BudgetDialogViewModel _newBudgetDialogViewModel;
-        private readonly StackPanel _newGameDialogPaneInner;
         private readonly NotificationPaneViewModel _notificationPanelViewModel;
         private readonly MediaElement _soundOutput;
         private readonly MenuFlyout _speedMenu;
         private readonly ToolbarViewModel _toolsPanelViewModel;
-        public DelegateCommand AutoBudgetCommand;
-        public DelegateCommand AutoBulldozeCommand;
-        public DelegateCommand BudgetCommand;
+        public DelegateCommand AutoBudgetCommand { get; set; }
+        public DelegateCommand AutoBulldozeCommand { get; set; }
+        public DelegateCommand BudgetCommand { get; set; }
 
         /// <summary>
         ///     The current file loaded in the game.
@@ -85,20 +84,20 @@ namespace Micropolis.ViewModels
         /// </summary>
         public MicropolisTool CurrentTool;
 
-        public DelegateCommand DisastersCommand;
-        public DelegateCommand EarthquakeCommand;
-        public DelegateCommand EvaluationCommand;
-        public DelegateCommand FireCommand;
-        public DelegateCommand FloodCommand;
-        public DelegateCommand GraphCommand;
-        public DelegateCommand LoadCommand;
-        public DelegateCommand MeltdownCommand;
-        public DelegateCommand MonsterCommand;
-        public DelegateCommand NewCommand;
-        public DelegateCommand SaveAsCommand;
-        public DelegateCommand SaveCommand;
-        public DelegateCommand SoundCommand;
-        public DelegateCommand TornadoCommand;
+        public DelegateCommand DisastersCommand { get; set; }
+        public DelegateCommand EarthquakeCommand { get; set; }
+        public DelegateCommand EvaluationCommand { get; set; }
+        public DelegateCommand FireCommand { get; set; }
+        public DelegateCommand FloodCommand { get; set; }
+        public DelegateCommand GraphCommand { get; set; }
+        public DelegateCommand LoadCommand { get; set; }
+        public DelegateCommand MeltdownCommand { get; set; }
+        public DelegateCommand MonsterCommand { get; set; }
+        public DelegateCommand NewCommand { get; set; }
+        public DelegateCommand SaveAsCommand { get; set; }
+        public DelegateCommand SaveCommand { get; set; }
+        public DelegateCommand SoundCommand { get; set; }
+        public DelegateCommand TornadoCommand { get; set; }
 
         private bool _autoBudgetCheckBoxIsChecked;
         private string _autoBudgetCheckBoxText;
@@ -235,6 +234,7 @@ namespace Micropolis.ViewModels
         private string _menuZonesHeaderButtonText;
         private string _menuOverlaysHeaderButtonText;
         private OverlayMapViewModel _mapViewViewModel;
+        private NewCityDialogViewModel _newCityDialogViewModel;
 
 
         public MainGamePageViewModel(NotificationPaneViewModel notificationPanelViewModel,
@@ -242,8 +242,10 @@ namespace Micropolis.ViewModels
             ToolbarViewModel toolsPanelViewModel, MicropolisDrawingArea drawingArea, ConfirmationBar confirmBar,
             BudgetDialogViewModel newBudgetDialogViewModel, GraphsPaneViewModel graphsPaneViewModel,
             EvaluationPaneViewModel evaluationPaneViewModel, ScrollViewer drawingAreaScroll,
-            ScrollViewer messagesScrollViewer, DemandIndicatorViewModel demandIndViewModel, StackPanel newGameDialogPaneInner, OverlayMapViewModel mapViewViewModel)
+            ScrollViewer messagesScrollViewer, DemandIndicatorViewModel demandIndViewModel, OverlayMapViewModel mapViewViewModel, NewCityDialogViewModel newCityDialogViewModel)
         {
+            _newCityDialogViewModel = newCityDialogViewModel;
+            _newCityDialogViewModel.MainPageViewModel = this;
             _mapViewViewModel = mapViewViewModel;
             MenuOverlaysHeaderButtonText = Strings.GetString("menu.overlays");
             MenuZonesHeaderFlyoutItems=new ObservableCollection<LevelButtonViewModel>();
@@ -273,7 +275,7 @@ namespace Micropolis.ViewModels
             SaveAsCommand = new DelegateCommand(SaveAsButton_Click);
 
 
-            _newGameDialogPaneInner = newGameDialogPaneInner;
+
             _demandIndViewModel = demandIndViewModel;
             _messagesScrollViewer = messagesScrollViewer;
             _drawingAreaScroll = drawingAreaScroll;
@@ -1919,12 +1921,9 @@ namespace Micropolis.ViewModels
                 StopTimer();
             }
 
-            var dialog = new NewCityDialog(this);
-            _newGameDialogPaneInner.Children.Clear();
-            _newGameDialogPaneInner.Children.Add(dialog);
             ShowNewGameDialogPanel();
 
-            if (timerEnabled)
+            if (timerEnabled) //Bug:not a thread stopping dialog
             {
                 StartTimer();
             }
