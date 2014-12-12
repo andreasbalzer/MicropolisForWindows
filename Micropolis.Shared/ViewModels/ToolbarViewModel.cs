@@ -27,7 +27,6 @@ namespace Micropolis.ViewModels
             set
             {
                 _mode = value;
-                ToolBarItems.Clear();
                 MakeToolbar();
             }
         }
