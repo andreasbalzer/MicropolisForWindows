@@ -41,6 +41,7 @@ namespace Micropolis.ViewModels
             ToolBarItems=new ObservableCollection<ToolbarButtonViewModel>();
             _mode = ToolBarMode.NORMAL;
             ToolRowHeight = ToolRowHeight = new GridLength(1, GridUnitType.Star);
+            _toolBtns = new Dictionary<MicropolisTool, ToolbarButtonViewModel>();
         }
 
 
@@ -74,6 +75,8 @@ namespace Micropolis.ViewModels
         /// <returns>the toolbar as stackpanel</returns>
         private void MakeToolbar()
         {
+            _toolBtns.Clear();
+            ToolBarItems.Clear();
             ToolRowHeight = new GridLength(1, GridUnitType.Star);
             if (_mode == ToolBarMode.NORMAL || _mode == ToolBarMode.WIDE)
             {
@@ -85,7 +88,7 @@ namespace Micropolis.ViewModels
                 ToolBarExpandButtonIsVisible = true;
                 ToolBarIsVisible = false;
             }
-            _toolBtns = new Dictionary<MicropolisTool, ToolbarButtonViewModel>();
+            
 
             ToolBarItems.Add(MakeToolBtn(MicropolisTools.MicropolisTool["EMPTY"]));
 
