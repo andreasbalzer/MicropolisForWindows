@@ -244,7 +244,7 @@ namespace Micropolis.ViewModels
 
 
         public MainGamePageViewModel(NotificationPaneViewModel notificationPanelViewModel,
-            MicropolisDrawingAreaViewModel drawingAreaViewModel, MediaElement soundOutput,
+            MicropolisDrawingAreaViewModel drawingAreaViewModel,
             ToolbarViewModel toolsPanelViewModel, MicropolisDrawingArea drawingArea, ConfirmationBar confirmBar,
             BudgetDialogViewModel newBudgetDialogViewModel, GraphsPaneViewModel graphsPaneViewModel,
             EvaluationPaneViewModel evaluationPaneViewModel, StackPanel miniMapPane, ScrollViewer drawingAreaScroll,
@@ -288,7 +288,6 @@ namespace Micropolis.ViewModels
             _confirmBar = confirmBar;
             _drawingArea = drawingArea;
             _toolsPanelViewModel = toolsPanelViewModel;
-            _soundOutput = soundOutput;
             _notificationPanelViewModel = notificationPanelViewModel;
             _drawingAreaViewModel = drawingAreaViewModel;
             ToggleMiniMapCommand = new DelegateCommand(ToggleMiniMap);
@@ -752,12 +751,21 @@ namespace Micropolis.ViewModels
 
             try
             {
-                _soundOutput.Source = afile;
-                _soundOutput.Play();
+                OnPlaySound(afile);
+                
             }
             catch (Exception e)
             {
                 //e.printStackTrace(System.err);
+            }
+        }
+
+        public event EventHandler<Uri> PlaySound;
+        private void OnPlaySound(Uri file)
+        {
+            if (PlaySound != null)
+            {
+                PlaySound(this, file);
             }
         }
 

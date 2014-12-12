@@ -35,7 +35,7 @@ namespace Micropolis
             NavigationCacheMode = NavigationCacheMode.Required;
             App.MainPageReference = this;
 
-            _viewModel = new MainGamePageViewModel(NotificationPanel.ViewModel, DrawingArea.ViewModel, SoundOutput,
+            _viewModel = new MainGamePageViewModel(NotificationPanel.ViewModel, DrawingArea.ViewModel,
                 ToolsPanel.ViewModel, DrawingArea, ConfirmBar, NewBudgetDialog.ViewModel, GraphsPane.ViewModel,
                 EvaluationPane.ViewModel, MiniMapPane, DrawingAreaScroll, MessagesScrollViewer, DemandInd.ViewModel,
                 LevelMenu, SpeedMenu, NewGameDialogPaneInner);
@@ -44,8 +44,15 @@ namespace Micropolis
 
             VisualStateChanged += _viewModel.MainGamePage_VisualStateChanged;
             _viewModel.DrawingAreaScrollChangeView += _viewModel_DrawingAreaScrollChangeView;
+            _viewModel.PlaySound += _viewModel_PlaySound;
             Window.Current.SizeChanged += Window_SizeChanged;
             DetermineVisualState();
+        }
+
+        void _viewModel_PlaySound(object sender, Uri file)
+        {
+            this.SoundOutput.Source = file;
+            this.SoundOutput.Play();
         }
 
         void _viewModel_DrawingAreaScrollChangeView(object sender, DrawingAreaScrollChangeCoordinates e)
