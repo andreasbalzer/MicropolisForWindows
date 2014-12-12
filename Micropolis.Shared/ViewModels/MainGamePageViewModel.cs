@@ -56,15 +56,15 @@ namespace Micropolis.ViewModels
         private readonly MicropolisDrawingAreaViewModel _drawingAreaViewModel;
         private readonly EvaluationPaneViewModel _evaluationPaneViewModel;
         private readonly GraphsPaneViewModel _graphsPaneViewModel;
+ 
 
         /// <summary>
         ///     The map state menu items contains map states linking to their respective ToggleMenuFlyoutItems.
         /// </summary>
-        private readonly Dictionary<MapState, ToggleMenuFlyoutItem> _mapStateMenuItems =
-            new Dictionary<MapState, ToggleMenuFlyoutItem>();
+        private readonly Dictionary<MapState, LevelButtonViewModel> _mapStateMenuItems =
+            new Dictionary<MapState, LevelButtonViewModel>();
 
         private readonly ScrollViewer _messagesScrollViewer;
-        private readonly StackPanel _miniMapPane;
         private readonly BudgetDialogViewModel _newBudgetDialogViewModel;
         private readonly StackPanel _newGameDialogPaneInner;
         private readonly NotificationPaneViewModel _notificationPanelViewModel;
@@ -190,11 +190,6 @@ namespace Micropolis.ViewModels
         private double _mapLegendLblOpacity;
 
         /// <summary>
-        ///     The map view used to display map states and viewport.
-        /// </summary>
-        private OverlayMapView _mapView;
-
-        /// <summary>
         ///     The messages pane used to display game messages.
         /// </summary>
         private MessagesPane _messagesPane;
@@ -237,14 +232,23 @@ namespace Micropolis.ViewModels
         /// </summary>
         private PointerRoutedEventArgs touchPointerRoutedEventArgsOfCurrentConfirmationPending;
 
+        private string _menuZonesHeaderButtonText;
+        private string _menuOverlaysHeaderButtonText;
+        private OverlayMapViewModel _mapViewViewModel;
+
 
         public MainGamePageViewModel(NotificationPaneViewModel notificationPanelViewModel,
             MicropolisDrawingAreaViewModel drawingAreaViewModel,
             ToolbarViewModel toolsPanelViewModel, MicropolisDrawingArea drawingArea, ConfirmationBar confirmBar,
             BudgetDialogViewModel newBudgetDialogViewModel, GraphsPaneViewModel graphsPaneViewModel,
-            EvaluationPaneViewModel evaluationPaneViewModel, StackPanel miniMapPane, ScrollViewer drawingAreaScroll,
-            ScrollViewer messagesScrollViewer, DemandIndicatorViewModel demandIndViewModel, StackPanel newGameDialogPaneInner)
+            EvaluationPaneViewModel evaluationPaneViewModel, ScrollViewer drawingAreaScroll,
+            ScrollViewer messagesScrollViewer, DemandIndicatorViewModel demandIndViewModel, StackPanel newGameDialogPaneInner, OverlayMapViewModel mapViewViewModel)
         {
+            _mapViewViewModel = mapViewViewModel;
+            MenuOverlaysHeaderButtonText = Strings.GetString("menu.overlays");
+            MenuZonesHeaderFlyoutItems=new ObservableCollection<LevelButtonViewModel>();
+            MenuOverlaysHeaderFlyoutItems = new ObservableCollection<LevelButtonViewModel>();
+            MenuZonesHeaderButtonText = Strings.GetString("menu.zones");
             Levels=new ObservableCollection<LevelButtonViewModel>();
             BudgetCommand = new DelegateCommand(BudgetButton_Click);
             EvaluationCommand = new DelegateCommand(EvaluationButton_Click);
@@ -273,7 +277,6 @@ namespace Micropolis.ViewModels
             _demandIndViewModel = demandIndViewModel;
             _messagesScrollViewer = messagesScrollViewer;
             _drawingAreaScroll = drawingAreaScroll;
-            _miniMapPane = miniMapPane;
             _newBudgetDialogViewModel = newBudgetDialogViewModel;
 
             _graphsPaneViewModel = graphsPaneViewModel;
@@ -1174,58 +1177,29 @@ namespace Micropolis.ViewModels
 
             _evaluationPaneViewModel.SetupAfterBasicInit(this, engine);
 
-            var mapViewContainer = new StackPanel();
-            _miniMapPane.Children.Add(mapViewContainer);
-            var mapMenu = new StackPanel();
-            mapViewContainer.Children.Add(mapMenu);
+            MenuZonesHeaderFlyoutItems.Add(MakeMapStateMenuItem("menu.zones.ALL", MapState.ALL));
+            MenuZonesHeaderFlyoutItems.Add(MakeMapStateMenuItem("menu.zones.RESIDENTIAL", MapState.RESIDENTIAL));
+            MenuZonesHeaderFlyoutItems.Add(MakeMapStateMenuItem("menu.zones.COMMERCIAL", MapState.COMMERCIAL));
+            MenuZonesHeaderFlyoutItems.Add(MakeMapStateMenuItem("menu.zones.INDUSTRIAL", MapState.INDUSTRIAL));
+            MenuZonesHeaderFlyoutItems.Add(MakeMapStateMenuItem("menu.zones.TRANSPORT", MapState.TRANSPORT));
 
-            var zonesMenu = new StackPanel();
-            var menuZonesHeader = new Button
-            {
-                Content = Strings.GetString("menu.zones"),
-                Style = Application.Current.Resources["WhiteButtonStyle"] as Style
-            };
-            zonesMenu.Children.Add(menuZonesHeader);
 
-            //setupKeys(zonesMenu, "menu.zones");
-            var mapMenuButtons = new StackPanel {Orientation = Orientation.Horizontal};
 
-            mapMenu.Children.Add(mapMenuButtons);
-            mapMenuButtons.Children.Add(zonesMenu);
 
-            var zoneflyout = new MenuFlyout();
-            menuZonesHeader.Flyout = zoneflyout;
-            zoneflyout.Items.Add(MakeMapStateMenuItem("menu.zones.ALL", MapState.ALL));
-            zoneflyout.Items.Add(MakeMapStateMenuItem("menu.zones.RESIDENTIAL", MapState.RESIDENTIAL));
-            zoneflyout.Items.Add(MakeMapStateMenuItem("menu.zones.COMMERCIAL", MapState.COMMERCIAL));
-            zoneflyout.Items.Add(MakeMapStateMenuItem("menu.zones.INDUSTRIAL", MapState.INDUSTRIAL));
-            zoneflyout.Items.Add(MakeMapStateMenuItem("menu.zones.TRANSPORT", MapState.TRANSPORT));
 
-            var overlaysMenu = new StackPanel();
-            mapMenuButtons.Children.Add(overlaysMenu);
-
-            var overlaysMenuHeader = new Button();
-            overlaysMenu.Children.Add(overlaysMenuHeader);
-            overlaysMenuHeader.Content = Strings.GetString("menu.overlays");
-            overlaysMenuHeader.Style = Application.Current.Resources["WhiteButtonStyle"] as Style;
-            var menuflyout = new MenuFlyout();
-            overlaysMenuHeader.Flyout = menuflyout;
-            //setupKeys(overlaysMenu, "menu.overlays");
-
-            menuflyout.Items.Add(MakeMapStateMenuItem("menu.overlays.POPDEN_OVERLAY", MapState.POPDEN_OVERLAY));
-            menuflyout.Items.Add(MakeMapStateMenuItem("menu.overlays.GROWTHRATE_OVERLAY", MapState.GROWTHRATE_OVERLAY));
-            menuflyout.Items.Add(MakeMapStateMenuItem("menu.overlays.LANDVALUE_OVERLAY", MapState.LANDVALUE_OVERLAY));
-            menuflyout.Items.Add(MakeMapStateMenuItem("menu.overlays.CRIME_OVERLAY", MapState.CRIME_OVERLAY));
-            menuflyout.Items.Add(MakeMapStateMenuItem("menu.overlays.POLLUTE_OVERLAY", MapState.POLLUTE_OVERLAY));
-            menuflyout.Items.Add(MakeMapStateMenuItem("menu.overlays.TRAFFIC_OVERLAY", MapState.TRAFFIC_OVERLAY));
-            menuflyout.Items.Add(MakeMapStateMenuItem("menu.overlays.POWER_OVERLAY", MapState.POWER_OVERLAY));
-            menuflyout.Items.Add(MakeMapStateMenuItem("menu.overlays.FIRE_OVERLAY", MapState.FIRE_OVERLAY));
-            menuflyout.Items.Add(MakeMapStateMenuItem("menu.overlays.POLICE_OVERLAY", MapState.POLICE_OVERLAY));
-
-            _mapView = new OverlayMapView();
-            _mapView.ViewModel.SetUpAfterBasicInit(engine);
-            _mapView.ViewModel.ConnectView(_drawingAreaViewModel, _drawingAreaScroll);
-            mapViewContainer.Children.Add(_mapView);
+            MenuOverlaysHeaderFlyoutItems.Add(MakeMapStateMenuItem("menu.overlays.POPDEN_OVERLAY", MapState.POPDEN_OVERLAY));
+            MenuOverlaysHeaderFlyoutItems.Add(MakeMapStateMenuItem("menu.overlays.GROWTHRATE_OVERLAY", MapState.GROWTHRATE_OVERLAY));
+            MenuOverlaysHeaderFlyoutItems.Add(MakeMapStateMenuItem("menu.overlays.LANDVALUE_OVERLAY", MapState.LANDVALUE_OVERLAY));
+            MenuOverlaysHeaderFlyoutItems.Add(MakeMapStateMenuItem("menu.overlays.CRIME_OVERLAY", MapState.CRIME_OVERLAY));
+            MenuOverlaysHeaderFlyoutItems.Add(MakeMapStateMenuItem("menu.overlays.POLLUTE_OVERLAY", MapState.POLLUTE_OVERLAY));
+            MenuOverlaysHeaderFlyoutItems.Add(MakeMapStateMenuItem("menu.overlays.TRAFFIC_OVERLAY", MapState.TRAFFIC_OVERLAY));
+            MenuOverlaysHeaderFlyoutItems.Add(MakeMapStateMenuItem("menu.overlays.POWER_OVERLAY", MapState.POWER_OVERLAY));
+            MenuOverlaysHeaderFlyoutItems.Add(MakeMapStateMenuItem("menu.overlays.FIRE_OVERLAY", MapState.FIRE_OVERLAY));
+            MenuOverlaysHeaderFlyoutItems.Add(MakeMapStateMenuItem("menu.overlays.POLICE_OVERLAY", MapState.POLICE_OVERLAY));
+            
+            _mapViewViewModel.SetUpAfterBasicInit(engine);
+            _mapViewViewModel.ConnectView(_drawingAreaViewModel, _drawingAreaScroll);
+            
 
             SetMapState(MapState.ALL);
 
@@ -1244,7 +1218,7 @@ namespace Micropolis.ViewModels
             _isDoSounds = Prefs.GetBoolean("SOUNDS_PREF", true);
 
             // start things up
-            _mapView.ViewModel.SetEngine(engine);
+            _mapViewViewModel.SetEngine(engine);
 
             engine.AddEarthquakeListener(this);
             ReloadFunds();
@@ -1253,10 +1227,25 @@ namespace Micropolis.ViewModels
             StartTimer();
             MakeClean();
 
-            _drawingAreaScroll.ViewChanging += _mapView.ViewModel.drawingAreaScroll_ViewChanging;
+            _drawingAreaScroll.ViewChanging += _mapViewViewModel.drawingAreaScroll_ViewChanging;
 
             _toolsPanelViewModel.SetUpAfterBasicInit(this);
         }
+
+        public ObservableCollection<LevelButtonViewModel> MenuZonesHeaderFlyoutItems { get; set; }
+
+        public ObservableCollection<LevelButtonViewModel> MenuOverlaysHeaderFlyoutItems { get; set; } 
+
+        public string MenuZonesHeaderButtonText {get { return _menuZonesHeaderButtonText; } set
+        {
+            SetProperty(ref _menuZonesHeaderButtonText, value);
+        }
+        }
+
+        public string MenuOverlaysHeaderButtonText { get { return _menuOverlaysHeaderButtonText; } set
+        {
+            SetProperty(ref _menuOverlaysHeaderButtonText, value);
+        } }
 
         /// <summary>
         ///     Handles the Righted event of the ConfirmBar control to move sprite to the right.
@@ -1386,7 +1375,7 @@ namespace Micropolis.ViewModels
             StopEarthquake();
 
             _drawingAreaViewModel.SetEngine(Engine);
-            _mapView.ViewModel.SetEngine(Engine); //must change mapView after DrawingArea
+            _mapViewViewModel.SetEngine(Engine); //must change mapView after DrawingArea
             _evaluationPaneViewModel.SetEngine(Engine);
             _demandIndViewModel.SetEngine(Engine);
             _graphsPaneViewModel.SetEngine(Engine);
@@ -2649,11 +2638,11 @@ namespace Micropolis.ViewModels
         /// <param name="stringPrefix">The string prefix identifying the caption for the map state menu item.</param>
         /// <param name="state">The state, the map state menu item represents.</param>
         /// <returns></returns>
-        private ToggleMenuFlyoutItem MakeMapStateMenuItem(String stringPrefix, MapState state)
+        private LevelButtonViewModel MakeMapStateMenuItem(String stringPrefix, MapState state)
         {
             String caption = Strings.GetString(stringPrefix);
-            var menuItem = new ToggleMenuFlyoutItem {Text = caption};
-            menuItem.Click += delegate { SetMapState(state); };
+            var menuItem = new LevelButtonViewModel() {Text = caption};
+            menuItem.ClickCommand = new DelegateCommand(() => { SetMapState(state); });
             _mapStateMenuItems.Add(state, menuItem);
             return menuItem;
         }
@@ -2664,9 +2653,9 @@ namespace Micropolis.ViewModels
         /// <param name="state">The state.</param>
         private void SetMapState(MapState state)
         {
-            _mapStateMenuItems[(_mapView.ViewModel.GetMapState())].IsChecked = false;
+            _mapStateMenuItems[(_mapViewViewModel.GetMapState())].IsChecked = false;
             _mapStateMenuItems[(state)].IsChecked = true;
-            _mapView.ViewModel.SetMapState(state);
+            _mapViewViewModel.SetMapState(state);
             SetMapLegend(state);
         }
 

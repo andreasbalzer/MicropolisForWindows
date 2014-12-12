@@ -37,8 +37,8 @@ namespace Micropolis
 
             _viewModel = new MainGamePageViewModel(NotificationPanel.ViewModel, DrawingArea.ViewModel,
                 ToolsPanel.ViewModel, DrawingArea, ConfirmBar, NewBudgetDialog.ViewModel, GraphsPane.ViewModel,
-                EvaluationPane.ViewModel, MiniMapPane, DrawingAreaScroll, MessagesScrollViewer, DemandInd.ViewModel,
-                NewGameDialogPaneInner);
+                EvaluationPane.ViewModel, DrawingAreaScroll, MessagesScrollViewer, DemandInd.ViewModel,
+                NewGameDialogPaneInner, MapView.ViewModel);
             DataContext = _viewModel;
             Loaded += MainGamePage_Loaded;
 

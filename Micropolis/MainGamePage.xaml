@@ -326,6 +326,53 @@
                                 <Image x:Name="MapLegendLbl" MaxWidth="80" MaxHeight="20" HorizontalAlignment="Left"
                                        VerticalAlignment="Top" Source="{Binding MapLegendLblImageSource}"
                                        Opacity="{Binding MapLegendLblOpacity}" />
+                                    <StackPanel x:Name="MapViewContainer">
+                                        <StackPanel x:Name="MapMenu">
+                                            <StackPanel x:Name="MapMenuButtons" Orientation="Horizontal">
+                                            
+                                                <Button Style="{StaticResource WhiteButtonStyle}" Content="{Binding MenuZonesHeaderButtonText}" >
+                                                    <Button.Flyout>
+                                                        <Flyout>
+                                                            <ItemsControl VerticalAlignment="Center" ItemsSource="{Binding MenuZonesHeaderFlyoutItems, Mode=TwoWay}">
+                                                                <ItemsControl.ItemsPanel>
+                                                                    <ItemsPanelTemplate>
+                                                                        <StackPanel Orientation="Vertical" />
+                                                                    </ItemsPanelTemplate>
+                                                                </ItemsControl.ItemsPanel>
+                                                                <ItemsControl.ItemTemplate>
+                                                                    <DataTemplate>
+                                                                        <ToggleMenuFlyoutItem Text="{Binding Text}" Command="{Binding ClickCommand}" IsChecked="{Binding IsChecked, Mode=TwoWay}" />
+                                                                    </DataTemplate>
+                                                                </ItemsControl.ItemTemplate>
+                                                            </ItemsControl>
+                                                        </Flyout>
+                                                    </Button.Flyout>
+                                                </Button>
+                                            <Button Style="{StaticResource WhiteButtonStyle}" Content="{Binding MenuOverlaysHeaderButtonText}" >
+                                                <Button.Flyout>
+                                                    <Flyout>
+                                                        <ItemsControl VerticalAlignment="Center" ItemsSource="{Binding MenuOverlaysHeaderFlyoutItems, Mode=TwoWay}">
+                                                            <ItemsControl.ItemsPanel>
+                                                                <ItemsPanelTemplate>
+                                                                    <StackPanel Orientation="Vertical" />
+                                                                </ItemsPanelTemplate>
+                                                            </ItemsControl.ItemsPanel>
+                                                            <ItemsControl.ItemTemplate>
+                                                                <DataTemplate>
+                                                                    <ToggleMenuFlyoutItem Text="{Binding Text}" Command="{Binding ClickCommand}" IsChecked="{Binding IsChecked, Mode=TwoWay}" />
+                                                                </DataTemplate>
+                                                            </ItemsControl.ItemTemplate>
+                                                        </ItemsControl>
+                                                    </Flyout>
+                                                </Button.Flyout>
+                                            </Button>
+
+
+                                        </StackPanel>
+                                            
+                                    </StackPanel>
+                                    <local:OverlayMapView x:Name="MapView"/>
+                                    </StackPanel>
                             </StackPanel>
                         </Border>
                     </StackPanel>
