@@ -11,6 +11,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -55,7 +56,6 @@ namespace Micropolis.ViewModels
         private readonly MicropolisDrawingAreaViewModel _drawingAreaViewModel;
         private readonly EvaluationPaneViewModel _evaluationPaneViewModel;
         private readonly GraphsPaneViewModel _graphsPaneViewModel;
-        private readonly MenuFlyout _levelMenu;
 
         /// <summary>
         ///     The map state menu items contains map states linking to their respective ToggleMenuFlyoutItems.
@@ -120,7 +120,7 @@ namespace Micropolis.ViewModels
         /// <summary>
         ///     The difficulty menu items linking difficulty levels to their respective ToggleMenuFlyoutItems.
         /// </summary>
-        private Dictionary<int, ToggleMenuFlyoutItem> _difficultyMenuItems;
+        private Dictionary<int, LevelButtonViewModel> _difficultyMenuItems;
 
         /// <summary>
         ///     Indicates if simulator took a step since last save.
@@ -243,8 +243,9 @@ namespace Micropolis.ViewModels
             ToolbarViewModel toolsPanelViewModel, MicropolisDrawingArea drawingArea, ConfirmationBar confirmBar,
             BudgetDialogViewModel newBudgetDialogViewModel, GraphsPaneViewModel graphsPaneViewModel,
             EvaluationPaneViewModel evaluationPaneViewModel, StackPanel miniMapPane, ScrollViewer drawingAreaScroll,
-            ScrollViewer messagesScrollViewer, DemandIndicatorViewModel demandIndViewModel, MenuFlyout levelMenu, StackPanel newGameDialogPaneInner)
+            ScrollViewer messagesScrollViewer, DemandIndicatorViewModel demandIndViewModel, StackPanel newGameDialogPaneInner)
         {
+            Levels=new ObservableCollection<LevelButtonViewModel>();
             BudgetCommand = new DelegateCommand(BudgetButton_Click);
             EvaluationCommand = new DelegateCommand(EvaluationButton_Click);
             GraphCommand = new DelegateCommand(GraphButton_Click);
@@ -269,7 +270,6 @@ namespace Micropolis.ViewModels
 
 
             _newGameDialogPaneInner = newGameDialogPaneInner;
-            _levelMenu = levelMenu;
             _demandIndViewModel = demandIndViewModel;
             _messagesScrollViewer = messagesScrollViewer;
             _drawingAreaScroll = drawingAreaScroll;
@@ -1717,15 +1717,15 @@ namespace Micropolis.ViewModels
 
             SpeedButtonText = Strings.GetString("menu.speed");
 
-            _difficultyMenuItems = new Dictionary<int, ToggleMenuFlyoutItem>();
+            _difficultyMenuItems = new Dictionary<int, LevelButtonViewModel>();
             for (int i = GameLevel.MIN_LEVEL; i <= GameLevel.MAX_LEVEL; i++)
             {
                 int level = i;
-                var menuItemc = new ToggleMenuFlyoutItem {Text = Strings.GetString("menu.difficulty." + level)};
-                menuItemc.Click += delegate { OnDifficultyClicked(level); };
+                var menuItemc = new LevelButtonViewModel {Text = Strings.GetString("menu.difficulty." + level)};
+                menuItemc.ClickCommand = new DelegateCommand(() => { OnDifficultyClicked(level); });
 
-                _levelMenu.Items.Add(menuItemc);
                 _difficultyMenuItems.Add(level, menuItemc);
+                Levels.Add(menuItemc);
             }
             
             BudgetButtonText = Strings.GetString("menu.windows.budget");
@@ -1733,7 +1733,7 @@ namespace Micropolis.ViewModels
             GraphButtonText = Strings.GetString("menu.windows.graph");
         }
 
-
+        public ObservableCollection<LevelButtonViewModel> Levels { get; set; } 
         /// <summary>
         ///     Called when automatic budget button clicked.
         /// </summary>

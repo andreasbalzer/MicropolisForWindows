@@ -214,7 +214,20 @@
                 <Button x:Name="DifficultyButton" Style="{StaticResource BarButtonStyle}">
                     <TextBlock x:Name="DifficultyButtonContent" Text="{Binding DifficultyButtonContentText}" />
                     <Button.Flyout>
-                        <MenuFlyout x:Name="LevelMenu" />
+                        <Flyout>
+                            <ItemsControl Margin="0,0,0,0" VerticalAlignment="Center" ItemsSource="{Binding Levels, Mode=TwoWay}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Orientation="Vertical" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <ToggleMenuFlyoutItem Margin="0,0,0,0" Text="{Binding Text}" Command="{Binding ClickCommand}" IsChecked="{Binding IsChecked, Mode=TwoWay}" />
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </Flyout>
                     </Button.Flyout>
                 </Button>
 
@@ -224,17 +237,17 @@
                         <MenuFlyout>
                             <ToggleMenuFlyoutItem x:Name="AutoBudgetCheckBox" Text="{Binding AutoBudgetCheckBoxText}"
                                                   Command="{Binding AutoBudgetCommand}"
-                                                  IsEnabled="{Binding AutoBudgetCheckBoxIsChecked, Mode=TwoWay}" />
+                                                  IsChecked="{Binding AutoBudgetCheckBoxIsChecked, Mode=TwoWay}" />
                             <ToggleMenuFlyoutItem x:Name="AutoBulldozeCheckBox"
                                                   Text="{Binding AutoBulldozeCheckBoxText}"
                                                   Command="{Binding AutoBulldozeCommand}"
-                                                  IsEnabled="{Binding AutoBulldozeCheckBoxIsChecked, Mode=TwoWay}" />
+                                                  IsChecked="{Binding AutoBulldozeCheckBoxIsChecked, Mode=TwoWay}" />
                             <ToggleMenuFlyoutItem x:Name="DisastersCheckBox" Text="{Binding DisastersCheckBoxText}"
-                                                  IsEnabled="{Binding DisastersCheckBoxIsChecked, Mode=TwoWay}"
+                                                  IsChecked="{Binding DisastersCheckBoxIsChecked, Mode=TwoWay}"
                                                   Command="{Binding DisastersCommand}" />
                             <ToggleMenuFlyoutItem x:Name="SoundCheckBox" Text="{Binding SoundCheckBoxText}"
                                                   Command="{Binding SoundCommand}"
-                                                  IsEnabled="{Binding SoundCheckBoxIsChecked, Mode=TwoWay}" />
+                                                  IsChecked="{Binding SoundCheckBoxIsChecked, Mode=TwoWay}" />
                         </MenuFlyout>
                     </Button.Flyout>
                 </Button>
