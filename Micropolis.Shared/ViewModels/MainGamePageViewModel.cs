@@ -56,7 +56,6 @@ namespace Micropolis.ViewModels
         private readonly EvaluationPaneViewModel _evaluationPaneViewModel;
         private readonly GraphsPaneViewModel _graphsPaneViewModel;
         private readonly MenuFlyout _levelMenu;
-        private readonly MainGamePage _mainPage;
 
         /// <summary>
         ///     The map state menu items contains map states linking to their respective ToggleMenuFlyoutItems.
@@ -227,7 +226,7 @@ namespace Micropolis.ViewModels
 
         private bool _soundCheckBoxIsChecked;
         private string _soundCheckBoxText;
-        private string _state = string.Empty;
+        
         private string _titleTextBlockText;
 
         /// <summary>
@@ -244,7 +243,7 @@ namespace Micropolis.ViewModels
         private PointerRoutedEventArgs touchPointerRoutedEventArgsOfCurrentConfirmationPending;
 
 
-        public MainGamePageViewModel(MainGamePage mainPage, NotificationPaneViewModel notificationPanelViewModel,
+        public MainGamePageViewModel(NotificationPaneViewModel notificationPanelViewModel,
             MicropolisDrawingAreaViewModel drawingAreaViewModel, MediaElement soundOutput,
             ToolbarViewModel toolsPanelViewModel, MicropolisDrawingArea drawingArea, ConfirmationBar confirmBar,
             BudgetDialogViewModel newBudgetDialogViewModel, GraphsPaneViewModel graphsPaneViewModel,
@@ -290,7 +289,6 @@ namespace Micropolis.ViewModels
             _drawingArea = drawingArea;
             _toolsPanelViewModel = toolsPanelViewModel;
             _soundOutput = soundOutput;
-            _mainPage = mainPage;
             _notificationPanelViewModel = notificationPanelViewModel;
             _drawingAreaViewModel = drawingAreaViewModel;
             ToggleMiniMapCommand = new DelegateCommand(ToggleMiniMap);
@@ -908,17 +906,14 @@ namespace Micropolis.ViewModels
 
             _firstRun = false;
 
-            VisualStateChanged += MainGamePage_VisualStateChanged;
-
-            Window.Current.SizeChanged += Window_SizeChanged;
-            DetermineVisualState();
+            
 
             //TODO: Map-Creation als Teil des Hauptmenüs!
         }
 
-        private void MainGamePage_VisualStateChanged(object sender, EventArgs e)
+        public void MainGamePage_VisualStateChanged(object sender, VisualStateEventInformation e)
         {
-            _toolsPanelViewModel.Mode = (_state == "Snapped" || _state == "Narrow")
+            _toolsPanelViewModel.Mode = (e.State == "Snapped" || e.State == "Narrow")
                 ? ToolBarMode.FLYOUT
                 : ToolBarMode.NORMAL;
         }
@@ -2028,7 +2023,7 @@ namespace Micropolis.ViewModels
                 var newX = (int) Math.Round(mousePt.X*zoomFactor - (mousePt.X - pos.X));
                 var newY = (int) Math.Round(mousePt.Y*zoomFactor - (mousePt.Y - pos.Y));
                 _drawingAreaViewModel.SelectTileSize(newZoom);
-                _mainPage.DrawingAreaScrollChangeView(newX, newY, DrawingAreaScrollZoomFactor);
+                OnDrawingAreaScrollChangeView(newX, newY, DrawingAreaScrollZoomFactor);
             }
         }
 
@@ -2784,9 +2779,18 @@ namespace Micropolis.ViewModels
         {
             double horizontalPos = DrawingAreaScrollHorizontalOffset - dx;
             double verticalPos = DrawingAreaScrollVerticalOffset - dy;
-            _mainPage.DrawingAreaScrollChangeView(horizontalPos, verticalPos, 1);
+            OnDrawingAreaScrollChangeView(horizontalPos, verticalPos, 1);
         }
 
+        public event EventHandler<DrawingAreaScrollChangeCoordinates> DrawingAreaScrollChangeView;
+
+        public void OnDrawingAreaScrollChangeView(double x, double y, float zoomFactor)
+        {
+            if (DrawingAreaScrollChangeView != null)
+            {
+                DrawingAreaScrollChangeView(this, new DrawingAreaScrollChangeCoordinates(x,y,zoomFactor));
+            }
+        }
 
         /// <summary>
         ///     Called when app gets suspended. Saves current game if necessary and initiates app shutdown.
@@ -2836,65 +2840,5 @@ namespace Micropolis.ViewModels
         {
             return DrawingAreaScrollZoomFactor;
         }
-
-
-        /// <summary>
-        ///     http://marcominerva.wordpress.com/2013/10/16/handling-visualstate-in-windows-8-1-store-apps/
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void Cleanup(object sender, RoutedEventArgs e)
-        {
-            Window.Current.SizeChanged -= Window_SizeChanged;
-        }
-
-        /// <summary>
-        ///     http://marcominerva.wordpress.com/2013/10/16/handling-visualstate-in-windows-8-1-store-apps/
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void Window_SizeChanged(object sender, WindowSizeChangedEventArgs e)
-        {
-            DetermineVisualState();
-        }
-
-        /// <summary>
-        ///     http://marcominerva.wordpress.com/2013/10/16/handling-visualstate-in-windows-8-1-store-apps/
-        /// </summary>
-        private void DetermineVisualState()
-        {
-            ApplicationView applicationView = ApplicationView.GetForCurrentView();
-            Rect size = Window.Current.Bounds;
-
-            if (applicationView.IsFullScreen)
-            {
-                if (applicationView.Orientation == ApplicationViewOrientation.Landscape)
-                    _state = "FullScreenLandscape";
-                else
-                    _state = "FullScreenPortrait";
-            }
-            else
-            {
-                if (size.Width == 320)
-                    _state = "Snapped";
-                else if (size.Width <= 500)
-                    _state = "Narrow";
-                else
-                    _state = "Filled";
-            }
-
-            VisualStateManager.GoToState(_mainPage, _state, true);
-            OnVisualStateChanged();
-        }
-
-        private void OnVisualStateChanged()
-        {
-            if (VisualStateChanged != null)
-            {
-                VisualStateChanged(_mainPage, new EventArgs());
-            }
-        }
-
-        public event EventHandler VisualStateChanged;
     }
 }

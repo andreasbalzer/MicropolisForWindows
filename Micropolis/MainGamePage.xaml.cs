@@ -1,6 +1,11 @@
-﻿using Windows.UI.Xaml;
+﻿using System;
+using Windows.Foundation;
+using Windows.UI.Core;
+using Windows.UI.ViewManagement;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
+using Micropolis.Model.Entities;
 using Micropolis.ViewModels;
 
 namespace Micropolis
@@ -30,13 +35,84 @@ namespace Micropolis
             NavigationCacheMode = NavigationCacheMode.Required;
             App.MainPageReference = this;
 
-            _viewModel = new MainGamePageViewModel(this, NotificationPanel.ViewModel, DrawingArea.ViewModel, SoundOutput,
+            _viewModel = new MainGamePageViewModel(NotificationPanel.ViewModel, DrawingArea.ViewModel, SoundOutput,
                 ToolsPanel.ViewModel, DrawingArea, ConfirmBar, NewBudgetDialog.ViewModel, GraphsPane.ViewModel,
                 EvaluationPane.ViewModel, MiniMapPane, DrawingAreaScroll, MessagesScrollViewer, DemandInd.ViewModel,
                 LevelMenu, SpeedMenu, NewGameDialogPaneInner);
             DataContext = _viewModel;
             Loaded += MainGamePage_Loaded;
+
+            VisualStateChanged += _viewModel.MainGamePage_VisualStateChanged;
+            _viewModel.DrawingAreaScrollChangeView += _viewModel_DrawingAreaScrollChangeView;
+            Window.Current.SizeChanged += Window_SizeChanged;
+            DetermineVisualState();
         }
+
+        void _viewModel_DrawingAreaScrollChangeView(object sender, DrawingAreaScrollChangeCoordinates e)
+        {
+            this.DrawingAreaScrollChangeView(e.X,e.Y,e.ZoomFactor);
+        }
+
+        /// <summary>
+        ///     http://marcominerva.wordpress.com/2013/10/16/handling-visualstate-in-windows-8-1-store-apps/
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Cleanup(object sender, RoutedEventArgs e)
+        {
+            Window.Current.SizeChanged -= Window_SizeChanged;
+        }
+
+        /// <summary>
+        ///     http://marcominerva.wordpress.com/2013/10/16/handling-visualstate-in-windows-8-1-store-apps/
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Window_SizeChanged(object sender, WindowSizeChangedEventArgs e)
+        {
+            DetermineVisualState();
+        }
+
+        private string _state = string.Empty;
+
+        /// <summary>
+        ///     http://marcominerva.wordpress.com/2013/10/16/handling-visualstate-in-windows-8-1-store-apps/
+        /// </summary>
+        private void DetermineVisualState()
+        {
+            ApplicationView applicationView = ApplicationView.GetForCurrentView();
+            Rect size = Window.Current.Bounds;
+
+            if (applicationView.IsFullScreen)
+            {
+                if (applicationView.Orientation == ApplicationViewOrientation.Landscape)
+                    _state = "FullScreenLandscape";
+                else
+                    _state = "FullScreenPortrait";
+            }
+            else
+            {
+                if (size.Width == 320)
+                    _state = "Snapped";
+                else if (size.Width <= 500)
+                    _state = "Narrow";
+                else
+                    _state = "Filled";
+            }
+
+            VisualStateManager.GoToState(this, _state, true);
+            OnVisualStateChanged();
+        }
+
+        private void OnVisualStateChanged()
+        {
+            if (VisualStateChanged != null)
+            {
+                VisualStateChanged(this, new VisualStateEventInformation(){State = _state});
+            }
+        }
+
+        public event EventHandler<VisualStateEventInformation> VisualStateChanged;
 
         void MainGamePage_Loaded(object sender, RoutedEventArgs e)
         {

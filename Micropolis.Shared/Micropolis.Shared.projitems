@@ -26,6 +26,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Converters\SpeedButtonToBackgroundConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\UppercaseTextConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Entities\City.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Entities\DrawingAreaScrollChangeCoordinates.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Entities\GraphDataPoint.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Entities\GraphicsBuffer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Entities\Polyline.cs" />
@@ -38,6 +39,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Model\Entities\Prefs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Entities\Strings.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Entities\TileImages.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Model\Entities\VisualStateEventInformation.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Enums\GraphData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Enums\TimePeriod.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model\Enums\ToolBarMode.cs" />
