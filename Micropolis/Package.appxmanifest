@@ -25,6 +25,7 @@
           <m2:Rotation Preference="portraitFlipped" />
           <m2:Rotation Preference="landscapeFlipped" />
         </m2:InitialRotationPreference>
+        <m2:ApplicationView MinWidth="width320" />
       </m2:VisualElements>
       <Extensions>
         <Extension Category="windows.fileTypeAssociation">

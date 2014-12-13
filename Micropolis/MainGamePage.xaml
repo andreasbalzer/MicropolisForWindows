@@ -67,9 +67,99 @@
     </Page.Resources>
 
     <Grid Background="#6666E6">
+        <VisualStateManager.VisualStateGroups>
+            <!-- Visual states reflect the application's window size -->
+            <VisualStateGroup>
+                <VisualState x:Name="DefaultLayout">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
+                                                                           Storyboard.TargetName="Title">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Visible</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+                <VisualState x:Name="Normal">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
+                                                                           Storyboard.TargetName="Title">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Visible</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+                <VisualState x:Name="FullScreenLandscape">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
+                                                                           Storyboard.TargetName="Title">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Visible</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+                <VisualState x:Name="FullScreenPortrait">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
+                                                                           Storyboard.TargetName="Title">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Visible</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+                <VisualState x:Name="Filled">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
+                                                                           Storyboard.TargetName="Title">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Visible</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+
+                <VisualState x:Name="Snapped">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
+                                                                           Storyboard.TargetName="Title">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Collapsed</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+                <VisualState x:Name="Narrow">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
+                                                                           Storyboard.TargetName="Title">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Collapsed</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
         <Grid.RowDefinitions>
             <RowDefinition Height="40" />
-            <RowDefinition />
+            <RowDefinition Height="*" />
             <RowDefinition Height="40" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -82,11 +172,6 @@
                 <Button x:Name="MenuButton" Margin="0,0,40,0" Style="{StaticResource BarButtonStyle}">
                     <Button.Flyout>
                         <MenuFlyout MenuFlyoutPresenterStyle="{StaticResource MenuFlyoutPresenterStyle1}">
-                            <!--<AppBarButton Icon="Document" Label="New" />
-                            <AppBarButton Icon="Home" Label="Load" />
-                            <AppBarButton Icon="Save" Label="Save" x:Name="" Click="SaveButton_Click" />
-                            <AppBarButton Icon="SaveLocal" Label="Save as" x:Name="SaveAsButton" Click="SaveAsButton_Click" />-->
-
                             <MenuFlyoutItem x:Name="NewButton" Padding="32,10,20,12" Text="{Binding NewButtonText}"
                                             Command="{Binding NewCommand, Mode=OneWay}" />
                             <MenuFlyoutItem x:Name="LoadButton" Padding="32,10,20,12" Text="{Binding LoadButtonText}"
@@ -94,10 +179,12 @@
                             <MenuFlyoutItem x:Name="SaveButton" Padding="32,10,20,12" Text="{Binding SaveButtonText}"
                                             Command="{Binding SaveCommmand, Mode=OneWay}" />
                             <MenuFlyoutItem x:Name="SaveAsButton" Padding="32,10,20,12"
-                                            Text="{Binding SaveAsButtonText}" Command="{Binding SaveAsCommand, Mode=OneWay}" />
+                                            Text="{Binding SaveAsButtonText}"
+                                            Command="{Binding SaveAsCommand, Mode=OneWay}" />
                         </MenuFlyout>
                     </Button.Flyout>
                     <StackPanel Orientation="Horizontal">
+                        
                         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                             <Rectangle Fill="Black" Height="3" Width="20" />
                             <Rectangle Fill="Black" Height="3" Margin="0,4,0,4" Width="20" />
@@ -234,7 +321,8 @@
                     <TextBlock x:Name="DifficultyButtonContent" Text="{Binding DifficultyButtonContentText}" />
                     <Button.Flyout>
                         <Flyout>
-                            <ItemsControl Margin="0,0,0,0" VerticalAlignment="Center" ItemsSource="{Binding Levels, Mode=TwoWay}">
+                            <ItemsControl Margin="0,0,0,0" VerticalAlignment="Center"
+                                          ItemsSource="{Binding Levels, Mode=TwoWay}">
                                 <ItemsControl.ItemsPanel>
                                     <ItemsPanelTemplate>
                                         <StackPanel Orientation="Vertical" />
@@ -242,7 +330,9 @@
                                 </ItemsControl.ItemsPanel>
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
-                                        <ToggleMenuFlyoutItem Margin="0,0,0,0" Text="{Binding Text}" Command="{Binding ClickCommand}" IsChecked="{Binding IsChecked, Mode=TwoWay}" />
+                                        <ToggleMenuFlyoutItem Margin="0,0,0,0" Text="{Binding Text}"
+                                                              Command="{Binding ClickCommand}"
+                                                              IsChecked="{Binding IsChecked, Mode=TwoWay}" />
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
@@ -345,32 +435,16 @@
                                 <Image x:Name="MapLegendLbl" MaxWidth="80" MaxHeight="20" HorizontalAlignment="Left"
                                        VerticalAlignment="Top" Source="{Binding MapLegendLblImageSource}"
                                        Opacity="{Binding MapLegendLblOpacity}" />
-                                    <StackPanel x:Name="MapViewContainer">
-                                        <StackPanel x:Name="MapMenu">
-                                            <StackPanel x:Name="MapMenuButtons" Orientation="Horizontal">
-                                            
-                                                <Button Style="{StaticResource WhiteButtonStyle}" Content="{Binding MenuZonesHeaderButtonText}" >
-                                                    <Button.Flyout>
-                                                        <Flyout>
-                                                            <ItemsControl VerticalAlignment="Center" ItemsSource="{Binding MenuZonesHeaderFlyoutItems, Mode=TwoWay}">
-                                                                <ItemsControl.ItemsPanel>
-                                                                    <ItemsPanelTemplate>
-                                                                        <StackPanel Orientation="Vertical" />
-                                                                    </ItemsPanelTemplate>
-                                                                </ItemsControl.ItemsPanel>
-                                                                <ItemsControl.ItemTemplate>
-                                                                    <DataTemplate>
-                                                                        <ToggleMenuFlyoutItem Text="{Binding Text}" Command="{Binding ClickCommand}" IsChecked="{Binding IsChecked, Mode=TwoWay}" />
-                                                                    </DataTemplate>
-                                                                </ItemsControl.ItemTemplate>
-                                                            </ItemsControl>
-                                                        </Flyout>
-                                                    </Button.Flyout>
-                                                </Button>
-                                            <Button Style="{StaticResource WhiteButtonStyle}" Content="{Binding MenuOverlaysHeaderButtonText}" >
+                                <StackPanel x:Name="MapViewContainer">
+                                    <StackPanel x:Name="MapMenu">
+                                        <StackPanel x:Name="MapMenuButtons" Orientation="Horizontal">
+
+                                            <Button Style="{StaticResource WhiteButtonStyle}"
+                                                    Content="{Binding MenuZonesHeaderButtonText}">
                                                 <Button.Flyout>
                                                     <Flyout>
-                                                        <ItemsControl VerticalAlignment="Center" ItemsSource="{Binding MenuOverlaysHeaderFlyoutItems, Mode=TwoWay}">
+                                                        <ItemsControl VerticalAlignment="Center"
+                                                                      ItemsSource="{Binding MenuZonesHeaderFlyoutItems, Mode=TwoWay}">
                                                             <ItemsControl.ItemsPanel>
                                                                 <ItemsPanelTemplate>
                                                                     <StackPanel Orientation="Vertical" />
@@ -378,7 +452,31 @@
                                                             </ItemsControl.ItemsPanel>
                                                             <ItemsControl.ItemTemplate>
                                                                 <DataTemplate>
-                                                                    <ToggleMenuFlyoutItem Text="{Binding Text}" Command="{Binding ClickCommand}" IsChecked="{Binding IsChecked, Mode=TwoWay}" />
+                                                                    <ToggleMenuFlyoutItem Text="{Binding Text}"
+                                                                                          Command="{Binding ClickCommand}"
+                                                                                          IsChecked="{Binding IsChecked, Mode=TwoWay}" />
+                                                                </DataTemplate>
+                                                            </ItemsControl.ItemTemplate>
+                                                        </ItemsControl>
+                                                    </Flyout>
+                                                </Button.Flyout>
+                                            </Button>
+                                            <Button Style="{StaticResource WhiteButtonStyle}"
+                                                    Content="{Binding MenuOverlaysHeaderButtonText}">
+                                                <Button.Flyout>
+                                                    <Flyout>
+                                                        <ItemsControl VerticalAlignment="Center"
+                                                                      ItemsSource="{Binding MenuOverlaysHeaderFlyoutItems, Mode=TwoWay}">
+                                                            <ItemsControl.ItemsPanel>
+                                                                <ItemsPanelTemplate>
+                                                                    <StackPanel Orientation="Vertical" />
+                                                                </ItemsPanelTemplate>
+                                                            </ItemsControl.ItemsPanel>
+                                                            <ItemsControl.ItemTemplate>
+                                                                <DataTemplate>
+                                                                    <ToggleMenuFlyoutItem Text="{Binding Text}"
+                                                                                          Command="{Binding ClickCommand}"
+                                                                                          IsChecked="{Binding IsChecked, Mode=TwoWay}" />
                                                                 </DataTemplate>
                                                             </ItemsControl.ItemTemplate>
                                                         </ItemsControl>
@@ -388,10 +486,10 @@
 
 
                                         </StackPanel>
-                                            
+
                                     </StackPanel>
-                                    <local:OverlayMapView x:Name="MapView"/>
-                                    </StackPanel>
+                                    <local:OverlayMapView x:Name="MapView" />
+                                </StackPanel>
                             </StackPanel>
                         </Border>
                     </StackPanel>
@@ -414,14 +512,18 @@
                     </Border>
                 </Grid>
 
-                <Border Background="White" Visibility="{Binding NotificationPanelIsVisible, Converter={StaticResource BooleanToVisibilityConverter}}" BorderBrush="#2B2B2B" BorderThickness="1,1,0,1" HorizontalAlignment="Right"
+                <Border Background="White"
+                        Visibility="{Binding NotificationPanelIsVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
+                        BorderBrush="#2B2B2B" BorderThickness="1,1,0,1" HorizontalAlignment="Right"
                         VerticalAlignment="Center">
                     <local:NotificationPane x:Name="NotificationPanel"
-                                             x:FieldModifier="public"
+                                            x:FieldModifier="public"
                                             Width="200" />
                 </Border>
 
-                <Border Background="White" Visibility="{Binding EvaluationPaneIsVisible, Converter={StaticResource BooleanToVisibilityConverter}}" BorderBrush="#2B2B2B" BorderThickness="0,1,1,1" HorizontalAlignment="Left"
+                <Border Background="White"
+                        Visibility="{Binding EvaluationPaneIsVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
+                        BorderBrush="#2B2B2B" BorderThickness="0,1,1,1" HorizontalAlignment="Left"
                         VerticalAlignment="Center">
                     <local:EvaluationPane x:Name="EvaluationPane"
                                           x:FieldModifier="public"
@@ -474,7 +576,9 @@
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <StackPanel x:Name="NewGameDialogPaneInner" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="1" ><local:NewCityDialog x:Name="CityDialog" /></StackPanel>
+                <StackPanel x:Name="NewGameDialogPaneInner" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="1">
+                    <local:NewCityDialog x:Name="CityDialog" />
+                </StackPanel>
             </Grid>
             <Grid Visibility="{Binding GraphsPaneIsVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
                 <local:GraphsPane x:Name="GraphsPane" />

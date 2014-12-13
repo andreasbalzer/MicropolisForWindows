@@ -94,7 +94,7 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
-    <Grid Visibility="{Binding ToolBarIsVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+    <Grid Visibility="{Binding ToolBarIsVisible, Converter={StaticResource BooleanToVisibilityConverter}}" Margin="0,4,0,-4">
         <ItemsControl Background="White" x:Name="toolBar" HorizontalAlignment="Left"
                       Margin="0"
                       ItemsSource="{Binding ToolBarItems}">
