@@ -209,8 +209,6 @@ namespace Micropolis.ViewModels
         /// </summary>
         private ToolStroke _toolStroke;
 
-        private string popLblTextBlockText;
-
         /// <summary>
         ///     The touch pointer routed event arguments of current confirmation pending when user touched screen and confirmation
         ///     bar awaits user action.
@@ -569,7 +567,7 @@ namespace Micropolis.ViewModels
         public string PopLblTextBlockText
         {
             get { return _popLblTextBlockText; }
-            set { SetProperty(ref popLblTextBlockText, value); }
+            set { SetProperty(ref _popLblTextBlockText, value); }
         }
 
         public string DateLblTextBlockText
