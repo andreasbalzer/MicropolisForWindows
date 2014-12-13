@@ -133,9 +133,62 @@
                                 </DiscreteObjectKeyFrame.Value>
                             </DiscreteObjectKeyFrame>
                         </ObjectAnimationUsingKeyFrames>
+
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
+                                                                           Storyboard.TargetName="MessagesVisibilityButton">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Visible</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
+                                                                           Storyboard.TargetName="MessagesVisibilityButtonSmall">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Collapsed</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
+                                                                           Storyboard.TargetName="MiniMapVisibilityButton">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Visible</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
+                                                                           Storyboard.TargetName="MiniMapVisibilityButtonSmall">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Collapsed</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
+                                                                           Storyboard.TargetName="Numbers">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Visible</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
+                                                                           Storyboard.TargetName="NumbersButtonSmall">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Collapsed</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+
                     </Storyboard>
                 </VisualState>
-                <VisualState x:Name="Normal">
+                <!--<VisualState x:Name="Normal">
                     <Storyboard>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
                                                                            Storyboard.TargetName="Title">
@@ -146,7 +199,7 @@
                             </DiscreteObjectKeyFrame>
                         </ObjectAnimationUsingKeyFrames>
                     </Storyboard>
-                </VisualState>
+                </VisualState>-->
                 <VisualState x:Name="FullScreenLandscape">
                     <Storyboard>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
@@ -210,6 +263,59 @@
                                 </DiscreteObjectKeyFrame.Value>
                             </DiscreteObjectKeyFrame>
                         </ObjectAnimationUsingKeyFrames>
+
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
+                                                                           Storyboard.TargetName="MessagesVisibilityButton">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Visible</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
+                                                                           Storyboard.TargetName="MessagesVisibilityButtonSmall">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Collapsed</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
+                                                                           Storyboard.TargetName="MiniMapVisibilityButton">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Visible</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
+                                                                           Storyboard.TargetName="MiniMapVisibilityButtonSmall">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Collapsed</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
+                                                                           Storyboard.TargetName="Numbers">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Visible</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
+                                                                           Storyboard.TargetName="NumbersButtonSmall">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Collapsed</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+
                     </Storyboard>
                 </VisualState>
                 <VisualState x:Name="FullScreenPortrait">
@@ -275,6 +381,59 @@
                                 </DiscreteObjectKeyFrame.Value>
                             </DiscreteObjectKeyFrame>
                         </ObjectAnimationUsingKeyFrames>
+
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
+                                                                           Storyboard.TargetName="MessagesVisibilityButton">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Visible</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
+                                                                           Storyboard.TargetName="MessagesVisibilityButtonSmall">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Collapsed</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
+                                                                           Storyboard.TargetName="MiniMapVisibilityButton">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Visible</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
+                                                                           Storyboard.TargetName="MiniMapVisibilityButtonSmall">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Collapsed</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
+                                                                           Storyboard.TargetName="Numbers">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Visible</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
+                                                                           Storyboard.TargetName="NumbersButtonSmall">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Collapsed</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+
                     </Storyboard>
                 </VisualState>
                 <VisualState x:Name="Filled">
@@ -340,6 +499,59 @@
                                 </DiscreteObjectKeyFrame.Value>
                             </DiscreteObjectKeyFrame>
                         </ObjectAnimationUsingKeyFrames>
+
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
+                                                                           Storyboard.TargetName="MessagesVisibilityButton">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Visible</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
+                                                                           Storyboard.TargetName="MessagesVisibilityButtonSmall">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Collapsed</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
+                                                                           Storyboard.TargetName="MiniMapVisibilityButton">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Visible</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
+                                                                           Storyboard.TargetName="MiniMapVisibilityButtonSmall">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Collapsed</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
+                                                                           Storyboard.TargetName="Numbers">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Visible</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
+                                                                           Storyboard.TargetName="NumbersButtonSmall">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Collapsed</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                        
                     </Storyboard>
                 </VisualState>
 
@@ -406,6 +618,59 @@
                                 </DiscreteObjectKeyFrame.Value>
                             </DiscreteObjectKeyFrame>
                         </ObjectAnimationUsingKeyFrames>
+
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
+                                                                           Storyboard.TargetName="MessagesVisibilityButton">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Collapsed</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
+                                                                           Storyboard.TargetName="MessagesVisibilityButtonSmall">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Visible</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
+                                                                           Storyboard.TargetName="MiniMapVisibilityButton">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Collapsed</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
+                                                                           Storyboard.TargetName="MiniMapVisibilityButtonSmall">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Visible</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
+                                                                           Storyboard.TargetName="Numbers">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Collapsed</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
+                                                                           Storyboard.TargetName="NumbersButtonSmall">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Visible</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                        
                     </Storyboard>
                 </VisualState>
                 <VisualState x:Name="Narrow">
@@ -470,6 +735,62 @@
                                 </DiscreteObjectKeyFrame.Value>
                             </DiscreteObjectKeyFrame>
                         </ObjectAnimationUsingKeyFrames>
+
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
+                                                                           Storyboard.TargetName="MessagesVisibilityButton">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Collapsed</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
+                                                                           Storyboard.TargetName="MessagesVisibilityButtonSmall">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Visible</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+
+
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
+                                                                           Storyboard.TargetName="MiniMapVisibilityButton">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Collapsed</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
+                                                                           Storyboard.TargetName="MiniMapVisibilityButtonSmall">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Visible</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                        
+                        
+
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
+                                                                           Storyboard.TargetName="Numbers">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Collapsed</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
+                                                                           Storyboard.TargetName="NumbersButtonSmall">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Visible</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+
                     </Storyboard>
                 </VisualState>
             </VisualStateGroup>
@@ -551,24 +872,60 @@
                     <Image Source="/resources/UIButtons/SuperFast-Icon.png" />
                 </Button>
                 </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Button x:Name="NumbersButtonSmall" Style="{StaticResource BarButtonStyle}">
+                        <Grid>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock FontSize="16" Margin="12,0,0,0" Text="&#xE099;" VerticalAlignment="Center"
+                                       FontFamily="Segoe UI Symbol" />
+                            </StackPanel>
+                        </Grid>
+                        <Button.Flyout>
+                            <Flyout>
+                                <StackPanel Orientation="Vertical">
+                                    <StackPanel Orientation="Horizontal">
+                                    <Path Height="12" Fill="#2B2B2B" Margin="20,-2,0,0" Stretch="Uniform"
+                          Style="{StaticResource DateSmallPathStyle}" Width="12" />
+                                    <TextBlock x:Name="DateLblSmall" Margin="7,0,0,0" MinWidth="65" Text="{Binding DateLblTextBlockText}"
+                               FontSize="14"
+                               Foreground="#2B2B2B" />
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Path Height="12" Fill="#2B2B2B" Margin="10,-2,0,0" Stretch="Uniform"
+                          Style="{StaticResource FundsSmallPathStyle}" Width="12" />
+                                    <TextBlock x:Name="FundsLblSmall" Margin="7,0,0,0" MinWidth="65" Text="{Binding FundsLblTextBlockText}"
+                               FontSize="14"
+                               Foreground="#2B2B2B" />
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Path Height="14" Fill="#2B2B2B" Margin="10,-1,0,0" Stretch="Uniform"
+                          Style="{StaticResource PopulationSmallPathStyle}" Width="14" />
+                                    <TextBlock x:Name="PopLblSmall" Margin="7,0,0,0" Text="{Binding PopLblTextBlockText}" FontSize="14"
+                               Foreground="#2B2B2B" />
+                                            </StackPanel>
+                                </StackPanel>
+                            </Flyout>
+                        </Button.Flyout>
+                    </Button>
 
-                <StackPanel Orientation="Horizontal" Margin="12,6" VerticalAlignment="Center">
-                    <Path Height="12" Fill="#2B2B2B" Margin="20,-2,0,0" Stretch="Uniform"
+                    <StackPanel x:Name="Numbers" Orientation="Horizontal" Margin="12,6" VerticalAlignment="Center">
+                        <Path Height="12" Fill="#2B2B2B" Margin="20,-2,0,0" Stretch="Uniform"
                           Style="{StaticResource DatePathStyle}" Width="12" />
-                    <TextBlock x:Name="DateLbl" Margin="7,0,0,0" MinWidth="65" Text="{Binding DateLblTextBlockText}"
+                        <TextBlock x:Name="DateLbl" Margin="7,0,0,0" MinWidth="65" Text="{Binding DateLblTextBlockText}"
                                FontSize="14"
                                Foreground="#2B2B2B" />
 
-                    <Path Height="12" Fill="#2B2B2B" Margin="10,-2,0,0" Stretch="Uniform"
+                        <Path Height="12" Fill="#2B2B2B" Margin="10,-2,0,0" Stretch="Uniform"
                           Style="{StaticResource FundsPathStyle}" Width="12" />
-                    <TextBlock x:Name="FundsLbl" Margin="7,0,0,0" MinWidth="65" Text="{Binding FundsLblTextBlockText}"
+                        <TextBlock x:Name="FundsLbl" Margin="7,0,0,0" MinWidth="65" Text="{Binding FundsLblTextBlockText}"
                                FontSize="14"
                                Foreground="#2B2B2B" />
 
-                    <Path Height="14" Fill="#2B2B2B" Margin="10,-1,0,0" Stretch="Uniform"
+                        <Path Height="14" Fill="#2B2B2B" Margin="10,-1,0,0" Stretch="Uniform"
                           Style="{StaticResource PopulationPathStyle}" Width="14" />
-                    <TextBlock x:Name="PopLbl" Margin="7,0,0,0" Text="{Binding PopLblTextBlockText}" FontSize="14"
+                        <TextBlock x:Name="PopLbl" Margin="7,0,0,0" Text="{Binding PopLblTextBlockText}" FontSize="14"
                                Foreground="#2B2B2B" />
+                    </StackPanel>
                 </StackPanel>
             </StackPanel>
 
@@ -582,27 +939,58 @@
                     </local:DemandIndicator>
                 </Grid>
 
-                <Button x:Uid="MessagesVisibilityButton" Command="{Binding ToggleMessagesCommand}"
-                        Style="{StaticResource BarButtonStyle}" Width="230">
-                    <Grid>
+                <StackPanel Orientation="Horizontal">
+                    <Button x:Name="MessagesVisibilityButtonSmall" Command="{Binding ToggleMessagesCommand}" Style="{StaticResource BarButtonStyle}">
+                        <Grid>
                         <StackPanel Orientation="Horizontal"
                                     Visibility="{Binding IsMessagesVisible, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=inverted, FallbackValue=Collapsed}">
-                            <TextBlock FontSize="16" FontWeight="SemiLight" Text="Nachrichten einblenden"
-                                       VerticalAlignment="Center" />
-                            <TextBlock FontSize="16" Margin="12,0,0,0" Text="&#xE099;" VerticalAlignment="Center"
+                                <TextBlock FontSize="16" Margin="12,0,0,0" Text="&#xE099;" VerticalAlignment="Center"
                                        FontFamily="Segoe UI Symbol" />
-                        </StackPanel>
+                            </StackPanel>
                         <StackPanel Orientation="Horizontal"
                                     Visibility="{Binding IsMessagesVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
-                            <TextBlock FontSize="16" FontWeight="SemiLight" Text="Nachrichten ausblenden"
-                                       VerticalAlignment="Center" />
-                            <TextBlock FontSize="16" Margin="12,0,0,2" Text="&#xE098;" VerticalAlignment="Center"
+                                <TextBlock FontSize="16" Margin="12,0,0,2" Text="&#xE098;" VerticalAlignment="Center"
                                        FontFamily="Segoe UI Symbol" />
-                        </StackPanel>
-                    </Grid>
-                </Button>
-
-                <Button x:Uid="MiniMapVisibilityButton" Command="{Binding ToggleMiniMapCommand}"
+                            </StackPanel>
+                        </Grid>
+                    </Button>
+                    <Button x:Name="MessagesVisibilityButton" Command="{Binding ToggleMessagesCommand}"
+                        Style="{StaticResource BarButtonStyle}" Width="230">
+                        <Grid>
+                            <StackPanel Orientation="Horizontal"
+                                    Visibility="{Binding IsMessagesVisible, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=inverted, FallbackValue=Collapsed}">
+                                <TextBlock FontSize="16" FontWeight="SemiLight" Text="Nachrichten einblenden"
+                                       VerticalAlignment="Center" />
+                                <TextBlock FontSize="16" Margin="12,0,0,0" Text="&#xE099;" VerticalAlignment="Center"
+                                       FontFamily="Segoe UI Symbol" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal"
+                                    Visibility="{Binding IsMessagesVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                <TextBlock FontSize="16" FontWeight="SemiLight" Text="Nachrichten ausblenden"
+                                       VerticalAlignment="Center" />
+                                <TextBlock FontSize="16" Margin="12,0,0,2" Text="&#xE098;" VerticalAlignment="Center"
+                                       FontFamily="Segoe UI Symbol" />
+                            </StackPanel>
+                        </Grid>
+                    </Button>
+                </StackPanel>
+<StackPanel Orientation="Horizontal">
+                    <Button x:Name="MiniMapVisibilityButtonSmall" Command="{Binding ToggleMiniMapCommand}"
+                        Style="{StaticResource BarButtonStyle}">
+                        <Grid>
+                            <StackPanel Orientation="Horizontal"
+                                    Visibility="{Binding IsMiniMapVisible, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=inverted, FallbackValue=Collapsed}">
+                                <TextBlock FontSize="16" Margin="12,0,0,0" Text="&#xE099;" VerticalAlignment="Center"
+                                       FontFamily="Segoe UI Symbol" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal"
+                                    Visibility="{Binding IsMiniMapVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                <TextBlock FontSize="16" Margin="12,0,0,2" Text="&#xE098;" VerticalAlignment="Center"
+                                       FontFamily="Segoe UI Symbol" />
+                            </StackPanel>
+                        </Grid>
+                    </Button>
+                        <Button x:Name="MiniMapVisibilityButton" Command="{Binding ToggleMiniMapCommand}"
                         Style="{StaticResource BarButtonStyle}" Width="220">
                     <Grid>
                         <StackPanel Orientation="Horizontal"
@@ -621,6 +1009,7 @@
                         </StackPanel>
                     </Grid>
                 </Button>
+                </StackPanel>
             </StackPanel>
         </Grid>
 
