@@ -99,7 +99,7 @@ namespace Micropolis
             }
             else
             {
-                if (size.Width == 320)
+                if (size.Width <= 320)
                     _state = "Snapped";
                 else if (size.Width <= 500)
                     _state = "Narrow";

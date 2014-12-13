@@ -36,10 +36,8 @@ namespace Micropolis.ViewModels
         /// </summary>
         public ToolbarViewModel()
         {
-            ExpandCommand = new DelegateCommand(Expand);
             ToolBarItems=new ObservableCollection<ToolbarButtonViewModel>();
             _mode = ToolBarMode.NORMAL;
-            ToolRowHeight = ToolRowHeight = new GridLength(1, GridUnitType.Star);
             _toolBtns = new Dictionary<MicropolisTool, ToolbarButtonViewModel>();
         }
 
@@ -57,16 +55,8 @@ namespace Micropolis.ViewModels
         public ObservableCollection<ToolbarButtonViewModel> ToolBarItems { get; set; }
 
 
-        private bool _toolBarExpandButtonIsVisible;
-        public bool ToolBarExpandButtonIsVisible { get { return _toolBarExpandButtonIsVisible; } set { SetProperty(ref _toolBarExpandButtonIsVisible, value); } }
-
         private bool _toolBarIsVisible;
         public bool ToolBarIsVisible { get { return _toolBarIsVisible; } set { SetProperty(ref _toolBarIsVisible, value); } }
-
-
-        private GridLength _toolRowHeight;
-        public GridLength ToolRowHeight { get { return _toolRowHeight; } set { SetProperty(ref _toolRowHeight, value); } }
-
 
         /// <summary>
         ///     Makes the toolbar with tools to use on map.
@@ -76,15 +66,12 @@ namespace Micropolis.ViewModels
         {
             _toolBtns.Clear();
             ToolBarItems.Clear();
-            ToolRowHeight = new GridLength(1, GridUnitType.Star);
             if (_mode == ToolBarMode.NORMAL || _mode == ToolBarMode.WIDE)
             {
-                ToolBarExpandButtonIsVisible = false;
                 ToolBarIsVisible = true;
             }
             else if (_mode == ToolBarMode.FLYOUT)
             {
-                ToolBarExpandButtonIsVisible = true;
                 ToolBarIsVisible = false;
             }
             
@@ -211,25 +198,12 @@ namespace Micropolis.ViewModels
             if (ToolBarIsVisible == true)
             {
                 ToolBarIsVisible = false;
-                ToolBarExpandButtonText = "▼";
-                ToolRowHeight = new GridLength(0,GridUnitType.Auto);
             }
             else
             {
                 ToolBarIsVisible = true;
-                ToolBarExpandButtonText = "▲";
-                ToolRowHeight = new GridLength(1, GridUnitType.Star);
-
             }
              
         }
-
-        private DelegateCommand _expandCommand;
-        public DelegateCommand ExpandCommand { get { return _expandCommand; } set { SetProperty(ref _expandCommand, value); } }
-
-
-        private string _toolBarExpandButtonText;
-        public string ToolBarExpandButtonText { get { return _toolBarExpandButtonText; } set { SetProperty(ref _toolBarExpandButtonText, value); } }
-
     }
 }

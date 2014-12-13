@@ -20,7 +20,7 @@
     xmlns:converters="using:Micropolis.Converters"
     mc:Ignorable="d"
     d:DesignHeight="300"
-    d:DesignWidth="50">
+    d:DesignWidth="50" >
     <UserControl.Resources>
 
         <ResourceDictionary>
@@ -94,18 +94,8 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="{Binding ToolRowHeight}" x:Name="ToolRow" />
-        </Grid.RowDefinitions>
-        <Button Background="White" x:Name="ToolBarExpandButton" Grid.Row="0" Foreground="Black"
-                Content="{Binding ToolBarExpandButtonText}" FontFamily="Segoe UI" Width="60" Height="60"
-                Visibility="{Binding ToolBarExpandButtonIsVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
-                Command="{Binding ExpandCommand}" />
-        <ItemsControl Background="White"
-                      Visibility="{Binding ToolBarIsVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
-                      x:Name="toolBar" Grid.Row="1" HorizontalAlignment="Left"
+    <Grid Visibility="{Binding ToolBarIsVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+        <ItemsControl Background="White" x:Name="toolBar" HorizontalAlignment="Left"
                       Margin="0"
                       ItemsSource="{Binding ToolBarItems}">
             <ItemsControl.ItemsPanel>

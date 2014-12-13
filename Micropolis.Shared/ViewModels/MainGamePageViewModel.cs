@@ -217,6 +217,8 @@ namespace Micropolis.ViewModels
         /// </summary>
         private PointerRoutedEventArgs touchPointerRoutedEventArgsOfCurrentConfirmationPending;
 
+        private bool _isToolsVisible;
+
 
         public MainGamePageViewModel(NotificationPaneViewModel notificationPanelViewModel,
             MicropolisDrawingAreaViewModel drawingAreaViewModel,
@@ -237,7 +239,7 @@ namespace Micropolis.ViewModels
             BudgetCommand = new DelegateCommand(BudgetButton_Click);
             EvaluationCommand = new DelegateCommand(EvaluationButton_Click);
             GraphCommand = new DelegateCommand(GraphButton_Click);
-
+            ToggleToolsCommand = new DelegateCommand(ToggleToolsButton_Click);
 
             MonsterCommand = new DelegateCommand(MonsterButton_Click);
             FireCommand = new DelegateCommand(FireButton_Click);
@@ -278,6 +280,11 @@ namespace Micropolis.ViewModels
             SpeedSuperFastCommand = new DelegateCommand(SpeedSuperFast);
         }
 
+        private void ToggleToolsButton_Click()
+        {
+            _toolsPanelViewModel.ToolBarIsVisible = !_toolsPanelViewModel.ToolBarIsVisible;
+        }
+
         public DelegateCommand AutoBudgetCommand { get; set; }
         public DelegateCommand AutoBulldozeCommand { get; set; }
         public DelegateCommand BudgetCommand { get; set; }
@@ -295,7 +302,9 @@ namespace Micropolis.ViewModels
         public DelegateCommand SaveCommand { get; set; }
         public DelegateCommand SoundCommand { get; set; }
         public DelegateCommand TornadoCommand { get; set; }
+        public DelegateCommand ToggleToolsCommand { get; set; }
 
+        
         public bool IsMessagesVisible
         {
             get { return _isMessagesVisible; }

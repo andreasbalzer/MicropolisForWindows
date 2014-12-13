@@ -211,6 +211,25 @@
         <Grid x:Uid="BottomBar" Grid.Row="2" Background="{StaticResource BarBackgroundBrush}" Grid.Column="0"
               Grid.ColumnSpan="2">
             <StackPanel Orientation="Horizontal">
+                <Button x:Uid="ToolsButton" Command="{Binding ToggleToolsCommand}"
+                        Style="{StaticResource BarButtonStyle}" Width="220">
+                    <Grid>
+                        <StackPanel Orientation="Horizontal"
+                                    Visibility="{Binding ViewModel.ToolBarIsVisible, ElementName=ToolsPanel, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=inverted, FallbackValue=Collapsed}">
+                            <TextBlock FontSize="16" FontWeight="SemiLight" Text="Tools einblenden"
+                                       VerticalAlignment="Center" />
+                            <TextBlock FontSize="16" Margin="12,0,0,0" Text="&#xE098;" VerticalAlignment="Center"
+                                       FontFamily="Segoe UI Symbol" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal"
+                                    Visibility="{Binding ViewModel.ToolBarIsVisible, ElementName=ToolsPanel, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            <TextBlock FontSize="16" FontWeight="SemiLight" Text="Tools ausblenden"
+                                       VerticalAlignment="Center" />
+                            <TextBlock FontSize="16" Margin="12,0,0,2" Text="&#xE099;" VerticalAlignment="Center"
+                                       FontFamily="Segoe UI Symbol" />
+                        </StackPanel>
+                    </Grid>
+                </Button>
                 <Button x:Name="DifficultyButton" Style="{StaticResource BarButtonStyle}">
                     <TextBlock x:Name="DifficultyButtonContent" Text="{Binding DifficultyButtonContentText}" />
                     <Button.Flyout>
