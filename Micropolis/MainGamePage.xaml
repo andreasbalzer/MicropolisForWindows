@@ -1678,31 +1678,40 @@
                         </Grid>
                         <Button.Flyout>
                             <Flyout>
-                                <StackPanel Orientation="Vertical">
-                                    <StackPanel Orientation="Horizontal">
-                                        <Path Height="12" Fill="#2B2B2B" Margin="20,-2,0,0" Stretch="Uniform"
-                                              Style="{StaticResource DateSmallPathStyle}" Width="12" />
-                                        <TextBlock x:Name="DateLblSmall" Margin="7,0,0,0" MinWidth="65"
-                                                   Text="{Binding DateLblTextBlockText}"
-                                                   FontSize="14"
-                                                   Foreground="#2B2B2B" />
-                                    </StackPanel>
-                                    <StackPanel Orientation="Horizontal">
-                                        <Path Height="12" Fill="#2B2B2B" Margin="10,-2,0,0" Stretch="Uniform"
-                                              Style="{StaticResource FundsSmallPathStyle}" Width="12" />
-                                        <TextBlock x:Name="FundsLblSmall" Margin="7,0,0,0" MinWidth="65"
-                                                   Text="{Binding FundsLblTextBlockText}"
-                                                   FontSize="14"
-                                                   Foreground="#2B2B2B" />
-                                    </StackPanel>
-                                    <StackPanel Orientation="Horizontal">
-                                        <Path Height="14" Fill="#2B2B2B" Margin="10,-1,0,0" Stretch="Uniform"
-                                              Style="{StaticResource PopulationSmallPathStyle}" Width="14" />
-                                        <TextBlock x:Name="PopLblSmall" Margin="7,0,0,0"
-                                                   Text="{Binding PopLblTextBlockText}" FontSize="14"
-                                                   Foreground="#2B2B2B" />
-                                    </StackPanel>
-                                </StackPanel>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+
+                                    <Path Height="12" Fill="#2B2B2B" Margin="20,-2,0,0" Stretch="Uniform"
+                                          Style="{StaticResource DateSmallPathStyle}" Width="12" Grid.Row="0"
+                                          Grid.Column="1" />
+                                    <TextBlock x:Name="DateLblSmall" Margin="7,0,0,0" MinWidth="65"
+                                               Text="{Binding DateLblTextBlockText}"
+                                               FontSize="14"
+                                               Foreground="#2B2B2B" Grid.Row="0" Grid.Column="1" />
+
+                                    <Path Height="12" Fill="#2B2B2B" Margin="10,-2,0,0" Stretch="Uniform"
+                                          Style="{StaticResource FundsSmallPathStyle}" Width="12" Grid.Row="1"
+                                          Grid.Column="0" />
+                                    <TextBlock x:Name="FundsLblSmall" Margin="7,0,0,0" MinWidth="65"
+                                               Text="{Binding FundsLblTextBlockText}"
+                                               FontSize="14"
+                                               Foreground="#2B2B2B" Grid.Row="1" Grid.Column="1" />
+
+                                    <Path Height="14" Fill="#2B2B2B" Margin="10,-1,0,0" Stretch="Uniform"
+                                          Style="{StaticResource PopulationSmallPathStyle}" Width="14" Grid.Row="2"
+                                          Grid.Column="0" />
+                                    <TextBlock x:Name="PopLblSmall" Margin="7,0,0,0"
+                                               Text="{Binding PopLblTextBlockText}" FontSize="14"
+                                               Foreground="#2B2B2B" Grid.Row="2" Grid.Column="1" />
+                                </Grid>
                             </Flyout>
                         </Button.Flyout>
                     </Button>
