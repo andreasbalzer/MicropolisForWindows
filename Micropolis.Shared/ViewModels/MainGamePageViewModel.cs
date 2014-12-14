@@ -216,6 +216,13 @@ namespace Micropolis.ViewModels
         private PointerRoutedEventArgs touchPointerRoutedEventArgsOfCurrentConfirmationPending;
 
         private bool _isToolsVisible;
+        private string _earthquakeButtonText;
+        private string _monsterButtonText;
+        private string _fireButtonText;
+        private string _floodButtonText;
+        private string _meltdownButtonText;
+        private string _tornadoButtonText;
+        private string _speedButtonText;
 
 
         public MainGamePageViewModel(NotificationPaneViewModel notificationPanelViewModel,
@@ -487,51 +494,51 @@ namespace Micropolis.ViewModels
 
         public string MonsterButtonText
         {
-            get { return _saveAsButtonText; }
+            get { return _monsterButtonText; }
 
-            set { SetProperty(ref _saveAsButtonText, value); }
+            set { SetProperty(ref _monsterButtonText, value); }
         }
 
         public string FireButtonText
         {
-            get { return _saveAsButtonText; }
+            get { return _fireButtonText; }
 
-            set { SetProperty(ref _saveAsButtonText, value); }
+            set { SetProperty(ref _fireButtonText, value); }
         }
 
         public string FloodButtonText
         {
-            get { return _saveAsButtonText; }
+            get { return _floodButtonText; }
 
-            set { SetProperty(ref _saveAsButtonText, value); }
+            set { SetProperty(ref _floodButtonText, value); }
         }
 
         public string MeltdownButtonText
         {
-            get { return _saveAsButtonText; }
+            get { return _meltdownButtonText; }
 
-            set { SetProperty(ref _saveAsButtonText, value); }
+            set { SetProperty(ref _meltdownButtonText, value); }
         }
 
         public string TornadoButtonText
         {
-            get { return _saveAsButtonText; }
+            get { return _tornadoButtonText; }
 
-            set { SetProperty(ref _saveAsButtonText, value); }
+            set { SetProperty(ref _tornadoButtonText, value); }
         }
 
         public string EarthquakeButtonText
         {
-            get { return _saveAsButtonText; }
+            get { return _earthquakeButtonText; }
 
-            set { SetProperty(ref _saveAsButtonText, value); }
+            set { SetProperty(ref _earthquakeButtonText, value); }
         }
 
         public string SpeedButtonText
         {
-            get { return _saveAsButtonText; }
+            get { return _speedButtonText; }
 
-            set { SetProperty(ref _saveAsButtonText, value); }
+            set { SetProperty(ref _speedButtonText, value); }
         }
 
         public string BudgetButtonText
@@ -1402,7 +1409,7 @@ namespace Micropolis.ViewModels
             }
         }
 
-        /// <summary>
+        /// <summary>DisastersCheckBoxText
         ///     Determines whether the game needs to be saved.
         /// </summary>
         /// <returns></returns>

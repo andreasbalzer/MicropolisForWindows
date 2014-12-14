@@ -73,7 +73,15 @@
                 <VisualState x:Name="DefaultLayout">
                     <Storyboard>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="Title">
+                                                       Storyboard.TargetName="MenuSmallButton">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Collapsed</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
+                                                       Storyboard.TargetName="MenuButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Visible</Visibility>
@@ -82,7 +90,7 @@
                         </ObjectAnimationUsingKeyFrames>
 
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="SpeedButton">
+                                                       Storyboard.TargetName="SpeedButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Collapsed</Visibility>
@@ -91,7 +99,7 @@
                         </ObjectAnimationUsingKeyFrames>
 
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="SpeedPauseButton">
+                                                       Storyboard.TargetName="SpeedPauseButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Visible</Visibility>
@@ -99,16 +107,7 @@
                             </DiscreteObjectKeyFrame>
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="SpeedSlowButton">
-                            <DiscreteObjectKeyFrame KeyTime="0">
-                                <DiscreteObjectKeyFrame.Value>
-                                    <Visibility>Visible</Visibility>
-                                </DiscreteObjectKeyFrame.Value>
-                            </DiscreteObjectKeyFrame>
-                        </ObjectAnimationUsingKeyFrames>
-
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="SpeedNormalButton">
+                                                       Storyboard.TargetName="SpeedSlowButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Visible</Visibility>
@@ -117,7 +116,7 @@
                         </ObjectAnimationUsingKeyFrames>
 
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="SpeedFastButton">
+                                                       Storyboard.TargetName="SpeedNormalButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Visible</Visibility>
@@ -126,7 +125,7 @@
                         </ObjectAnimationUsingKeyFrames>
 
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="SpeedSuperFastButton">
+                                                       Storyboard.TargetName="SpeedFastButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Visible</Visibility>
@@ -135,7 +134,16 @@
                         </ObjectAnimationUsingKeyFrames>
 
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="MessagesVisibilityButton">
+                                                       Storyboard.TargetName="SpeedSuperFastButton">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Visible</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
+                                                       Storyboard.TargetName="MessagesVisibilityButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Visible</Visibility>
@@ -143,7 +151,7 @@
                             </DiscreteObjectKeyFrame>
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="MessagesVisibilityButtonSmall">
+                                                       Storyboard.TargetName="MessagesVisibilityButtonSmall">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Collapsed</Visibility>
@@ -152,7 +160,7 @@
                         </ObjectAnimationUsingKeyFrames>
 
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="MiniMapVisibilityButton">
+                                                       Storyboard.TargetName="MiniMapVisibilityButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Visible</Visibility>
@@ -160,7 +168,7 @@
                             </DiscreteObjectKeyFrame>
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="MiniMapVisibilityButtonSmall">
+                                                       Storyboard.TargetName="MiniMapVisibilityButtonSmall">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Collapsed</Visibility>
@@ -169,7 +177,7 @@
                         </ObjectAnimationUsingKeyFrames>
 
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="Numbers">
+                                                       Storyboard.TargetName="Numbers">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Visible</Visibility>
@@ -178,7 +186,7 @@
                         </ObjectAnimationUsingKeyFrames>
 
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="NumbersButtonSmall">
+                                                       Storyboard.TargetName="NumbersButtonSmall">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Collapsed</Visibility>
@@ -186,7 +194,7 @@
                             </DiscreteObjectKeyFrame>
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="ToolsSmallButton">
+                                                       Storyboard.TargetName="ToolsSmallButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Collapsed</Visibility>
@@ -194,7 +202,7 @@
                             </DiscreteObjectKeyFrame>
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="ToolsButton">
+                                                       Storyboard.TargetName="ToolsButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Visible</Visibility>
@@ -202,7 +210,7 @@
                             </DiscreteObjectKeyFrame>
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="DifficultySmallButton">
+                                                       Storyboard.TargetName="DifficultySmallButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Collapsed</Visibility>
@@ -210,24 +218,7 @@
                             </DiscreteObjectKeyFrame>
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="DifficultyButton">
-                            <DiscreteObjectKeyFrame KeyTime="0">
-                                <DiscreteObjectKeyFrame.Value>
-                                    <Visibility>Visible</Visibility>
-                                </DiscreteObjectKeyFrame.Value>
-                            </DiscreteObjectKeyFrame>
-                        </ObjectAnimationUsingKeyFrames>
-
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="SettingsSmallButton">
-                            <DiscreteObjectKeyFrame KeyTime="0">
-                                <DiscreteObjectKeyFrame.Value>
-                                    <Visibility>Collapsed</Visibility>
-                                </DiscreteObjectKeyFrame.Value>
-                            </DiscreteObjectKeyFrame>
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="SettingsButton">
+                                                       Storyboard.TargetName="DifficultyButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Visible</Visibility>
@@ -236,7 +227,7 @@
                         </ObjectAnimationUsingKeyFrames>
 
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="DisasterSmallButton">
+                                                       Storyboard.TargetName="SettingsSmallButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Collapsed</Visibility>
@@ -244,7 +235,7 @@
                             </DiscreteObjectKeyFrame>
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="DisasterButton">
+                                                       Storyboard.TargetName="SettingsButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Visible</Visibility>
@@ -253,7 +244,7 @@
                         </ObjectAnimationUsingKeyFrames>
 
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="BudgetSmallButton">
+                                                       Storyboard.TargetName="DisasterSmallButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Collapsed</Visibility>
@@ -261,7 +252,7 @@
                             </DiscreteObjectKeyFrame>
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="BudgetButton">
+                                                       Storyboard.TargetName="DisasterButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Visible</Visibility>
@@ -270,7 +261,7 @@
                         </ObjectAnimationUsingKeyFrames>
 
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="EvaluationSmallButton">
+                                                       Storyboard.TargetName="BudgetSmallButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Collapsed</Visibility>
@@ -278,7 +269,24 @@
                             </DiscreteObjectKeyFrame>
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="EvaluationButton">
+                                                       Storyboard.TargetName="BudgetButton">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Visible</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
+                                                       Storyboard.TargetName="EvaluationSmallButton">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Collapsed</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
+                                                       Storyboard.TargetName="EvaluationButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Visible</Visibility>
@@ -288,7 +296,7 @@
 
 
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="GraphSmallButton">
+                                                       Storyboard.TargetName="GraphSmallButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Collapsed</Visibility>
@@ -296,7 +304,7 @@
                             </DiscreteObjectKeyFrame>
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="GraphButton">
+                                                       Storyboard.TargetName="GraphButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Visible</Visibility>
@@ -321,7 +329,15 @@
                 <VisualState x:Name="FullScreenLandscape">
                     <Storyboard>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="Title">
+                                                       Storyboard.TargetName="MenuSmallButton">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Collapsed</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
+                                                       Storyboard.TargetName="MenuButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Visible</Visibility>
@@ -330,7 +346,7 @@
                         </ObjectAnimationUsingKeyFrames>
 
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="SpeedButton">
+                                                       Storyboard.TargetName="SpeedButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Collapsed</Visibility>
@@ -339,7 +355,7 @@
                         </ObjectAnimationUsingKeyFrames>
 
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="SpeedPauseButton">
+                                                       Storyboard.TargetName="SpeedPauseButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Visible</Visibility>
@@ -347,16 +363,7 @@
                             </DiscreteObjectKeyFrame>
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="SpeedSlowButton">
-                            <DiscreteObjectKeyFrame KeyTime="0">
-                                <DiscreteObjectKeyFrame.Value>
-                                    <Visibility>Visible</Visibility>
-                                </DiscreteObjectKeyFrame.Value>
-                            </DiscreteObjectKeyFrame>
-                        </ObjectAnimationUsingKeyFrames>
-
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="SpeedNormalButton">
+                                                       Storyboard.TargetName="SpeedSlowButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Visible</Visibility>
@@ -365,7 +372,7 @@
                         </ObjectAnimationUsingKeyFrames>
 
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="SpeedFastButton">
+                                                       Storyboard.TargetName="SpeedNormalButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Visible</Visibility>
@@ -374,7 +381,7 @@
                         </ObjectAnimationUsingKeyFrames>
 
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="SpeedSuperFastButton">
+                                                       Storyboard.TargetName="SpeedFastButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Visible</Visibility>
@@ -383,7 +390,16 @@
                         </ObjectAnimationUsingKeyFrames>
 
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="MessagesVisibilityButton">
+                                                       Storyboard.TargetName="SpeedSuperFastButton">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Visible</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
+                                                       Storyboard.TargetName="MessagesVisibilityButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Visible</Visibility>
@@ -391,7 +407,7 @@
                             </DiscreteObjectKeyFrame>
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="MessagesVisibilityButtonSmall">
+                                                       Storyboard.TargetName="MessagesVisibilityButtonSmall">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Collapsed</Visibility>
@@ -400,7 +416,7 @@
                         </ObjectAnimationUsingKeyFrames>
 
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="MiniMapVisibilityButton">
+                                                       Storyboard.TargetName="MiniMapVisibilityButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Visible</Visibility>
@@ -408,7 +424,7 @@
                             </DiscreteObjectKeyFrame>
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="MiniMapVisibilityButtonSmall">
+                                                       Storyboard.TargetName="MiniMapVisibilityButtonSmall">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Collapsed</Visibility>
@@ -417,7 +433,7 @@
                         </ObjectAnimationUsingKeyFrames>
 
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="Numbers">
+                                                       Storyboard.TargetName="Numbers">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Visible</Visibility>
@@ -426,7 +442,7 @@
                         </ObjectAnimationUsingKeyFrames>
 
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="NumbersButtonSmall">
+                                                       Storyboard.TargetName="NumbersButtonSmall">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Collapsed</Visibility>
@@ -434,7 +450,7 @@
                             </DiscreteObjectKeyFrame>
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="ToolsSmallButton">
+                                                       Storyboard.TargetName="ToolsSmallButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Collapsed</Visibility>
@@ -442,7 +458,7 @@
                             </DiscreteObjectKeyFrame>
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="ToolsButton">
+                                                       Storyboard.TargetName="ToolsButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Visible</Visibility>
@@ -450,7 +466,7 @@
                             </DiscreteObjectKeyFrame>
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="DifficultySmallButton">
+                                                       Storyboard.TargetName="DifficultySmallButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Collapsed</Visibility>
@@ -458,24 +474,7 @@
                             </DiscreteObjectKeyFrame>
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="DifficultyButton">
-                            <DiscreteObjectKeyFrame KeyTime="0">
-                                <DiscreteObjectKeyFrame.Value>
-                                    <Visibility>Visible</Visibility>
-                                </DiscreteObjectKeyFrame.Value>
-                            </DiscreteObjectKeyFrame>
-                        </ObjectAnimationUsingKeyFrames>
-
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="SettingsSmallButton">
-                            <DiscreteObjectKeyFrame KeyTime="0">
-                                <DiscreteObjectKeyFrame.Value>
-                                    <Visibility>Collapsed</Visibility>
-                                </DiscreteObjectKeyFrame.Value>
-                            </DiscreteObjectKeyFrame>
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="SettingsButton">
+                                                       Storyboard.TargetName="DifficultyButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Visible</Visibility>
@@ -484,7 +483,7 @@
                         </ObjectAnimationUsingKeyFrames>
 
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="DisasterSmallButton">
+                                                       Storyboard.TargetName="SettingsSmallButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Collapsed</Visibility>
@@ -492,7 +491,7 @@
                             </DiscreteObjectKeyFrame>
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="DisasterButton">
+                                                       Storyboard.TargetName="SettingsButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Visible</Visibility>
@@ -501,7 +500,7 @@
                         </ObjectAnimationUsingKeyFrames>
 
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="BudgetSmallButton">
+                                                       Storyboard.TargetName="DisasterSmallButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Collapsed</Visibility>
@@ -509,7 +508,7 @@
                             </DiscreteObjectKeyFrame>
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="BudgetButton">
+                                                       Storyboard.TargetName="DisasterButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Visible</Visibility>
@@ -518,7 +517,7 @@
                         </ObjectAnimationUsingKeyFrames>
 
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="EvaluationSmallButton">
+                                                       Storyboard.TargetName="BudgetSmallButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Collapsed</Visibility>
@@ -526,7 +525,24 @@
                             </DiscreteObjectKeyFrame>
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="EvaluationButton">
+                                                       Storyboard.TargetName="BudgetButton">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Visible</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
+                                                       Storyboard.TargetName="EvaluationSmallButton">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Collapsed</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
+                                                       Storyboard.TargetName="EvaluationButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Visible</Visibility>
@@ -536,7 +552,7 @@
 
 
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="GraphSmallButton">
+                                                       Storyboard.TargetName="GraphSmallButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Collapsed</Visibility>
@@ -544,7 +560,7 @@
                             </DiscreteObjectKeyFrame>
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="GraphButton">
+                                                       Storyboard.TargetName="GraphButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Visible</Visibility>
@@ -557,7 +573,15 @@
                 <VisualState x:Name="FullScreenPortrait">
                     <Storyboard>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="Title">
+                                                       Storyboard.TargetName="MenuSmallButton">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Collapsed</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
+                                                       Storyboard.TargetName="MenuButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Visible</Visibility>
@@ -566,7 +590,7 @@
                         </ObjectAnimationUsingKeyFrames>
 
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="SpeedButton">
+                                                       Storyboard.TargetName="SpeedButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Collapsed</Visibility>
@@ -575,7 +599,7 @@
                         </ObjectAnimationUsingKeyFrames>
 
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="SpeedPauseButton">
+                                                       Storyboard.TargetName="SpeedPauseButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Visible</Visibility>
@@ -583,16 +607,7 @@
                             </DiscreteObjectKeyFrame>
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="SpeedSlowButton">
-                            <DiscreteObjectKeyFrame KeyTime="0">
-                                <DiscreteObjectKeyFrame.Value>
-                                    <Visibility>Visible</Visibility>
-                                </DiscreteObjectKeyFrame.Value>
-                            </DiscreteObjectKeyFrame>
-                        </ObjectAnimationUsingKeyFrames>
-
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="SpeedNormalButton">
+                                                       Storyboard.TargetName="SpeedSlowButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Visible</Visibility>
@@ -601,7 +616,7 @@
                         </ObjectAnimationUsingKeyFrames>
 
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="SpeedFastButton">
+                                                       Storyboard.TargetName="SpeedNormalButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Visible</Visibility>
@@ -610,7 +625,7 @@
                         </ObjectAnimationUsingKeyFrames>
 
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="SpeedSuperFastButton">
+                                                       Storyboard.TargetName="SpeedFastButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Visible</Visibility>
@@ -619,7 +634,16 @@
                         </ObjectAnimationUsingKeyFrames>
 
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="MessagesVisibilityButton">
+                                                       Storyboard.TargetName="SpeedSuperFastButton">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Visible</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
+                                                       Storyboard.TargetName="MessagesVisibilityButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Visible</Visibility>
@@ -627,7 +651,7 @@
                             </DiscreteObjectKeyFrame>
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="MessagesVisibilityButtonSmall">
+                                                       Storyboard.TargetName="MessagesVisibilityButtonSmall">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Collapsed</Visibility>
@@ -636,7 +660,7 @@
                         </ObjectAnimationUsingKeyFrames>
 
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="MiniMapVisibilityButton">
+                                                       Storyboard.TargetName="MiniMapVisibilityButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Visible</Visibility>
@@ -644,7 +668,7 @@
                             </DiscreteObjectKeyFrame>
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="MiniMapVisibilityButtonSmall">
+                                                       Storyboard.TargetName="MiniMapVisibilityButtonSmall">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Collapsed</Visibility>
@@ -653,7 +677,7 @@
                         </ObjectAnimationUsingKeyFrames>
 
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="Numbers">
+                                                       Storyboard.TargetName="Numbers">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Visible</Visibility>
@@ -662,7 +686,7 @@
                         </ObjectAnimationUsingKeyFrames>
 
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="NumbersButtonSmall">
+                                                       Storyboard.TargetName="NumbersButtonSmall">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Collapsed</Visibility>
@@ -670,7 +694,7 @@
                             </DiscreteObjectKeyFrame>
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="ToolsSmallButton">
+                                                       Storyboard.TargetName="ToolsSmallButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Collapsed</Visibility>
@@ -678,7 +702,7 @@
                             </DiscreteObjectKeyFrame>
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="ToolsButton">
+                                                       Storyboard.TargetName="ToolsButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Visible</Visibility>
@@ -686,7 +710,7 @@
                             </DiscreteObjectKeyFrame>
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="DifficultySmallButton">
+                                                       Storyboard.TargetName="DifficultySmallButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Collapsed</Visibility>
@@ -694,24 +718,7 @@
                             </DiscreteObjectKeyFrame>
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="DifficultyButton">
-                            <DiscreteObjectKeyFrame KeyTime="0">
-                                <DiscreteObjectKeyFrame.Value>
-                                    <Visibility>Visible</Visibility>
-                                </DiscreteObjectKeyFrame.Value>
-                            </DiscreteObjectKeyFrame>
-                        </ObjectAnimationUsingKeyFrames>
-
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="SettingsSmallButton">
-                            <DiscreteObjectKeyFrame KeyTime="0">
-                                <DiscreteObjectKeyFrame.Value>
-                                    <Visibility>Collapsed</Visibility>
-                                </DiscreteObjectKeyFrame.Value>
-                            </DiscreteObjectKeyFrame>
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="SettingsButton">
+                                                       Storyboard.TargetName="DifficultyButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Visible</Visibility>
@@ -720,7 +727,7 @@
                         </ObjectAnimationUsingKeyFrames>
 
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="DisasterSmallButton">
+                                                       Storyboard.TargetName="SettingsSmallButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Collapsed</Visibility>
@@ -728,7 +735,7 @@
                             </DiscreteObjectKeyFrame>
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="DisasterButton">
+                                                       Storyboard.TargetName="SettingsButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Visible</Visibility>
@@ -737,7 +744,7 @@
                         </ObjectAnimationUsingKeyFrames>
 
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="BudgetSmallButton">
+                                                       Storyboard.TargetName="DisasterSmallButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Collapsed</Visibility>
@@ -745,7 +752,7 @@
                             </DiscreteObjectKeyFrame>
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="BudgetButton">
+                                                       Storyboard.TargetName="DisasterButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Visible</Visibility>
@@ -754,7 +761,7 @@
                         </ObjectAnimationUsingKeyFrames>
 
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="EvaluationSmallButton">
+                                                       Storyboard.TargetName="BudgetSmallButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Collapsed</Visibility>
@@ -762,7 +769,24 @@
                             </DiscreteObjectKeyFrame>
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="EvaluationButton">
+                                                       Storyboard.TargetName="BudgetButton">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Visible</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
+                                                       Storyboard.TargetName="EvaluationSmallButton">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Collapsed</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
+                                                       Storyboard.TargetName="EvaluationButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Visible</Visibility>
@@ -772,7 +796,7 @@
 
 
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="GraphSmallButton">
+                                                       Storyboard.TargetName="GraphSmallButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Collapsed</Visibility>
@@ -780,7 +804,7 @@
                             </DiscreteObjectKeyFrame>
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="GraphButton">
+                                                       Storyboard.TargetName="GraphButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Visible</Visibility>
@@ -793,7 +817,15 @@
                 <VisualState x:Name="Filled">
                     <Storyboard>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="Title">
+                                                       Storyboard.TargetName="MenuSmallButton">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Collapsed</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
+                                                       Storyboard.TargetName="MenuButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Visible</Visibility>
@@ -802,7 +834,7 @@
                         </ObjectAnimationUsingKeyFrames>
 
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="SpeedButton">
+                                                       Storyboard.TargetName="SpeedButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Collapsed</Visibility>
@@ -811,7 +843,7 @@
                         </ObjectAnimationUsingKeyFrames>
 
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="SpeedPauseButton">
+                                                       Storyboard.TargetName="SpeedPauseButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Visible</Visibility>
@@ -819,16 +851,7 @@
                             </DiscreteObjectKeyFrame>
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="SpeedSlowButton">
-                            <DiscreteObjectKeyFrame KeyTime="0">
-                                <DiscreteObjectKeyFrame.Value>
-                                    <Visibility>Visible</Visibility>
-                                </DiscreteObjectKeyFrame.Value>
-                            </DiscreteObjectKeyFrame>
-                        </ObjectAnimationUsingKeyFrames>
-
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="SpeedNormalButton">
+                                                       Storyboard.TargetName="SpeedSlowButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Visible</Visibility>
@@ -837,7 +860,7 @@
                         </ObjectAnimationUsingKeyFrames>
 
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="SpeedFastButton">
+                                                       Storyboard.TargetName="SpeedNormalButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Visible</Visibility>
@@ -846,7 +869,7 @@
                         </ObjectAnimationUsingKeyFrames>
 
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="SpeedSuperFastButton">
+                                                       Storyboard.TargetName="SpeedFastButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Visible</Visibility>
@@ -855,7 +878,16 @@
                         </ObjectAnimationUsingKeyFrames>
 
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="MessagesVisibilityButton">
+                                                       Storyboard.TargetName="SpeedSuperFastButton">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Visible</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
+                                                       Storyboard.TargetName="MessagesVisibilityButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Visible</Visibility>
@@ -863,7 +895,7 @@
                             </DiscreteObjectKeyFrame>
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="MessagesVisibilityButtonSmall">
+                                                       Storyboard.TargetName="MessagesVisibilityButtonSmall">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Collapsed</Visibility>
@@ -872,7 +904,7 @@
                         </ObjectAnimationUsingKeyFrames>
 
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="MiniMapVisibilityButton">
+                                                       Storyboard.TargetName="MiniMapVisibilityButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Visible</Visibility>
@@ -880,7 +912,7 @@
                             </DiscreteObjectKeyFrame>
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="MiniMapVisibilityButtonSmall">
+                                                       Storyboard.TargetName="MiniMapVisibilityButtonSmall">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Collapsed</Visibility>
@@ -889,50 +921,7 @@
                         </ObjectAnimationUsingKeyFrames>
 
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="Numbers">
-                            <DiscreteObjectKeyFrame KeyTime="0">
-                                <DiscreteObjectKeyFrame.Value>
-                                    <Visibility>Visible</Visibility>
-                                </DiscreteObjectKeyFrame.Value>
-                            </DiscreteObjectKeyFrame>
-                        </ObjectAnimationUsingKeyFrames>
-
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="NumbersButtonSmall">
-                            <DiscreteObjectKeyFrame KeyTime="0">
-                                <DiscreteObjectKeyFrame.Value>
-                                    <Visibility>Collapsed</Visibility>
-                                </DiscreteObjectKeyFrame.Value>
-                            </DiscreteObjectKeyFrame>
-                        </ObjectAnimationUsingKeyFrames>
-
-
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="ToolsSmallButton">
-                            <DiscreteObjectKeyFrame KeyTime="0">
-                                <DiscreteObjectKeyFrame.Value>
-                                    <Visibility>Collapsed</Visibility>
-                                </DiscreteObjectKeyFrame.Value>
-                            </DiscreteObjectKeyFrame>
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="ToolsButton">
-                            <DiscreteObjectKeyFrame KeyTime="0">
-                                <DiscreteObjectKeyFrame.Value>
-                                    <Visibility>Visible</Visibility>
-                                </DiscreteObjectKeyFrame.Value>
-                            </DiscreteObjectKeyFrame>
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="DifficultySmallButton">
-                            <DiscreteObjectKeyFrame KeyTime="0">
-                                <DiscreteObjectKeyFrame.Value>
-                                    <Visibility>Collapsed</Visibility>
-                                </DiscreteObjectKeyFrame.Value>
-                            </DiscreteObjectKeyFrame>
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="DifficultyButton">
+                                                       Storyboard.TargetName="Numbers">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Visible</Visibility>
@@ -941,7 +930,17 @@
                         </ObjectAnimationUsingKeyFrames>
 
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="SettingsSmallButton">
+                                                       Storyboard.TargetName="NumbersButtonSmall">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Collapsed</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+
+
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
+                                                       Storyboard.TargetName="ToolsSmallButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Collapsed</Visibility>
@@ -949,7 +948,23 @@
                             </DiscreteObjectKeyFrame>
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="SettingsButton">
+                                                       Storyboard.TargetName="ToolsButton">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Visible</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
+                                                       Storyboard.TargetName="DifficultySmallButton">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Collapsed</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
+                                                       Storyboard.TargetName="DifficultyButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Visible</Visibility>
@@ -958,7 +973,7 @@
                         </ObjectAnimationUsingKeyFrames>
 
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="DisasterSmallButton">
+                                                       Storyboard.TargetName="SettingsSmallButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Collapsed</Visibility>
@@ -966,7 +981,7 @@
                             </DiscreteObjectKeyFrame>
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="DisasterButton">
+                                                       Storyboard.TargetName="SettingsButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Visible</Visibility>
@@ -975,7 +990,7 @@
                         </ObjectAnimationUsingKeyFrames>
 
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="BudgetSmallButton">
+                                                       Storyboard.TargetName="DisasterSmallButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Collapsed</Visibility>
@@ -983,7 +998,7 @@
                             </DiscreteObjectKeyFrame>
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="BudgetButton">
+                                                       Storyboard.TargetName="DisasterButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Visible</Visibility>
@@ -992,7 +1007,7 @@
                         </ObjectAnimationUsingKeyFrames>
 
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="EvaluationSmallButton">
+                                                       Storyboard.TargetName="BudgetSmallButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Collapsed</Visibility>
@@ -1000,7 +1015,24 @@
                             </DiscreteObjectKeyFrame>
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="EvaluationButton">
+                                                       Storyboard.TargetName="BudgetButton">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Visible</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
+                                                       Storyboard.TargetName="EvaluationSmallButton">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Collapsed</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
+                                                       Storyboard.TargetName="EvaluationButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Visible</Visibility>
@@ -1010,7 +1042,7 @@
 
 
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="GraphSmallButton">
+                                                       Storyboard.TargetName="GraphSmallButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Collapsed</Visibility>
@@ -1018,7 +1050,7 @@
                             </DiscreteObjectKeyFrame>
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="GraphButton">
+                                                       Storyboard.TargetName="GraphButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Visible</Visibility>
@@ -1032,7 +1064,15 @@
                 <VisualState x:Name="Snapped">
                     <Storyboard>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="Title">
+                                                       Storyboard.TargetName="MenuSmallButton">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Visible</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
+                                                       Storyboard.TargetName="MenuButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Collapsed</Visibility>
@@ -1041,7 +1081,7 @@
                         </ObjectAnimationUsingKeyFrames>
 
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="SpeedButton">
+                                                       Storyboard.TargetName="SpeedButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Visible</Visibility>
@@ -1050,7 +1090,7 @@
                         </ObjectAnimationUsingKeyFrames>
 
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="SpeedPauseButton">
+                                                       Storyboard.TargetName="SpeedPauseButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Collapsed</Visibility>
@@ -1058,16 +1098,7 @@
                             </DiscreteObjectKeyFrame>
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="SpeedSlowButton">
-                            <DiscreteObjectKeyFrame KeyTime="0">
-                                <DiscreteObjectKeyFrame.Value>
-                                    <Visibility>Collapsed</Visibility>
-                                </DiscreteObjectKeyFrame.Value>
-                            </DiscreteObjectKeyFrame>
-                        </ObjectAnimationUsingKeyFrames>
-
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="SpeedNormalButton">
+                                                       Storyboard.TargetName="SpeedSlowButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Collapsed</Visibility>
@@ -1076,7 +1107,7 @@
                         </ObjectAnimationUsingKeyFrames>
 
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="SpeedFastButton">
+                                                       Storyboard.TargetName="SpeedNormalButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Collapsed</Visibility>
@@ -1085,7 +1116,7 @@
                         </ObjectAnimationUsingKeyFrames>
 
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="SpeedSuperFastButton">
+                                                       Storyboard.TargetName="SpeedFastButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Collapsed</Visibility>
@@ -1094,7 +1125,16 @@
                         </ObjectAnimationUsingKeyFrames>
 
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="MessagesVisibilityButton">
+                                                       Storyboard.TargetName="SpeedSuperFastButton">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Collapsed</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
+                                                       Storyboard.TargetName="MessagesVisibilityButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Collapsed</Visibility>
@@ -1102,7 +1142,7 @@
                             </DiscreteObjectKeyFrame>
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="MessagesVisibilityButtonSmall">
+                                                       Storyboard.TargetName="MessagesVisibilityButtonSmall">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Visible</Visibility>
@@ -1111,7 +1151,7 @@
                         </ObjectAnimationUsingKeyFrames>
 
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="MiniMapVisibilityButton">
+                                                       Storyboard.TargetName="MiniMapVisibilityButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Collapsed</Visibility>
@@ -1119,7 +1159,7 @@
                             </DiscreteObjectKeyFrame>
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="MiniMapVisibilityButtonSmall">
+                                                       Storyboard.TargetName="MiniMapVisibilityButtonSmall">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Visible</Visibility>
@@ -1128,7 +1168,7 @@
                         </ObjectAnimationUsingKeyFrames>
 
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="Numbers">
+                                                       Storyboard.TargetName="Numbers">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Collapsed</Visibility>
@@ -1137,7 +1177,7 @@
                         </ObjectAnimationUsingKeyFrames>
 
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="NumbersButtonSmall">
+                                                       Storyboard.TargetName="NumbersButtonSmall">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Visible</Visibility>
@@ -1145,7 +1185,7 @@
                             </DiscreteObjectKeyFrame>
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="ToolsSmallButton">
+                                                       Storyboard.TargetName="ToolsSmallButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Visible</Visibility>
@@ -1153,7 +1193,7 @@
                             </DiscreteObjectKeyFrame>
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="ToolsButton">
+                                                       Storyboard.TargetName="ToolsButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Collapsed</Visibility>
@@ -1161,7 +1201,7 @@
                             </DiscreteObjectKeyFrame>
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="DifficultySmallButton">
+                                                       Storyboard.TargetName="DifficultySmallButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Visible</Visibility>
@@ -1169,24 +1209,7 @@
                             </DiscreteObjectKeyFrame>
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="DifficultyButton">
-                            <DiscreteObjectKeyFrame KeyTime="0">
-                                <DiscreteObjectKeyFrame.Value>
-                                    <Visibility>Collapsed</Visibility>
-                                </DiscreteObjectKeyFrame.Value>
-                            </DiscreteObjectKeyFrame>
-                        </ObjectAnimationUsingKeyFrames>
-
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="SettingsSmallButton">
-                            <DiscreteObjectKeyFrame KeyTime="0">
-                                <DiscreteObjectKeyFrame.Value>
-                                    <Visibility>Visible</Visibility>
-                                </DiscreteObjectKeyFrame.Value>
-                            </DiscreteObjectKeyFrame>
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="SettingsButton">
+                                                       Storyboard.TargetName="DifficultyButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Collapsed</Visibility>
@@ -1195,7 +1218,7 @@
                         </ObjectAnimationUsingKeyFrames>
 
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="DisasterSmallButton">
+                                                       Storyboard.TargetName="SettingsSmallButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Visible</Visibility>
@@ -1203,7 +1226,7 @@
                             </DiscreteObjectKeyFrame>
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="DisasterButton">
+                                                       Storyboard.TargetName="SettingsButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Collapsed</Visibility>
@@ -1212,7 +1235,7 @@
                         </ObjectAnimationUsingKeyFrames>
 
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="BudgetSmallButton">
+                                                       Storyboard.TargetName="DisasterSmallButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Visible</Visibility>
@@ -1220,7 +1243,7 @@
                             </DiscreteObjectKeyFrame>
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="BudgetButton">
+                                                       Storyboard.TargetName="DisasterButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Collapsed</Visibility>
@@ -1229,7 +1252,7 @@
                         </ObjectAnimationUsingKeyFrames>
 
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="EvaluationSmallButton">
+                                                       Storyboard.TargetName="BudgetSmallButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Visible</Visibility>
@@ -1237,7 +1260,24 @@
                             </DiscreteObjectKeyFrame>
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="EvaluationButton">
+                                                       Storyboard.TargetName="BudgetButton">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Collapsed</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
+                                                       Storyboard.TargetName="EvaluationSmallButton">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Visible</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
+                                                       Storyboard.TargetName="EvaluationButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Collapsed</Visibility>
@@ -1247,7 +1287,7 @@
 
 
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="GraphSmallButton">
+                                                       Storyboard.TargetName="GraphSmallButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Visible</Visibility>
@@ -1255,7 +1295,7 @@
                             </DiscreteObjectKeyFrame>
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="GraphButton">
+                                                       Storyboard.TargetName="GraphButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Collapsed</Visibility>
@@ -1267,7 +1307,15 @@
                 <VisualState x:Name="Narrow">
                     <Storyboard>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="Title">
+                                                       Storyboard.TargetName="MenuSmallButton">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Visible</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
+                                                       Storyboard.TargetName="MenuButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Collapsed</Visibility>
@@ -1275,7 +1323,7 @@
                             </DiscreteObjectKeyFrame>
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="SpeedButton">
+                                                       Storyboard.TargetName="SpeedButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Visible</Visibility>
@@ -1284,7 +1332,7 @@
                         </ObjectAnimationUsingKeyFrames>
 
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="SpeedPauseButton">
+                                                       Storyboard.TargetName="SpeedPauseButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Collapsed</Visibility>
@@ -1292,16 +1340,7 @@
                             </DiscreteObjectKeyFrame>
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="SpeedSlowButton">
-                            <DiscreteObjectKeyFrame KeyTime="0">
-                                <DiscreteObjectKeyFrame.Value>
-                                    <Visibility>Collapsed</Visibility>
-                                </DiscreteObjectKeyFrame.Value>
-                            </DiscreteObjectKeyFrame>
-                        </ObjectAnimationUsingKeyFrames>
-
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="SpeedNormalButton">
+                                                       Storyboard.TargetName="SpeedSlowButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Collapsed</Visibility>
@@ -1310,7 +1349,7 @@
                         </ObjectAnimationUsingKeyFrames>
 
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="SpeedFastButton">
+                                                       Storyboard.TargetName="SpeedNormalButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Collapsed</Visibility>
@@ -1319,7 +1358,7 @@
                         </ObjectAnimationUsingKeyFrames>
 
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="SpeedSuperFastButton">
+                                                       Storyboard.TargetName="SpeedFastButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Collapsed</Visibility>
@@ -1328,7 +1367,16 @@
                         </ObjectAnimationUsingKeyFrames>
 
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="MessagesVisibilityButton">
+                                                       Storyboard.TargetName="SpeedSuperFastButton">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Collapsed</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
+                                                       Storyboard.TargetName="MessagesVisibilityButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Collapsed</Visibility>
@@ -1336,7 +1384,7 @@
                             </DiscreteObjectKeyFrame>
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="MessagesVisibilityButtonSmall">
+                                                       Storyboard.TargetName="MessagesVisibilityButtonSmall">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Visible</Visibility>
@@ -1346,7 +1394,7 @@
 
 
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="MiniMapVisibilityButton">
+                                                       Storyboard.TargetName="MiniMapVisibilityButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Collapsed</Visibility>
@@ -1354,27 +1402,7 @@
                             </DiscreteObjectKeyFrame>
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="MiniMapVisibilityButtonSmall">
-                            <DiscreteObjectKeyFrame KeyTime="0">
-                                <DiscreteObjectKeyFrame.Value>
-                                    <Visibility>Visible</Visibility>
-                                </DiscreteObjectKeyFrame.Value>
-                            </DiscreteObjectKeyFrame>
-                        </ObjectAnimationUsingKeyFrames>
-                        
-                        
-
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="Numbers">
-                            <DiscreteObjectKeyFrame KeyTime="0">
-                                <DiscreteObjectKeyFrame.Value>
-                                    <Visibility>Collapsed</Visibility>
-                                </DiscreteObjectKeyFrame.Value>
-                            </DiscreteObjectKeyFrame>
-                        </ObjectAnimationUsingKeyFrames>
-
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="NumbersButtonSmall">
+                                                       Storyboard.TargetName="MiniMapVisibilityButtonSmall">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Visible</Visibility>
@@ -1382,32 +1410,9 @@
                             </DiscreteObjectKeyFrame>
                         </ObjectAnimationUsingKeyFrames>
 
+
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="ToolsSmallButton">
-                            <DiscreteObjectKeyFrame KeyTime="0">
-                                <DiscreteObjectKeyFrame.Value>
-                                    <Visibility>Visible</Visibility>
-                                </DiscreteObjectKeyFrame.Value>
-                            </DiscreteObjectKeyFrame>
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="ToolsButton">
-                            <DiscreteObjectKeyFrame KeyTime="0">
-                                <DiscreteObjectKeyFrame.Value>
-                                    <Visibility>Collapsed</Visibility>
-                                </DiscreteObjectKeyFrame.Value>
-                            </DiscreteObjectKeyFrame>
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="DifficultySmallButton">
-                            <DiscreteObjectKeyFrame KeyTime="0">
-                                <DiscreteObjectKeyFrame.Value>
-                                    <Visibility>Visible</Visibility>
-                                </DiscreteObjectKeyFrame.Value>
-                            </DiscreteObjectKeyFrame>
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="DifficultyButton">
+                                                       Storyboard.TargetName="Numbers">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Collapsed</Visibility>
@@ -1416,7 +1421,16 @@
                         </ObjectAnimationUsingKeyFrames>
 
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="SettingsSmallButton">
+                                                       Storyboard.TargetName="NumbersButtonSmall">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Visible</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
+                                                       Storyboard.TargetName="ToolsSmallButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Visible</Visibility>
@@ -1424,7 +1438,23 @@
                             </DiscreteObjectKeyFrame>
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="SettingsButton">
+                                                       Storyboard.TargetName="ToolsButton">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Collapsed</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
+                                                       Storyboard.TargetName="DifficultySmallButton">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Visible</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
+                                                       Storyboard.TargetName="DifficultyButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Collapsed</Visibility>
@@ -1433,7 +1463,7 @@
                         </ObjectAnimationUsingKeyFrames>
 
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="DisasterSmallButton">
+                                                       Storyboard.TargetName="SettingsSmallButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Visible</Visibility>
@@ -1441,7 +1471,7 @@
                             </DiscreteObjectKeyFrame>
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="DisasterButton">
+                                                       Storyboard.TargetName="SettingsButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Collapsed</Visibility>
@@ -1450,7 +1480,7 @@
                         </ObjectAnimationUsingKeyFrames>
 
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="BudgetSmallButton">
+                                                       Storyboard.TargetName="DisasterSmallButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Visible</Visibility>
@@ -1458,7 +1488,7 @@
                             </DiscreteObjectKeyFrame>
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="BudgetButton">
+                                                       Storyboard.TargetName="DisasterButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Collapsed</Visibility>
@@ -1467,7 +1497,7 @@
                         </ObjectAnimationUsingKeyFrames>
 
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="EvaluationSmallButton">
+                                                       Storyboard.TargetName="BudgetSmallButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Visible</Visibility>
@@ -1475,7 +1505,24 @@
                             </DiscreteObjectKeyFrame>
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="EvaluationButton">
+                                                       Storyboard.TargetName="BudgetButton">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Collapsed</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
+                                                       Storyboard.TargetName="EvaluationSmallButton">
+                            <DiscreteObjectKeyFrame KeyTime="0">
+                                <DiscreteObjectKeyFrame.Value>
+                                    <Visibility>Visible</Visibility>
+                                </DiscreteObjectKeyFrame.Value>
+                            </DiscreteObjectKeyFrame>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
+                                                       Storyboard.TargetName="EvaluationButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Collapsed</Visibility>
@@ -1485,7 +1532,7 @@
 
 
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="GraphSmallButton">
+                                                       Storyboard.TargetName="GraphSmallButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Visible</Visibility>
@@ -1493,17 +1540,13 @@
                             </DiscreteObjectKeyFrame>
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                           Storyboard.TargetName="GraphButton">
+                                                       Storyboard.TargetName="GraphButton">
                             <DiscreteObjectKeyFrame KeyTime="0">
                                 <DiscreteObjectKeyFrame.Value>
                                     <Visibility>Collapsed</Visibility>
                                 </DiscreteObjectKeyFrame.Value>
                             </DiscreteObjectKeyFrame>
                         </ObjectAnimationUsingKeyFrames>
-
-                        
-
-
 
 
                     </Storyboard>
@@ -1522,6 +1565,33 @@
 
         <Grid x:Uid="TopBar" Background="{StaticResource BarBackgroundBrush}" Grid.Column="0" Grid.ColumnSpan="2">
             <StackPanel Orientation="Horizontal">
+                <Button x:Name="MenuSmallButton" Margin="0,0,40,0" Style="{StaticResource BarSmallTopButtonStyle}">
+                    <Button.Flyout>
+                        <MenuFlyout MenuFlyoutPresenterStyle="{StaticResource MenuFlyoutPresenterStyle1}">
+                            <MenuFlyoutItem x:Name="NewSmallButton" Padding="32,10,20,12"
+                                            Text="{Binding NewButtonText}"
+                                            Command="{Binding NewCommand, Mode=OneWay}" />
+                            <MenuFlyoutItem x:Name="LoadSmallButton" Padding="32,10,20,12"
+                                            Text="{Binding LoadButtonText}"
+                                            Command="{Binding LoadCommand, Mode=OneWay}" />
+                            <MenuFlyoutItem x:Name="SaveSmallButton" Padding="32,10,20,12"
+                                            Text="{Binding SaveButtonText}"
+                                            Command="{Binding SaveCommmand, Mode=OneWay}" />
+                            <MenuFlyoutItem x:Name="SaveAsSmallButton" Padding="32,10,20,12"
+                                            Text="{Binding SaveAsButtonText}"
+                                            Command="{Binding SaveAsCommand, Mode=OneWay}" />
+                        </MenuFlyout>
+                    </Button.Flyout>
+                    <StackPanel Orientation="Vertical">
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5,10,0,0">
+                            <Rectangle Fill="Black" Height="3" Width="20" />
+                            <Rectangle Fill="Black" Height="3" Margin="0,4,0,4" Width="20" />
+                            <Rectangle Fill="Black" Height="3" Width="20" />
+                        </StackPanel>
+                        <TextBlock FontSize="6" Margin="12,0,0,0" Text="&#xE099;" VerticalAlignment="Center"
+                                   FontFamily="Segoe UI Symbol" />
+                    </StackPanel>
+                </Button>
                 <Button x:Name="MenuButton" Margin="0,0,40,0" Style="{StaticResource BarButtonStyle}">
                     <Button.Flyout>
                         <MenuFlyout MenuFlyoutPresenterStyle="{StaticResource MenuFlyoutPresenterStyle1}">
@@ -1537,7 +1607,7 @@
                         </MenuFlyout>
                     </Button.Flyout>
                     <StackPanel Orientation="Horizontal">
-                        
+
                         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                             <Rectangle Fill="Black" Height="3" Width="20" />
                             <Rectangle Fill="Black" Height="3" Margin="0,4,0,4" Width="20" />
@@ -1549,75 +1619,89 @@
                     </StackPanel>
                 </Button>
                 <StackPanel Orientation="Horizontal">
-                    <Button x:Name="SpeedButton" Style="{StaticResource BarButtonStyle}">
-                        <TextBlock x:Name="SpeedButtonContent" Text="{Binding SpeedButtonText}" />
+                    <Button x:Name="SpeedButton" Style="{StaticResource BarSmallTopButtonStyle}">
+                        <StackPanel Orientation="Vertical">
+                            <Image x:Name="SpeedButtonContent" Source="/resources/images/GameUI/bars/clock.png"
+                                   Height="30" />
+                            <TextBlock FontSize="6" Margin="12,0,0,0" Text="&#xE099;" VerticalAlignment="Center"
+                                       FontFamily="Segoe UI Symbol" />
+                        </StackPanel>
                         <Button.Flyout>
                             <MenuFlyout>
-                                <ToggleMenuFlyoutItem Text="Super Fast" Command="{Binding SpeedSuperFastCommand}" IsChecked="{Binding IsSpeedSuperFast}" />
-                                <ToggleMenuFlyoutItem Text="Fast" Command="{Binding SpeedFastCommand}" IsChecked="{Binding IsSpeedFast}" />
-                                <ToggleMenuFlyoutItem Text="Normal" Command="{Binding SpeedNormalCommand}" IsChecked="{Binding IsSpeedNormal}" />
-                                <ToggleMenuFlyoutItem Text="Slow" Command="{Binding SpeedSlowCommand}" IsChecked="{Binding IsSpeedSlow}" />
-                                <ToggleMenuFlyoutItem Text="Pause" Command="{Binding SpeedPauseCommand}" IsChecked="{Binding IsSpeedPause}" />
+                                <ToggleMenuFlyoutItem Text="Super Fast" Command="{Binding SpeedSuperFastCommand}"
+                                                      IsChecked="{Binding IsSpeedSuperFast}" />
+                                <ToggleMenuFlyoutItem Text="Fast" Command="{Binding SpeedFastCommand}"
+                                                      IsChecked="{Binding IsSpeedFast}" />
+                                <ToggleMenuFlyoutItem Text="Normal" Command="{Binding SpeedNormalCommand}"
+                                                      IsChecked="{Binding IsSpeedNormal}" />
+                                <ToggleMenuFlyoutItem Text="Slow" Command="{Binding SpeedSlowCommand}"
+                                                      IsChecked="{Binding IsSpeedSlow}" />
+                                <ToggleMenuFlyoutItem Text="Pause" Command="{Binding SpeedPauseCommand}"
+                                                      IsChecked="{Binding IsSpeedPause}" />
                             </MenuFlyout>
                         </Button.Flyout>
                     </Button>
-                <Button x:Name="SpeedPauseButton"
-                        Background="{Binding IsSpeedPause, Converter={StaticResource SpeedButtonToBackgroundConverter}}"
-                        Style="{StaticResource BarButtonStyle}" Command="{Binding SpeedPauseCommand}">
-                    <Image Source="/resources/UIButtons/Pause-Icon.png" />
-                </Button>
-                <Button x:Name="SpeedSlowButton"
-                        Background="{Binding IsSpeedSlow, Converter={StaticResource SpeedButtonToBackgroundConverter}}"
-                        Style="{StaticResource BarButtonStyle}" Command="{Binding SpeedSlowCommand}">
-                    <Image Source="/resources/UIButtons/Slow-Icon.png" />
-                </Button>
-                <Button x:Name="SpeedNormalButton"
-                        Background="{Binding IsSpeedNormal, Converter={StaticResource SpeedButtonToBackgroundConverter}}"
-                        Style="{StaticResource BarButtonStyle}" Command="{Binding SpeedNormalCommand}">
-                    <Image Source="/resources/UIButtons/Normal-Icon.png" />
-                </Button>
-                <Button x:Name="SpeedFastButton"
-                        Background="{Binding IsSpeedFast, Converter={StaticResource SpeedButtonToBackgroundConverter}}"
-                        Style="{StaticResource BarButtonStyle}" Command="{Binding SpeedFastCommand}">
-                    <Image Source="/resources/UIButtons/Fast-Icon.png" />
-                </Button>
-                <Button x:Name="SpeedSuperFastButton"
-                        Background="{Binding IsSpeedSuperFast, Converter={StaticResource SpeedButtonToBackgroundConverter}}"
-                        Style="{StaticResource BarButtonStyle}" Command="{Binding SpeedSuperFastCommand}">
-                    <Image Source="/resources/UIButtons/SuperFast-Icon.png" />
-                </Button>
+                    <Button x:Name="SpeedPauseButton"
+                            Background="{Binding IsSpeedPause, Converter={StaticResource SpeedButtonToBackgroundConverter}}"
+                            Style="{StaticResource BarButtonStyle}" Command="{Binding SpeedPauseCommand}">
+                        <Image Source="/resources/UIButtons/Pause-Icon.png" />
+                    </Button>
+                    <Button x:Name="SpeedSlowButton"
+                            Background="{Binding IsSpeedSlow, Converter={StaticResource SpeedButtonToBackgroundConverter}}"
+                            Style="{StaticResource BarButtonStyle}" Command="{Binding SpeedSlowCommand}">
+                        <Image Source="/resources/UIButtons/Slow-Icon.png" />
+                    </Button>
+                    <Button x:Name="SpeedNormalButton"
+                            Background="{Binding IsSpeedNormal, Converter={StaticResource SpeedButtonToBackgroundConverter}}"
+                            Style="{StaticResource BarButtonStyle}" Command="{Binding SpeedNormalCommand}">
+                        <Image Source="/resources/UIButtons/Normal-Icon.png" />
+                    </Button>
+                    <Button x:Name="SpeedFastButton"
+                            Background="{Binding IsSpeedFast, Converter={StaticResource SpeedButtonToBackgroundConverter}}"
+                            Style="{StaticResource BarButtonStyle}" Command="{Binding SpeedFastCommand}">
+                        <Image Source="/resources/UIButtons/Fast-Icon.png" />
+                    </Button>
+                    <Button x:Name="SpeedSuperFastButton"
+                            Background="{Binding IsSpeedSuperFast, Converter={StaticResource SpeedButtonToBackgroundConverter}}"
+                            Style="{StaticResource BarButtonStyle}" Command="{Binding SpeedSuperFastCommand}">
+                        <Image Source="/resources/UIButtons/SuperFast-Icon.png" />
+                    </Button>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <Button x:Name="NumbersButtonSmall" Style="{StaticResource BarButtonStyle}">
+                    <Button x:Name="NumbersButtonSmall" Style="{StaticResource BarSmallTopButtonStyle}">
                         <Grid>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock FontSize="16" Margin="12,0,0,0" Text="&#xE099;" VerticalAlignment="Center"
-                                       FontFamily="Segoe UI Symbol" />
+                            <StackPanel Orientation="Vertical">
+                                <Image Source="/resources/images/GameUI/bars/numbers.png" Height="30" />
+                                <TextBlock FontSize="6" Margin="12,0,0,0" Text="&#xE099;" VerticalAlignment="Center"
+                                           FontFamily="Segoe UI Symbol" />
                             </StackPanel>
                         </Grid>
                         <Button.Flyout>
                             <Flyout>
                                 <StackPanel Orientation="Vertical">
                                     <StackPanel Orientation="Horizontal">
-                                    <Path Height="12" Fill="#2B2B2B" Margin="20,-2,0,0" Stretch="Uniform"
-                          Style="{StaticResource DateSmallPathStyle}" Width="12" />
-                                    <TextBlock x:Name="DateLblSmall" Margin="7,0,0,0" MinWidth="65" Text="{Binding DateLblTextBlockText}"
-                               FontSize="14"
-                               Foreground="#2B2B2B" />
+                                        <Path Height="12" Fill="#2B2B2B" Margin="20,-2,0,0" Stretch="Uniform"
+                                              Style="{StaticResource DateSmallPathStyle}" Width="12" />
+                                        <TextBlock x:Name="DateLblSmall" Margin="7,0,0,0" MinWidth="65"
+                                                   Text="{Binding DateLblTextBlockText}"
+                                                   FontSize="14"
+                                                   Foreground="#2B2B2B" />
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal">
                                         <Path Height="12" Fill="#2B2B2B" Margin="10,-2,0,0" Stretch="Uniform"
-                          Style="{StaticResource FundsSmallPathStyle}" Width="12" />
-                                    <TextBlock x:Name="FundsLblSmall" Margin="7,0,0,0" MinWidth="65" Text="{Binding FundsLblTextBlockText}"
-                               FontSize="14"
-                               Foreground="#2B2B2B" />
-                                        </StackPanel>
-                                        <StackPanel Orientation="Horizontal">
-                                            <Path Height="14" Fill="#2B2B2B" Margin="10,-1,0,0" Stretch="Uniform"
-                          Style="{StaticResource PopulationSmallPathStyle}" Width="14" />
-                                    <TextBlock x:Name="PopLblSmall" Margin="7,0,0,0" Text="{Binding PopLblTextBlockText}" FontSize="14"
-                               Foreground="#2B2B2B" />
-                                            </StackPanel>
+                                              Style="{StaticResource FundsSmallPathStyle}" Width="12" />
+                                        <TextBlock x:Name="FundsLblSmall" Margin="7,0,0,0" MinWidth="65"
+                                                   Text="{Binding FundsLblTextBlockText}"
+                                                   FontSize="14"
+                                                   Foreground="#2B2B2B" />
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Path Height="14" Fill="#2B2B2B" Margin="10,-1,0,0" Stretch="Uniform"
+                                              Style="{StaticResource PopulationSmallPathStyle}" Width="14" />
+                                        <TextBlock x:Name="PopLblSmall" Margin="7,0,0,0"
+                                                   Text="{Binding PopLblTextBlockText}" FontSize="14"
+                                                   Foreground="#2B2B2B" />
+                                    </StackPanel>
                                 </StackPanel>
                             </Flyout>
                         </Button.Flyout>
@@ -1625,21 +1709,23 @@
 
                     <StackPanel x:Name="Numbers" Orientation="Horizontal" Margin="12,6" VerticalAlignment="Center">
                         <Path Height="12" Fill="#2B2B2B" Margin="20,-2,0,0" Stretch="Uniform"
-                          Style="{StaticResource DatePathStyle}" Width="12" />
-                        <TextBlock x:Name="DateLbl" Margin="7,0,0,0" MinWidth="65" Text="{Binding DateLblTextBlockText}"
-                               FontSize="14"
-                               Foreground="#2B2B2B" />
+                              Style="{StaticResource DatePathStyle}" Width="12" />
+                        <TextBlock x:Name="DateLbl" Margin="7,0,0,0" MinWidth="65"
+                                   Text="{Binding DateLblTextBlockText}"
+                                   FontSize="14"
+                                   Foreground="#2B2B2B" />
 
                         <Path Height="12" Fill="#2B2B2B" Margin="10,-2,0,0" Stretch="Uniform"
-                          Style="{StaticResource FundsPathStyle}" Width="12" />
-                        <TextBlock x:Name="FundsLbl" Margin="7,0,0,0" MinWidth="65" Text="{Binding FundsLblTextBlockText}"
-                               FontSize="14"
-                               Foreground="#2B2B2B" />
+                              Style="{StaticResource FundsPathStyle}" Width="12" />
+                        <TextBlock x:Name="FundsLbl" Margin="7,0,0,0" MinWidth="65"
+                                   Text="{Binding FundsLblTextBlockText}"
+                                   FontSize="14"
+                                   Foreground="#2B2B2B" />
 
                         <Path Height="14" Fill="#2B2B2B" Margin="10,-1,0,0" Stretch="Uniform"
-                          Style="{StaticResource PopulationPathStyle}" Width="14" />
+                              Style="{StaticResource PopulationPathStyle}" Width="14" />
                         <TextBlock x:Name="PopLbl" Margin="7,0,0,0" Text="{Binding PopLblTextBlockText}" FontSize="14"
-                               Foreground="#2B2B2B" />
+                                   Foreground="#2B2B2B" />
                     </StackPanel>
                 </StackPanel>
             </StackPanel>
@@ -1655,75 +1741,80 @@
                 </Grid>
 
                 <StackPanel Orientation="Horizontal">
-                    <Button x:Name="MessagesVisibilityButtonSmall" Command="{Binding ToggleMessagesCommand}" Style="{StaticResource BarButtonStyle}">
+                    <Button x:Name="MessagesVisibilityButtonSmall" Command="{Binding ToggleMessagesCommand}"
+                            Style="{StaticResource BarSmallTopButtonStyle}">
                         <Grid>
-                        <StackPanel Orientation="Horizontal"
-                                    Visibility="{Binding IsMessagesVisible, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=inverted, FallbackValue=Collapsed}">
-                                <TextBlock FontSize="16" Margin="12,0,0,0" Text="&#xE099;" VerticalAlignment="Center"
-                                       FontFamily="Segoe UI Symbol" />
+                            <StackPanel Orientation="Vertical"
+                                        Visibility="{Binding IsMessagesVisible, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=inverted, FallbackValue=Collapsed}">
+                                <Image Source="/resources/images/GameUI/bars/messages.png" Height="30" />
+                                <TextBlock FontSize="6" Margin="12,0,0,0" Text="&#xE099;" VerticalAlignment="Center"
+                                           FontFamily="Segoe UI Symbol" />
                             </StackPanel>
-                        <StackPanel Orientation="Horizontal"
-                                    Visibility="{Binding IsMessagesVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
-                                <TextBlock FontSize="16" Margin="12,0,0,2" Text="&#xE098;" VerticalAlignment="Center"
-                                       FontFamily="Segoe UI Symbol" />
+                            <StackPanel Orientation="Vertical"
+                                        Visibility="{Binding IsMessagesVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                <Image Source="/resources/images/GameUI/bars/messages.png" Height="30" />
+                                <TextBlock FontSize="6" Margin="12,0,0,2" Text="&#xE098;" VerticalAlignment="Center"
+                                           FontFamily="Segoe UI Symbol" />
                             </StackPanel>
                         </Grid>
                     </Button>
                     <Button x:Name="MessagesVisibilityButton" Command="{Binding ToggleMessagesCommand}"
-                        Style="{StaticResource BarButtonStyle}" Width="230">
+                            Style="{StaticResource BarButtonStyle}" Width="230">
                         <Grid>
                             <StackPanel Orientation="Horizontal"
-                                    Visibility="{Binding IsMessagesVisible, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=inverted, FallbackValue=Collapsed}">
+                                        Visibility="{Binding IsMessagesVisible, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=inverted, FallbackValue=Collapsed}">
                                 <TextBlock FontSize="16" FontWeight="SemiLight" Text="Nachrichten einblenden"
-                                       VerticalAlignment="Center" />
+                                           VerticalAlignment="Center" />
                                 <TextBlock FontSize="16" Margin="12,0,0,0" Text="&#xE099;" VerticalAlignment="Center"
-                                       FontFamily="Segoe UI Symbol" />
+                                           FontFamily="Segoe UI Symbol" />
                             </StackPanel>
                             <StackPanel Orientation="Horizontal"
-                                    Visibility="{Binding IsMessagesVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                        Visibility="{Binding IsMessagesVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
                                 <TextBlock FontSize="16" FontWeight="SemiLight" Text="Nachrichten ausblenden"
-                                       VerticalAlignment="Center" />
+                                           VerticalAlignment="Center" />
                                 <TextBlock FontSize="16" Margin="12,0,0,2" Text="&#xE098;" VerticalAlignment="Center"
-                                       FontFamily="Segoe UI Symbol" />
+                                           FontFamily="Segoe UI Symbol" />
                             </StackPanel>
                         </Grid>
                     </Button>
                 </StackPanel>
-<StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Horizontal">
                     <Button x:Name="MiniMapVisibilityButtonSmall" Command="{Binding ToggleMiniMapCommand}"
-                        Style="{StaticResource BarButtonStyle}">
+                            Style="{StaticResource BarSmallTopButtonStyle}">
                         <Grid>
-                            <StackPanel Orientation="Horizontal"
-                                    Visibility="{Binding IsMiniMapVisible, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=inverted, FallbackValue=Collapsed}">
-                                <TextBlock FontSize="16" Margin="12,0,0,0" Text="&#xE099;" VerticalAlignment="Center"
-                                       FontFamily="Segoe UI Symbol" />
+                            <StackPanel Orientation="Vertical"
+                                        Visibility="{Binding IsMiniMapVisible, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=inverted, FallbackValue=Collapsed}">
+                                <Image Source="/resources/images/GameUI/bars/map.png" Height="30" />
+                                <TextBlock FontSize="6" Margin="12,0,0,0" Text="&#xE099;" VerticalAlignment="Center"
+                                           FontFamily="Segoe UI Symbol" />
                             </StackPanel>
-                            <StackPanel Orientation="Horizontal"
-                                    Visibility="{Binding IsMiniMapVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
-                                <TextBlock FontSize="16" Margin="12,0,0,2" Text="&#xE098;" VerticalAlignment="Center"
-                                       FontFamily="Segoe UI Symbol" />
+                            <StackPanel Orientation="Vertical"
+                                        Visibility="{Binding IsMiniMapVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                <Image Source="/resources/images/GameUI/bars/map.png" Height="30" />
+                                <TextBlock FontSize="6" Margin="12,0,0,2" Text="&#xE098;" VerticalAlignment="Center"
+                                           FontFamily="Segoe UI Symbol" />
                             </StackPanel>
                         </Grid>
                     </Button>
-                        <Button x:Name="MiniMapVisibilityButton" Command="{Binding ToggleMiniMapCommand}"
-                        Style="{StaticResource BarButtonStyle}" Width="220">
-                    <Grid>
-                        <StackPanel Orientation="Horizontal"
-                                    Visibility="{Binding IsMiniMapVisible, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=inverted, FallbackValue=Collapsed}">
-                            <TextBlock FontSize="16" FontWeight="SemiLight" Text="Karte einblenden"
-                                       VerticalAlignment="Center" />
-                            <TextBlock FontSize="16" Margin="12,0,0,0" Text="&#xE099;" VerticalAlignment="Center"
-                                       FontFamily="Segoe UI Symbol" />
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal"
-                                    Visibility="{Binding IsMiniMapVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
-                            <TextBlock FontSize="16" FontWeight="SemiLight" Text="Karte ausblenden"
-                                       VerticalAlignment="Center" />
-                            <TextBlock FontSize="16" Margin="12,0,0,2" Text="&#xE098;" VerticalAlignment="Center"
-                                       FontFamily="Segoe UI Symbol" />
-                        </StackPanel>
-                    </Grid>
-                </Button>
+                    <Button x:Name="MiniMapVisibilityButton" Command="{Binding ToggleMiniMapCommand}"
+                            Style="{StaticResource BarButtonStyle}" Width="220">
+                        <Grid>
+                            <StackPanel Orientation="Horizontal"
+                                        Visibility="{Binding IsMiniMapVisible, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=inverted, FallbackValue=Collapsed}">
+                                <TextBlock FontSize="16" FontWeight="SemiLight" Text="Karte einblenden"
+                                           VerticalAlignment="Center" />
+                                <TextBlock FontSize="16" Margin="12,0,0,0" Text="&#xE099;" VerticalAlignment="Center"
+                                           FontFamily="Segoe UI Symbol" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal"
+                                        Visibility="{Binding IsMiniMapVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                <TextBlock FontSize="16" FontWeight="SemiLight" Text="Karte ausblenden"
+                                           VerticalAlignment="Center" />
+                                <TextBlock FontSize="16" Margin="12,0,0,2" Text="&#xE098;" VerticalAlignment="Center"
+                                           FontFamily="Segoe UI Symbol" />
+                            </StackPanel>
+                        </Grid>
+                    </Button>
                 </StackPanel>
             </StackPanel>
         </Grid>
@@ -1732,17 +1823,19 @@
               Grid.ColumnSpan="2">
             <StackPanel Orientation="Horizontal">
                 <Button x:Name="ToolsSmallButton" Command="{Binding ToggleToolsCommand}"
-                        Style="{StaticResource BarButtonStyle}">
+                        Style="{StaticResource BarSmallBottomButtonStyle}">
                     <Grid>
-                        <StackPanel Orientation="Horizontal"
+                        <StackPanel Orientation="Vertical"
                                     Visibility="{Binding ViewModel.ToolBarIsVisible, ElementName=ToolsPanel, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=inverted, FallbackValue=Collapsed}">
-                            <TextBlock FontSize="16" Margin="12,0,0,0" Text="&#xE098;" VerticalAlignment="Center"
-                                       FontFamily="Segoe UI Symbol" />
+                            <TextBlock FontSize="6" Margin="12,0,0,0" Text="&#xE098;" VerticalAlignment="Top"
+                                       FontFamily="Segoe UI Symbol" Height="10" />
+                            <Image Source="/resources/images/GameUI/bars/tools.png" Height="30" />
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal"
+                        <StackPanel Orientation="Vertical"
                                     Visibility="{Binding ViewModel.ToolBarIsVisible, ElementName=ToolsPanel, Converter={StaticResource BooleanToVisibilityConverter}}">
-                            <TextBlock FontSize="16" Margin="12,0,0,2" Text="&#xE099;" VerticalAlignment="Center"
+                            <TextBlock FontSize="6" Margin="12,0,0,2" Text="&#xE099;" VerticalAlignment="Center"
                                        FontFamily="Segoe UI Symbol" />
+                            <Image Source="/resources/images/GameUI/bars/tools.png" Height="30" />
                         </StackPanel>
                     </Grid>
                 </Button>
@@ -1767,8 +1860,13 @@
                     </Grid>
                 </Button>
 
-                <Button x:Name="DifficultySmallButton" Style="{StaticResource BarButtonStyle}">
-                    <TextBlock x:Name="DifficultySmallButtonContent" Text="i" />
+                <Button x:Name="DifficultySmallButton" Style="{StaticResource BarSmallBottomButtonStyle}">
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock FontSize="6" Margin="12,0,0,0" Text="&#xE098;" VerticalAlignment="Top"
+                                   FontFamily="Segoe UI Symbol" Height="10" />
+                        <Image x:Name="DifficultySmallButtonContent"
+                               Source="/resources/images/GameUI/bars/difficulty.png" Height="30" />
+                    </StackPanel>
                     <Button.Flyout>
                         <Flyout>
                             <ItemsControl Margin="0,0,0,0" VerticalAlignment="Center"
@@ -1789,7 +1887,7 @@
                         </Flyout>
                     </Button.Flyout>
                 </Button>
-            <Button x:Name="DifficultyButton" Style="{StaticResource BarButtonStyle}">
+                <Button x:Name="DifficultyButton" Style="{StaticResource BarButtonStyle}">
                     <TextBlock x:Name="DifficultyButtonContent" Text="{Binding DifficultyButtonContentText}" />
                     <Button.Flyout>
                         <Flyout>
@@ -1813,18 +1911,25 @@
                 </Button>
 
 
-                <Button x:Name="SettingsSmallButton" Style="{StaticResource BarButtonStyle}">
-                    <TextBlock x:Name="SettingsSmallButtonContent" Text="i" />
+                <Button x:Name="SettingsSmallButton" Style="{StaticResource BarSmallBottomButtonStyle}">
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock FontSize="6" Margin="12,0,0,0" Text="&#xE098;" VerticalAlignment="Top"
+                                   FontFamily="Segoe UI Symbol" Height="10" />
+                        <Image x:Name="SettingsSmallButtonContent" Source="/resources/images/GameUI/bars/settings.png"
+                               Height="30" />
+                    </StackPanel>
                     <Button.Flyout>
                         <MenuFlyout>
-                            <ToggleMenuFlyoutItem x:Name="AutoBudgetSmallCheckBox" Text="{Binding AutoBudgetCheckBoxText}"
+                            <ToggleMenuFlyoutItem x:Name="AutoBudgetSmallCheckBox"
+                                                  Text="{Binding AutoBudgetCheckBoxText}"
                                                   Command="{Binding AutoBudgetCommand}"
                                                   IsChecked="{Binding AutoBudgetCheckBoxIsChecked, Mode=TwoWay}" />
                             <ToggleMenuFlyoutItem x:Name="AutoBulldozeSmallCheckBox"
                                                   Text="{Binding AutoBulldozeCheckBoxText}"
                                                   Command="{Binding AutoBulldozeCommand}"
                                                   IsChecked="{Binding AutoBulldozeCheckBoxIsChecked, Mode=TwoWay}" />
-                            <ToggleMenuFlyoutItem x:Name="DisastersSmallCheckBox" Text="{Binding DisastersCheckBoxText}"
+                            <ToggleMenuFlyoutItem x:Name="DisastersSmallCheckBox"
+                                                  Text="{Binding DisastersCheckBoxText}"
                                                   IsChecked="{Binding DisastersCheckBoxIsChecked, Mode=TwoWay}"
                                                   Command="{Binding DisastersCommand}" />
                             <ToggleMenuFlyoutItem x:Name="SoundSmallCheckBox" Text="{Binding SoundCheckBoxText}"
@@ -1855,8 +1960,13 @@
                 </Button>
 
 
-                <Button x:Name="DisasterSmallButton" Style="{StaticResource BarButtonStyle}">
-                    <TextBlock x:Name="DisasterSmallButtonContent" Text="i" />
+                <Button x:Name="DisasterSmallButton" Style="{StaticResource BarSmallBottomButtonStyle}">
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock FontSize="6" Margin="12,0,0,0" Text="&#xE098;" VerticalAlignment="Top"
+                                   FontFamily="Segoe UI Symbol" Height="10" />
+                        <Image x:Name="DisasterSmallButtonContent" Source="/resources/images/GameUI/bars/disaster.png"
+                               Height="30" />
+                    </StackPanel>
                     <Button.Flyout>
                         <MenuFlyout>
                             <MenuFlyoutItem x:Name="MonsterSmallButton" Text="{Binding MonsterButtonText}"
@@ -1894,18 +2004,27 @@
                     </Button.Flyout>
                 </Button>
 
-                <Button Content="i" x:Name="BudgetSmallButton" Command="{Binding BudgetCommand}"
-                        Style="{StaticResource BarButtonStyle}" />
+                <Button x:Name="BudgetSmallButton" Command="{Binding BudgetCommand}"
+                        Style="{StaticResource BarSmallBottomButtonStyle}">
+                    <Image x:Name="BudgetSmallButtonContent" Source="/resources/images/GameUI/bars/budget.png"
+                           Height="30" />
+                </Button>
                 <Button Content="{Binding BudgetButtonText}" x:Name="BudgetButton" Command="{Binding BudgetCommand}"
                         Style="{StaticResource BarButtonStyle}" />
 
-                <Button Content="i" x:Name="EvaluationSmallButton"
-                        Command="{Binding EvaluationCommand}" Style="{StaticResource BarButtonStyle}" />
+                <Button x:Name="EvaluationSmallButton"
+                        Command="{Binding EvaluationCommand}" Style="{StaticResource BarSmallBottomButtonStyle}">
+                    <Image x:Name="EvaluationSmallButtonContent" Source="/resources/images/GameUI/bars/evaluation.png"
+                           Height="30" />
+                </Button>
                 <Button Content="{Binding EvaluationButtonText}" x:Name="EvaluationButton"
                         Command="{Binding EvaluationCommand}" Style="{StaticResource BarButtonStyle}" />
 
-                <Button Content="i" x:Name="GraphSmallButton" Command="{Binding GraphCommand}"
-                        Style="{StaticResource BarButtonStyle}" />
+                <Button x:Name="GraphSmallButton" Command="{Binding GraphCommand}"
+                        Style="{StaticResource BarSmallBottomButtonStyle}">
+                    <Image x:Name="GraphSmallButtonContent" Source="/resources/images/GameUI/bars/graph.png"
+                           Height="30" />
+                </Button>
                 <Button Content="{Binding GraphButtonText}" x:Name="GraphButton" Command="{Binding GraphCommand}"
                         Style="{StaticResource BarButtonStyle}" />
             </StackPanel>

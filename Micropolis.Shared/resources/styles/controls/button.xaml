@@ -292,5 +292,12 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-    </Style>    
+    </Style>
+    <Style x:Key="BarSmallBottomButtonStyle" TargetType="Button" BasedOn="{StaticResource BarButtonStyle}">
+        <Setter Property="Padding" Value="5,1" />
+        <Setter Property="VerticalContentAlignment" Value="Bottom" />
+    </Style>
+    <Style x:Key="BarSmallTopButtonStyle" TargetType="Button" BasedOn="{StaticResource BarSmallBottomButtonStyle}">
+        <Setter Property="VerticalContentAlignment" Value="Top" />
+    </Style>
 </ResourceDictionary>

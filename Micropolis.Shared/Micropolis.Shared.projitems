@@ -238,6 +238,17 @@
     <Content Include="$(MSBuildThisFileDirectory)resources\fire.scale-100.png" />
     <Content Include="$(MSBuildThisFileDirectory)resources\fonts\dos437.ttf" />
     <Content Include="$(MSBuildThisFileDirectory)resources\fonts\dos437.txt" />
+    <Content Include="$(MSBuildThisFileDirectory)resources\images\GameUI\bars\budget.scale-100.png" />
+    <Content Include="$(MSBuildThisFileDirectory)resources\images\GameUI\bars\clock.scale-100.png" />
+    <Content Include="$(MSBuildThisFileDirectory)resources\images\GameUI\bars\difficulty.scale-100.png" />
+    <Content Include="$(MSBuildThisFileDirectory)resources\images\GameUI\bars\disaster.scale-100.png" />
+    <Content Include="$(MSBuildThisFileDirectory)resources\images\GameUI\bars\evaluation.scale-100.png" />
+    <Content Include="$(MSBuildThisFileDirectory)resources\images\GameUI\bars\graph.scale-100.png" />
+    <Content Include="$(MSBuildThisFileDirectory)resources\images\GameUI\bars\map.scale-100.png" />
+    <Content Include="$(MSBuildThisFileDirectory)resources\images\GameUI\bars\messages.scale-100.png" />
+    <Content Include="$(MSBuildThisFileDirectory)resources\images\GameUI\bars\numbers.scale-100.png" />
+    <Content Include="$(MSBuildThisFileDirectory)resources\images\GameUI\bars\settings.scale-100.png" />
+    <Content Include="$(MSBuildThisFileDirectory)resources\images\GameUI\bars\tools.scale-100.png" />
     <Content Include="$(MSBuildThisFileDirectory)resources\images\GameUI\demandg.scale-100.png" />
     <Content Include="$(MSBuildThisFileDirectory)resources\images\GameUI\demandg.scale-140.png" />
     <Content Include="$(MSBuildThisFileDirectory)resources\images\GameUI\demandg.scale-180.png" />
