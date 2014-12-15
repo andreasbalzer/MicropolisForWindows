@@ -48,40 +48,6 @@ namespace Micropolis.ViewModels
         /// </summary>
         private static readonly string EXTENSION = "cty";
 
-        private readonly ConfirmationBar _confirmBar;
-        private readonly DemandIndicatorViewModel _demandIndViewModel;
-        private readonly MicropolisDrawingArea _drawingArea;
-        private readonly ScrollViewer _drawingAreaScroll;
-        private readonly MicropolisDrawingAreaViewModel _drawingAreaViewModel;
-        private readonly EvaluationPaneViewModel _evaluationPaneViewModel;
-        private readonly GraphsPaneViewModel _graphsPaneViewModel;
-
-
-        /// <summary>
-        ///     The map state menu items contains map states linking to their respective ToggleMenuFlyoutItems.
-        /// </summary>
-        private readonly Dictionary<MapState, LevelButtonViewModel> _mapStateMenuItems =
-            new Dictionary<MapState, LevelButtonViewModel>();
-
-        private readonly OverlayMapViewModel _mapViewViewModel;
-
-        private readonly ScrollViewer _messagesScrollViewer;
-        private readonly BudgetDialogViewModel _newBudgetDialogViewModel;
-        private readonly NotificationPaneViewModel _notificationPanelViewModel;
-        private readonly MediaElement _soundOutput;
-        private readonly MenuFlyout _speedMenu;
-        private readonly ToolbarViewModel _toolsPanelViewModel;
-
-        /// <summary>
-        ///     The current file loaded in the game.
-        /// </summary>
-        public StorageFile CurrentFile;
-
-        /// <summary>
-        ///     The current tool selected.
-        /// </summary>
-        public MicropolisTool CurrentTool;
-
         private bool _autoBudgetCheckBoxIsChecked;
         private string _autoBudgetCheckBoxText;
         private bool _autoBulldozeCheckBoxIsChecked;
@@ -119,12 +85,18 @@ namespace Micropolis.ViewModels
         private double _drawingAreaScrollViewportHeight;
         private double _drawingAreaScrollViewportWidth;
         private float _drawingAreaScrollZoomFactor;
+        private string _earthquakeButtonText;
         private string _evaluationButtonText;
         private bool _evaluationPaneIsVisible;
+        private string _fireButtonText;
         private bool _firstRun = true;
+        private string _floodButtonText;
         private string _fundsLblTextBlockText;
         private string _graphButtonText;
         private bool _graphsPaneIsVisible;
+        private string _hideMapButtonText;
+        private string _hideMessagesButtonText;
+        private string _hideToolsButtonText;
 
         /// <summary>
         ///     Indicates if auto budget is pending.
@@ -142,7 +114,6 @@ namespace Micropolis.ViewModels
         private bool _isDoSounds = true;
 
         private bool _isMessagesVisible;
-
         private bool _isMiniMapVisible;
 
         /// <summary>
@@ -152,10 +123,10 @@ namespace Micropolis.ViewModels
 
         private bool _isSpeedFast;
         private bool _isSpeedNormal;
-
         private bool _isSpeedPause;
         private bool _isSpeedSlow;
         private bool _isSpeedSuperFast;
+        private bool _isToolsVisible;
 
         /// <summary>
         ///     Real-time clock of when file was last saved
@@ -170,6 +141,7 @@ namespace Micropolis.ViewModels
         private string _loadButtonText;
         private ImageSource _mapLegendLblImageSource;
         private double _mapLegendLblOpacity;
+        private string _meltdownButtonText;
         private string _menuOverlaysHeaderButtonText;
         private string _menuZonesHeaderButtonText;
 
@@ -178,13 +150,12 @@ namespace Micropolis.ViewModels
         /// </summary>
         private MessagesPane _messagesPane;
 
+        private string _monsterButtonText;
         private bool _newBudgetDialogPaneOuterIsVisible;
         private string _newButtonText;
-        private NewCityDialogViewModel _newCityDialogViewModel;
         private bool _newGameDialogPaneOuterIsVisible;
         private bool _notificationPanelIsVisible;
         private string _popLblTextBlockText;
-
         private string _saveAsButtonText;
         private string _saveButtonText;
         private string _settingsButtonContentText;
@@ -194,6 +165,10 @@ namespace Micropolis.ViewModels
         /// </summary>
         private DispatcherTimer _shakeTimer;
 
+        private string _showMapButtonText;
+        private string _showMessagesButtonText;
+        private string _showToolsButtonText;
+
         /// <summary>
         ///     The sim timer progresses the game.
         /// </summary>
@@ -201,7 +176,7 @@ namespace Micropolis.ViewModels
 
         private bool _soundCheckBoxIsChecked;
         private string _soundCheckBoxText;
-
+        private string _speedButtonText;
         private string _titleTextBlockText;
 
         /// <summary>
@@ -209,21 +184,46 @@ namespace Micropolis.ViewModels
         /// </summary>
         private ToolStroke _toolStroke;
 
+        private string _tornadoButtonText;
+
+        /// <summary>
+        ///     The current file loaded in the game.
+        /// </summary>
+        public StorageFile CurrentFile;
+
+        /// <summary>
+        ///     The current tool selected.
+        /// </summary>
+        public MicropolisTool CurrentTool;
+
         /// <summary>
         ///     The touch pointer routed event arguments of current confirmation pending when user touched screen and confirmation
         ///     bar awaits user action.
         /// </summary>
         private PointerRoutedEventArgs touchPointerRoutedEventArgsOfCurrentConfirmationPending;
 
-        private bool _isToolsVisible;
-        private string _earthquakeButtonText;
-        private string _monsterButtonText;
-        private string _fireButtonText;
-        private string _floodButtonText;
-        private string _meltdownButtonText;
-        private string _tornadoButtonText;
-        private string _speedButtonText;
+        private readonly ConfirmationBar _confirmBar;
+        private readonly DemandIndicatorViewModel _demandIndViewModel;
+        private readonly MicropolisDrawingArea _drawingArea;
+        private readonly ScrollViewer _drawingAreaScroll;
+        private readonly MicropolisDrawingAreaViewModel _drawingAreaViewModel;
+        private readonly EvaluationPaneViewModel _evaluationPaneViewModel;
+        private readonly GraphsPaneViewModel _graphsPaneViewModel;
 
+        /// <summary>
+        ///     The map state menu items contains map states linking to their respective ToggleMenuFlyoutItems.
+        /// </summary>
+        private readonly Dictionary<MapState, LevelButtonViewModel> _mapStateMenuItems =
+            new Dictionary<MapState, LevelButtonViewModel>();
+
+        private readonly OverlayMapViewModel _mapViewViewModel;
+        private readonly ScrollViewer _messagesScrollViewer;
+        private readonly BudgetDialogViewModel _newBudgetDialogViewModel;
+        private readonly NewCityDialogViewModel _newCityDialogViewModel;
+        private readonly NotificationPaneViewModel _notificationPanelViewModel;
+        private readonly MediaElement _soundOutput;
+        private readonly MenuFlyout _speedMenu;
+        private readonly ToolbarViewModel _toolsPanelViewModel;
 
         public MainGamePageViewModel(NotificationPaneViewModel notificationPanelViewModel,
             MicropolisDrawingAreaViewModel drawingAreaViewModel,
@@ -236,6 +236,16 @@ namespace Micropolis.ViewModels
             _newCityDialogViewModel = newCityDialogViewModel;
             _newCityDialogViewModel.MainPageViewModel = this;
             _mapViewViewModel = mapViewViewModel;
+
+            ShowToolsButtonText = Strings.GetString("main.showTools");
+            HideToolsButtonText = Strings.GetString("main.hideTools");
+
+            ShowMessagesButtonText = Strings.GetString("main.showMessages");
+            HideMessagesButtonText = Strings.GetString("main.hideMessages");
+
+            ShowMapButtonText = Strings.GetString("main.showMap");
+            HideMapButtonText = Strings.GetString("main.hideMap");
+
             MenuOverlaysHeaderButtonText = Strings.GetString("menu.overlays");
             MenuZonesHeaderFlyoutItems = new ObservableCollection<LevelButtonViewModel>();
             MenuOverlaysHeaderFlyoutItems = new ObservableCollection<LevelButtonViewModel>();
@@ -285,11 +295,6 @@ namespace Micropolis.ViewModels
             SpeedSuperFastCommand = new DelegateCommand(SpeedSuperFast);
         }
 
-        private void ToggleToolsButton_Click()
-        {
-            _toolsPanelViewModel.ToolBarIsVisible = !_toolsPanelViewModel.ToolBarIsVisible;
-        }
-
         public DelegateCommand AutoBudgetCommand { get; set; }
         public DelegateCommand AutoBulldozeCommand { get; set; }
         public DelegateCommand BudgetCommand { get; set; }
@@ -309,7 +314,6 @@ namespace Micropolis.ViewModels
         public DelegateCommand TornadoCommand { get; set; }
         public DelegateCommand ToggleToolsCommand { get; set; }
 
-        
         public bool IsMessagesVisible
         {
             get { return _isMessagesVisible; }
@@ -332,6 +336,42 @@ namespace Micropolis.ViewModels
         {
             get { return _drawingAreaScrollViewportWidth; }
             set { SetProperty(ref _drawingAreaScrollViewportWidth, value); }
+        }
+
+        public string ShowMapButtonText
+        {
+            get { return _showMapButtonText; }
+            set { SetProperty(ref _showMapButtonText, value); }
+        }
+
+        public string ShowToolsButtonText
+        {
+            get { return _showToolsButtonText; }
+            set { SetProperty(ref _showToolsButtonText, value); }
+        }
+
+        public string ShowMessagesButtonText
+        {
+            get { return _showMessagesButtonText; }
+            set { SetProperty(ref _showMessagesButtonText, value); }
+        }
+
+        public string HideMapButtonText
+        {
+            get { return _hideMapButtonText; }
+            set { SetProperty(ref _hideMapButtonText, value); }
+        }
+
+        public string HideToolsButtonText
+        {
+            get { return _hideToolsButtonText; }
+            set { SetProperty(ref _hideToolsButtonText, value); }
+        }
+
+        public string HideMessagesButtonText
+        {
+            get { return _hideMessagesButtonText; }
+            set { SetProperty(ref _hideMessagesButtonText, value); }
         }
 
         public double DrawingAreaScrollViewportHeight
@@ -441,7 +481,6 @@ namespace Micropolis.ViewModels
 
             set { SetProperty(ref _saveAsButtonText, value); }
         }
-
 
         public string SettingsButtonContentText
         {
@@ -589,13 +628,11 @@ namespace Micropolis.ViewModels
             set { SetProperty(ref _fundsLblTextBlockText, value); }
         }
 
-
         public bool AutoBudgetCheckBoxIsChecked
         {
             get { return _autoBudgetCheckBoxIsChecked; }
             set { SetProperty(ref _autoBudgetCheckBoxIsChecked, value); }
         }
-
 
         public bool AutoBulldozeCheckBoxIsChecked
         {
@@ -689,7 +726,6 @@ namespace Micropolis.ViewModels
         }
 
         public ObservableCollection<LevelButtonViewModel> MenuZonesHeaderFlyoutItems { get; set; }
-
         public ObservableCollection<LevelButtonViewModel> MenuOverlaysHeaderFlyoutItems { get; set; }
 
         public string MenuZonesHeaderButtonText
@@ -737,7 +773,6 @@ namespace Micropolis.ViewModels
             }
         }
 
-
         /// <summary>
         ///     Fired whenever the mayor's money changes.
         /// </summary>
@@ -764,11 +799,11 @@ namespace Micropolis.ViewModels
             if (!_isDoSounds)
                 return;
 
-            Uri afile = sound.GetAudioFile();
+            var afile = sound.GetAudioFile();
             if (afile == null)
                 return;
 
-            bool isOnScreen =
+            var isOnScreen =
                 RectangleContainsPoint(
                     new Rect(DrawingAreaScrollHorizontalOffset, DrawingAreaScrollVerticalOffset,
                         DrawingAreaScrollViewportWidth, DrawingAreaScrollViewportHeight),
@@ -810,6 +845,11 @@ namespace Micropolis.ViewModels
         {
         }
 
+        private void ToggleToolsButton_Click()
+        {
+            _toolsPanelViewModel.ToolBarIsVisible = !_toolsPanelViewModel.ToolBarIsVisible;
+        }
+
         public event EventHandler<Uri> PlaySound;
 
         private void OnPlaySound(Uri file)
@@ -829,7 +869,6 @@ namespace Micropolis.ViewModels
         {
             IsMessagesVisible = !IsMessagesVisible;
         }
-
 
         private void SpeedPause()
         {
@@ -881,7 +920,6 @@ namespace Micropolis.ViewModels
             SetSpeed(Speeds.Speed["SUPER_FAST"]);
         }
 
-
         /// <summary>
         ///     Selects the tool specified.
         /// </summary>
@@ -895,7 +933,7 @@ namespace Micropolis.ViewModels
                     ? Strings.GetString("tool." + CurrentTool.Name + ".name")
                     : CurrentTool.Name;
 
-            int cost = CurrentTool.GetToolCost();
+            var cost = CurrentTool.GetToolCost();
             CurrentToolCostLblTextBlockText = cost != 0 ? FormatFunds(cost) : " ";
 
             if (newTool == MicropolisTools.MicropolisTool["EMPTY"])
@@ -936,7 +974,7 @@ namespace Micropolis.ViewModels
                 // Register handler for CommandsRequested events from the settings pane
                 SettingsPane.GetForCurrentView().CommandsRequested += SettingsCharm.OnCommandsInGameRequested;
 
-                bool engineExists = Engine != null;
+                var engineExists = Engine != null;
                 // If we loaded another game via app commands, we already have an engine.
                 if (!engineExists)
                 {
@@ -965,15 +1003,15 @@ namespace Micropolis.ViewModels
         private void ProcessAppCommands()
         {
             var currentApp = (ISupportsAppCommands) Application.Current;
-            AppCommand loadCityCommand =
+            var loadCityCommand =
                 currentApp.AppCommands.FirstOrDefault(s => s.Instruction == AppCommands.LOADFILE);
 
-            bool loadCity = loadCityCommand != null; // loadCityCommand present?
+            var loadCity = loadCityCommand != null; // loadCityCommand present?
 
-            AppCommand loadCityAsNewCommand =
+            var loadCityAsNewCommand =
                 currentApp.AppCommands.FirstOrDefault(s => s.Instruction == AppCommands.LOADFILEASNEWCITY);
 
-            bool loadCityAsNew = loadCityAsNewCommand != null; // loadCityCommand present?
+            var loadCityAsNew = loadCityAsNewCommand != null; // loadCityCommand present?
 
             if (loadCity)
             {
@@ -1018,7 +1056,6 @@ namespace Micropolis.ViewModels
                 });
             }
         }
-
 
         /// <summary>
         ///     Handles the KeyDown event of the MainPage control for zooming or canceling an action.
@@ -1075,7 +1112,6 @@ namespace Micropolis.ViewModels
                 }
             }
         }
-
 
         /// <summary>
         ///     Handles the PointerMoved event of the DrawingArea control for when a tool is dragged or hovered.
@@ -1167,14 +1203,14 @@ namespace Micropolis.ViewModels
         /// <param name="args">The <see cref="PointerRoutedEventArgs" /> instance containing the event data.</param>
         private void DrawingArea_PointerWheelChanged(object sender, PointerRoutedEventArgs args)
         {
-            int delta = args.GetCurrentPoint(_drawingArea).Properties.MouseWheelDelta;
+            var delta = args.GetCurrentPoint(_drawingArea).Properties.MouseWheelDelta;
 
             try
             {
                 var posX = (int) (args.GetCurrentPoint(_drawingArea).Position.X + DrawingAreaScrollHorizontalOffset);
                 var posY = (int) (args.GetCurrentPoint(_drawingArea).Position.Y + DrawingAreaScrollVerticalOffset);
 
-                CityLocation loc = _drawingAreaViewModel.GetCityLocation(posX, posY);
+                var loc = _drawingAreaViewModel.GetCityLocation(posX, posY);
                 onMouseWheelMoved(delta, new Point(posX, posY));
             }
             catch (Exception e)
@@ -1182,7 +1218,6 @@ namespace Micropolis.ViewModels
                 ShowErrorMessage(e);
             }
         }
-
 
         /// <summary>
         ///     Initializes the MainGamePage.
@@ -1364,7 +1399,6 @@ namespace Micropolis.ViewModels
             }
         }
 
-
         /// <summary>
         ///     Sets the engine specified and updates the user interface.
         /// </summary>
@@ -1387,7 +1421,7 @@ namespace Micropolis.ViewModels
                 Engine.AddEarthquakeListener(this);
             }
 
-            bool timerEnabled = IsTimerActive();
+            var timerEnabled = IsTimerActive();
             if (timerEnabled)
             {
                 StopTimer();
@@ -1402,14 +1436,15 @@ namespace Micropolis.ViewModels
             ReloadFunds();
             ReloadOptions();
 
-            bool notPaused = Speeds.Speed.First(s => s.Value == Engine.SimSpeed).Key != "PAUSED";
+            var notPaused = Speeds.Speed.First(s => s.Value == Engine.SimSpeed).Key != "PAUSED";
             if (timerEnabled || notPaused)
             {
                 StartTimer();
             }
         }
 
-        /// <summary>DisastersCheckBoxText
+        /// <summary>
+        ///     DisastersCheckBoxText
         ///     Determines whether the game needs to be saved.
         /// </summary>
         /// <returns></returns>
@@ -1436,7 +1471,7 @@ namespace Micropolis.ViewModels
         /// <remarks>ToDo: Depends on translation. Make it depend on ID.</remarks>
         private void CommandInvokedHandler(IUICommand command)
         {
-            string yesString = Strings.GetString("main.saveDialogYes");
+            var yesString = Strings.GetString("main.saveDialogYes");
             if (command.Label == yesString) //ToDo: test this conversion of object to int
             {
                 // Display message showing the label of the command that was invoked
@@ -1452,7 +1487,7 @@ namespace Micropolis.ViewModels
         {
             if (NeedsSaved())
             {
-                bool timerEnabled = IsTimerActive();
+                var timerEnabled = IsTimerActive();
                 if (timerEnabled)
                 {
                     StopTimer();
@@ -1460,8 +1495,8 @@ namespace Micropolis.ViewModels
 
                 try
                 {
-                    string yesString = Strings.GetString("main.saveDialogYes");
-                    string noString = Strings.GetString("main.saveDialogNo");
+                    var yesString = Strings.GetString("main.saveDialogYes");
+                    var noString = Strings.GetString("main.saveDialogNo");
                     var saveDialog = new MessageDialog(Strings.GetString("main.save_query"));
                     saveDialog.Commands.Add(new UICommand(
                         yesString,
@@ -1496,7 +1531,6 @@ namespace Micropolis.ViewModels
         {
             MaybeSaveCity();
         }
-
 
         /// <summary>
         ///     Handles the Click event of the NewButton control.
@@ -1698,7 +1732,6 @@ namespace Micropolis.ViewModels
             OnAboutClicked();
         }
 
-
         /// <summary>
         ///     Makes the menu and displays translated strings.
         /// </summary>
@@ -1727,9 +1760,9 @@ namespace Micropolis.ViewModels
             SpeedButtonText = Strings.GetString("menu.speed");
 
             _difficultyMenuItems = new Dictionary<int, LevelButtonViewModel>();
-            for (int i = GameLevel.MIN_LEVEL; i <= GameLevel.MAX_LEVEL; i++)
+            for (var i = GameLevel.MIN_LEVEL; i <= GameLevel.MAX_LEVEL; i++)
             {
-                int level = i;
+                var level = i;
                 var menuItemc = new LevelButtonViewModel {Text = Strings.GetString("menu.difficulty." + level)};
                 menuItemc.ClickCommand = new DelegateCommand(() => { OnDifficultyClicked(level); });
 
@@ -1789,7 +1822,7 @@ namespace Micropolis.ViewModels
             _lastSavedTime = DateTime.Now.Millisecond;
             if (CurrentFile != null)
             {
-                String fileName = CurrentFile.Name;
+                var fileName = CurrentFile.Name;
                 if (fileName.EndsWith("." + EXTENSION))
                 {
                     fileName = fileName.Substring(0, fileName.Length - 1 - EXTENSION.Length);
@@ -1837,7 +1870,7 @@ namespace Micropolis.ViewModels
         /// <returns></returns>
         private async Task<bool> OnSaveCityAsClicked()
         {
-            bool timerEnabled = IsTimerActive();
+            var timerEnabled = IsTimerActive();
             if (timerEnabled)
             {
                 StopTimer();
@@ -1847,7 +1880,7 @@ namespace Micropolis.ViewModels
                 var picker = new FileSavePicker {DefaultFileExtension = ".cty"};
                 picker.FileTypeChoices.Add(".cty Micropolis city", new List<string> {".cty"});
                 picker.FileTypeChoices.Add(".cty_file Micropolis city", new List<string> {".cty_file"});
-                StorageFile fileToSave = await picker.PickSaveFileAsync();
+                var fileToSave = await picker.PickSaveFileAsync();
                 if (fileToSave != null)
                 {
                     await Engine.Save(fileToSave);
@@ -1876,9 +1909,9 @@ namespace Micropolis.ViewModels
         private async void OnLoadGameClicked()
         {
             // check if user wants to save their current city
-            bool saveNeeded = await MaybeSaveCity();
+            var saveNeeded = await MaybeSaveCity();
 
-            bool timerEnabled = IsTimerActive();
+            var timerEnabled = IsTimerActive();
             if (timerEnabled)
             {
                 StopTimer();
@@ -1889,7 +1922,7 @@ namespace Micropolis.ViewModels
                 var picker = new FileOpenPicker();
                 picker.FileTypeFilter.Add(".cty");
                 picker.FileTypeFilter.Add(".cty_file");
-                StorageFile file = await picker.PickSingleFileAsync();
+                var file = await picker.PickSingleFileAsync();
 
                 if (file != null)
                 {
@@ -1913,13 +1946,12 @@ namespace Micropolis.ViewModels
             }
         }
 
-
         /// <summary>
         ///     Called when the user clicked the new city button to open the dialog.
         /// </summary>
         private async void OnNewCityClicked()
         {
-            bool saveNeeded = await MaybeSaveCity();
+            var saveNeeded = await MaybeSaveCity();
             //if (saveNeeded)
             //{
             DoNewCity(false);
@@ -1932,7 +1964,7 @@ namespace Micropolis.ViewModels
         /// <param name="firstTime">if set to <c>true</c> [first time].</param>
         public void DoNewCity(bool firstTime)
         {
-            bool timerEnabled = IsTimerActive();
+            var timerEnabled = IsTimerActive();
             if (timerEnabled)
             {
                 StopTimer();
@@ -1972,7 +2004,7 @@ namespace Micropolis.ViewModels
             if (!Engine.TestBounds(xpos, ypos))
                 return;
 
-            ZoneStatus z = Engine.QueryZoneStatus(xpos, ypos);
+            var z = Engine.QueryZoneStatus(xpos, ypos);
             _notificationPanelViewModel.ShowZoneStatus(xpos, ypos, z);
         }
 
@@ -1983,8 +2015,8 @@ namespace Micropolis.ViewModels
         /// <param name="mousePt">The mouse position to center at.</param>
         private void DoZoom(int dir, Point mousePt)
         {
-            int oldZoom = _drawingAreaViewModel.GetTileSize();
-            int newZoom = dir < 0 ? (oldZoom/2) : (oldZoom*2);
+            var oldZoom = _drawingAreaViewModel.GetTileSize();
+            var newZoom = dir < 0 ? (oldZoom/2) : (oldZoom*2);
             if (newZoom <= 8)
             {
                 newZoom = 8;
@@ -1997,7 +2029,7 @@ namespace Micropolis.ViewModels
             if (oldZoom != newZoom)
             {
                 // preserve effective mouse position in viewport when changing zoom level
-                double zoomFactor = newZoom/(double) oldZoom;
+                var zoomFactor = newZoom/(double) oldZoom;
                 var pos = new Point(DrawingAreaScrollHorizontalOffset, DrawingAreaScrollVerticalOffset);
                 var newX = (int) Math.Round(mousePt.X*zoomFactor - (mousePt.X - pos.X));
                 var newY = (int) Math.Round(mousePt.Y*zoomFactor - (mousePt.Y - pos.Y));
@@ -2035,7 +2067,6 @@ namespace Micropolis.ViewModels
             }*/
         }
 
-
         /// <summary>
         ///     Called when the user wants to use a tool and presses the mouse button for it. Could be a single tool use or a drag
         ///     at this point.
@@ -2044,14 +2075,14 @@ namespace Micropolis.ViewModels
         private void OnToolDown(PointerRoutedEventArgs ev)
         {
             double zoomFactor = DrawingAreaScrollZoomFactor;
-            ScrollViewer target = _drawingAreaScroll;
+            var target = _drawingAreaScroll;
             if (ev.GetCurrentPoint(target).Properties.IsRightButtonPressed)
             {
                 var posX =
                     (int) ((ev.GetCurrentPoint(target).Position.X + DrawingAreaScrollHorizontalOffset)/zoomFactor);
                 var posY = (int) ((ev.GetCurrentPoint(target).Position.Y + DrawingAreaScrollVerticalOffset)/zoomFactor);
 
-                CityLocation loc = _drawingAreaViewModel.GetCityLocation(posX, posY);
+                var loc = _drawingAreaViewModel.GetCityLocation(posX, posY);
 
                 DoQueryTool(loc.X, loc.Y);
                 return;
@@ -2066,9 +2097,9 @@ namespace Micropolis.ViewModels
             var posXb = (int) ((ev.GetCurrentPoint(target).Position.X + DrawingAreaScrollHorizontalOffset)/zoomFactor);
             var posYb = (int) ((ev.GetCurrentPoint(target).Position.Y + DrawingAreaScrollVerticalOffset)/zoomFactor);
 
-            CityLocation locb = _drawingAreaViewModel.GetCityLocation(posXb, posYb);
-            int x = locb.X;
-            int y = locb.Y;
+            var locb = _drawingAreaViewModel.GetCityLocation(posXb, posYb);
+            var x = locb.X;
+            var y = locb.Y;
 
             if (CurrentTool == MicropolisTools.MicropolisTool["QUERY"])
             {
@@ -2094,7 +2125,7 @@ namespace Micropolis.ViewModels
             _lastToolUsage.X = x;
             _lastToolUsage.Y = y;
 
-            bool isQueryTool = CurrentTool == MicropolisTools.MicropolisTool["QUERY"];
+            var isQueryTool = CurrentTool == MicropolisTools.MicropolisTool["QUERY"];
             if (isQueryTool)
             {
                 DoQueryTool(x, y);
@@ -2142,8 +2173,8 @@ namespace Micropolis.ViewModels
         {
             if (_toolStroke != null)
             {
-                CityLocation loc = _toolStroke.GetLocation();
-                ToolResult tr = _toolStroke.Apply();
+                var loc = _toolStroke.GetLocation();
+                var tr = _toolStroke.Apply();
                 ShowToolResult(loc, tr);
 
                 _drawingAreaViewModel.RepaintNow(true);
@@ -2181,7 +2212,7 @@ namespace Micropolis.ViewModels
         private void OnToolDrag(PointerRoutedEventArgs ev)
         {
             double zoomFactor = DrawingAreaScrollZoomFactor;
-            ScrollViewer target = _drawingAreaScroll;
+            var target = _drawingAreaScroll;
             if (CurrentTool == null)
                 return;
             /*if ((ev.getModifiersEx() & MouseEvent.BUTTON1_DOWN_MASK) == 0)
@@ -2191,10 +2222,10 @@ namespace Micropolis.ViewModels
             var posX = (int) ((ev.GetCurrentPoint(target).Position.X/zoomFactor + DrawingAreaScrollHorizontalOffset));
             var posY = (int) ((ev.GetCurrentPoint(target).Position.Y/zoomFactor + DrawingAreaScrollVerticalOffset));
 
-            CityLocation loc = _drawingAreaViewModel.GetCityLocation(posX, posY);
+            var loc = _drawingAreaViewModel.GetCityLocation(posX, posY);
 
-            int x = loc.X;
-            int y = loc.Y;
+            var x = loc.X;
+            var y = loc.Y;
             if (x == _lastToolUsage.X && y == _lastToolUsage.Y)
                 return;
 
@@ -2236,7 +2267,7 @@ namespace Micropolis.ViewModels
             }
 
             double zoomFactor = DrawingAreaScrollZoomFactor;
-            ScrollViewer target = _drawingAreaScroll;
+            var target = _drawingAreaScroll;
             if (CurrentTool == null || CurrentTool == MicropolisTools.MicropolisTool["QUERY"])
             {
                 _drawingAreaViewModel.SetToolCursor(null);
@@ -2246,11 +2277,11 @@ namespace Micropolis.ViewModels
             var posX = (int) ((ev.GetCurrentPoint(target).Position.X + DrawingAreaScrollHorizontalOffset)/zoomFactor);
             var posY = (int) ((ev.GetCurrentPoint(target).Position.Y + DrawingAreaScrollVerticalOffset)/zoomFactor);
 
-            CityLocation loc = _drawingAreaViewModel.GetCityLocation(posX, posY);
-            int x = loc.X;
-            int y = loc.Y;
-            int w = CurrentTool.GetWidth();
-            int h = CurrentTool.GetHeight();
+            var loc = _drawingAreaViewModel.GetCityLocation(posX, posY);
+            var x = loc.X;
+            var y = loc.Y;
+            var w = CurrentTool.GetWidth();
+            var h = CurrentTool.GetHeight();
 
             if (w >= 3)
                 x--;
@@ -2298,7 +2329,7 @@ namespace Micropolis.ViewModels
                     CitySound(Sounds.Sound["SORRY"], loc);
                     break;
 
-                    //assert false;
+                //assert false;
             }
         }
 
@@ -2342,15 +2373,15 @@ namespace Micropolis.ViewModels
         /// </summary>
         internal void StartTimer()
         {
-            Engine.Micropolis engine = Engine;
-            int count = engine.SimSpeed.SimStepsPerUpdate;
+            var engine = Engine;
+            var count = engine.SimSpeed.SimStepsPerUpdate;
 
             if (engine.SimSpeed == Speeds.Speed["PAUSED"])
                 return;
 
             if (_currentEarthquake != null)
             {
-                int interval = 3000/MicropolisDrawingAreaViewModel.SHAKE_STEPS;
+                var interval = 3000/MicropolisDrawingAreaViewModel.SHAKE_STEPS;
                 _shakeTimer = new DispatcherTimer {Interval = new TimeSpan(0, 0, 0, 0, interval)};
                 _shakeTimer.Tick += delegate
                 {
@@ -2371,7 +2402,7 @@ namespace Micropolis.ViewModels
             _simTimer = new DispatcherTimer {Interval = new TimeSpan(0, 0, 0, 0, engine.SimSpeed.AnimationDelay)};
             _simTimer.Tick += delegate
             {
-                for (int i = 0; i < count; i++)
+                for (var i = 0; i < count; i++)
                 {
                     engine.Animate();
                     if (!engine.AutoBudget && engine.IsBudgetTime())
@@ -2386,7 +2417,6 @@ namespace Micropolis.ViewModels
 
             _simTimer.Start();
         }
-
 
         /// <summary>
         ///     Shows the error message.
@@ -2475,7 +2505,6 @@ namespace Micropolis.ViewModels
                 item.Value.IsChecked = (item.Key.Equals(newDifficulty));
         }
 
-
         private void SetSpeed(Speed newSpeed)
         {
             if (IsTimerActive())
@@ -2517,7 +2546,7 @@ namespace Micropolis.ViewModels
                 case Disaster.EARTHQUAKE:
                     Engine.MakeEarthquake();
                     break;
-                    //assert false; //unknown disaster
+                //assert false; //unknown disaster
             }
         }
 
@@ -2545,12 +2574,11 @@ namespace Micropolis.ViewModels
             IsSpeedSlow = Engine.SimSpeed == Speeds.Speed["SLOW"];
             IsSpeedPause = Engine.SimSpeed == Speeds.Speed["PAUSED"];
 
-            for (int i = GameLevel.MIN_LEVEL; i <= GameLevel.MAX_LEVEL; i++)
+            for (var i = GameLevel.MIN_LEVEL; i <= GameLevel.MAX_LEVEL; i++)
             {
                 _difficultyMenuItems[i].IsChecked = (Engine.GameLevel == i);
             }
         }
-
 
         /// <summary>
         ///     Checks whether the rectangle contains the point.
@@ -2621,7 +2649,7 @@ namespace Micropolis.ViewModels
         /// <param name="isEndOfYear">if set to <c>true</c> [is end of year].</param>
         private void ShowBudgetWindow(bool isEndOfYear)
         {
-            bool timerEnabled = IsTimerActive();
+            var timerEnabled = IsTimerActive();
             if (timerEnabled)
             {
                 StopTimer();
@@ -2656,7 +2684,7 @@ namespace Micropolis.ViewModels
         /// <returns></returns>
         private LevelButtonViewModel MakeMapStateMenuItem(String stringPrefix, MapState state)
         {
-            String caption = Strings.GetString(stringPrefix);
+            var caption = Strings.GetString(stringPrefix);
             var menuItem = new LevelButtonViewModel {Text = caption};
             menuItem.ClickCommand = new DelegateCommand(() => { SetMapState(state); });
             _mapStateMenuItems.Add(state, menuItem);
@@ -2682,16 +2710,16 @@ namespace Micropolis.ViewModels
         /// <param name="state">The state.</param>
         private async void SetMapLegend(MapState state)
         {
-            String k = "legend_image." + state;
+            var k = "legend_image." + state;
             Uri iconUrl = null;
             if (Strings.ContainsKey(k))
             {
-                String iconName = "ms-appx:///resources/" + Strings.GetString(k);
+                var iconName = "ms-appx:///resources/" + Strings.GetString(k);
                 iconUrl = new Uri(iconName, UriKind.RelativeOrAbsolute);
 
-                StorageFolder folder = Package.Current.InstalledLocation;
+                var folder = Package.Current.InstalledLocation;
                 folder = await folder.GetFolderAsync("resources");
-                IStorageItem file =
+                var file =
                     await
                         folder.TryGetItemAsync(
                             iconUrl.AbsoluteUri.Substring(
@@ -2714,9 +2742,9 @@ namespace Micropolis.ViewModels
         /// </summary>
         private void OnAboutClicked()
         {
-            String version = "0.5";
-            String versionStr = Strings.GetString("main.about_caption") + ": " +
-                                Strings.GetString("main.version_string") + " " + version;
+            var version = "0.5";
+            var versionStr = Strings.GetString("main.about_caption") + ": " +
+                             Strings.GetString("main.version_string") + " " + version;
 
             var d = new MessageDialog(Strings.GetString("main.about_text") + versionStr);
         }
@@ -2745,7 +2773,6 @@ namespace Micropolis.ViewModels
             NotificationPanelIsVisible = true;
         }
 
-
         /// <summary>
         ///     Scrolls the game field by delta.
         /// </summary>
@@ -2753,8 +2780,8 @@ namespace Micropolis.ViewModels
         /// <param name="dy">The vertical delta.</param>
         internal void ScrollGameFieldBy(int dx, int dy)
         {
-            double horizontalPos = DrawingAreaScrollHorizontalOffset - dx;
-            double verticalPos = DrawingAreaScrollVerticalOffset - dy;
+            var horizontalPos = DrawingAreaScrollHorizontalOffset - dx;
+            var verticalPos = DrawingAreaScrollVerticalOffset - dy;
             OnDrawingAreaScrollChangeView(horizontalPos, verticalPos, 1);
         }
 
@@ -2784,7 +2811,7 @@ namespace Micropolis.ViewModels
         {
             if (NeedsSaved())
             {
-                bool timerEnabled = IsTimerActive();
+                var timerEnabled = IsTimerActive();
                 if (timerEnabled)
                 {
                     StopTimer();
@@ -2792,8 +2819,8 @@ namespace Micropolis.ViewModels
 
                 try
                 {
-                    StorageFolder folderToSave = ApplicationData.Current.LocalFolder;
-                    StorageFile fileToSave =
+                    var folderToSave = ApplicationData.Current.LocalFolder;
+                    var fileToSave =
                         await folderToSave.CreateFileAsync("autosave.cty", CreationCollisionOption.ReplaceExisting);
                     if (fileToSave != null)
                     {

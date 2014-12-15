@@ -1772,14 +1772,14 @@
                         <Grid>
                             <StackPanel Orientation="Horizontal"
                                         Visibility="{Binding IsMessagesVisible, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=inverted, FallbackValue=Collapsed}">
-                                <TextBlock FontSize="16" FontWeight="SemiLight" Text="Nachrichten einblenden"
+                                <TextBlock FontSize="16" FontWeight="SemiLight" Text="{Binding ShowMessagesButtonText}"
                                            VerticalAlignment="Center" />
                                 <TextBlock FontSize="16" Margin="12,0,0,0" Text="&#xE099;" VerticalAlignment="Center"
                                            FontFamily="Segoe UI Symbol" />
                             </StackPanel>
                             <StackPanel Orientation="Horizontal"
                                         Visibility="{Binding IsMessagesVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
-                                <TextBlock FontSize="16" FontWeight="SemiLight" Text="Nachrichten ausblenden"
+                                <TextBlock FontSize="16" FontWeight="SemiLight" Text="{Binding HideMessagesButtonText}"
                                            VerticalAlignment="Center" />
                                 <TextBlock FontSize="16" Margin="12,0,0,2" Text="&#xE098;" VerticalAlignment="Center"
                                            FontFamily="Segoe UI Symbol" />
@@ -1810,14 +1810,14 @@
                         <Grid>
                             <StackPanel Orientation="Horizontal"
                                         Visibility="{Binding IsMiniMapVisible, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=inverted, FallbackValue=Collapsed}">
-                                <TextBlock FontSize="16" FontWeight="SemiLight" Text="Karte einblenden"
+                                <TextBlock FontSize="16" FontWeight="SemiLight" Text="{Binding ShowMapButtonText}"
                                            VerticalAlignment="Center" />
                                 <TextBlock FontSize="16" Margin="12,0,0,0" Text="&#xE099;" VerticalAlignment="Center"
                                            FontFamily="Segoe UI Symbol" />
                             </StackPanel>
                             <StackPanel Orientation="Horizontal"
                                         Visibility="{Binding IsMiniMapVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
-                                <TextBlock FontSize="16" FontWeight="SemiLight" Text="Karte ausblenden"
+                                <TextBlock FontSize="16" FontWeight="SemiLight" Text="{Binding HideMapButtonText}"
                                            VerticalAlignment="Center" />
                                 <TextBlock FontSize="16" Margin="12,0,0,2" Text="&#xE098;" VerticalAlignment="Center"
                                            FontFamily="Segoe UI Symbol" />
@@ -1854,14 +1854,14 @@
                     <Grid>
                         <StackPanel Orientation="Horizontal"
                                     Visibility="{Binding ViewModel.ToolBarIsVisible, ElementName=ToolsPanel, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=inverted, FallbackValue=Collapsed}">
-                            <TextBlock FontSize="16" FontWeight="SemiLight" Text="Tools einblenden"
+                            <TextBlock FontSize="16" FontWeight="SemiLight" Text="{Binding ShowToolsButtonText}"
                                        VerticalAlignment="Center" />
                             <TextBlock FontSize="16" Margin="12,0,0,0" Text="&#xE098;" VerticalAlignment="Center"
                                        FontFamily="Segoe UI Symbol" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal"
                                     Visibility="{Binding ViewModel.ToolBarIsVisible, ElementName=ToolsPanel, Converter={StaticResource BooleanToVisibilityConverter}}">
-                            <TextBlock FontSize="16" FontWeight="SemiLight" Text="Tools ausblenden"
+                            <TextBlock FontSize="16" FontWeight="SemiLight" Text="{Binding HideToolsButtonText}"
                                        VerticalAlignment="Center" />
                             <TextBlock FontSize="16" Margin="12,0,0,2" Text="&#xE099;" VerticalAlignment="Center"
                                        FontFamily="Segoe UI Symbol" />
