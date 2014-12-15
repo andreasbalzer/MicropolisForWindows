@@ -168,7 +168,7 @@ namespace Micropolis.ViewModels
             long diff = DateTime.Now.Ticks - lastRepaintTicks;
             if (diff > x.Ticks)
             {
-                if (repaintNow)
+                if (repaintNow || UndrawnTilesInView())
                 {
                     repaintNow = false;
                     PaintComponentInView();
@@ -191,6 +191,26 @@ namespace Micropolis.ViewModels
             int paintXMax = (int) _mainPage.MapWidth/TILE_WIDTH;
             int paintYMax = (int) _mainPage.MapHeight/TILE_HEIGHT;
             PaintComponent(false, paintX, paintY, paintXMax, paintYMax);
+        }
+
+        private bool UndrawnTilesInView()
+        { //ToDo: implement version based on bounding boxes
+            var paintX = (int)(_mainPage.HorizontalMapOffset / _mainPage.ZoomFactor / TILE_WIDTH);
+            var paintY = (int)(_mainPage.VerticalMapOffset / _mainPage.ZoomFactor / TILE_HEIGHT);
+            int paintXMax = (int)_mainPage.MapWidth / TILE_WIDTH;
+            int paintYMax = (int)_mainPage.MapHeight / TILE_HEIGHT;
+
+            for (var x = paintX; x < paintXMax; x++)
+            {
+                for (var y = paintY; y < paintYMax; y++)
+                {
+                    if (_buffer.Get(x, y) == -1)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
 
 
