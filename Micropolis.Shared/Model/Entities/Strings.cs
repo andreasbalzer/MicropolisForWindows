@@ -143,10 +143,10 @@ namespace Micropolis
                     // a language different from english should be loaded (english is loaded below as default and fall back)
                 {
                     Micropolis.Utils.ThreadCancellation.CheckCancellation(cancelToken);
-                    await LoadAndParseFile("strings", "CityMessages" + languageModifier + ".properties");
-                    await LoadAndParseFile("strings", "CityStrings" + languageModifier + ".properties");
-                    await LoadAndParseFile("strings", "GuiStrings" + languageModifier + ".properties");
-                    await LoadAndParseFile("strings", "StatusMessages" + languageModifier + ".properties");
+                    await LoadAndParseFile("strings", "CityMessages_" + languageModifier + ".properties");
+                    await LoadAndParseFile("strings", "CityStrings_" + languageModifier + ".properties");
+                    await LoadAndParseFile("strings", "GuiStrings_" + languageModifier + ".properties");
+                    await LoadAndParseFile("strings", "StatusMessages_" + languageModifier + ".properties");
                 }
             }
             catch
