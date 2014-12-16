@@ -87,25 +87,17 @@ namespace Micropolis
         /// </summary>
         private void DetermineVisualState()
         {
-            ApplicationView applicationView = ApplicationView.GetForCurrentView();
             Rect size = Window.Current.Bounds;
-
-            if (applicationView.IsFullScreen)
-            {
-                if (applicationView.Orientation == ApplicationViewOrientation.Landscape)
-                    _state = "FullScreenLandscape";
-                else
-                    _state = "FullScreenPortrait";
-            }
-            else
-            {
-                if (size.Width <= 320)
+            
+                if (size.Width >= 1337)
+                    _state = "state1337";
+                else if (size.Width <= 320)
                     _state = "Snapped";
                 else if (size.Width <= 500)
                     _state = "Narrow";
                 else
-                    _state = "Filled";
-            }
+                    _state = "Sub1337";
+            
 
             VisualStateManager.GoToState(this, _state, true);
             OnVisualStateChanged();
