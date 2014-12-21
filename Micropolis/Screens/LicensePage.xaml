@@ -151,11 +151,21 @@
                                        FontSize="{StaticResource NormalFontSize}"
                                        FontWeight="{StaticResource NormalFontWeight}"
                                        Foreground="{StaticResource NormalForeground}"
-                                       Margin="{StaticResource NormalMargin}" x:Name="licenseP5">This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version. This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with this program. If not, see
+                                       Margin="{StaticResource NormalMargin}" x:Name="licenseP5">This program is free software.
+                                            
+                                            You can redistribute the sourcecode and Micropolis graphics and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version. This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with this program. If not, see 
                                 <InlineUIContainer>
                                     <Button x:Name="GnuGplButton" Content="http://www.gnu.org/licenses" Click="GnuGplButton_Clicked" />
                                 </InlineUIContainer>.
                                             </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="licenseP4b">
+                                Note: Some icons used in the user interface are not licensed as GNU GPL. Please see below for further information. 
+                                The Micropolis logo is build with New York City, a font by Magique Fonts, downloadable via http://www.dafont.com/de/new-york-city.font.
+                            </Paragraph>
                             <Paragraph TextAlignment="{StaticResource HeaderTextAlignment}"
                                        FontSize="{StaticResource HeaderFontSize}"
                                        FontWeight="{StaticResource HeaderFontWeight}"
