@@ -8,7 +8,6 @@ This program is free software.
 You can redistribute the sourcecode and Micropolis graphics and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version. This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with this program. If not, see http://www.gnu.org/licenses/ . 
 
 Note: Some icons used in the user interface are not licensed as GNU GPL. Please see below for further information.
-Note: Micropolis uses Microsoft Application Insight. It is used as a nuget package and not licensed via GNU GPL. You can find the license agreement at http://www.visualstudio.com/support/dn614805
 The Micropolis logo is build with New York City, a font by Magique Fonts, downloadable via http://www.dafont.com/de/new-york-city.font.
 
 ADDITIONAL TERMS per GNU GPL Section 7
