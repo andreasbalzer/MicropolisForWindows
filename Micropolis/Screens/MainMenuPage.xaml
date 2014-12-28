@@ -17,10 +17,12 @@
     xmlns:local="using:Micropolis.Screens"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:converters="using:Micropolis.Converters"
     mc:Ignorable="d"
     DataContext="{Binding RelativeSource={RelativeSource Self}}">
 
     <Page.Resources>
+        <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         <SolidColorBrush x:Key="MenuButtonHoverBrush" Color="#0B0B0B" />
         <SolidColorBrush x:Key="MenuButtonPressedBrush" Color="#030303" />
 
@@ -433,7 +435,7 @@
 
         <Grid Grid.Row="0">
             <Grid x:Name="LoadUnsavedGameButton" Background="DarkRed" HorizontalAlignment="Stretch" MinHeight="70"
-                  Visibility="Collapsed">
+                  Visibility="{Binding LoadUnsavedGameButtonIsVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
