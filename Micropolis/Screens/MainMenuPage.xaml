@@ -445,24 +445,20 @@
 
                 <StackPanel Background="Green" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" />
                 <TextBlock Grid.Row="1" Grid.Column="0" TextWrapping="Wrap" FontSize="20" HorizontalAlignment="Left"
-                           VerticalAlignment="Center" Margin="20,10,10,10" x:Name="UnsavedGameMessageWide">
-                    ! A previously played city has not been saved. If you start another city, the unsaved city is lost.
-                </TextBlock>
+                           VerticalAlignment="Center" Margin="20,10,10,10" x:Name="UnsavedGameMessageWide"
+                           Text="{Binding UnsavedGameMessageText}" />
                 <Button Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center"
-                        Margin="10,10,10,10" FontSize="20" Click="LoadUnsavedGameButton_OnClick"
-                        x:Name="UnsavedGameButtonWide">
-                    Load autosave game.
-                </Button>
+                        Margin="10,10,10,10" FontSize="20" Command="{Binding LoadUnsavedGameCommand}"
+                        x:Name="UnsavedGameButtonWide" Content="{Binding UnsavedGameButtonText}" />
+
                 <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
                             x:Name="MessageContainerNarrow" Visibility="Collapsed">
                     <TextBlock TextWrapping="Wrap" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center"
-                               Margin="20,10,10,10" x:Name="UnsavedGameMessageNarrow">
-                        ! A previously played city has not been saved. If you start another city, the unsaved city is lost.
-                    </TextBlock>
+                               Margin="20,10,10,10" x:Name="UnsavedGameMessageNarrow"
+                               Text="{Binding UnsavedGameMessageText}" />
                     <Button HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10,10,10,10" FontSize="20"
-                            Click="LoadUnsavedGameButton_OnClick" x:Name="UnsavedGameButtonNarrow">
-                        Load autosave game.
-                    </Button>
+                            Command="{Binding LoadUnsavedGameCommand}" x:Name="UnsavedGameButtonNarrow"
+                            Content="{Binding UnsavedGameButtonText}" />
                 </StackPanel>
 
             </Grid>
@@ -471,7 +467,7 @@
             <!--LayoutUpdated="FrameworkElement_OnLayoutUpdated"-->
             <Hub.Header>
                 <Image x:Name="HubHeaderImage" Height="100" IsHitTestVisible="false" HorizontalAlignment="Right"
-                       VerticalAlignment="Bottom" Source="/Assets/Logo/LogoWhite800.png" />
+                       VerticalAlignment="Bottom" Source="{Binding HubHeaderImageSource}" />
             </Hub.Header>
             <HubSection Width="700">
 
@@ -486,12 +482,13 @@
             <HubSection x:Name="GeneralHubSection">
                 <HubSection.Header>
                     <TextBlock x:Uid="GeneralHeader" x:Name="GeneralHubSectionHeader" TextLineBounds="TrimToBaseline"
-                               OpticalMarginAlignment="TrimSideBearings" Text="General" Foreground="Black" />
+                               OpticalMarginAlignment="TrimSideBearings" Text="{Binding GeneralHubSectionHeaderText}"
+                               Foreground="Black" />
                 </HubSection.Header>
                 <HubSection.ContentTemplate>
                     <DataTemplate>
                         <StackPanel>
-                            <Button x:Name="NewGameButton" Click="NewGameButton_Click"
+                            <Button x:Name="NewGameButton" Command="{Binding NewGameCommand}"
                                     Style="{StaticResource MenuButtonStyle}" VerticalAlignment="Top" Width="200"
                                     Height="100">
                                 <Grid Background="LightGray">
@@ -506,11 +503,11 @@
                                     <StackPanel Orientation="Horizontal" Background="Green" Height="30" Grid.Row="1"
                                                 Width="200">
                                         <TextBlock x:Name="StartNewGameButtonTB" Foreground="White" Margin="9,1,0,0"
-                                                   FontWeight="SemiLight" Loaded="StartNewGameButtonTB_OnLoaded" />
+                                                   FontWeight="SemiLight" Text="{Binding StartNewGameButtonText}" />
                                     </StackPanel>
                                 </Grid>
                             </Button>
-                            <Button x:Name="LoadGameButton" Click="NewGameButton_Click"
+                            <Button x:Name="LoadGameButton" Command="{Binding NewGameCommand}"
                                     Style="{StaticResource MenuButtonStyle}" VerticalAlignment="Top" Height="100"
                                     Width="200">
                                 <Grid Background="LightGray">
@@ -525,7 +522,7 @@
                                     <StackPanel Orientation="Horizontal" Background="Green" Height="30" Grid.Row="1"
                                                 Width="200">
                                         <TextBlock Foreground="White" Margin="9,1,0,0" FontWeight="SemiLight"
-                                                   x:Name="LoadGameButtonTB" Loaded="LoadGameButtonTB_OnLoaded" />
+                                                   x:Name="LoadGameButtonTB" Text="{Binding LoadGameButtonText}" />
                                     </StackPanel>
                                 </Grid>
                             </Button>
@@ -533,75 +530,78 @@
                     </DataTemplate>
                 </HubSection.ContentTemplate>
             </HubSection>
-            <HubSection  x:Name="CityPanelNarrow">
+            <HubSection x:Name="CityPanelNarrow">
                 <HubSection.Header>
-                    <TextBlock x:Uid="CitiesHeader" x:Name="CitiesHubSectionNarrowHeader" TextLineBounds="TrimToBaseline"
-                               OpticalMarginAlignment="TrimSideBearings" Text="Cities" Foreground="Black" />
-                </HubSection.Header>
-                <HubSection.ContentTemplate>
-                    <DataTemplate>
-                       <ItemsControl ItemsSource="{Binding Path=Cities}"
-                                      VerticalContentAlignment="Stretch">
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <Button Click="ButtonBase_OnClick" Style="{StaticResource TileButtonStyle}">
-                                            <Grid Width="140" Height="140">
-                                                <Grid.RowDefinitions>
-                                                    <RowDefinition Height="*" />
-                                                    <RowDefinition Height="Auto" />
-                                                </Grid.RowDefinitions>
-
-                                                <Image Grid.Row="0" Source="{Binding ImageSource}" Stretch="Fill" />
-                                                <StackPanel Grid.Row="1" Background="Green" Height="25"
-                                                        HorizontalAlignment="Stretch">
-                                                    <TextBlock Text="{Binding Title}" Height="20" Foreground="White" />
-                                                </StackPanel>
-                                            </Grid>
-                                        </Button>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                                <ItemsControl.ItemsPanel>
-                                    <ItemsPanelTemplate>
-                                        <WrapGrid Orientation="Horizontal" MaximumRowsOrColumns="2" />
-                                    </ItemsPanelTemplate>
-                                </ItemsControl.ItemsPanel>
-                            </ItemsControl>
-                       </DataTemplate>
-                </HubSection.ContentTemplate>
-            </HubSection>
-            <HubSection x:Name="CityPanelWide" VerticalContentAlignment="Stretch">
-                <HubSection.Header>
-                    <TextBlock x:Uid="CitiesHeader" x:Name="CitiesHubSectionWideHeader" TextLineBounds="TrimToBaseline"
-                               OpticalMarginAlignment="TrimSideBearings" Text="Cities" Foreground="Black" />
+                    <TextBlock x:Uid="CitiesHeader" x:Name="CitiesHubSectionNarrowHeader"
+                               TextLineBounds="TrimToBaseline"
+                               OpticalMarginAlignment="TrimSideBearings" Text="{Binding CitiesHubSectionHeaderText}"
+                               Foreground="Black" />
                 </HubSection.Header>
                 <HubSection.ContentTemplate>
                     <DataTemplate>
                         <ItemsControl ItemsSource="{Binding Path=Cities}"
                                       VerticalContentAlignment="Stretch">
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <Button Click="ButtonBase_OnClick" Style="{StaticResource TileButtonStyle}">
-                                            <Grid Width="140" Height="140">
-                                                <Grid.RowDefinitions>
-                                                    <RowDefinition Height="*" />
-                                                    <RowDefinition Height="Auto" />
-                                                </Grid.RowDefinitions>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Button Click="ButtonBase_OnClick" Style="{StaticResource TileButtonStyle}">
+                                        <Grid Width="140" Height="140">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*" />
+                                                <RowDefinition Height="Auto" />
+                                            </Grid.RowDefinitions>
 
-                                                <Image Grid.Row="0" Source="{Binding ImageSource}" Stretch="Fill" />
-                                                <StackPanel Grid.Row="1" Background="Green" Height="25"
+                                            <Image Grid.Row="0" Source="{Binding ImageSource}" Stretch="Fill" />
+                                            <StackPanel Grid.Row="1" Background="Green" Height="25"
                                                         HorizontalAlignment="Stretch">
-                                                    <TextBlock Text="{Binding Title}" Height="20" Foreground="White" />
-                                                </StackPanel>
-                                            </Grid>
-                                        </Button>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                                <ItemsControl.ItemsPanel>
-                                    <ItemsPanelTemplate>
-                                        <WrapGrid Orientation="Vertical" MaximumRowsOrColumns="4" />
-                                    </ItemsPanelTemplate>
-                                </ItemsControl.ItemsPanel>
-                            </ItemsControl>
+                                                <TextBlock Text="{Binding Title}" Height="20" Foreground="White" />
+                                            </StackPanel>
+                                        </Grid>
+                                    </Button>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapGrid Orientation="Horizontal" MaximumRowsOrColumns="2" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                        </ItemsControl>
+                    </DataTemplate>
+                </HubSection.ContentTemplate>
+            </HubSection>
+            <HubSection x:Name="CityPanelWide" VerticalContentAlignment="Stretch">
+                <HubSection.Header>
+                    <TextBlock x:Uid="CitiesHeader" x:Name="CitiesHubSectionWideHeader" TextLineBounds="TrimToBaseline"
+                               OpticalMarginAlignment="TrimSideBearings" Text="{Binding CitiesHubSectionHeaderText}"
+                               Foreground="Black" />
+                </HubSection.Header>
+                <HubSection.ContentTemplate>
+                    <DataTemplate>
+                        <ItemsControl ItemsSource="{Binding Path=Cities}"
+                                      VerticalContentAlignment="Stretch">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Button Click="ButtonBase_OnClick" Style="{StaticResource TileButtonStyle}">
+                                        <Grid Width="140" Height="140">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*" />
+                                                <RowDefinition Height="Auto" />
+                                            </Grid.RowDefinitions>
+
+                                            <Image Grid.Row="0" Source="{Binding ImageSource}" Stretch="Fill" />
+                                            <StackPanel Grid.Row="1" Background="Green" Height="25"
+                                                        HorizontalAlignment="Stretch">
+                                                <TextBlock Text="{Binding Title}" Height="20" Foreground="White" />
+                                            </StackPanel>
+                                        </Grid>
+                                    </Button>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapGrid Orientation="Vertical" MaximumRowsOrColumns="4" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                        </ItemsControl>
                     </DataTemplate>
                 </HubSection.ContentTemplate>
             </HubSection>
