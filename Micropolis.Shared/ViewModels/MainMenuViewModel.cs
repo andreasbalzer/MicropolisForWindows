@@ -127,8 +127,19 @@ namespace Micropolis.ViewModels
         {
             var folder = ApplicationData.Current.LocalFolder;
 
+#if WINDOWS_PHONE_APP
+            try
+            {
+                _unsavedFileExists = await folder.GetFileAsync("autosave.cty");
+            }
+            catch
+            {
+                return;
+            }
+#else
             _unsavedFileExists = await folder.TryGetItemAsync("autosave.cty");
             if (_unsavedFileExists != null)
+#endif
             {
                 LoadUnsavedGameButtonIsVisible = true;
             }
@@ -174,7 +185,15 @@ namespace Micropolis.ViewModels
 
                     var iconUri = new Uri(cityThumbs.Path + "/" + fileName, UriKind.Absolute);
 
+#if WINDOWS_PHONE_APP
+                    try
+                    {
+                        var voidi = await cityThumbs.GetFileAsync(fileName);
+                    }
+                    catch
+#else
                     if (await cityThumbs.TryGetItemAsync(fileName) == null)
+#endif
                     {
                         iconUri = new Uri(cityFolder.Path + "/unknown.png", UriKind.Absolute);
                     }

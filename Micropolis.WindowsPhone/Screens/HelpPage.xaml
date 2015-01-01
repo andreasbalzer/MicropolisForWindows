@@ -1,0 +1,1179 @@
+﻿<!--
+    // This file is part of Micropolis for WinRT.
+    // Copyright (C) 2014 Andreas Balzer, Felix Dietrich, Florian Thurnwald and Ivo Vutov
+    // Portions Copyright (C) MicropolisJ by Jason Long
+    // Portions Copyright (C) Micropolis Don Hopkins
+    // Portions Copyright (C) 1989-2007 Electronic Arts Inc.
+    //
+    // Micropolis for WinRT is free software; you can redistribute it and/or modify
+    // it under the terms of the GNU GPLv3, with Additional terms.
+    // See the README file, included in this distribution, for details.
+    // Project website: http://code.google.com/p/micropolis/
+    -->
+<Page
+    x:Name="pageRoot"
+    x:Class="Micropolis.Screens.HelpPage"
+    DataContext="{Binding DefaultViewModel, RelativeSource={RelativeSource Self}}"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Micropolis.Screens"
+    xmlns:common="using:Micropolis.Common"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:utils="using:Micropolis.Utils"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <!-- TODO: Delete this line if the key AppName is declared in App.xaml -->
+        <SolidColorBrush x:Key="SectionHeaderForeground">
+            <Color>Orange</Color>
+        </SolidColorBrush>
+        <x:Double x:Key="SectionHeaderFontSize">50</x:Double>
+        <FontWeight x:Key="SectionHeaderFontWeight">Bold</FontWeight>
+        <TextAlignment x:Key="SectionHeaderTextAlignment">Left</TextAlignment>
+        <Thickness x:Key="SectionHeaderMargin">0,0,0,0</Thickness>
+
+        <SolidColorBrush x:Key="HeaderForeground">
+            <Color>Orange</Color>
+        </SolidColorBrush>
+        <x:Double x:Key="HeaderFontSize">20</x:Double>
+        <FontWeight x:Key="HeaderFontWeight">Bold</FontWeight>
+        <TextAlignment x:Key="HeaderTextAlignment">Justify</TextAlignment>
+        <Thickness x:Key="HeaderMargin">0,30,0,0</Thickness>
+
+        <SolidColorBrush x:Key="SubHeaderForeground">
+            <Color>Orange</Color>
+        </SolidColorBrush>
+        <x:Double x:Key="SubHeaderFontSize">18</x:Double>
+        <FontWeight x:Key="SubHeaderFontWeight">Bold</FontWeight>
+        <TextAlignment x:Key="SubHeaderTextAlignment">Justify</TextAlignment>
+        <Thickness x:Key="SubHeaderMargin">0,30,0,0</Thickness>
+
+        <SolidColorBrush x:Key="EmphasisForeground">
+            <Color>Orange</Color>
+        </SolidColorBrush>
+        <x:Double x:Key="EmphasisFontSize">18</x:Double>
+        <FontWeight x:Key="EmphasisFontWeight">Bold</FontWeight>
+        <TextAlignment x:Key="EmphasisTextAlignment">Justify</TextAlignment>
+        <Thickness x:Key="EmphasisMargin">0,0,0,0</Thickness>
+
+        <SolidColorBrush x:Key="NormalForeground">
+            <Color>White</Color>
+        </SolidColorBrush>
+        <x:Double x:Key="NormalFontSize">18</x:Double>
+        <FontWeight x:Key="NormalFontWeight">Normal</FontWeight>
+        <TextAlignment x:Key="NormalTextAlignment">Justify</TextAlignment>
+        <Thickness x:Key="NormalMargin">0,0,0,0</Thickness>
+
+        <SolidColorBrush x:Key="ListForeground">
+            <Color>White</Color>
+        </SolidColorBrush>
+        <x:Double x:Key="ListFontSize">18</x:Double>
+        <FontWeight x:Key="ListFontWeight">Normal</FontWeight>
+        <TextAlignment x:Key="ListTextAlignment">Left</TextAlignment>
+        <Thickness x:Key="ListMargin">20,0,0,0</Thickness>
+        <x:Double x:Key="ListTextIndent">20</x:Double>
+
+        <SolidColorBrush x:Key="ListInnerForeground">
+            <Color>White</Color>
+        </SolidColorBrush>
+        <x:Double x:Key="ListInnerFontSize">18</x:Double>
+        <FontWeight x:Key="ListInnerFontWeight">Normal</FontWeight>
+        <TextAlignment x:Key="ListInnerTextAlignment">Left</TextAlignment>
+        <Thickness x:Key="ListInnerMargin">40,0,0,0</Thickness>
+        <x:Double x:Key="ListInnerTextIndent">20</x:Double>
+
+    </Page.Resources>
+
+    <!--
+        This grid acts as a root panel for the page that defines two rows:
+        * Row 0 contains the back button and page title
+        * Row 1 contains the rest of the page layout
+    -->
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.ChildrenTransitions>
+            <TransitionCollection>
+                <EntranceThemeTransition />
+            </TransitionCollection>
+        </Grid.ChildrenTransitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="140" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- Back button and page title -->
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="120" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Button x:Name="backButton" Margin="39,59,39,0"
+                    Command="{Binding NavigationHelper.GoBackCommand, ElementName=pageRoot}"
+                    Style="{StaticResource NavigationBackButtonNormalStyle}"
+                    VerticalAlignment="Top"
+                    AutomationProperties.Name="Back"
+                    AutomationProperties.AutomationId="BackButton"
+                    AutomationProperties.ItemType="Navigation Button" />
+            <TextBlock x:Name="helpTitle" Text="Help pages" Style="{StaticResource HeaderTextBlockStyle}"
+                       Grid.Column="1"
+                       IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40" />
+        </Grid>
+        <Grid Grid.Row="1" x:Name="HelpContainer">
+            <ScrollViewer HorizontalScrollMode="Auto" HorizontalScrollBarVisibility="Auto"
+                          VerticalScrollMode="Disabled" VerticalScrollBarVisibility="Disabled">
+                <StackPanel Orientation="Horizontal" Height="{Binding ElementName=HelpContainer, Path=Height}">
+                    
+                        <RichTextBlock TextWrapping="Wrap" Margin="120,0,0,0" Width="420">
+                            <Paragraph x:Name="HelpTextTB" 
+                                       TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" />
+                            <Paragraph TextAlignment="{StaticResource SectionHeaderTextAlignment}"
+                                       FontSize="{StaticResource SectionHeaderFontSize}"
+                                       FontWeight="{StaticResource SectionHeaderFontWeight}"
+                                       Foreground="{StaticResource SectionHeaderForeground}"
+                                       Margin="{StaticResource SectionHeaderMargin}"
+                                       x:Name="helpP1">
+                                Introduction
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource HeaderTextAlignment}"
+                                       FontSize="{StaticResource HeaderFontSize}"
+                                       FontWeight="{StaticResource HeaderFontWeight}"
+                                       Foreground="{StaticResource HeaderForeground}"
+                                       Margin="{StaticResource HeaderMargin}" x:Name="helpP2">
+                                Foreword
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP3">
+                                Enter Micropolis and take control. Be the undisputed ruler of a sophisticated real-time City Simulation. Become the master of existing cities or create your own dream city (or nightmare slum) from the ground up.
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP4">
+                                Whether you take over an existing city or build your own, you are the Mayor and City Planner with complete authority.
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP5">
+                                Your city is populated by Sims -- Simulated Citizens. Like their human counterparts, they build houses, condos, churches, stores and factories. And, also like humans, they complain about things like taxes, mayors, taxes, city planners, and taxes. If they get unhappy, they move out; you collect fewer taxes, the city deteriorates.
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP6">
+                                The next few sections will explain the overall concept of Micropolis and give information that will help you win Scenarios and design and build better cities.
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource HeaderTextAlignment}"
+                                       FontSize="{StaticResource HeaderFontSize}"
+                                       FontWeight="{StaticResource HeaderFontWeight}"
+                                       Foreground="{StaticResource HeaderForeground}"
+                                       Margin="{StaticResource HeaderMargin}" x:Name="helpP7">
+                                About System Simulations
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP8">
+                                Micropolis is the first of a new type of entertainment/educational software, called System Simulations. We provide you with a set of Rules and Tools that describe, create and control a system. In the case of Micropolis the system is a city.
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP9">
+                                The challenge of playing a System Simulation game is to figure out how the system works and take control of it. As master of the system, you are free to use the Tools to create and control an unlimited number of systems (in this case, cities) within the framework and limits provided by the Rules.
+                            </Paragraph>
+
+                            <Paragraph TextAlignment="{StaticResource SubHeaderTextAlignment}"
+                                       FontSize="{StaticResource SubHeaderFontSize}"
+                                       FontWeight="{StaticResource SubHeaderFontWeight}"
+                                       Foreground="{StaticResource SubHeaderForeground}"
+                                       Margin="{StaticResource SubHeaderMargin}" x:Name="helpP10">
+                                Rules
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP11">
+                                In Micropolis, the Rules to learn are based on city planning and management, including:
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource ListTextAlignment}"
+                                       FontSize="{StaticResource ListFontSize}"
+                                       FontWeight="{StaticResource ListFontWeight}"
+                                       Foreground="{StaticResource ListForeground}"
+                                       Margin="{StaticResource ListMargin}" x:Name="helpP12">
+                                • Human Factors: Residential space and amenities, availability of jobs, and quality of life.
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource ListTextAlignment}"
+                                       FontSize="{StaticResource ListFontSize}"
+                                       FontWeight="{StaticResource ListFontWeight}"
+                                       Foreground="{StaticResource ListForeground}"
+                                       Margin="{StaticResource ListMargin}" x:Name="helpP13">
+                                • Economic Factors: Land value, industrial and commercial space, unemployment, internal and external markets, electric power, taxation, and funding for city services.
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource ListTextAlignment}"
+                                       FontSize="{StaticResource ListFontSize}"
+                                       FontWeight="{StaticResource ListFontWeight}"
+                                       Foreground="{StaticResource ListForeground}"
+                                       Margin="{StaticResource ListMargin}" x:Name="helpP14">
+                                • Survival Factors: Strategies for dealing with disasters, crime, and pollution.
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource ListTextAlignment}"
+                                       FontSize="{StaticResource ListFontSize}"
+                                       FontWeight="{StaticResource ListFontWeight}"
+                                       Foreground="{StaticResource ListForeground}"
+                                       Margin="{StaticResource ListMargin}" x:Name="helpP15">
+                                • Political Factors: Public opinion, zoning, and keeping residents and businesses satisfied with your city and your performance.
+                            </Paragraph>
+
+                            <Paragraph TextAlignment="{StaticResource SubHeaderTextAlignment}"
+                                       FontSize="{StaticResource SubHeaderFontSize}"
+                                       FontWeight="{StaticResource SubHeaderFontWeight}"
+                                       Foreground="{StaticResource SubHeaderForeground}"
+                                       Margin="{StaticResource SubHeaderMargin}" x:Name="helpP16">
+                                Tools
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP17">
+                                The Tools provide you with the ability to plan, lay out, zone, build, bulldoze, re-zone, and manage a city.
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource ListTextAlignment}"
+                                       FontSize="{StaticResource ListFontSize}"
+                                       FontWeight="{StaticResource ListFontWeight}"
+                                       Foreground="{StaticResource ListForeground}"
+                                       Margin="{StaticResource ListMargin}" x:Name="helpP18">
+                                • Plan: Mapping systems give physical and demographic overviews of the entire city.
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource ListTextAlignment}"
+                                       FontSize="{StaticResource ListFontSize}"
+                                       FontWeight="{StaticResource ListFontWeight}"
+                                       Foreground="{StaticResource ListForeground}"
+                                       Margin="{StaticResource ListMargin}" x:Name="helpP19">
+                                • Layout: Design living and working areas, road and transit systems, and recreational areas.
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource ListTextAlignment}"
+                                       FontSize="{StaticResource ListFontSize}"
+                                       FontWeight="{StaticResource ListFontWeight}"
+                                       Foreground="{StaticResource ListForeground}"
+                                       Margin="{StaticResource ListMargin}" x:Name="helpP20">
+                                • Zone: Set zoning boundaries for parks, residential, commercial and industrial areas.
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource ListTextAlignment}"
+                                       FontSize="{StaticResource ListFontSize}"
+                                       FontWeight="{StaticResource ListFontWeight}"
+                                       Foreground="{StaticResource ListForeground}"
+                                       Margin="{StaticResource ListMargin}" x:Name="helpP21">
+                                • Build: Place roads, rails, airports, seaports, fire and police stations, sports stadiums, and power plants.
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource ListTextAlignment}"
+                                       FontSize="{StaticResource ListFontSize}"
+                                       FontWeight="{StaticResource ListFontWeight}"
+                                       Foreground="{StaticResource ListForeground}"
+                                       Margin="{StaticResource ListMargin}" x:Name="helpP22">
+                                • Bulldoze: Clear forests for city growth, build landfill along waterways, clear and re-zone developed areas.
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource ListTextAlignment}"
+                                       FontSize="{StaticResource ListFontSize}"
+                                       FontWeight="{StaticResource ListFontWeight}"
+                                       Foreground="{StaticResource ListForeground}"
+                                       Margin="{StaticResource ListMargin}" x:Name="helpP23">
+                                • Manage: Using the mapping and graphing systems, gather up-to-date information on traffic density, population trends, power grid status, pollution, crime, land value, police and fire department efficiency, and cash flow. Set the tax rate and funding levels for city services.
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP24">
+                                But the most important Tool of all is the Simulator itself. Test your plans and ideas as you watch the city grow or shrink through the immigration and emigration of industrious Simulated Citizens. Sims will move in and build homes, hospitals, churches, stores and factories in the zones you provide, or move out in search of jobs or a better life elsewhere. The success of the city is based on the quality of the city you design and manage.
+                            </Paragraph>
+
+                            <Paragraph TextAlignment="{StaticResource SubHeaderTextAlignment}"
+                                       FontSize="{StaticResource SubHeaderFontSize}"
+                                       FontWeight="{StaticResource SubHeaderFontWeight}"
+                                       Foreground="{StaticResource SubHeaderForeground}"
+                                       Margin="{StaticResource SubHeaderMargin}" x:Name="helpP25">
+                                Simulator Reaction Time
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP26">
+                                The simulator is a very complex multi-tasking piece of software. It is constantly performing many checks, calculations, and updates, as well as keeping watch on the mouse and keyboard to respond to your demands. When you load in a city, give the simulator some time to compile its data and update the maps, graphs, population levels, etc. Some of the other times when the simulator lags behind you are when powering zones and updating the city services map after installing police and fire stations.
+                            </Paragraph>
+
+
+                            <Paragraph TextAlignment="{StaticResource HeaderTextAlignment}"
+                                       FontSize="{StaticResource HeaderFontSize}"
+                                       FontWeight="{StaticResource HeaderFontWeight}"
+                                       Foreground="{StaticResource HeaderForeground}"
+                                       Margin="{StaticResource HeaderMargin}" x:Name="helpP27">
+                                The Goals of Micropolis
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP28">
+                                Build the city of your dreams with energy providers, industries, commercial and residential areas, public transport and shipping just as you want it.
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource SubHeaderTextAlignment}"
+                                       FontSize="{StaticResource SubHeaderFontSize}"
+                                       FontWeight="{StaticResource SubHeaderFontWeight}"
+                                       Foreground="{StaticResource SubHeaderForeground}"
+                                       Margin="{StaticResource SubHeaderMargin}" x:Name="helpP29">
+                                Your Dream City
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP30">
+                                Perhaps the main goal of Micropolis is for you to design, manage and maintain the city of your dreams.
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP31">
+                                Your ideal place to live may be a bustling megalopolis, lots of people, lots of cars, tall buildings: high-energy, high density living. Or it may be a small rural community, or a linked group of small communities providing slow-paced country living.
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP32">
+                                As long as your city can provide places for people to live, work, shop and play, it will attract residents. And as long as traffic, pollution, overcrowding, crime or taxes don't drive them away, your city will live.
+                            </Paragraph>
+
+                        </RichTextBlock>
+                       
+            
+                    
+                        <RichTextBlock TextWrapping="Wrap" Margin="80,0,0,0" Width="420">
+                            <Paragraph TextAlignment="{StaticResource SectionHeaderTextAlignment}"
+                                       FontSize="{StaticResource SectionHeaderFontSize}"
+                                       FontWeight="{StaticResource SectionHeaderFontWeight}"
+                                       Foreground="{StaticResource SectionHeaderForeground}"
+                                       Margin="{StaticResource SectionHeaderMargin}" x:Name="helpP33">
+                                Tutorial -- A Walk Through Your City
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource HeaderTextAlignment}"
+                                       FontSize="{StaticResource HeaderFontSize}"
+                                       FontWeight="{StaticResource HeaderFontWeight}"
+                                       Foreground="{StaticResource HeaderForeground}"
+                                       Margin="{StaticResource HeaderMargin}" x:Name="helpP34">
+                                Starting Up
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP35">
+                                To start up Micropolis, just launch the game by clicking or tapping its tile in the Windows Start screen, or open a cty file. Loading the game, especially the first time might take some time. You'll know things are going well when you see the main menu screen.
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource SubHeaderTextAlignment}"
+                                       FontSize="{StaticResource SubHeaderFontSize}"
+                                       FontWeight="{StaticResource SubHeaderFontWeight}"
+                                       Foreground="{StaticResource SubHeaderForeground}"
+                                       Margin="{StaticResource SubHeaderMargin}" x:Name="helpP36">
+                                The main menu screen
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP37">
+                                Once Micropolis is loaded, the main menu screen will shop up, with a bunch of buttons for cities and scenarios. By swyping in from the right, you can launch the Windows Settings Charm and within it, modify the settings of Micropolis or find out more about the developers and how to contact them.
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP38">
+                                To start a new game, simply click or tap the “Start a new game” button. It will open the game page and offer you possibilities to generate islands, fields and valleys. To load an existing game simply click or tap the “Load a game” button. It will open the main game page and offer you the possibility to load a game there.
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP39">
+                                If you want to start a prebuilt city, just click or tap one on the right of the page. Note: You can scroll to the right and left to see more cities.
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource SubHeaderTextAlignment}"
+                                       FontSize="{StaticResource SubHeaderFontSize}"
+                                       FontWeight="{StaticResource SubHeaderFontWeight}"
+                                       Foreground="{StaticResource SubHeaderForeground}"
+                                       Margin="{StaticResource SubHeaderMargin}" x:Name="helpP40">
+                                The Welcome Notice
+                                The Startup Window
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource HeaderTextAlignment}"
+                                       FontSize="{StaticResource HeaderFontSize}"
+                                       FontWeight="{StaticResource HeaderFontWeight}"
+                                       Foreground="{StaticResource HeaderForeground}"
+                                       Margin="{StaticResource HeaderMargin}" x:Name="helpP41">
+                                Generating a New City
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP42">
+                                If you clicked the “Start a new game” button, a control panel will appear that allows you to see a suggested map on the left side. On the right side you can select the difficulty of the game. Select “easy” for now. Below the map you see various buttons, like “Previous map”, “Play this map”, “Next map”. With previous and next you can view various terrains. If the current one doesn’t suit, simply click or tap next to generate a new one. Once you found one you like, click or tap “Play this map”. By clicking or tapping the Load button next to it you can, once again, load a previously built city.
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource HeaderTextAlignment}"
+                                       FontSize="{StaticResource HeaderFontSize}"
+                                       FontWeight="{StaticResource HeaderFontWeight}"
+                                       Foreground="{StaticResource HeaderForeground}"
+                                       Margin="{StaticResource HeaderMargin}" x:Name="helpP43">
+                                Playing the game
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP44">
+                                When starting a game, you will see a detailed map full screen showing part of the terrain. Around the edges are controls and fields displaying information about the city.
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP45">
+                                Along the top edge of the screen is the City Name, where the name of your city or the scenario you selected is displayed. Next to the name are two fields that display your Current Funds (in dollars) and the Current Date (the year and month).
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP46">
+                                Along the left edge of the window are two columns of colorful Tool Icons, used for choosing the city editing mode. Depending on the size of your screen you might have to click or touch the Tool-dropdown button to display the tools. Click the mouse over an icon to select an editing tool, or simply touch it. The currently selected tool is highlighted in yellow. The Tool Cost field on the top of the tools tells you the name of the selected tool, and how many dollars it costs to use.
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP47">
+                                You can use the selected tool by pressing the left mouse button over the map in the middle. You can easily scroll the map up and down by using the scroll wheel on your mouse. If your mouse supports left-to-right scrolling, you can also scroll the map in that direction.
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP48">
+                                The minimap at the bottom left shows you a zoomed out view of your city. In it you can see a rectangle with a white border. Clicking or touching the rectangle and moving it around will also move the map. If you want to zoom in or out of the map, simply press CTRL on your keyboard and move the mouse scrollwheel up or down. On top of the minimap you find options to highlight certain information within the minimap, such as police coverage, high traffic and others.
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP49">
+                                At the bottom right of the screen, you see a white box. During the game, important messages will be shown there, indicating the needs of your city. For convenience the box shows the most recent ones.
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP50">
+                                The right side of the screen will occasionally tell you notifications about major events in the city, e.g. a fire outbreak, a ship collision or when a disaster occurs. Additionally you can query information on buildings or land by selecting the Query-Tool in the toolpane and left clicking the map or by simply right clicking the map at any time. You can close the notification window on the right again by clicking “close”.
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP51">
+                                The Demand Indicator on the top right shows the demand levels for Residential (green), Commercial (blue), and Industrial zones (yellow), and can be helpful in planning your city.
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP52">
+                                The main portion of the map is land. Your available land is made up of three types of terrain. The brown areas are Clear Land, the green areas are forests and Trees, and the blue areas are Water. You can build only on Clear Land. You can clear forest and extend coastlines with your bulldozer. You can run roads, rails, and power lines straight across the Water.
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource HeaderTextAlignment}"
+                                       FontSize="{StaticResource HeaderFontSize}"
+                                       FontWeight="{StaticResource HeaderFontWeight}"
+                                       Foreground="{StaticResource HeaderForeground}"
+                                       Margin="{StaticResource HeaderMargin}" x:Name="helpP53">
+                                Building a City
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP54">
+                                To begin a city, we need: places for Sims to live, places for Sims to work, and power.
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP55">
+                                You can only build on Clear Land, so use the Bulldozer to clear away some trees. Click the left mouse button on the Bulldozer Icon. Move the cursor over to land. It now points to a small square, outlining the area that will be bulldozed when you click the left button. The Trees under your pointer are now Clear Land. Now, hold the left button down and drag the pointer across the Trees. Mass destruction. Clear a large area of land to prepare for building.
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP56">
+                                Click the Residential Icon, then move back to your terrain. Your cursor will now point to a large square outline. This outline indicates how much clear space you will need to create a Residential Zone -- a place for Sims to live. Clicking the left mouse button in Clear Land will "zone" that area. The "R" in the zone center indicates that it is a Residential Zone. The flashing lightning symbol means that the zone has no power. Place a few more Residential Zones next to the first one.
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource SubHeaderTextAlignment}"
+                                       FontSize="{StaticResource SubHeaderFontSize}"
+                                       FontWeight="{StaticResource SubHeaderFontWeight}"
+                                       Foreground="{StaticResource SubHeaderForeground}"
+                                       Margin="{StaticResource SubHeaderMargin}" x:Name="helpP57">
+                                Several New Residential Zones
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP58">
+                                Now decide where to position a Power Plant in your city. Point to the Power Plant Icon, and press and hold the left mouse button. A menu will appear, giving you the option of choosing a Coal or Nuclear plant. For now, release the button over "Coal". The outline for a Power Plant is even larger than for a Residential Zone. Place the Power Plant in some open space near your Residential Zones. If your Power Plant is not directly adjacent to a Residential Zone, you'll need to run a Power Line from your Power Plant to the Residential Zones.
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP59">
+                                To do this, click the left mouse button over the Power Line Icon. By pointing your cursor and pressing the button, lay Power Lines from your Power Plant to your Residential Zones. Adjacent Power Line sections will automatically connect to each other. Road and Rail lines connect in the same manner.
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP60">
+                                In a moment, the flashing symbols in the Residential Zones will disappear, indicating that your zones have been powered. Any zones that are adjacent to a powered zone do not need separate Power Lines run to them. Soon you will see small houses start to appear. The Sims have started to move in!
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource SubHeaderTextAlignment}"
+                                       FontSize="{StaticResource SubHeaderFontSize}"
+                                       FontWeight="{StaticResource SubHeaderFontWeight}"
+                                       Foreground="{StaticResource SubHeaderForeground}"
+                                       Margin="{StaticResource SubHeaderMargin}" x:Name="helpP61">
+                                Here Comes the Neighborhood!
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP62">
+                                Once there are a few Residential Zones, where Sims can live, you need to make it possible for your new residents to find jobs. They can't all work at the power plant!
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource SubHeaderTextAlignment}"
+                                       FontSize="{StaticResource SubHeaderFontSize}"
+                                       FontWeight="{StaticResource SubHeaderFontWeight}"
+                                       Foreground="{StaticResource SubHeaderForeground}"
+                                       Margin="{StaticResource SubHeaderMargin}" x:Name="helpP63">
+                                Residential, Commercial, and Industrial Zones
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP64">
+                                Now you're ready for Commercial and Industrial areas; places for Sims to work, shop, and transact business. Select the Commercial Icon and place a few Commercial Zones near your Residential ones. Then select the Industrial Icon and place some Industrial Zones. Connect all necessary Power Lines.
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP65">
+                                Notice that as you select different Tool Icons, the icon's description and its associated cost will be displayed in the Tool Cost field near the lower left corner of the Edit Window. The Current Funds field near the top of the window displays your total funds available.
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP66">
+                                Now click the left button on the Road Icon and add Roads from your Residential housing to the Commercial and Industrial areas to allow the Sims to commute to work. Road sections connect themselves like Power Line sections. Once you have Roads, traffic will be generated.
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource SubHeaderTextAlignment}"
+                                       FontSize="{StaticResource SubHeaderFontSize}"
+                                       FontWeight="{StaticResource SubHeaderFontWeight}"
+                                       Foreground="{StaticResource SubHeaderForeground}"
+                                       Margin="{StaticResource SubHeaderMargin}" x:Name="helpP67">
+                                The Budget Window
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP68">
+                                Open the App bar by right clicking in the game or swype from the bottom of your screen upwards. In the App bar you can open the budget window. It lets you set the level of funding for your fire, police, and transportation departments.
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP69">
+                                Drag the sliders to change the funding levels. You can also adjust the current tax rate. If you have no police or fire departments, you can't fund them. You cannot fund more than 100%. Since your city is so new, you can't do much here now, but come back later. Click the left mouse button on the "Go With These Figures" button to make the window go away when you're done. If the hour glass runs out, the window will go away automatically. You can click on the hourglass to keep that from happening.
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP70">
+                                Now look at the minimap. You can get an idea of the size of your city, and how much room you have left. Try the different map views by clicking the left mouse button on the icons along the left edge of the minimap. You will need this information to build and adjust conditions in your city. For example, you can pinpoint the areas with the highest crime to determine locations for new police stations.
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource SubHeaderTextAlignment}"
+                                       FontSize="{StaticResource SubHeaderFontSize}"
+                                       FontWeight="{StaticResource SubHeaderFontWeight}"
+                                       Foreground="{StaticResource SubHeaderForeground}"
+                                       Margin="{StaticResource SubHeaderMargin}" x:Name="helpP71">
+                                The Graph Window
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP72">
+                                In the app bar you can also open a graph window. It will display relevant information of your city on a timeline. You can toggle the various graph displays on and off, and switch between 10 year and 120 year graphs, by clicking on the icons at the left of the Graph Window.
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource SubHeaderTextAlignment}"
+                                       FontSize="{StaticResource SubHeaderFontSize}"
+                                       FontWeight="{StaticResource SubHeaderFontWeight}"
+                                       Foreground="{StaticResource SubHeaderForeground}"
+                                       Margin="{StaticResource SubHeaderMargin}" x:Name="helpP73">
+                                Query Tool
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP74">
+                                Another way to gather information about your city is by using the Query Tool. To use this, select the Tool Icon with the magnifying glass and question mark, then press the left mouse button over the map. Instead you can simply right click the map. You will be shown a window filled with information about the zone under the cursor.
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource SubHeaderTextAlignment}"
+                                       FontSize="{StaticResource SubHeaderFontSize}"
+                                       FontWeight="{StaticResource SubHeaderFontWeight}"
+                                       Foreground="{StaticResource SubHeaderForeground}"
+                                       Margin="{StaticResource SubHeaderMargin}" x:Name="helpP75">
+                                Save File Dialog
+                            </Paragraph>
+
+                            <Paragraph TextAlignment="{StaticResource SubHeaderTextAlignment}"
+                                       FontSize="{StaticResource SubHeaderFontSize}"
+                                       FontWeight="{StaticResource SubHeaderFontWeight}"
+                                       Foreground="{StaticResource SubHeaderForeground}"
+                                       Margin="{StaticResource SubHeaderMargin}" x:Name="helpP76">
+                                Saving the city
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP77">
+                                Now, let's Save the city to disk. Use the App bar to select "Save City as...". You'll see the Save File dialog. Micropolis files have the file extension “.cty”. Upon clicking save, your city will be saved to disk, so you can load it later to get back to where you are now.
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource SubHeaderTextAlignment}"
+                                       FontSize="{StaticResource SubHeaderFontSize}"
+                                       FontWeight="{StaticResource SubHeaderFontWeight}"
+                                       Foreground="{StaticResource SubHeaderForeground}"
+                                       Margin="{StaticResource SubHeaderMargin}" x:Name="helpP78">
+                                Open File Dialog
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP79">
+                                To load a city, use the File Menu and select the item labelled "Load City...". The Open File dialog looks and works almost like the Save File dialog. It will start out in a directory named "Cities", which contains some interesting cities included with Micropolis. You can load and play any of them, or navigate to the directory where you saved your city, and load that again.
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP80">
+                                This is all the basic information you need to run Micropolis, but we suggest reading on. The User Reference section explains in detail how to use each program function. Inside Micropolis explains the inner workings of the simulator, and gives some brief hints and tips for using it. There is also an essay on The History of Cities and City Planning, and a Bibliography for serious City Planners.
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP81">
+                                Have Fun Playing Micropolis!
+                            </Paragraph>
+                        </RichTextBlock>
+                       
+                        <RichTextBlock TextWrapping="Wrap" Margin="80,0,0,0" Width="420">
+                            <Paragraph TextAlignment="{StaticResource SectionHeaderTextAlignment}"
+                                       FontSize="{StaticResource SectionHeaderFontSize}"
+                                       FontWeight="{StaticResource SectionHeaderFontWeight}"
+                                       Foreground="{StaticResource SectionHeaderForeground}"
+                                       Margin="{StaticResource SectionHeaderMargin}" x:Name="helpP82">
+                                Inside The Simulator
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource HeaderTextAlignment}"
+                                       FontSize="{StaticResource HeaderFontSize}"
+                                       FontWeight="{StaticResource HeaderFontWeight}"
+                                       Foreground="{StaticResource HeaderForeground}"
+                                       Margin="{StaticResource HeaderMargin}" x:Name="helpP83">
+                                How the Simulator Works and Strategies for Using It
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP84">
+                                Many factors influence the chance of your city's prospering or floundering: both internal factors (the structure and efficiency of your city) and external factors (the regional economy, disasters, etc.).
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource SubHeaderTextAlignment}"
+                                       FontSize="{StaticResource SubHeaderFontSize}"
+                                       FontWeight="{StaticResource SubHeaderFontWeight}"
+                                       Foreground="{StaticResource SubHeaderForeground}"
+                                       Margin="{StaticResource SubHeaderMargin}" x:Name="helpP85">
+                                Zones
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP86">
+                                Your city is divided up into three primary zones: residential, commercial and industrial. These zones symbolize the three basic pillars upon which a city is based: population, industry, and commerce. All three are necessary for your city to grow and thrive.
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP87">
+                                •	Residential Zones are where the Sims live. Here they build houses, apartments and community facilities such as churches and schools. Sims are the work force for your city's commercial and industrial zones.
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource ListTextAlignment}"
+                                       FontSize="{StaticResource ListFontSize}"
+                                       FontWeight="{StaticResource ListFontWeight}"
+                                       Foreground="{StaticResource ListForeground}"
+                                       Margin="{StaticResource ListMargin}" x:Name="helpP88">
+                                • Industrial Zones are used to site warehouses, factories, and other unsightly and polluting structures which have a negative impact on surrounding zones. One of the major goals of planning is to separate these "nuisances" from the areas where people live. In this simulation, industrial zones represent the "basic" production of your city. Things produced here are sold outside the city to an "external market," bringing money into the city for future growth.
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource ListTextAlignment}"
+                                       FontSize="{StaticResource ListFontSize}"
+                                       FontWeight="{StaticResource ListFontWeight}"
+                                       Foreground="{StaticResource ListForeground}"
+                                       Margin="{StaticResource ListMargin}" x:Name="helpP89">
+                                • Commercial Zones represent the retail stores and services in your city, including gas stations, grocery stores, banks, and offices. Commercial areas are mainly dedicated to producing goods and services needed within your city. This is called "non-basic" production or production for the "internal market."
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource SubHeaderTextAlignment}"
+                                       FontSize="{StaticResource SubHeaderFontSize}"
+                                       FontWeight="{StaticResource SubHeaderFontWeight}"
+                                       Foreground="{StaticResource SubHeaderForeground}"
+                                       Margin="{StaticResource SubHeaderMargin}" x:Name="helpP90">
+                                Population -- Residential
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP91">
+                                The major factors controlling residential population are birthrate, availability of jobs and housing, unemployment, and quality of life within the city.
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP92">
+                                Birthrate as used here, is actually a combination of the birthrate (positive) and the deathrate (negative). Within Micropolis there is always a positive birthrate.
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP93">
+                                Availability of jobs (the employment rate) is a ratio of the current commercial and industrial populations to the total residential population. As a rule of thumb, the number of commercial and industrial zones together should roughly equal the number of residential zones.
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP94">
+                                If there are more jobs in your city than residents, new settlers will be attracted. If the job market declines during a local recession, your people will migrate away in search of jobs.
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP95">
+                                Housing for your residents is built in the residential zones. These zones must be powered and connected to the places of employment by roads. The structures built in residential zones are influenced by land value and population density.
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP96">
+                                Quality of life is a measure of relative "attractiveness" assigned to different zone locations. It is affected by negative factors such as pollution and crime, and positive factors such as parks and accessibility.
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource SubHeaderTextAlignment}"
+                                       FontSize="{StaticResource SubHeaderFontSize}"
+                                       FontWeight="{StaticResource SubHeaderFontWeight}"
+                                       Foreground="{StaticResource SubHeaderForeground}"
+                                       Margin="{StaticResource SubHeaderMargin}" x:Name="helpP97">
+                                External Market -- Industrial
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP98">
+                                There are thousands of variables that influence your city. All these variables can be influenced by your actions with the exception of one.
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP99">
+                                The external market (the economic conditions that exist outside of your city) is controlled by the simulation -- there is nothing you can do to change it. In many ways, this external market is the original source of all city growth. Towns frequently begin as production centers (steel towns, refineries, etc.) that service a demand in the surrounding region. As time passes, the external market grows to reflect the regional growth going on around your city.
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP100">
+                                The industry in your city will attempt to grow as the external market grows. For this to happen there must be room for expansion (more industrial zones) and an adequate labor supply (more residential zones).
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource SubHeaderTextAlignment}"
+                                       FontSize="{StaticResource SubHeaderFontSize}"
+                                       FontWeight="{StaticResource SubHeaderFontWeight}"
+                                       Foreground="{StaticResource SubHeaderForeground}"
+                                       Margin="{StaticResource SubHeaderMargin}" x:Name="helpP101">
+                                Internal Market -- Commercial
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP102">
+                                The internal market is completely influenced by the conditions within your city. Internal production, created in the commercial zones, represents all the things which are purchased and consumed within the city. Food stores, gas stations, retail stores, financial services, medical care, etc. -- all depend on a nearby population to service. Within Micropolis, the size of the internal market determines the rate at which commercial zones will prosper. Commercial zones need enough zoned land to build on and an existent, sufficient work force to employ. The structures built in commercial zones are mainly influenced by land value and population density.
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP103">
+                                Commercial zones grow and develop to serve the expanding internal market. Commercial growth will usually be slow at first, when the population is small and needs very little. As your city grows, commercial growth will accelerate and the internal market will become a much larger consumer of your total city production. This accelerating effect, when the external/industrial production is overtaken by the accelerating internal/commercial sector, can turn a sleepy little town of 50,000 into a thriving capital of 200,000 in a few short years.
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource SubHeaderTextAlignment}"
+                                       FontSize="{StaticResource SubHeaderFontSize}"
+                                       FontWeight="{StaticResource SubHeaderFontWeight}"
+                                       Foreground="{StaticResource SubHeaderForeground}"
+                                       Margin="{StaticResource SubHeaderMargin}" x:Name="helpP104">
+                                Tax Rate
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP105">
+                                The tax rate you set controls the amount of income generated by your city. As taxes are collected each year (simulation time), the Budget Window will appear, giving you the fiscal details of your city and a chance to adjust rates. The simulation determines the amount of revenue collected by assessing each zone an amount based on its land value, current level of development and the current tax rate.
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP106">
+                                The tax rate has a global affect on your city's growth rate. If you set it low (0%-4%), growth will be brisk but the city income will be low. If you set it high (10%-20%), you will collect a lot in the short run but in the long run tax income will decrease along with the population. You must keep tax income high enough to invest in new development, but low enough not to scare off residents and businesses. A high tax rate is one way to control city growth, should you want to experiment with "growth control measures."
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource SubHeaderTextAlignment}"
+                                       FontSize="{StaticResource SubHeaderFontSize}"
+                                       FontWeight="{StaticResource SubHeaderFontWeight}"
+                                       Foreground="{StaticResource SubHeaderForeground}"
+                                       Margin="{StaticResource SubHeaderMargin}" x:Name="helpP107">
+                                Budgeting
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP108">
+                                City budgeting affects the way your city grows. City infrastructure cost is represented by three departments: police, fire, and transportation. You may set the funding levels separately for each. All three departments will request a certain level of funding each year. You may supply all or part of the requested funds, in the attempt to balance safety needs and budgetary concerns.
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP109">
+                                •	Police Department: Police stations lower the crime rate around a territory. The effective radius of your police station is related to the amount of funding allocated to the police department. Police stations cost $100 per year to fund.
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP110">
+                                •	Fire Department: Fire stations prevent and extinguish fires. The level of funding determines the effective radius of a fire station. Fire stations put out fires within this radius much sooner than outside it, and decrease the chance that they will start in the first place. Fire stations cost $100 per year to fund.
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP111">
+                                •	Transportation Department:When you build roads and rail systems you are charged for construction and yearly maintenance. The larger your transportation network, the more it will cost for upkeep. If you decide not to or are unable to pay this maintenance cost, roads will slowly deteriorate and become unusable. The maintenance cost for each piece is: Road - $1, Bridge - $4, Rail - $4, Rail tunnel - $10.
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource SubHeaderTextAlignment}"
+                                       FontSize="{StaticResource SubHeaderFontSize}"
+                                       FontWeight="{StaticResource SubHeaderFontWeight}"
+                                       Foreground="{StaticResource SubHeaderForeground}"
+                                       Margin="{StaticResource SubHeaderMargin}" x:Name="helpP112">
+                                Power
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP113">
+                                Electrical power makes modern cities possible. Efficient and reliable power transmission to all zones is the goal of good "power management."
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP114">
+                                The entire power grid of your city is periodically checked in the simulation for links to power. If a zone is connected (by other zones or power lines) to a power plant, the zone is considered powered.
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP115">
+                                Zones must be powered for development to occur. Many things (such as fires, tornadoes, earthquakes and bulldozers) can knock down power lines and cause blackouts in parts of your city. Development will stop in unpowered zones, and if power is not quickly restored, the zone will decline back to its original state of emptiness.
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP116">
+                                Redundant power plants and power connections can make your power grid more reliable, but running more line adds construction costs.
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource SubHeaderTextAlignment}"
+                                       FontSize="{StaticResource SubHeaderFontSize}"
+                                       FontWeight="{StaticResource SubHeaderFontWeight}"
+                                       Foreground="{StaticResource SubHeaderForeground}"
+                                       Margin="{StaticResource SubHeaderMargin}" x:Name="helpP117">
+                                Transportation -- Traffic
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP118">
+                                One of the most important elements of city structure is the transportation network. It moves Sims and good throughout your city. Roads typically occupy as much as 25%-40% of the land in urban areas. Traffic along these roads indicates which sections of your road system are used the most.
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP119">
+                                Traffic levels are simulated by a process known as "Trip Generation." Over time, each populated zone in the city will generate a number of trips, depending on the population. Each generated trip starts at the origin zone, travels down the road, and if a "proper destination" is reached, ends at the destination zone -- otherwise, the trip fails. Trip failure indicates inaccessibility of a zone and limits its growth.
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP120">
+                                The majority of generated trips represent people commuting to and from work. Additional traffic is generated by residents traveling to shopping, recreation, etc. When analyzing traffic, the simulator tests the following traffic routes:
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource EmphasisTextAlignment}"
+                                       FontSize="{StaticResource EmphasisFontSize}"
+                                       FontWeight="{StaticResource EmphasisFontWeight}"
+                                       Foreground="{StaticResource EmphasisForeground}"
+                                       Margin="{StaticResource EmphasisMargin}" x:Name="helpP121">
+                                Traffic Patterns
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource ListTextAlignment}"
+                                       FontSize="{StaticResource ListFontSize}"
+                                       FontWeight="{StaticResource ListFontWeight}"
+                                       Foreground="{StaticResource ListForeground}"
+                                       Margin="{StaticResource ListMargin}"
+                                       TextIndent="{StaticResource ListTextIndent}" x:Name="helpP122">
+                                • From Residential
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource ListInnerTextAlignment}"
+                                       FontSize="{StaticResource ListInnerFontSize}"
+                                       FontWeight="{StaticResource ListInnerFontWeight}"
+                                       Foreground="{StaticResource ListInnerForeground}"
+                                       Margin="{StaticResource ListInnerMargin}"
+                                       TextIndent="{StaticResource ListInnerTextIndent}" x:Name="helpP123">
+                                o To Commercial
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource ListInnerTextAlignment}"
+                                       FontSize="{StaticResource ListInnerFontSize}"
+                                       FontWeight="{StaticResource ListInnerFontWeight}"
+                                       Foreground="{StaticResource ListInnerForeground}"
+                                       Margin="{StaticResource ListInnerMargin}"
+                                       TextIndent="{StaticResource ListInnerTextIndent}" x:Name="helpP124">
+                                o To Industrial
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource ListTextAlignment}"
+                                       FontSize="{StaticResource ListFontSize}"
+                                       FontWeight="{StaticResource ListFontWeight}"
+                                       Foreground="{StaticResource ListForeground}"
+                                       Margin="{StaticResource ListMargin}"
+                                       TextIndent="{StaticResource ListTextIndent}" x:Name="helpP125">
+                                • From Commercial
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource ListInnerTextAlignment}"
+                                       FontSize="{StaticResource ListInnerFontSize}"
+                                       FontWeight="{StaticResource ListInnerFontWeight}"
+                                       Foreground="{StaticResource ListInnerForeground}"
+                                       Margin="{StaticResource ListInnerMargin}"
+                                       TextIndent="{StaticResource ListInnerTextIndent}" x:Name="helpP126">
+                                o To Residential
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource ListInnerTextAlignment}"
+                                       FontSize="{StaticResource ListInnerFontSize}"
+                                       FontWeight="{StaticResource ListInnerFontWeight}"
+                                       Foreground="{StaticResource ListInnerForeground}"
+                                       Margin="{StaticResource ListInnerMargin}"
+                                       TextIndent="{StaticResource ListInnerTextIndent}" x:Name="helpP127">
+                                o To Industrial
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource ListTextAlignment}"
+                                       FontSize="{StaticResource ListFontSize}"
+                                       FontWeight="{StaticResource ListFontWeight}"
+                                       Foreground="{StaticResource ListForeground}"
+                                       Margin="{StaticResource ListMargin}"
+                                       TextIndent="{StaticResource ListTextIndent}" x:Name="helpP128">
+                                • From Industrial
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource ListInnerTextAlignment}"
+                                       FontSize="{StaticResource ListInnerFontSize}"
+                                       FontWeight="{StaticResource ListInnerFontWeight}"
+                                       Foreground="{StaticResource ListInnerForeground}"
+                                       Margin="{StaticResource ListInnerMargin}"
+                                       TextIndent="{StaticResource ListInnerTextIndent}" x:Name="helpP129">
+                                o	To Residential
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP130">
+                                When Sims drive away from an origin zone, they have a limited "trip range" in which to find a destination zone. Heavy traffic decreases the trip range. If the destination zone is too far away, the trip is unsuccessful. Repeated unsuccessful trips will cause the Sims to move out of the origin zone.
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP131">
+                                Each road has a limited capacity for traffic. When this capacity is exceeded traffic jams will form. Traffic jams drastically lower the capacity of a road, compounding the problem and frustrating drivers.
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP132">
+                                Traffic conditions fluctuate quickly. Avoid traffic problems by providing several routes for the traffic to take.
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP133">
+                                A road must be adjacent to a zone for the zone to be connected to the traffic pattern. Zones do not conduct traffic the way they conduct power.
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource SubHeaderTextAlignment}"
+                                       FontSize="{StaticResource SubHeaderFontSize}"
+                                       FontWeight="{StaticResource SubHeaderFontWeight}"
+                                       Foreground="{StaticResource SubHeaderForeground}"
+                                       Margin="{StaticResource SubHeaderMargin}" x:Name="helpP134">
+                                Pollution
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP135">
+                                Pollution levels are tracked in all areas of your city. This is a general "nuisance level" that includes air and water pollution, noise pollution, toxic wastes, etc. Pollution has a negative impact on the growth of residential areas.
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP136">
+                                The primary cause of pollution is industrialized zones. The level of pollution created by an industrial zone increases with its level of growth.
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP137">
+                                Traffic is another cause of pollution. There are limited means of combating the pollution level. Lowering traffic density, limiting industrial development, and separating the pollution from the residential areas will help.
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource SubHeaderTextAlignment}"
+                                       FontSize="{StaticResource SubHeaderFontSize}"
+                                       FontWeight="{StaticResource SubHeaderFontWeight}"
+                                       Foreground="{StaticResource SubHeaderForeground}"
+                                       Margin="{StaticResource SubHeaderMargin}" x:Name="helpP138">
+                                Crime
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP139">
+                                Crime rates are influenced by population density, local law enforcement, and land values. As population density increases in an area, the number of crimes committed increases. Crime will also increase in areas of low land value.
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP140">
+                                The most effective way to deal with high crime rates is to introduce a police station into the area. Based on its level of funding, the police station will reduce the rate of crime in its sphere of influence. A long-term approach to lowering crime is to raise the land value of the area. One way to do this is to demolish and rezone (urban renewal).
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource SubHeaderTextAlignment}"
+                                       FontSize="{StaticResource SubHeaderFontSize}"
+                                       FontWeight="{StaticResource SubHeaderFontWeight}"
+                                       Foreground="{StaticResource SubHeaderForeground}"
+                                       Margin="{StaticResource SubHeaderMargin}" x:Name="helpP141">
+                                Land Value
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP142">
+                                Land value is one of the most fundamental aspects of urban structure. The land value of an area affects how that area is used. In this simulation the land value of an area is based on terrain, accessibility, pollution, and distance to downtown.
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP143">
+                                The farther the residents have to go to work, the lower the land value where they live, due in part to transportation costs. The value of commercial zones depends greatly on accessibility by the populace.
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP144">
+                                Land value is also affected by surrounding terrain. If land is closer to water, trees, agricultural areas, or parks, its value will rise. Creative placement of zones within the terrain, with little bulldozing, can make good use of this natural advantage.
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="helpP145">
+                                Land value and crime rate have a feedback effect on each other. Lower land values cause crime rates to rise. Higher crime rates cause land values to drop, and can cause "transition areas" near your central city to rapidly decline in value.
+                            </Paragraph>
+                        </RichTextBlock>
+                       
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Page>

@@ -1,23 +1,15 @@
-﻿using Windows.ApplicationModel.Activation;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Windows.ApplicationModel;
+using Windows.ApplicationModel.Activation;
 using Windows.Globalization;
 using Windows.UI.Popups;
-using Engine;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Micropolis.Screens;
-using Windows.ApplicationModel;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Micropolis.Model.Entities;
+using Micropolis.Screens;
 
 // Die Vorlage "Leere Anwendung" ist unter http://go.microsoft.com/fwlink/?LinkId=234227 dokumentiert.
 
@@ -33,56 +25,69 @@ namespace Micropolis
     // it under the terms of the GNU GPLv3, with Additional terms.
     // See the README file, included in this distribution, for details.
     // Project website: http://code.google.com/p/micropolis/
-
-    using System.Linq.Expressions;
-
-    using Windows.Storage;
-
-    using Micropolis.Model.Entities;
-
+    
     /// <summary>
-    /// Stellt das anwendungsspezifische Verhalten bereit, um die Standardanwendungsklasse zu ergänzen.
+    ///     Stellt das anwendungsspezifische Verhalten bereit, um die Standardanwendungsklasse zu ergänzen.
     /// </summary>
     sealed partial class App : Application, ISupportsAppCommands
     {
+        private Frame rootFrame;
 
         /// <summary>
-        /// Indicates if user navigated away from main page.
-        /// </summary>
-        public static bool IsNavigatedAway { get; set; }
-
-        /// <summary>
-        /// Gets or sets the main page reference. It is used to signal MainGamePage of updates such as app suspension and helps to get access to navigation frame.
-        /// </summary>
-        /// <value>
-        /// The main page reference.
-        /// </value>
-        public static MainGamePage MainPageReference {get;set;}
-
-        /// <summary>
-        /// Gets or sets the main menu reference. It is used to signal MainGamePage of updates such as app suspension and helps to get access to navigation frame.
-        /// </summary>
-        /// <value>
-        /// The main page reference.
-        /// </value>
-        public static MainMenuPage MainMenuReference { get; set; }
-
-        
-        /// <summary>
-        /// Initialisiert das Singletonanwendungsobjekt.  Dies ist die erste Zeile von erstelltem Code
-        /// und daher das logische Äquivalent von main() bzw. WinMain().
+        ///     Initialisiert das Singletonanwendungsobjekt.  Dies ist die erste Zeile von erstelltem Code
+        ///     und daher das logische Äquivalent von main() bzw. WinMain().
         /// </summary>
         public App()
         {
             InitializeComponent();
-            AppCommands=new List<AppCommand>();
+            AppCommands = new List<AppCommand>();
             CheckVersion();
             Suspending += OnSuspending;
             UnhandledException += App_UnhandledException;
             Resuming += App_Resuming;
         }
 
-        void App_Resuming(object sender, object e)
+        /// <summary>
+        ///     Indicates if user navigated away from main page.
+        /// </summary>
+        public static bool IsNavigatedAway { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the main page reference. It is used to signal MainGamePage of updates such as app suspension and helps
+        ///     to get access to navigation frame.
+        /// </summary>
+        /// <value>
+        ///     The main page reference.
+        /// </value>
+        public static MainGamePage MainPageReference { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the main menu reference. It is used to signal MainGamePage of updates such as app suspension and helps
+        ///     to get access to navigation frame.
+        /// </summary>
+        /// <value>
+        ///     The main page reference.
+        /// </value>
+        public static MainMenuPage MainMenuReference { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the load page reference. It is used to get a dispatcher during load of components.
+        /// </summary>
+        /// <value>
+        ///     The load page reference.
+        /// </value>
+        public static LoadPage LoadPageReference { get; set; }
+
+        /// <summary>
+        ///     Gets the application commands used to signal game components for updates, e.g. to load a specific file or to skip
+        ///     menu page and directly load maingamepage.
+        /// </summary>
+        /// <value>
+        ///     The application commands.
+        /// </value>
+        public List<AppCommand> AppCommands { get; private set; }
+
+        private void App_Resuming(object sender, object e)
         {
             if (MainPageReference != null)
             {
@@ -91,7 +96,7 @@ namespace Micropolis
         }
 
         /// <summary>
-        /// Checks for previously installed game versions and updates the game to the current version.
+        ///     Checks for previously installed game versions and updates the game to the current version.
         /// </summary>
         private void CheckVersion()
         {
@@ -108,28 +113,29 @@ namespace Micropolis
         }
 
         /// <summary>
-        /// Handles the UnhandledException event of the App control to catch them during debug.
+        ///     Handles the UnhandledException event of the App control to catch them during debug.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="UnhandledExceptionEventArgs"/> instance containing the event data.</param>
-        void App_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        /// <param name="e">The <see cref="UnhandledExceptionEventArgs" /> instance containing the event data.</param>
+        private void App_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
-            string x = ""; // Bug: Todo
+            var x = ""; // Bug: Todo
             //e.Handled = true;
-            MessageDialog dialog = new MessageDialog("Unfortunately Micropolis experienced an issue it could not resolve.\n The game will now exit and you can manually restart it. Provided you participate in the Microsoft Customer Experience Improvement Program, we will then be notified of the issue and do our very best to fix it.","Your citizens riot.");
-            
+            var dialog =
+                new MessageDialog(
+                    "Unfortunately Micropolis experienced an issue it could not resolve.\n The game will now exit and you can manually restart it. Provided you participate in the Microsoft Customer Experience Improvement Program, we will then be notified of the issue and do our very best to fix it.",
+                    "Your citizens riot.");
+
             dialog.ShowAsync();
         }
 
-        private Frame rootFrame;
         /// <summary>
-        /// Wird aufgerufen, wenn die Anwendung durch den Endbenutzer normal gestartet wird.  Weitere Einstiegspunkte
-        /// werden z. B. verwendet, wenn die Anwendung gestartet wird, um eine bestimmte Datei zu öffnen.
+        ///     Wird aufgerufen, wenn die Anwendung durch den Endbenutzer normal gestartet wird.  Weitere Einstiegspunkte
+        ///     werden z. B. verwendet, wenn die Anwendung gestartet wird, um eine bestimmte Datei zu öffnen.
         /// </summary>
         /// <param name="e">Details über Startanforderung und -prozess.</param>
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
-
 #if DEBUG
             //if (System.Diagnostics.Debugger.IsAttached)
             //{
@@ -164,7 +170,7 @@ namespace Micropolis
                 // Wenn der Navigationsstapel nicht wiederhergestellt wird, zur ersten Seite navigieren
                 // und die neue Seite konfigurieren, indem die erforderlichen Informationen als Navigationsparameter
                 // übergeben werden
-                rootFrame.Navigate(typeof(LoadPage), e.Arguments);
+                rootFrame.Navigate(typeof (LoadPage), e.Arguments);
             }
 
             // Sicherstellen, dass das aktuelle Fenster aktiv ist
@@ -172,19 +178,19 @@ namespace Micropolis
         }
 
         /// <summary>
-        /// Wird aufgerufen, wenn die Navigation auf eine bestimmte Seite fehlschlägt
+        ///     Wird aufgerufen, wenn die Navigation auf eine bestimmte Seite fehlschlägt
         /// </summary>
         /// <param name="sender">Der Rahmen, bei dem die Navigation fehlgeschlagen ist</param>
         /// <param name="e">Details über den Navigationsfehler</param>
-        void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
+        private void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
         {
             throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
         }
 
         /// <summary>
-        /// Wird aufgerufen, wenn die Ausführung der Anwendung angehalten wird.  Der Anwendungszustand wird gespeichert,
-        /// ohne zu wissen, ob die Anwendung beendet oder fortgesetzt wird und die Speicherinhalte dabei
-        /// unbeschädigt bleiben.
+        ///     Wird aufgerufen, wenn die Ausführung der Anwendung angehalten wird.  Der Anwendungszustand wird gespeichert,
+        ///     ohne zu wissen, ob die Anwendung beendet oder fortgesetzt wird und die Speicherinhalte dabei
+        ///     unbeschädigt bleiben.
         /// </summary>
         /// <param name="sender">Die Quelle der Anhalteanforderung.</param>
         /// <param name="e">Details zur Anhalteanforderung.</param>
@@ -202,15 +208,7 @@ namespace Micropolis
         }
 
         /// <summary>
-        /// Gets or sets the load page reference. It is used to get a dispatcher during load of components.
-        /// </summary>
-        /// <value>
-        /// The load page reference.
-        /// </value>
-        public static LoadPage LoadPageReference { get; set; }
-
-        /// <summary>
-        /// Wird aufgerufen, wenn die Anwendung durch den Vorgang "Datei öffnen" aktiviert wird.
+        ///     Wird aufgerufen, wenn die Anwendung durch den Vorgang "Datei öffnen" aktiviert wird.
         /// </summary>
         /// <param name="args">Die Ereignisdaten für das Ereignis.</param>
         protected override void OnFileActivated(FileActivatedEventArgs args)
@@ -220,11 +218,11 @@ namespace Micropolis
             if (args.Files.Any())
             {
                 AppCommands.Add(new AppCommand(Model.Entities.AppCommands.SKIPMENU));
-                AppCommands.Add(new AppCommand(Model.Entities.AppCommands.LOADFILE,args.Files[0]));
+                AppCommands.Add(new AppCommand(Model.Entities.AppCommands.LOADFILE, args.Files[0]));
             }
             if (rootFrame != null)
             {
-                rootFrame.Navigate(typeof(LoadPage), null);
+                rootFrame.Navigate(typeof (LoadPage), null);
             }
             else
             {
@@ -249,19 +247,11 @@ namespace Micropolis
                     // Wenn der Navigationsstapel nicht wiederhergestellt wird, zur ersten Seite navigieren
                     // und die neue Seite konfigurieren, indem die erforderlichen Informationen als Navigationsparameter
                     // übergeben werden
-                    rootFrame.Navigate(typeof(LoadPage), "");
+                    rootFrame.Navigate(typeof (LoadPage), "");
                 }
                 // Sicherstellen, dass das aktuelle Fenster aktiv ist
                 Window.Current.Activate();
             }
         }
-
-        /// <summary>
-        /// Gets the application commands used to signal game components for updates, e.g. to load a specific file or to skip menu page and directly load maingamepage.
-        /// </summary>
-        /// <value>
-        /// The application commands.
-        /// </value>
-        public List<AppCommand> AppCommands { get; private set; }
     }
 }

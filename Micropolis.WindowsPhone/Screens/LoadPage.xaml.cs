@@ -1,5 +1,7 @@
-﻿using Windows.UI.Core;
+﻿using Windows.Storage;
+using Windows.UI.Core;
 using Engine;
+using Micropolis.Common;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -17,6 +19,8 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 // Die Elementvorlage "Standardseite" ist unter http://go.microsoft.com/fwlink/?LinkId=234237 dokumentiert.
+using Micropolis.Utils;
+using Micropolis.ViewModels;
 
 namespace Micropolis.Screens
 {
@@ -33,6 +37,7 @@ namespace Micropolis.Screens
 
     using System.Threading;
 
+    using Micropolis.Controller;
     using Micropolis.Model.Entities;
 
     /// <summary>
@@ -47,13 +52,13 @@ namespace Micropolis.Screens
 
         private CancellationTokenSource _tokenSource;
 
-
         /// <summary>
         /// Initializes a new instance of the <see cref="LoadPage"/> class.
         /// </summary>
         public LoadPage()
         {
             InitializeComponent();
+
             App.LoadPageReference = this;
             App.Current.Suspending += Current_Suspending;
         }
@@ -70,15 +75,12 @@ namespace Micropolis.Screens
         /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void Image_ImageOpened(object sender, RoutedEventArgs e)
         {
-            this._tokenSource = new CancellationTokenSource();
-            this._cancelToken = this._tokenSource.Token;
             LoadData();
-            ProgressIn.Value = 1;
         }
 
         public void CancelLoading()
         {
-            this._tokenSource.Cancel();
+            this._tokenSource.Cancel();    
         }
 
         /// <summary>
@@ -89,6 +91,10 @@ namespace Micropolis.Screens
         /// As soon as everything is loaded, the page is navigated to the MainGamePage.</remarks>
         private async Task LoadData()
         {
+            ProgressIn.Value = 1;
+            this._tokenSource = new CancellationTokenSource();
+            this._cancelToken = this._tokenSource.Token;
+
             if (_loaded)
             {
                 this.ProcessAppCommands();
@@ -97,12 +103,17 @@ namespace Micropolis.Screens
 
             try
             {
+
                 Task t1 = Strings.Initialize(this._cancelToken).ContinueWith(
                     (e) =>
                     {
                         App.LoadPageReference.Dispatcher.RunAsync(
                             CoreDispatcherPriority.Normal,
-                            () => { ProgressIn.Value += 1; });
+                            () =>
+                            {
+                                CopyrightTB.Text = Strings.GetString("CopyrightTB");
+                                ProgressIn.Value += 1;
+                            });
                     }); // async load language files
                 Task t2 = TileImages.Initialize(this._cancelToken).ContinueWith(
                     (e) =>
@@ -118,7 +129,7 @@ namespace Micropolis.Screens
                             CoreDispatcherPriority.Normal,
                             () => { ProgressIn.Value += 1; });
                     });
-                Task t5 = OverlayMapView.Initialize(this._cancelToken).ContinueWith(
+                Task t5 = OverlayMapViewModel.Initialize(this._cancelToken).ContinueWith(
                     (e) =>
                     {
                         App.LoadPageReference.Dispatcher.RunAsync(
@@ -126,7 +137,25 @@ namespace Micropolis.Screens
                             () => { ProgressIn.Value += 1; });
                     });
 
-                Task.WhenAll(new List<Task> { t1, t2, t3, t5 }).ContinueWith(
+
+                // Render thumbnail images, after required images are loaded
+                //beginning of section that blacks out screen
+                Task t6 = t5.ContinueWith(
+                    (f) =>
+                    {
+                        Installer.CreateCityFolderAndThumbnails(this._cancelToken).Wait(this._cancelToken);
+
+                        App.LoadPageReference.Dispatcher.RunAsync(
+                            CoreDispatcherPriority.Normal,
+                            () =>
+                            {
+                                ProgressIn.Value += 1;
+                            });
+                    });
+                //end of setion that blacks out screen
+                Task loadingTask = new Task(() =>
+                {
+                Task.WhenAll(new List<Task> {t1, t2, t3, t6}).ContinueWith(
                     (e) =>
                     {
                         App.LoadPageReference.Dispatcher.RunAsync(
@@ -137,6 +166,8 @@ namespace Micropolis.Screens
                                 ProcessAppCommands();
                             });
                     });
+                });
+                loadingTask.Start();
             }
             catch (AggregateException)
             {
@@ -147,11 +178,24 @@ namespace Micropolis.Screens
         /// <summary>
         /// Processes the application commands. Depending on commands either the main menu or the game page gets loaded. The command gets removed from the pool.
         /// </summary>
-        private void ProcessAppCommands()
+        private async void ProcessAppCommands()
         {
+            StorageFolder appFolder = ApplicationData.Current.LocalFolder;
+            try
+            {
+                var voidi = await appFolder.GetFileAsync("licenseAccepted.txt");
+            }
+            catch 
+            {
+                Frame.Navigate(typeof(LicensePage));
+                return;
+            }
+                
+
+
             ISupportsAppCommands current = (ISupportsAppCommands)App.Current;
             AppCommand skipCommand = current.AppCommands.FirstOrDefault(s => s.Instruction == AppCommands.SKIPMENU);
-
+            
             bool skipMenu = skipCommand != null;
             if (skipMenu)
             {
@@ -160,11 +204,8 @@ namespace Micropolis.Screens
             }
             else
             {
-                Frame.Navigate(typeof(MainGamePage));
+                Frame.Navigate(typeof(MainMenuPage));
             }
         }
-
-
-
     }
 }

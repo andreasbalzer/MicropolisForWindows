@@ -80,11 +80,7 @@
                         {
                             if (file.FileType == ".cty")
                             {
-#if WINDOWS_PHONE_APP
-                                ///Bug:add this
-#else
                                 await App.LoadPageReference.ThumbRender.RenderAndSaveToDisk(file);
-#endif
                             }
                         }
                         completionSource.SetResult(true);

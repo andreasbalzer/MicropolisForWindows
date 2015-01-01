@@ -1,4 +1,16 @@
-﻿<Page
+﻿<!--
+    // This file is part of Micropolis for WinRT.
+    // Copyright (C) 2014 Andreas Balzer, Felix Dietrich, Florian Thurnwald and Ivo Vutov
+    // Portions Copyright (C) MicropolisJ by Jason Long
+    // Portions Copyright (C) Micropolis Don Hopkins
+    // Portions Copyright (C) 1989-2007 Electronic Arts Inc.
+    //
+    // Micropolis for WinRT is free software; you can redistribute it and/or modify
+    // it under the terms of the GNU GPLv3, with Additional terms.
+    // See the README file, included in this distribution, for details.
+    // Project website: http://code.google.com/p/micropolis/
+    -->
+    <Page
     x:Name="pageRoot"
     x:Class="Micropolis.Screens.LoadPage"
     DataContext="{Binding DefaultViewModel, RelativeSource={RelativeSource Self}}"
@@ -8,73 +20,29 @@
     xmlns:common="using:Micropolis.Common"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:view="using:Micropolis.View"
     mc:Ignorable="d">
 
     <Grid Background="#545654">
-        
-        <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
-            <StackPanel>
-                <StackPanel>
-                    <Image Source="ms-appx:///Assets/Logo/Logo800.png" Height="100" ImageOpened="Image_ImageOpened"/>
-                    <ProgressBar x:Name="ProgressIn" Background="#ACAAAC" Foreground="Yellow" Height="25" IsIndeterminate="False" Margin="0,35,0,0" Minimum="0" Maximum="6" Value="0"/>
-                </StackPanel>
-                <TextBlock HorizontalAlignment="Center" Margin="0,20,0,0" Text="Andreas Balzer + Felix Dietrich + Florian Thurnwald + Ivo Vutov" FontFamily="/resources/fonts/dos437.ttf#Perfect DOS VGA 437 Win" FontSize="16"/>
-            </StackPanel>
+        <!-- ThumbnailRenderer used to render maps on startup when non existent -->
+        <Grid Height="400" Width="400" VerticalAlignment="Top">
+            <view:ThumbnailRenderer x:Name="ThumbRender" Height="400" Width="400" x:FieldModifier="public" IsHitTestVisible="False" />
+            <StackPanel Background="#545654" Height="400" Width="400" />
         </Grid>
-        
-        
-        
-        <!--<Grid.ChildrenTransitions>
-            <TransitionCollection>
-                <EntranceThemeTransition/>
-            </TransitionCollection>
-        </Grid.ChildrenTransitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
+        <!-- end of ThumbnailRenderer -->
 
-        --><!-- Back button and page title --><!--
-        <StackPanel Grid.Column="1" Grid.Row="1">
-            <StackPanel Orientation="Horizontal">
-                --><!--<Image Width="100" Height="100" />--><!--
-                <Ellipse Height="100" Width="100" Fill="Black" />
-                <TextBlock Text="Micropolis" FontSize="100" Foreground="Black"  Margin="20,0,0,0"/>
-            </StackPanel>
-            <TextBlock Text="Loading files.." FontSize="30" Foreground="Black" Margin="0,20,0,0" />
-            <ProgressBar x:Name="ProgressIn" Minimum="0" Value="0" Maximum="5" IsIndeterminate="False" Grid.Column="1" Background="Black" Foreground="White" Height="50" />
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-            
-            <TextBlock VerticalAlignment="Center" Text="author vCurrent" Grid.Row="0" Grid.Column="0" Margin="0,0,20,0" />
-            <TextBlock VerticalAlignment="Center" Text="dev vCurrent" Grid.Row="1" Grid.Column="0" />
-            <TextBlock VerticalAlignment="Center" Text="editor vNext" Grid.Row="2" Grid.Column="0" />
-            <TextBlock VerticalAlignment="Center" Text="designer vNext" Grid.Row="3" Grid.Column="0" />
-            
-            
-            <TextBlock Text="Andreas Balzer" Foreground="Black" FontSize="16" Grid.Row="0" Grid.Column="1" />
-            <TextBlock Text="Felix Dietrich" Foreground="Black" FontSize="16" Grid.Row="1" Grid.Column="1" />
-            <TextBlock Text="Ivo Vutov" Foreground="Black" FontSize="16"  Grid.Row="2" Grid.Column="1" />
-            <TextBlock Text="Florian Thurnwald" Foreground="Black" FontSize="16" Grid.Row="3" Grid.Column="1" />
-            
-            </Grid>
-        </StackPanel>-->
-        <TextBlock HorizontalAlignment="Center" Margin="0,0,0,15" FontFamily="/resources/fonts/dos437.ttf#Perfect DOS VGA 437 Win" VerticalAlignment="Bottom" Text="Micropolis for WinRT is part of the Micropolis project. It is licensed as GNU GPL so you can contribute at http://code.google.com/p/micropolis/" FontSize="16"/>
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+                
+                    <Image Grid.Row="0" Source="ms-appx:///Assets/Logo/Logo800.png" MaxHeight="100" ImageOpened="Image_ImageOpened"/>
+                    <ProgressBar Grid.Row="1" x:Name="ProgressIn" Background="#ACAAAC" Foreground="Yellow" Height="25" IsIndeterminate="False" Margin="0,35,0,0" Minimum="0" Maximum="7" Value="0"/>
+                    <TextBlock Grid.Row="2" TextWrapping="Wrap" Text="Micropolis http://code.google.com/p/micropolis/" HorizontalAlignment="Center" Margin="0,20,0,0" FontFamily="/resources/fonts/dos437.ttf#Perfect DOS VGA 437 Win" FontSize="16"/>
+        </Grid>
+        <TextBlock x:Name="CopyrightTB" Text="GNU GPL" HorizontalAlignment="Center" Margin="0,0,0,15" TextWrapping="Wrap" FontFamily="/resources/fonts/dos437.ttf#Perfect DOS VGA 437 Win" VerticalAlignment="Bottom" FontSize="16"/>
     </Grid>
+
 </Page>
