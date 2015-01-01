@@ -1577,8 +1577,8 @@
         </Grid>
 
         <Grid x:Uid="BottomBar" Grid.Row="2" Background="{StaticResource BarBackgroundBrush}" Grid.Column="0"
-              Grid.ColumnSpan="2">
-            <StackPanel Orientation="Horizontal">
+              Grid.ColumnSpan="2" VerticalAlignment="Top">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
                 <Button x:Name="ToolsSmallButton" Command="{Binding ToggleToolsCommand}"
                         Style="{StaticResource BarSmallBottomButtonStyle}">
                     <Grid>
