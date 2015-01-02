@@ -61,6 +61,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\NewCityDialogViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\NotificationPaneViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\OverlayMapViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ReviewBarViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ToolbarButtonViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ToolbarViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)View\BudgetDialog.xaml.cs">
@@ -95,6 +96,9 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)View\OverlayMapView.xaml.cs">
       <DependentUpon>OverlayMapView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)View\ReviewBar.xaml.cs">
+      <DependentUpon>ReviewBar.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)View\ThumbnailRenderer.xaml.cs">
       <DependentUpon>ThumbnailRenderer.xaml</DependentUpon>
@@ -164,6 +168,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="$(MSBuildThisFileDirectory)View\OverlayMapView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)View\ReviewBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
