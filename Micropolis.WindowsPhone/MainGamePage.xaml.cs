@@ -1,6 +1,7 @@
 ﻿using System;
 using Windows.ApplicationModel.Core;
 using Windows.Foundation;
+using Windows.Phone.UI.Input;
 using Windows.UI.Core;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
@@ -43,11 +44,22 @@ namespace Micropolis
             DataContext = _viewModel;
             Loaded += MainGamePage_Loaded;
 
+            Windows.Phone.UI.Input.HardwareButtons.BackPressed += HardwareButtons_BackPressed;
+
             VisualStateChanged += _viewModel.MainGamePage_VisualStateChanged;
             _viewModel.DrawingAreaScrollChangeView += _viewModel_DrawingAreaScrollChangeView;
             _viewModel.PlaySound += _viewModel_PlaySound;
             Window.Current.SizeChanged += Window_SizeChanged;
             DetermineVisualState();
+        }
+
+        private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
+        {
+            if (_viewModel.GoBack())
+            {
+                Frame.GoBack();
+            }
+            e.Handled = true;
         }
 
         void _viewModel_PlaySound(object sender, Uri file)

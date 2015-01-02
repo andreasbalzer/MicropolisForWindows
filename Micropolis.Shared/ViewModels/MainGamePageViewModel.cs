@@ -2660,7 +2660,6 @@ namespace Micropolis.ViewModels
             {
                 StopTimer();
             }
-
             ShowBudgetDialog(timerEnabled);
         }
 
@@ -2860,6 +2859,26 @@ namespace Micropolis.ViewModels
         internal float GetZoomFactor()
         {
             return DrawingAreaScrollZoomFactor;
+        }
+
+        public bool GoBack()
+        {
+            if (NewBudgetDialogPaneOuterIsVisible)
+            {
+                StartTimer();
+                HideBudgetDialog();
+                
+                return false;
+            }
+            
+            if (GraphsPaneIsVisible)
+            {
+                HideGraphsPane();
+
+                return false;
+            }
+            
+            return true; // Hardware button should trigger page go back
         }
     }
 }
