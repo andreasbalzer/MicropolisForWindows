@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Globalization;
 using Windows.UI.Popups;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Animation;
@@ -37,6 +39,16 @@ namespace Micropolis
             Suspending += OnSuspending;
             UnhandledException += App_UnhandledException;
             Resuming += App_Resuming;
+
+            HideSystemTray();
+        }
+
+        private async Task HideSystemTray()
+        {
+            StatusBar statusBar = Windows.UI.ViewManagement.StatusBar.GetForCurrentView();
+
+            // Hide the status bar
+            await statusBar.HideAsync();
         }
 
         /// <summary>

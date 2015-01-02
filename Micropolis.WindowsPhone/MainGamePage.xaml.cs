@@ -48,9 +48,6 @@ namespace Micropolis
             _viewModel.PlaySound += _viewModel_PlaySound;
             Window.Current.SizeChanged += Window_SizeChanged;
             DetermineVisualState();
-
-            var x=ToolsSmallButton;
-            var s = "";
         }
 
         void _viewModel_PlaySound(object sender, Uri file)
