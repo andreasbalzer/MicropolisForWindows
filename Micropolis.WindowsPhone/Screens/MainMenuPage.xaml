@@ -18,6 +18,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:converters="using:Micropolis.Converters"
+    xmlns:micropolis="using:Micropolis"
     mc:Ignorable="d"
     DataContext="{Binding RelativeSource={RelativeSource Self}}">
 
@@ -489,7 +490,8 @@
                 </HubSection.Header>
                 <HubSection.ContentTemplate>
                     <DataTemplate>
-                        <StackPanel>
+                        <StackPanel Orientation="Vertical">
+                            <micropolis:ReviewBar />
                             <Button x:Name="NewGameButton" Command="{Binding NewGameCommand}"
                                     Style="{StaticResource MenuButtonStyle}" VerticalAlignment="Top" Width="200"
                                     Height="100">

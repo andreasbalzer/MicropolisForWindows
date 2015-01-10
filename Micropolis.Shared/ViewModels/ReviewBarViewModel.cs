@@ -12,7 +12,6 @@ namespace Micropolis.ViewModels
         private readonly string INITIALTIMEUNTILFEEDBACK = "5";
         private readonly string POSTPONETIMEUNTILFEEDBACK = "20";
         private readonly string SHOWFEEDBACK = "0";
-
         private bool _feedbackIsVisible;
         private string _sendFeedbackText;
         private bool _sorryMessageIsVisible;
@@ -69,7 +68,7 @@ namespace Micropolis.ViewModels
 
         private void OpenStoreRatingPage()
         {
-            Launcher.LaunchUriAsync(new Uri("ms-windows-store:reviewapp"));
+            Launcher.LaunchUriAsync(new Uri("ms-windows-store:reviewapp", UriKind.Absolute));
             Disable();
         }
 
@@ -78,7 +77,8 @@ namespace Micropolis.ViewModels
             var feedbackTitle = Strings.GetString("feedback.title");
             var feedbackBody = Strings.GetString("feedback.body");
             Launcher.LaunchUriAsync(
-                new Uri("mailto:micropolis@andreas-balzer.de?subject=" + feedbackTitle + "&body=" + feedbackBody));
+                new Uri("mailto:micropolis@andreas-balzer.de?subject=" + feedbackTitle + "&body=" + feedbackBody,
+                    UriKind.Absolute));
             Postpone();
         }
 
@@ -94,34 +94,32 @@ namespace Micropolis.ViewModels
             }
             catch {
                 FeedbackIsVisible = false;
-                CreateFeedbackFile();
+                CreateFeedbackSetting();
             }
 #else
-            var previousFeedbackFile = await folder.TryGetItemAsync("feedbackSent.txt");
-            var fileExists = previousFeedbackFile != null;
+
+            var fileExists = Prefs.ContainsKey("feedbackSent");
             if (!fileExists)
             {
                 FeedbackIsVisible = false;
-                CreateFeedbackFile();
+                CreateFeedbackSetting();
             }
             else
             {
-                ShowFeedbackOrDecrementCounter(previousFeedbackFile);
+                ShowFeedbackOrDecrementCounter();
             }
 #endif
         }
 
-        private async Task CreateFeedbackFile()
+        private async Task CreateFeedbackSetting()
         {
-            var folder = ApplicationData.Current.RoamingFolder;
-            var file = await folder.CreateFileAsync("feedbackSent.txt");
-            FileIO.WriteTextAsync(file, INITIALTIMEUNTILFEEDBACK);
+            Prefs.PutString("feedbackSent", INITIALTIMEUNTILFEEDBACK);
         }
 
-        private async Task ShowFeedbackOrDecrementCounter(IStorageItem previousFeedbackFile)
+        private async Task ShowFeedbackOrDecrementCounter()
         {
             bool previousFeedback;
-            var content = await FileIO.ReadTextAsync((IStorageFile) previousFeedbackFile);
+            var content = Prefs.GetString("feedbackSent", INITIALTIMEUNTILFEEDBACK);
             previousFeedback = content == SHOWFEEDBACK;
             if (!previousFeedback)
             {
@@ -132,7 +130,7 @@ namespace Micropolis.ViewModels
                 if (content != DONEFEEDBACK)
                 {
                     var newContent = (Int32.Parse(content) - 1).ToString();
-                    FileIO.WriteTextAsync((IStorageFile) previousFeedbackFile, newContent);
+                    Prefs.PutString("feedbackSent", newContent);
                 }
                 FeedbackIsVisible = false;
             }
@@ -140,16 +138,12 @@ namespace Micropolis.ViewModels
 
         private async Task Disable()
         {
-            var folder = ApplicationData.Current.RoamingFolder;
-            var file = await folder.GetFileAsync("feedbackSent.txt");
-            FileIO.WriteTextAsync(file, DONEFEEDBACK);
+            Prefs.PutString("feedbacksent", DONEFEEDBACK);
         }
 
         private async Task Postpone()
         {
-            var folder = ApplicationData.Current.RoamingFolder;
-            var file = await folder.GetFileAsync("feedbackSent.txt");
-            FileIO.WriteTextAsync(file, POSTPONETIMEUNTILFEEDBACK);
+            Prefs.PutString("feedbackSent", POSTPONETIMEUNTILFEEDBACK);
         }
     }
 }
