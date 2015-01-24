@@ -68,7 +68,7 @@ namespace Micropolis.ViewModels
 
         private void OpenStoreRatingPage()
         {
-            Launcher.LaunchUriAsync(new Uri("ms-windows-store:reviewapp", UriKind.Absolute));
+            Launcher.LaunchUriAsync(new Uri("ms-windows-store:review?PFN=62155AndreasBalzer.MicropolisforWindows_rqaffv28461by", UriKind.Absolute));
             Disable();
         }
 
@@ -118,10 +118,10 @@ namespace Micropolis.ViewModels
 
         private async Task ShowFeedbackOrDecrementCounter()
         {
-            bool previousFeedback;
+            bool showFeedback;
             var content = Prefs.GetString("feedbackSent", INITIALTIMEUNTILFEEDBACK);
-            previousFeedback = content == SHOWFEEDBACK;
-            if (!previousFeedback)
+            showFeedback = content == SHOWFEEDBACK;
+            if (showFeedback || true)
             {
                 FeedbackIsVisible = true;
             }
