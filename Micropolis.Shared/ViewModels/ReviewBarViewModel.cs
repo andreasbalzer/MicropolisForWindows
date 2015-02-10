@@ -90,7 +90,7 @@ namespace Micropolis.ViewModels
             try
             {
                 var previousFeedbackFile = await folder.GetFileAsync("feedbackSent.txt");
-                ShowFeedbackOrDecrementCounter(previousFeedbackFile);
+                ShowFeedbackOrDecrementCounter();
             }
             catch {
                 FeedbackIsVisible = false;
