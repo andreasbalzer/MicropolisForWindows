@@ -14,6 +14,7 @@ using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 using Micropolis.Model.Entities;
 using Micropolis.Screens;
+using Microsoft.ApplicationInsights;
 
 // Die Vorlage "Leere Anwendung" ist unter http://go.microsoft.com/fwlink/?LinkId=391641 dokumentiert.
 
@@ -24,6 +25,11 @@ namespace Micropolis
     /// </summary>
     public sealed partial class App : Application, ISupportsAppCommands
     {
+        /// <summary>
+        /// Allows tracking page views, exceptions and other telemetry through the Microsoft Application Insights service.
+        /// </summary>
+        public TelemetryClient TelemetryClient = new TelemetryClient();
+
         private Frame rootFrame;
         private TransitionCollection transitions;
 

@@ -14,6 +14,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Microsoft.ApplicationInsights;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234237
 
@@ -362,7 +363,12 @@ namespace Micropolis.Screens
             helpP144.Inlines.Add(new Run() {Text = Strings.GetString("help.P144")});
             helpP145.Inlines.Add(new Run() {Text = Strings.GetString("help.P145")});
 
+            _telemetry = new TelemetryClient();
+            _telemetry.TrackPageView("HelpPage");
+
         }
+
+        private TelemetryClient _telemetry;
         /*
         void Output_SizeChanged(object sender, SizeChangedEventArgs e)
         {
@@ -406,8 +412,8 @@ namespace Micropolis.Screens
         /// NavigationHelper to respond to the page's navigation methods.
         /// 
         /// Page specific logic should be placed in event handlers for the  
-        /// <see cref="GridCS.Common.NavigationHelper.LoadState"/>
-        /// and <see cref="GridCS.Common.NavigationHelper.SaveState"/>.
+        /// <see cref="Common.NavigationHelper.LoadState"/>
+        /// and <see cref="Common.NavigationHelper.SaveState"/>.
         /// The navigation parameter is available in the LoadState method 
         /// in addition to page state preserved during an earlier session.
 

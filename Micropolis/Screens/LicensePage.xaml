@@ -153,7 +153,7 @@
                                        Foreground="{StaticResource NormalForeground}"
                                        Margin="{StaticResource NormalMargin}" x:Name="licenseP5">This program is free software.
                                             
-                                            You can redistribute the sourcecode and Micropolis graphics and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version. This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with this program. If not, see 
+                                            You can redistribute the sourcecode (see exceptions below) and Micropolis graphics (see exceptions below) and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version. This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with this program. If not, see 
                                 <InlineUIContainer>
                                     <Button x:Name="GnuGplButton" Content="http://www.gnu.org/licenses" Click="GnuGplButton_Clicked" />
                                 </InlineUIContainer>.
@@ -163,7 +163,7 @@
                                        FontWeight="{StaticResource NormalFontWeight}"
                                        Foreground="{StaticResource NormalForeground}"
                                        Margin="{StaticResource NormalMargin}" x:Name="licenseP4b">
-                                Note: Some icons used in the user interface are not licensed as GNU GPL. Please see below for further information. 
+                                Note: Some icons used in the user interface and some external software packages used are not licensed as GNU GPL. Please see below for further information. 
                                 The Micropolis logo is build with New York City, a font by Magique Fonts, downloadable via http://www.dafont.com/de/new-york-city.font.
                             </Paragraph>
                             <Paragraph TextAlignment="{StaticResource HeaderTextAlignment}"
@@ -231,6 +231,25 @@
                                        FontWeight="{StaticResource NormalFontWeight}"
                                        Foreground="{StaticResource NormalForeground}"
                                        Margin="{StaticResource NormalMargin}" x:Name="licenseP16">Some icons in the main game UI have been designed by Freepik and published in set "universal 05" with CC BY 3.0 license http://www.freepik.com/, downloaded from http://www.flaticon.com/packs/universal-05. The GNU GPL does not apply to these icons.</Paragraph>
+                            <Paragraph TextAlignment="{StaticResource HeaderTextAlignment}"
+                                       FontSize="{StaticResource HeaderFontSize}"
+                                       FontWeight="{StaticResource HeaderFontWeight}"
+                                       Foreground="{StaticResource HeaderForeground}"
+                                       Margin="{StaticResource HeaderMargin}" x:Name="licenseP17">Additional software licenses
+                            </Paragraph>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource NormalMargin}" x:Name="licenseP18">Micropolis uses third party software. These packages are not included in our source code repository but get integrated when we build the game to ship it by using nuget. The nuget packages have own licenses and are not all licensed as GNU GPL. External software includes: 
+- Application Insights API
+- Application Insights for Windows 8.1 applications
+- Application Insights Runtime Telemetry
+- Microsoft EventSource Library Redistribution Package
+- WinRT XAML Toolkit - Data Visualization Controls
+- WinRT XAML Toolkit
+- WriteableBitmapEx
+                            </Paragraph>
                         </RichTextBlock>
                         <utils:RichTextColumns.ColumnTemplate>
                             <DataTemplate>

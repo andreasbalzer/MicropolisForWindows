@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Microsoft.ApplicationInsights;
 
 namespace Micropolis
 {
@@ -32,6 +33,11 @@ namespace Micropolis
         {
             this.InitializeComponent();
             PrivacyText.Text = Strings.GetString("privacy.Text");
+            
+            _telemetry = new TelemetryClient();
+            _telemetry.TrackPageView("PrivacyUserControl");
+
         }
+        private TelemetryClient _telemetry;
     }
 }

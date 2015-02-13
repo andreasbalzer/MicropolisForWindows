@@ -3,6 +3,7 @@ using System.Linq;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Microsoft.ApplicationInsights;
 
 namespace Micropolis
 {
@@ -45,7 +46,12 @@ namespace Micropolis
             Language.SelectedItem =
                 Language.Items.First(s => ((ComboBoxItem) s).Name == Prefs.GetString("Language", "automatic"));
             _isInit = true;
+
+            _telemetry = new TelemetryClient();
+            _telemetry.TrackPageView("PreferencesUserControl");
+
         }
+        private TelemetryClient _telemetry;
 
 
         /// <summary>

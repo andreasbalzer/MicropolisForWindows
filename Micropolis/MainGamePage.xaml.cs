@@ -7,6 +7,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using Micropolis.Model.Entities;
 using Micropolis.ViewModels;
+using Microsoft.ApplicationInsights;
 
 namespace Micropolis
 {
@@ -47,7 +48,12 @@ namespace Micropolis
             _viewModel.PlaySound += _viewModel_PlaySound;
             Window.Current.SizeChanged += Window_SizeChanged;
             DetermineVisualState();
+
+            _telemetry = new TelemetryClient();
+            _telemetry.TrackPageView("MainGamePage");
+
         }
+        private TelemetryClient _telemetry;
 
         void _viewModel_PlaySound(object sender, Uri file)
         {

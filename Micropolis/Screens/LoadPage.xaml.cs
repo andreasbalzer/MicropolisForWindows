@@ -21,6 +21,7 @@ using Windows.UI.Xaml.Navigation;
 // Die Elementvorlage "Standardseite" ist unter http://go.microsoft.com/fwlink/?LinkId=234237 dokumentiert.
 using Micropolis.Utils;
 using Micropolis.ViewModels;
+using Microsoft.ApplicationInsights;
 
 namespace Micropolis.Screens
 {
@@ -84,7 +85,12 @@ namespace Micropolis.Screens
             navigationHelper = new NavigationHelper(this);
             navigationHelper.LoadState += navigationHelper_LoadState;
             navigationHelper.SaveState += navigationHelper_SaveState;
+
+            _telemetry = new TelemetryClient();
+            _telemetry.TrackPageView("LoadPage");
+
         }
+        private TelemetryClient _telemetry;
 
         void Current_Suspending(object sender, Windows.ApplicationModel.SuspendingEventArgs e)
         {

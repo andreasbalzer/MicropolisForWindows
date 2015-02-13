@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Microsoft.ApplicationInsights;
 
 // The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
 
@@ -35,6 +36,10 @@ namespace Micropolis
             InitializeComponent();
             AboutText.Text = Strings.GetString("about.Text");
             AboutTitle.Text = Strings.GetString("about.Title");
+            _telemetry = new TelemetryClient();
+            _telemetry.TrackPageView("AboutUserControl");
+
         }
+        private TelemetryClient _telemetry;
     }
 }

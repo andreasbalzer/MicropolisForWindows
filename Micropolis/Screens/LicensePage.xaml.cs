@@ -19,6 +19,7 @@ using Windows.UI.Xaml.Navigation;
 
 // Die Elementvorlage "Standardseite" ist unter http://go.microsoft.com/fwlink/?LinkId=234237 dokumentiert.
 using Micropolis.Model.Entities;
+using Microsoft.ApplicationInsights;
 
 namespace Micropolis.Screens
 {
@@ -59,7 +60,11 @@ namespace Micropolis.Screens
             LicenseTextTB.Inlines.Add(new Run(){Text=Strings.GetString("license.P1")});
             B1.Content = Strings.GetString("license.B1");
             pageTitle.Text = Strings.GetString("license.Title");
+
+            _telemetry = new TelemetryClient();
+            _telemetry.TrackPageView("LicensePage");
         }
+        private TelemetryClient _telemetry;
 
         /// <summary>
         /// Füllt die Seite mit Inhalt auf, der bei der Navigation übergeben wird. Gespeicherte Zustände werden ebenfalls
@@ -94,8 +99,8 @@ namespace Micropolis.Screens
         /// damit NavigationHelper auf die Navigationsmethoden der Seite reagieren kann.
         /// 
         /// Platzieren Sie seitenspezifische Logik in Ereignishandlern für  
-        /// <see cref="GridCS.Common.NavigationHelper.LoadState"/>
-        /// und <see cref="GridCS.Common.NavigationHelper.SaveState"/>.
+        /// <see cref="Common.NavigationHelper.LoadState"/>
+        /// und <see cref="Common.NavigationHelper.SaveState"/>.
         /// Der Navigationsparameter ist in der LoadState-Methode verfügbar 
         /// zusätzlich zum Seitenzustand, der während einer früheren Sitzung beibehalten wurde.
 

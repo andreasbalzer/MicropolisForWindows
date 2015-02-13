@@ -11,6 +11,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Imaging;
 using Micropolis.Model.Entities;
 using Micropolis.ViewModels;
+using Microsoft.ApplicationInsights;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -50,7 +51,11 @@ namespace Micropolis.Screens
 
             // Register handler for CommandsRequested events from the settings pane
             SettingsPane.GetForCurrentView().CommandsRequested += SettingsCharm.OnCommandsInMenuRequested;
+            _telemetry = new TelemetryClient();
+            _telemetry.TrackPageView("MainMenuPage");
         }
+
+        private TelemetryClient _telemetry;
         
         private void Window_SizeChanged(object sender, WindowSizeChangedEventArgs e)
         {
