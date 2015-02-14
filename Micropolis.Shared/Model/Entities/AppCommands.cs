@@ -25,6 +25,11 @@
         /// Loads a game file but forgets about its origin so save does not overwrite that file.
         /// </summary>
         LOADFILEASNEWCITY,
+        
+        /// <summary>
+        /// Loads a game file but then deletes it. Used to load Autosave.
+        /// </summary>
+        LOADFILEASNEWCITYANDDELETE,
 
         /// <summary>
         /// Skip menu page and directly go to MainGamePage after game has been loaded.

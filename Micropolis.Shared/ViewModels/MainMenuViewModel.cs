@@ -169,7 +169,7 @@ namespace Micropolis.ViewModels
         {
             _telemetry.TrackEvent("MainMenuLoadUnsavedGameClicked");
 
-            ((ISupportsAppCommands) Application.Current).AppCommands.Add(new AppCommand(AppCommands.LOADFILE,
+            ((ISupportsAppCommands) Application.Current).AppCommands.Add(new AppCommand(AppCommands.LOADFILEASNEWCITYANDDELETE,
                 _unsavedFileExists));
             App.MainMenuReference.Frame.Navigate(typeof (MainGamePage));
         }

@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Windows.Storage;
@@ -14,7 +15,7 @@ namespace Engine.Controller
         public static async Task Load(StorageFile file, Micropolis engine)
         {
             Stream stream = await file.OpenStreamForReadAsync();
-            await LoadFile(stream, engine);
+            LoadFile(stream, engine);
         }
 
         /// <summary>
@@ -47,9 +48,13 @@ namespace Engine.Controller
         /// </summary>
         /// <param name="stream">The stream.</param>
         /// <returns></returns>
-        public static async Task LoadFile(Stream stream, Micropolis engine)
+        public static void LoadFile(Stream stream, Micropolis engine)
         {
-            if (stream.Length > 27120)
+            if (stream.Length == 0)
+            {
+                throw new ArgumentException("File empty");   
+            }
+            else if (stream.Length > 27120)
             {
                 // some editions of the classic Simcity game
                 // start the file off with a 128-byte header,

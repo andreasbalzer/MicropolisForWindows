@@ -2589,9 +2589,9 @@ namespace Engine
         /// </summary>
         /// <param name="stream">The stream.</param>
         /// <returns></returns>
-        public async Task LoadFile(Stream stream)
+        public void LoadFile(Stream stream)
         {
-            await MapLoader.LoadFile(stream, this);
+            MapLoader.LoadFile(stream, this);
         }
 
         /// <summary>

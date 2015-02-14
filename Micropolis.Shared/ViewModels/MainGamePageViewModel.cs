@@ -1039,6 +1039,12 @@ namespace Micropolis.ViewModels
 
             var loadCityAsNew = loadCityAsNewCommand != null; // loadCityCommand present?
 
+            var loadCityAsNewCommandAndDelete =
+              currentApp.AppCommands.FirstOrDefault(s => s.Instruction == AppCommands.LOADFILEASNEWCITYANDDELETE);
+
+
+            var loadCityAsNewAndDelete = loadCityAsNewAndDeleteAndDelteCommand != null;
+
             if (loadCity)
             {
                 var file = (StorageFile) loadCityCommand.File;
@@ -1051,7 +1057,14 @@ namespace Micropolis.ViewModels
                 var file = (StorageFile) loadCityAsNewCommand.File;
                 currentApp.AppCommands.Remove(loadCityAsNewCommand);
 
-                LoadGameFile(file, false);
+                LoadGameFile(file, false, false);
+            }
+            else if (loadCityAsNewAndDelete)
+            {
+                var file = (StorageFile)loadCityAsNewCommand.File;
+                currentApp.AppCommands.Remove(loadCityAsNewCommand);
+
+                LoadGameFile(file, true, false);
             }
             else if (_firstRun)
             {
@@ -1063,7 +1076,7 @@ namespace Micropolis.ViewModels
         ///     Loads the game file.
         /// </summary>
         /// <param name="file">The file to be loaded.</param>
-        private void LoadGameFile(StorageFile file, bool useFileForSave = true)
+        private void LoadGameFile(StorageFile file, bool deleteGameFileAfterLoading=false, bool useFileForSave = true)
         {
             if (file != null)
             {
@@ -1080,6 +1093,10 @@ namespace Micropolis.ViewModels
                         MakeClean();
                     });
                 });
+                if (deleteGameFileAfterLoading)
+                {
+                    file.DeleteAsync();
+                }
             }
         }
 
@@ -2926,7 +2943,8 @@ namespace Micropolis.ViewModels
         /// </summary>
         private async void SaveToInternalStorage()
         {
-            if (NeedsSaved())
+            bool needsSaved = NeedsSaved();
+            if (needsSaved)
             {
                 var timerEnabled = IsTimerActive();
                 if (timerEnabled)

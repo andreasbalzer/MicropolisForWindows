@@ -26,6 +26,8 @@ namespace Micropolis.ViewModels
 
         public NewCityDialogViewModel(OverlayMapViewModel mapPaneViewModel)
         {
+            _telemetry = new TelemetryClient();
+
             _mapPaneViewModel = mapPaneViewModel;
             Levels=new ObservableCollection<LevelButtonViewModel>();
             TitleTextBlockText = Strings.GetString("welcome.caption");
@@ -59,7 +61,7 @@ namespace Micropolis.ViewModels
 
             LoadCityCommand = new DelegateCommand(() => { OnLoadCityClicked(); });
 
-            _telemetry = new TelemetryClient();
+            
 
         }
 
