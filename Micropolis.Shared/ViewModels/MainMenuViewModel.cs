@@ -35,6 +35,8 @@ namespace Micropolis.ViewModels
 
         public MainMenuViewModel()
         {
+            _telemetry = new TelemetryClient();
+
             Cities = new ObservableCollection<City>();
 
             UnsavedGameButtonText = Strings.GetString("UnsavedGameButton");
@@ -54,8 +56,6 @@ namespace Micropolis.ViewModels
             _blackHeader = new BitmapImage(blackLogoUri);
             var whiteLogoUri = new Uri("ms-appx:///Assets/Logo/LogoWhite800.png", UriKind.RelativeOrAbsolute);
             _whiteHeader = new BitmapImage(whiteLogoUri);
-
-            _telemetry = new TelemetryClient();
         }
 
         public DelegateCommand LoadUnsavedGameCommand

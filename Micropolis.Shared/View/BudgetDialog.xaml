@@ -141,8 +141,8 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <CheckBox x:Name="autoBudgetBtn" Grid.Column="0" Content="{Binding AutoBudgetButtonText}" IsChecked="{Binding IsAutoBudget}" />
-                <CheckBox x:Name="pauseBtn" Grid.Column="1"  Content="{Binding PauseButtonText}" IsChecked="{Binding IsPause}" />
+                <CheckBox x:Name="autoBudgetBtn" Grid.Column="0" Content="{Binding AutoBudgetButtonText}" IsChecked="{Binding IsAutoBudget, Mode=TwoWay}" />
+                <CheckBox x:Name="pauseBtn" Grid.Column="1"  Content="{Binding PauseButtonText}" IsChecked="{Binding IsPause, Mode=TwoWay}" />
             </Grid>
 
             <Grid Grid.Row="9">
