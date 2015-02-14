@@ -1039,11 +1039,11 @@ namespace Micropolis.ViewModels
 
             var loadCityAsNew = loadCityAsNewCommand != null; // loadCityCommand present?
 
-            var loadCityAsNewCommandAndDelete =
+            var loadCityAsNewAndDelteCommand =
               currentApp.AppCommands.FirstOrDefault(s => s.Instruction == AppCommands.LOADFILEASNEWCITYANDDELETE);
 
 
-            var loadCityAsNewAndDelete = loadCityAsNewAndDeleteAndDelteCommand != null;
+            var loadCityAsNewAndDelete = loadCityAsNewAndDelteCommand != null;
 
             if (loadCity)
             {
