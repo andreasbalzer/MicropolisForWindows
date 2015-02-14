@@ -132,12 +132,14 @@ namespace Micropolis.Screens
             if (success)
             {
                 // URI launched
+                _telemetry.TrackEvent("LicenseGnuButtonPageOpened");
             }
             else
             {
                 // URI launch failed
                 MessageDialog dialog = new MessageDialog(Strings.GetString("license.InternetError"));
                 await dialog.ShowAsync();
+                _telemetry.TrackEvent("LicenseGnuButtonNoInternet");
             }
 
 
@@ -145,6 +147,7 @@ namespace Micropolis.Screens
 
         private async void B1_OnClick(object sender, RoutedEventArgs e)
         {
+            _telemetry.TrackEvent("LicenseAccepted");
             StorageFolder appFolder = ApplicationData.Current.LocalFolder;
             await appFolder.CreateFileAsync("licenseAccepted.txt",
                 CreationCollisionOption.ReplaceExisting);
@@ -155,11 +158,13 @@ namespace Micropolis.Screens
             bool skipMenu = skipCommand != null;
             if (skipMenu)
             {
+                _telemetry.TrackEvent("LicenseAppLaunchedToGame");
                 current.AppCommands.Remove(skipCommand);
                 Frame.Navigate(typeof(MainGamePage));
             }
             else
             {
+                _telemetry.TrackEvent("LicenseAppLaunchedToMenu");
                 Frame.Navigate(typeof(MainMenuPage));
             }
         }

@@ -16,6 +16,7 @@ using Windows.UI.Xaml.Media.Imaging;
 using Engine;
 using Micropolis.Common;
 using Micropolis.Lib.graphics;
+using Microsoft.ApplicationInsights;
 
 namespace Micropolis.ViewModels
 {
@@ -24,6 +25,7 @@ namespace Micropolis.ViewModels
         public OverlayMapViewModel(Grid layoutRoot)
         {
             _layoutRoot = layoutRoot;
+            _telemetry = new TelemetryClient();
         }
 
 
@@ -880,6 +882,8 @@ namespace Micropolis.ViewModels
             viewModel.Repaint();
         }
 
+        private TelemetryClient _telemetry;
+
         /// <summary>
         /// Fired when pointer pressed
         /// </summary>
@@ -891,6 +895,8 @@ namespace Micropolis.ViewModels
                 return;
             }
 
+            _telemetry.TrackEvent("OverlayMapClicked");
+            
             if (e.Pointer.PointerDeviceType == PointerDeviceType.Mouse || e.Pointer.PointerDeviceType == PointerDeviceType.Pen || e.Pointer.PointerDeviceType == PointerDeviceType.Touch)
             {
                 _isMouseDown = true;

@@ -1,11 +1,13 @@
 ﻿using System;
 using Engine;
 using Micropolis.Common;
+using Microsoft.ApplicationInsights;
 
 namespace Micropolis.ViewModels
 {
     public class BudgetDialogViewModel : BindableBase
     {
+        private readonly TelemetryClient _telemetry;
         private string _autoBudgetButtonText;
         private string _capExpenses1TextBlockText;
         private string _capExpenses2TextBlockText;
@@ -30,7 +32,6 @@ namespace Micropolis.ViewModels
         private string _opExpenses1TextBlockText;
         private string _opExpenses2TextBlockText;
         private string[] _opExpensesLbl;
-
         private double _origFirePct;
         private double _origPolicePct;
         private double _origRoadPct;
@@ -49,13 +50,13 @@ namespace Micropolis.ViewModels
         private string _roadFundAlloc;
         private int _roadFundEntry;
         private string _roadFundRequest;
+        private string _taxesMadeTextBlockText;
         private string _taxIncome1TextBlockText;
         private string _taxIncome2TextBlockText;
         private string[] _taxIncomeLbl;
         private string _taxIncomeTextBlockText;
         private int _taxRateEntry;
         private string _taxRevenue;
-        private string _taxesMadeTextBlockText;
         private string _tayTextBlockText;
         private string _th1TextBlockText;
         private string _th2TextBlockText;
@@ -69,11 +70,12 @@ namespace Micropolis.ViewModels
         {
             ContinueCommand = new DelegateCommand(Continue);
             ResetCommand = new DelegateCommand(Reset);
+
+            _telemetry = new TelemetryClient();
         }
 
         public DelegateCommand ContinueCommand { get; private set; }
         public DelegateCommand ResetCommand { get; private set; }
-
         public bool EnableTimerWhenClosing { get; set; }
 
         public int TaxRateEntry
@@ -100,7 +102,6 @@ namespace Micropolis.ViewModels
             set { SetProperty(ref _fireFundEntry, value); }
         }
 
-
         public string RoadFundRequest
         {
             get { return _roadFundRequest; }
@@ -118,7 +119,6 @@ namespace Micropolis.ViewModels
             get { return _fireFundRequest; }
             set { SetProperty(ref _fireFundRequest, value); }
         }
-
 
         public string RoadFundAlloc
         {
@@ -138,13 +138,11 @@ namespace Micropolis.ViewModels
             set { SetProperty(ref _fireFundAlloc, value); }
         }
 
-
         public string TaxRevenue
         {
             get { return _taxRevenue; }
             set { SetProperty(ref _taxRevenue, value); }
         }
-
 
         public string AutoBudgetButtonText
         {
@@ -176,13 +174,11 @@ namespace Micropolis.ViewModels
             set { SetProperty(ref _resetButtonText, value); }
         }
 
-
         public string FireExpensesTextBlockText
         {
             get { return _fireExpensesTextBlockText; }
             set { SetProperty(ref _fireExpensesTextBlockText, value); }
         }
-
 
         public string PoliceExpensesTextBlockText
         {
@@ -190,13 +186,11 @@ namespace Micropolis.ViewModels
             set { SetProperty(ref _policeExpensesTextBlockText, value); }
         }
 
-
         public string TrafficExpensesTextBlockText
         {
             get { return _trafficExpensesTextBlockText; }
             set { SetProperty(ref _trafficExpensesTextBlockText, value); }
         }
-
 
         public string PayedTextBlockText
         {
@@ -204,13 +198,11 @@ namespace Micropolis.ViewModels
             set { SetProperty(ref _payedTextBlockText, value); }
         }
 
-
         public string RequestedTextBlockText
         {
             get { return _requestedTextBlockText; }
             set { SetProperty(ref _requestedTextBlockText, value); }
         }
-
 
         public string FinancingTextBlockText
         {
@@ -218,19 +210,39 @@ namespace Micropolis.ViewModels
             set { SetProperty(ref _financingTextBlockText, value); }
         }
 
-
         public bool IsAutoBudget
         {
             get { return _isAutoBudget; }
-            set { SetProperty(ref _isAutoBudget, value); }
+            set
+            {
+                SetProperty(ref _isAutoBudget, value);
+                if (value)
+                {
+                    _telemetry.TrackEvent("BudgetDialogAutoBudgetEnabled");
+                }
+                else
+                {
+                    _telemetry.TrackEvent("BudgetDialogAutoBudgetDisabled");
+                }
+            }
         }
 
         public bool IsPause
         {
             get { return _isPause; }
-            set { SetProperty(ref _isPause, value); }
+            set
+            {
+                SetProperty(ref _isPause, value);
+                if (value)
+                {
+                    _telemetry.TrackEvent("BudgetDialogPauseEnabled");
+                }
+                else
+                {
+                    _telemetry.TrackEvent("BudgetDialogPauseDisabled");
+                }
+            }
         }
-
 
         public string TayTextBlockText
         {
@@ -244,20 +256,17 @@ namespace Micropolis.ViewModels
             set { SetProperty(ref _yearlyIncomeTextBlockText, value); }
         }
 
-
         public string TaxIncomeTextBlockText
         {
             get { return _taxIncomeTextBlockText; }
             set { SetProperty(ref _taxIncomeTextBlockText, value); }
         }
 
-
         public string YearlyReportTextBlockText
         {
             get { return _yearlyReportTextBlockText; }
             set { SetProperty(ref _yearlyReportTextBlockText, value); }
         }
-
 
         public string MoneyAtBeginningOfYearTextBlockText
         {
@@ -277,7 +286,6 @@ namespace Micropolis.ViewModels
             set { SetProperty(ref _investionsTextBlockText, value); }
         }
 
-
         public string CostsTextBlockText
         {
             get { return _costsTextBlockText; }
@@ -290,20 +298,17 @@ namespace Micropolis.ViewModels
             set { SetProperty(ref _moneyAtEndOfYearTextBlockText, value); }
         }
 
-
         public string Th1TextBlockText
         {
             get { return _th1TextBlockText; }
             set { SetProperty(ref _th1TextBlockText, value); }
         }
 
-
         public string Th2TextBlockText
         {
             get { return _th2TextBlockText; }
             set { SetProperty(ref _th2TextBlockText, value); }
         }
-
 
         public string PreviousBalance1TextBlockText
         {
@@ -335,13 +340,11 @@ namespace Micropolis.ViewModels
             set { SetProperty(ref _capExpenses1TextBlockText, value); }
         }
 
-
         public string CapExpenses2TextBlockText
         {
             get { return _capExpenses2TextBlockText; }
             set { SetProperty(ref _capExpenses2TextBlockText, value); }
         }
-
 
         public string OpExpenses1TextBlockText
         {
@@ -349,13 +352,11 @@ namespace Micropolis.ViewModels
             set { SetProperty(ref _opExpenses1TextBlockText, value); }
         }
 
-
         public string OpExpenses2TextBlockText
         {
             get { return _opExpenses2TextBlockText; }
             set { SetProperty(ref _opExpenses2TextBlockText, value); }
         }
-
 
         public string NewBalance1TextBlockText
         {
@@ -374,10 +375,10 @@ namespace Micropolis.ViewModels
         /// </summary>
         internal void ApplyChange()
         {
-            int newTaxRate = TaxRateEntry;
-            int newRoadPct = RoadFundEntry;
-            int newPolicePct = PoliceFundEntry;
-            int newFirePct = FireFundEntry;
+            var newTaxRate = TaxRateEntry;
+            var newRoadPct = RoadFundEntry;
+            var newPolicePct = PoliceFundEntry;
+            var newFirePct = FireFundEntry;
 
             _engine.CityTax = newTaxRate;
             _engine.RoadPercent = newRoadPct/100.0;
@@ -393,7 +394,7 @@ namespace Micropolis.ViewModels
         /// <param name="updateEntries">if set to <c>true</c>, entries get updated at beginning.</param>
         private void LoadBudgetNumbers(bool updateEntries)
         {
-            BudgetNumbers b = _engine.GenerateBudget();
+            var b = _engine.GenerateBudget();
             if (updateEntries)
             {
                 TaxRateEntry = b.TaxRate;
@@ -494,6 +495,8 @@ namespace Micropolis.ViewModels
         /// </summary>
         private void Continue()
         {
+            _telemetry.TrackEvent("BudgetDialogContinueClicked");
+
             if (IsAutoBudget != _engine.AutoBudget)
             {
                 _engine.ToggleAutoBudget();
@@ -518,6 +521,8 @@ namespace Micropolis.ViewModels
         /// </summary>
         private void Reset()
         {
+            _telemetry.TrackEvent("BudgetDialogResetClicked");
+
             _engine.CityTax = _origTaxRate;
             _engine.RoadPercent = _origRoadPct;
             _engine.FirePercent = _origFirePct;
@@ -543,10 +548,10 @@ namespace Micropolis.ViewModels
                 return;
             }
 
-            FinancialHistory f = _engine.FinancialHistory[0];
-            FinancialHistory fPrior = _engine.FinancialHistory[1];
-            int cashFlow = f.TotalFunds - fPrior.TotalFunds;
-            int capExpenses = -(cashFlow - f.TaxIncome + f.OperatingExpenses);
+            var f = _engine.FinancialHistory[0];
+            var fPrior = _engine.FinancialHistory[1];
+            var cashFlow = f.TotalFunds - fPrior.TotalFunds;
+            var capExpenses = -(cashFlow - f.TaxIncome + f.OperatingExpenses);
 
 
             Th1TextBlockText = MainGamePageViewModel.FormatGameDate(f.CityTime - 1);
@@ -561,10 +566,10 @@ namespace Micropolis.ViewModels
             {
                 return;
             }
-            FinancialHistory f2 = _engine.FinancialHistory[1];
-            FinancialHistory fPrior2 = _engine.FinancialHistory[2];
-            int cashFlow2 = f2.TotalFunds - fPrior2.TotalFunds;
-            int capExpenses2 = -(cashFlow2 - f2.TaxIncome + f2.OperatingExpenses);
+            var f2 = _engine.FinancialHistory[1];
+            var fPrior2 = _engine.FinancialHistory[2];
+            var cashFlow2 = f2.TotalFunds - fPrior2.TotalFunds;
+            var capExpenses2 = -(cashFlow2 - f2.TaxIncome + f2.OperatingExpenses);
 
 
             Th2TextBlockText = MainGamePageViewModel.FormatGameDate(f2.CityTime - 1);

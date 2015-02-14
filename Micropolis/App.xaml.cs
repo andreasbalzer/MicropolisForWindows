@@ -4,6 +4,7 @@ using System.Linq;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Globalization;
+using Windows.Storage;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -11,6 +12,7 @@ using Windows.UI.Xaml.Navigation;
 using Micropolis.Model.Entities;
 using Micropolis.Screens;
 using Microsoft.ApplicationInsights;
+using WinRTXamlToolkit.Controls;
 
 // Die Vorlage "Leere Anwendung" ist unter http://go.microsoft.com/fwlink/?LinkId=234227 dokumentiert.
 
@@ -35,7 +37,7 @@ namespace Micropolis
         /// <summary>
         /// Allows tracking page views, exceptions and other telemetry through the Microsoft Application Insights service.
         /// </summary>
-        public TelemetryClient TelemetryClient = new TelemetryClient();
+        public TelemetryClient _telemetry;
 
         private Frame rootFrame;
 
@@ -46,6 +48,7 @@ namespace Micropolis
         public App()
         {
             InitializeComponent();
+            _telemetry=new TelemetryClient();
             AppCommands = new List<AppCommand>();
             CheckVersion();
             Suspending += OnSuspending;
@@ -97,6 +100,7 @@ namespace Micropolis
         {
             if (MainPageReference != null)
             {
+                _telemetry.TrackEvent("AppResumed");
                 MainPageReference.ViewModel.OnWindowReopend();
             }
         }
@@ -106,16 +110,19 @@ namespace Micropolis
         /// </summary>
         private void CheckVersion()
         {
-            /*if (ApplicationData.Current.RoamingSettings.Values.ContainsKey("Version"))
+            if (ApplicationData.Current.RoamingSettings.Values.ContainsKey("Version"))
             {
-                if (Convert.ToDouble(ApplicationData.Current.RoamingSettings.Values["Version"]) <= 2)
+                if (Convert.ToDouble(ApplicationData.Current.RoamingSettings.Values["Version"]) == 1.00)
                 {
-                    AppCommands.Add(new AppCommand(AppCommands.UpdatedVersion));    
+                    AppCommands.Add(new AppCommand(Micropolis.Model.Entities.AppCommands.UPDATEDVERSION,"informAboutTelemetry"));
+              
+                    _telemetry.TrackEvent("AppUpdatedFrom1.00");
                 }
             }
              // ToDo: add version checks for new version
-             */
-            Prefs.PutString("Version", "1.00");
+             
+            Prefs.PutString("Version", "1.01");
+
         }
 
         /// <summary>
@@ -125,6 +132,8 @@ namespace Micropolis
         /// <param name="e">The <see cref="UnhandledExceptionEventArgs" /> instance containing the event data.</param>
         private void App_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
+            _telemetry.TrackException(e.Exception);
+
             var x = ""; // Bug: Todo
             //e.Handled = true;
             var dialog =
@@ -165,6 +174,7 @@ namespace Micropolis
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {
                     //TODO: Zustand von zuvor angehaltener Anwendung laden
+                    _telemetry.TrackEvent("AppPreviouslyTerminated");
                 }
 
                 // Den Rahmen im aktuellen Fenster platzieren
@@ -190,6 +200,8 @@ namespace Micropolis
         /// <param name="e">Details über den Navigationsfehler</param>
         private void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
         {
+            _telemetry.TrackEvent("AppNavigationFailed"+e.SourcePageType.FullName);
+            _telemetry.TrackException(e.Exception);
             throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
         }
 
@@ -205,6 +217,8 @@ namespace Micropolis
             var deferral = e.SuspendingOperation.GetDeferral();
             //TODO: Anwendungszustand speichern und alle Hintergrundaktivitäten beenden
 
+            _telemetry.TrackEvent("AppSuspending");
+
             if (MainPageReference != null)
             {
                 MainPageReference.ViewModel.OnAppClosed();
@@ -219,6 +233,7 @@ namespace Micropolis
         /// <param name="args">Die Ereignisdaten für das Ereignis.</param>
         protected override void OnFileActivated(FileActivatedEventArgs args)
         {
+            _telemetry.TrackEvent("AppLoadFileViaFileHandler");
             // TODO: check if there is any game running already.
 
             if (args.Files.Any())

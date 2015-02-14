@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Linq.Expressions;
 using System.Text;
 using Windows.Storage;
 using Windows.Storage.Pickers;
@@ -9,6 +10,7 @@ using Windows.UI.Popups;
 using Windows.UI.Xaml.Controls;
 using Engine;
 using Micropolis.Common;
+using Microsoft.ApplicationInsights;
 
 namespace Micropolis.ViewModels
 {
@@ -57,8 +59,8 @@ namespace Micropolis.ViewModels
 
             LoadCityCommand = new DelegateCommand(() => { OnLoadCityClicked(); });
 
+            _telemetry = new TelemetryClient();
 
-            
         }
 
         private string _titleTextBlockText;
@@ -97,6 +99,7 @@ namespace Micropolis.ViewModels
         private DelegateCommand _cancelCommand;
         private OverlayMapViewModel _mapPaneViewModel;
         private MainGamePageViewModel _mainPageViewModel;
+        private TelemetryClient _telemetry;
         public DelegateCommand CancelCommand { get { return _cancelCommand; } set { SetProperty(ref _cancelCommand, value); } }
         public MainGamePageViewModel MainPageViewModel { get { return _mainPageViewModel; } set
         {
@@ -118,6 +121,8 @@ namespace Micropolis.ViewModels
         /// </summary>
         private void OnPreviousMapClicked()
         {
+            _telemetry.TrackEvent("NewCityDialogPreviousMapClicked");
+
             if (_previousMaps.Count == 0)
                 return;
 
@@ -133,6 +138,8 @@ namespace Micropolis.ViewModels
         /// </summary>
         private void OnNextMapClicked()
         {
+            _telemetry.TrackEvent("NewCityDialogNextMapClicked");
+
             if (_nextMaps.Count == 0)
             {
                 var m = new Engine.Micropolis();
@@ -152,6 +159,7 @@ namespace Micropolis.ViewModels
         /// </summary>
         private async void OnLoadCityClicked()
         {
+            _telemetry.TrackEvent("NewCityDialogLoadMapClicked");
             try
             {
                 var picker = new FileOpenPicker();
@@ -191,6 +199,8 @@ namespace Micropolis.ViewModels
         /// </summary>
         private void OnPlayClicked()
         {
+            _telemetry.TrackEvent("NewCityDialogPlayMapClicked");
+
             _engine.SetGameLevel(GetSelectedGameLevel());
             _engine.SetFunds(GameLevel.GetStartingFunds(_engine.GameLevel));
             StartPlaying(_engine, null);
@@ -203,6 +213,8 @@ namespace Micropolis.ViewModels
         /// </summary>
         private void OnCancelClicked()
         {
+            _telemetry.TrackEvent("NewCityDialogCancelMapClicked");
+
             MainGamePageViewModel win = _mainPageViewModel;
             win.HideNewGameDialogPanel();
         }
@@ -229,6 +241,8 @@ namespace Micropolis.ViewModels
         /// <param name="level">level to set engine to</param>
         private void SetGameLevel(int level)
         {
+            _telemetry.TrackEvent("NewCityDialogSelectLevel"+level);
+
             foreach (int lev in _levelBtns.Keys)
             {
                 _levelBtns[lev].IsChecked = (lev == level);

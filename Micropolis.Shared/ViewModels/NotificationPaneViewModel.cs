@@ -10,6 +10,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using Engine;
 using Micropolis.Common;
+using Microsoft.ApplicationInsights;
 
 namespace Micropolis.ViewModels
 {
@@ -18,6 +19,8 @@ namespace Micropolis.ViewModels
         public NotificationPaneViewModel()
         {
             Messages=new ObservableCollection<string>();
+
+            _telemetry = new TelemetryClient();
         }
 
         private static readonly Size VIEWPORT_SIZE = new Size(160, 160);
@@ -47,6 +50,8 @@ namespace Micropolis.ViewModels
         /// </summary>
         private void OnDismissClicked()
         {
+            _telemetry.TrackEvent("NotificationPaneDismissClicked");
+
             _mainPageViewModel.HideNotificationPanel();
         }
 
@@ -75,6 +80,8 @@ namespace Micropolis.ViewModels
         /// <param name="ypos">ypos in map</param>
         public void ShowMessage(MicropolisMessage msg, int xpos, int ypos)
         {
+            _telemetry.TrackEvent("NotificationPaneMessageShown"+msg.Name);
+
             SetPicture(xpos, ypos);
 
             if (InfoPaneIsVisible == true)
@@ -181,6 +188,7 @@ namespace Micropolis.ViewModels
         public string NotificationGrowthTextBlockText { get { return _notificationGrowthTextBlockText; } set { SetProperty(ref _notificationGrowthTextBlockText, value); } }
 
         private string _growthRateStrTextBlockText;
+        private TelemetryClient _telemetry;
         public string GrowthRateStrTextBlockText { get { return _growthRateStrTextBlockText; } set { SetProperty(ref _growthRateStrTextBlockText, value); } }
     }
 }

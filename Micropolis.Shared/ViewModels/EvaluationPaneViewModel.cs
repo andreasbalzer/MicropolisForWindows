@@ -5,6 +5,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Engine;
 using Micropolis.Common;
+using Microsoft.ApplicationInsights;
 
 namespace Micropolis.ViewModels
 {
@@ -38,6 +39,8 @@ namespace Micropolis.ViewModels
         public EvaluationPaneViewModel()
         {
             DismissCommand = new DelegateCommand(OnDismissClicked);
+
+            _telemetry = new TelemetryClient();
         }
 
 
@@ -46,6 +49,8 @@ namespace Micropolis.ViewModels
         /// </summary>
         private void OnDismissClicked()
         {
+            _telemetry.TrackEvent("EvaluationPaneDismissClicked");
+
             _mainPageViewModel.HideEvaluationPane();
         }
 
@@ -810,6 +815,7 @@ namespace Micropolis.ViewModels
         public DelegateCommand DismissCommand { get; private set; }
 
         private string _dismissButtonText;
+        private TelemetryClient _telemetry;
 
         public string DismissButtonText
         {

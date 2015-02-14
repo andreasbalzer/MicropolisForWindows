@@ -3,11 +3,13 @@ using System.Threading.Tasks;
 using Windows.Storage;
 using Windows.System;
 using Micropolis.Common;
+using Microsoft.ApplicationInsights;
 
 namespace Micropolis.ViewModels
 {
     public class ReviewBarViewModel : BindableBase
     {
+        private readonly TelemetryClient _telemetry;
         private readonly string DONEFEEDBACK = "disabled";
         private readonly string INITIALTIMEUNTILFEEDBACK = "5";
         private readonly string POSTPONETIMEUNTILFEEDBACK = "20";
@@ -19,6 +21,8 @@ namespace Micropolis.ViewModels
 
         public ReviewBarViewModel()
         {
+            _telemetry = new TelemetryClient();
+
             SendFeedbackText = Strings.GetString("feedback.sendFeedbackText");
             SorryMessageText = Strings.GetString("feedback.sorryMessageText");
             Star1Command = new DelegateCommand(ShowFeedback);
@@ -39,7 +43,14 @@ namespace Micropolis.ViewModels
         public bool FeedbackIsVisible
         {
             get { return _feedbackIsVisible; }
-            set { SetProperty(ref _feedbackIsVisible, value); }
+            set
+            {
+                SetProperty(ref _feedbackIsVisible, value);
+                if (value)
+                {
+                    _telemetry.TrackEvent("ReviewShowReviewBar");
+                }
+            }
         }
 
         public string SorryMessageText
@@ -64,16 +75,22 @@ namespace Micropolis.ViewModels
         private void ShowFeedback()
         {
             SorryMessageIsVisible = true;
+            _telemetry.TrackEvent("ReviewShowFeedbackWithSorryMessage");
         }
 
         private void OpenStoreRatingPage()
         {
-            Launcher.LaunchUriAsync(new Uri("ms-windows-store:review?PFN=62155AndreasBalzer.MicropolisforWindows_rqaffv28461by", UriKind.Absolute));
+            _telemetry.TrackEvent("ReviewOpenRatingPage");
+
+            Launcher.LaunchUriAsync(
+                new Uri("ms-windows-store:review?PFN=62155AndreasBalzer.MicropolisforWindows_rqaffv28461by",
+                    UriKind.Absolute));
             Disable();
         }
 
         private void SendFeedback()
         {
+            _telemetry.TrackEvent("ReviewSendFeedback");
             var feedbackTitle = Strings.GetString("feedback.title");
             var feedbackBody = Strings.GetString("feedback.body");
             Launcher.LaunchUriAsync(

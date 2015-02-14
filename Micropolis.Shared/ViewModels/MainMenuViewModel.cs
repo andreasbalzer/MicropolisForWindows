@@ -9,6 +9,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using Micropolis.Common;
 using Micropolis.Model.Entities;
+using Microsoft.ApplicationInsights;
 
 namespace Micropolis.ViewModels
 {
@@ -30,6 +31,7 @@ namespace Micropolis.ViewModels
         private string _unsavedGameButtonWideText;
         private string _unsavedGameMessageText;
         private string _unsavedGameMessageWideText;
+        private TelemetryClient _telemetry;
 
         public MainMenuViewModel()
         {
@@ -52,6 +54,8 @@ namespace Micropolis.ViewModels
             _blackHeader = new BitmapImage(blackLogoUri);
             var whiteLogoUri = new Uri("ms-appx:///Assets/Logo/LogoWhite800.png", UriKind.RelativeOrAbsolute);
             _whiteHeader = new BitmapImage(whiteLogoUri);
+
+            _telemetry = new TelemetryClient();
         }
 
         public DelegateCommand LoadUnsavedGameCommand
@@ -141,6 +145,8 @@ namespace Micropolis.ViewModels
             if (_unsavedFileExists != null)
 #endif
             {
+                _telemetry.TrackEvent("MainMenuUnsavedGameDetected");
+
                 LoadUnsavedGameButtonIsVisible = true;
             }
         }
@@ -150,6 +156,8 @@ namespace Micropolis.ViewModels
         /// </summary>
         private void NewGame()
         {
+            _telemetry.TrackEvent("MainMenuLoadNewGameClicked");
+
             App.MainMenuReference.Frame.Navigate(typeof (MainGamePage));
         }
 
@@ -159,6 +167,8 @@ namespace Micropolis.ViewModels
         /// </summary>
         private void LoadUnsavedGame()
         {
+            _telemetry.TrackEvent("MainMenuLoadUnsavedGameClicked");
+
             ((ISupportsAppCommands) Application.Current).AppCommands.Add(new AppCommand(AppCommands.LOADFILE,
                 _unsavedFileExists));
             App.MainMenuReference.Frame.Navigate(typeof (MainGamePage));
@@ -205,6 +215,8 @@ namespace Micropolis.ViewModels
 
         public async Task LoadGameFile(string title)
         {
+            _telemetry.TrackEvent("MainMenuLoadGameFile"+title);
+
             var path = new Uri("ms-appx:///resources/cities/" + title, UriKind.Absolute);
             var file = await StorageFile.GetFileFromApplicationUriAsync(path);
 

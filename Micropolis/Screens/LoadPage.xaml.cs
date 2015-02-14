@@ -142,6 +142,7 @@ namespace Micropolis.Screens
                             {
                                 CopyrightTB.Text = Strings.GetString("CopyrightTB");
                                 ProgressIn.Value += 1;
+                                _telemetry.TrackEvent("LoadCopyrightSuccessful");
                             });
                     }); // async load language files
                 Task t2 = TileImages.Initialize(this._cancelToken).ContinueWith(
@@ -149,21 +150,21 @@ namespace Micropolis.Screens
                     {
                         App.LoadPageReference.Dispatcher.RunAsync(
                             CoreDispatcherPriority.Normal,
-                            () => { ProgressIn.Value += 1; });
+                            () => { ProgressIn.Value += 1; _telemetry.TrackEvent("LoadTileImagesSuccessful"); });
                     });
                 Task t3 = Tiles.Initialize().ContinueWith(
                     (e) =>
                     {
                         App.LoadPageReference.Dispatcher.RunAsync(
                             CoreDispatcherPriority.Normal,
-                            () => { ProgressIn.Value += 1; });
+                            () => { ProgressIn.Value += 1; _telemetry.TrackEvent("LoadTilesInitializedSuccessful"); });
                     });
                 Task t5 = OverlayMapViewModel.Initialize(this._cancelToken).ContinueWith(
                     (e) =>
                     {
                         App.LoadPageReference.Dispatcher.RunAsync(
                             CoreDispatcherPriority.Normal,
-                            () => { ProgressIn.Value += 1; });
+                            () => { ProgressIn.Value += 1; _telemetry.TrackEvent("LoadOverlayMapViewModelSuccessful"); });
                     });
 
 
@@ -179,6 +180,7 @@ namespace Micropolis.Screens
                             () =>
                             {
                                 ProgressIn.Value += 1;
+                                _telemetry.TrackEvent("LoadThumbnailsSuccessful");
                             });
                     });
                 //end of setion that blacks out screen
@@ -192,6 +194,7 @@ namespace Micropolis.Screens
                             () =>
                             {
                                 _loaded = true;
+                                _telemetry.TrackEvent("LoadSuccessful");
                                 ProcessAppCommands();
                             });
                     });
@@ -212,6 +215,7 @@ namespace Micropolis.Screens
             StorageFolder appFolder = ApplicationData.Current.LocalFolder;
             if (await appFolder.TryGetItemAsync("licenseAccepted.txt") == null)
             {
+                _telemetry.TrackEvent("LoadLicenseNotAccepted");
                 Frame.Navigate(typeof(LicensePage));
                 return;
             }
@@ -223,11 +227,13 @@ namespace Micropolis.Screens
             bool skipMenu = skipCommand != null;
             if (skipMenu)
             {
+                _telemetry.TrackEvent("LoadAppLaunchedToGame");
                 current.AppCommands.Remove(skipCommand);
                 Frame.Navigate(typeof(MainGamePage));
             }
             else
             {
+                _telemetry.TrackEvent("LoadAppLaunchedToMenu");
                 Frame.Navigate(typeof(MainMenuPage));
             }
         }

@@ -1,6 +1,7 @@
 ﻿using Windows.UI.ApplicationSettings;
 using Windows.UI.Xaml.Controls;
 using Micropolis.Screens;
+using Microsoft.ApplicationInsights;
 
 namespace Micropolis
 {
@@ -20,6 +21,12 @@ namespace Micropolis
     /// </summary>
     public static class SettingsCharm
     {
+        private static TelemetryClient _telemetry;
+
+        static SettingsCharm()
+        {
+            _telemetry = new TelemetryClient();
+        }
         /// <summary>
         ///     Called when commands are requested by settings charm. Adds an about, preferences, help and privacy command.
         /// </summary>
@@ -32,6 +39,8 @@ namespace Micropolis
             // Add an About command
             var about = new SettingsCommand("about", Strings.GetString("settingsCharm.About"), handler =>
             {
+                _telemetry.TrackEvent("SettingsCharmMainGameAboutClicked");
+
                 var settings = new SettingsFlyout();
                 settings.Content = new AboutUserControl();
 
@@ -43,13 +52,20 @@ namespace Micropolis
 
             
             var license = new SettingsCommand("license", Strings.GetString("settingsCharm.License"),
-                handler => App.MainPageReference.Frame.Navigate(typeof(LicensePage)));
+                handler =>
+                {
+                    _telemetry.TrackEvent("SettingsCharmMainGameLicenseClicked");
+
+                    App.MainPageReference.Frame.Navigate(typeof (LicensePage));
+                });
 
             args.Request.ApplicationCommands.Add(license);
 
             // Add a Preferences command
             var preferences = new SettingsCommand("preferences", Strings.GetString("settingsCharm.Preferences"), handler =>
             {
+                _telemetry.TrackEvent("SettingsCharmMainGamePreferencesClicked");
+
                 var settings = new SettingsFlyout();
                 settings.Content = new PreferencesUserControl();
                 settings.Title = Strings.GetString("settingsCharm.Preferences");
@@ -60,13 +76,19 @@ namespace Micropolis
 
             // Add an Help command
             var help = new SettingsCommand("help", Strings.GetString("settingsCharm.Help"),
-                handler => App.MainPageReference.Frame.Navigate(typeof (HelpPage)));
+                handler => {
+                    _telemetry.TrackEvent("SettingsCharmMainGameHelpClicked");
+                    
+                    App.MainPageReference.Frame.Navigate(typeof (HelpPage));
+                });
 
             args.Request.ApplicationCommands.Add(help);
 
             // Add a Privacy command
             var privacy = new SettingsCommand("privacy", Strings.GetString("settingsCharm.Privacy"), handler =>
             {
+                _telemetry.TrackEvent("SettingsCharmMainGamePrivacyClicked");
+
                 var settings = new SettingsFlyout();
                 settings.Content = new PrivacyUserControl();
                 settings.Title = Strings.GetString("settingsCharm.Privacy");
@@ -88,6 +110,8 @@ namespace Micropolis
             // Add an About command
             var about = new SettingsCommand("about", Strings.GetString("settingsCharm.About"), handler =>
             {
+                _telemetry.TrackEvent("SettingsCharmMainMenuAboutClicked");
+
                 var settings = new SettingsFlyout();
                 settings.Content = new AboutUserControl();
 
@@ -98,13 +122,19 @@ namespace Micropolis
             args.Request.ApplicationCommands.Add(about);
 
             var license = new SettingsCommand("license", Strings.GetString("settingsCharm.License"),
-    handler => App.MainMenuReference.Frame.Navigate(typeof(LicensePage)));
+                handler => {
+                    _telemetry.TrackEvent("SettingsCharmMainMenuLicenseClicked");
+
+                    App.MainMenuReference.Frame.Navigate(typeof (LicensePage));
+            });
 
             args.Request.ApplicationCommands.Add(license);
 
             // Add a Preferences command
             var preferences = new SettingsCommand("preferences", Strings.GetString("settingsCharm.Preferences"), handler =>
             {
+                _telemetry.TrackEvent("SettingsCharmMainMenuPreferencesClicked");
+
                 var settings = new SettingsFlyout();
                 settings.Content = new PreferencesUserControl();
                 settings.Title = Strings.GetString("settingsCharm.Preferences");
@@ -115,13 +145,20 @@ namespace Micropolis
 
             // Add an Help command
             var help = new SettingsCommand("help", Strings.GetString("settingsCharm.Help"),
-                handler => App.MainMenuReference.Frame.Navigate(typeof(HelpPage)));
+                handler =>
+                {
+                    _telemetry.TrackEvent("SettingsCharmMainMenuHelpClicked");
+
+                    App.MainMenuReference.Frame.Navigate(typeof (HelpPage));
+                });
 
             args.Request.ApplicationCommands.Add(help);
 
             // Add a Privacy command
             var privacy = new SettingsCommand("privacy", Strings.GetString("settingsCharm.Privacy"), handler =>
             {
+                _telemetry.TrackEvent("SettingsCharmMainMenuPrivacyClicked");
+
                 var settings = new SettingsFlyout();
                 settings.Content = new PrivacyUserControl();
                 settings.Title = Strings.GetString("settingsCharm.Privacy");

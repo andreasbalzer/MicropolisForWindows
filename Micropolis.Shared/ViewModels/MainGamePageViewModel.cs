@@ -36,6 +36,7 @@ using Windows.UI.Xaml.Media.Imaging;
 using Engine;
 using Micropolis.Common;
 using Micropolis.Model.Entities;
+using Microsoft.ApplicationInsights;
 
 namespace Micropolis.ViewModels
 {
@@ -296,7 +297,12 @@ namespace Micropolis.ViewModels
             SpeedNormalCommand = new DelegateCommand(SpeedNormal);
             SpeedFastCommand = new DelegateCommand(SpeedFast);
             SpeedSuperFastCommand = new DelegateCommand(SpeedSuperFast);
+
+            _telemetry = new TelemetryClient();
+            _telemetry.TrackPageView("MainGamePage");
         }
+
+        private TelemetryClient _telemetry;
 
         public DelegateCommand AutoBudgetCommand { get; set; }
         public DelegateCommand AutoBulldozeCommand { get; set; }
@@ -865,16 +871,22 @@ namespace Micropolis.ViewModels
 
         private void ToggleMiniMap()
         {
+            _telemetry.TrackEvent("MainGameMiniMapToggled");
+
             IsMiniMapVisible = !IsMiniMapVisible;
         }
 
         private void ToggleMessages()
         {
+            _telemetry.TrackEvent("MainGameMessagesToggled");
+
             IsMessagesVisible = !IsMessagesVisible;
         }
 
         private void SpeedPause()
         {
+            _telemetry.TrackEvent("MainGameSpeedPause");
+
             IsSpeedSlow = false;
             IsSpeedNormal = false;
             IsSpeedFast = false;
@@ -885,6 +897,8 @@ namespace Micropolis.ViewModels
 
         private void SpeedSlow()
         {
+            _telemetry.TrackEvent("MainGameSpeedSlow");
+
             IsSpeedPause = false;
             IsSpeedNormal = false;
             IsSpeedFast = false;
@@ -895,6 +909,8 @@ namespace Micropolis.ViewModels
 
         private void SpeedNormal()
         {
+            _telemetry.TrackEvent("MainGameSpeedNormal");
+
             IsSpeedPause = false;
             IsSpeedSlow = false;
             IsSpeedFast = false;
@@ -905,6 +921,8 @@ namespace Micropolis.ViewModels
 
         private void SpeedFast()
         {
+            _telemetry.TrackEvent("MainGameSpeedFast");
+
             IsSpeedPause = false;
             IsSpeedSlow = false;
             IsSpeedNormal = false;
@@ -915,6 +933,8 @@ namespace Micropolis.ViewModels
 
         private void SpeedSuperFast()
         {
+            _telemetry.TrackEvent("MainGameSpeedSuperFast");
+
             IsSpeedPause = false;
             IsSpeedSlow = false;
             IsSpeedNormal = false;
@@ -1179,6 +1199,12 @@ namespace Micropolis.ViewModels
         /// <param name="e">The <see cref="PointerRoutedEventArgs" /> instance containing the event data.</param>
         private void onToolTouch(PointerRoutedEventArgs e)
         {
+            if (_telemetryTouchUsedReported)
+            {
+                _telemetry.TrackEvent("MainGameToolUsedWithTouch");
+                _telemetryTouchUsedReported = true;
+            }
+
             ConfirmBarIsVisible = true;
         }
 
@@ -1202,6 +1228,9 @@ namespace Micropolis.ViewModels
             }
         }
 
+        private bool _telemetryMouseWheelUsedReported;
+        private bool _telemetryTouchUsedReported;
+
         /// <summary>
         ///     Handles the PointerWheelChanged event of the DrawingArea control for zooming.
         /// </summary>
@@ -1209,6 +1238,11 @@ namespace Micropolis.ViewModels
         /// <param name="args">The <see cref="PointerRoutedEventArgs" /> instance containing the event data.</param>
         private void DrawingArea_PointerWheelChanged(object sender, PointerRoutedEventArgs args)
         {
+            if (!_telemetryMouseWheelUsedReported)
+            {
+                _telemetry.TrackEvent("MainGameMouseWheelUsed");
+                _telemetryMouseWheelUsedReported = true;
+            }
             var delta = args.GetCurrentPoint(_drawingArea).Properties.MouseWheelDelta;
 
             try
@@ -1315,6 +1349,8 @@ namespace Micropolis.ViewModels
         /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
         private void ConfirmBar_Righted(object sender, EventArgs e)
         {
+            _telemetry.TrackEvent("MainGameConfirmBarRighted");
+
             if (_lastToolUsage.X + 1 >= Engine.Map[0].Length)
             {
                 return;
@@ -1330,6 +1366,8 @@ namespace Micropolis.ViewModels
         /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
         private void ConfirmBar_Lefted(object sender, EventArgs e)
         {
+            _telemetry.TrackEvent("MainGameConfirmBarLefted");
+
             if (_lastToolUsage.X - 1 < 0)
             {
                 return;
@@ -1344,6 +1382,8 @@ namespace Micropolis.ViewModels
         /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
         private void ConfirmBar_Downed(object sender, EventArgs e)
         {
+            _telemetry.TrackEvent("MainGameConfirmBarDowned");
+
             if (_lastToolUsage.Y + 1 >= Engine.Map.Length)
             {
                 return;
@@ -1358,6 +1398,8 @@ namespace Micropolis.ViewModels
         /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
         private void ConfirmBar_Uped(object sender, EventArgs e)
         {
+            _telemetry.TrackEvent("MainGameConfirmBarUped");
+            
             if (_lastToolUsage.Y - 1 < 0)
             {
                 return;
@@ -1372,6 +1414,8 @@ namespace Micropolis.ViewModels
         /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
         private void ConfirmBar_Declined(object sender, EventArgs e)
         {
+            _telemetry.TrackEvent("MainGameConfirmBarDeclined");
+
             ResetConfirmationBar();
         }
 
@@ -1399,6 +1443,8 @@ namespace Micropolis.ViewModels
         /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
         private void ConfirmBar_Confirmed(object sender, EventArgs e)
         {
+            _telemetry.TrackEvent("MainGameConfirmBarConfirmed");
+
             if (touchPointerRoutedEventArgsOfCurrentConfirmationPending != null)
             {
                 OnToolUp(touchPointerRoutedEventArgsOfCurrentConfirmationPending, false); // actually build the stuff
@@ -1535,6 +1581,8 @@ namespace Micropolis.ViewModels
         /// </summary>
         private void CloseWindow()
         {
+            _telemetry.TrackEvent("MainGameDisplayMessageOnClose");
+
             MaybeSaveCity();
         }
 
@@ -1545,6 +1593,8 @@ namespace Micropolis.ViewModels
         /// <param name="e">The <see cref="RoutedEventArgs" /> instance containing the event data.</param>
         public void NewButton_Click()
         {
+            _telemetry.TrackEvent("MainGameNewClicked");
+
             OnNewCityClicked();
         }
 
@@ -1555,6 +1605,8 @@ namespace Micropolis.ViewModels
         /// <param name="e">The <see cref="RoutedEventArgs" /> instance containing the event data.</param>
         public void LoadButton_Click()
         {
+            _telemetry.TrackEvent("MainGameLoadClicked");
+
             OnLoadGameClicked();
         }
 
@@ -1565,6 +1617,8 @@ namespace Micropolis.ViewModels
         /// <param name="e">The <see cref="RoutedEventArgs" /> instance containing the event data.</param>
         public void SaveButton_Click()
         {
+            _telemetry.TrackEvent("MainGameSaveClicked");
+
             OnSaveCityClicked();
         }
 
@@ -1575,6 +1629,8 @@ namespace Micropolis.ViewModels
         /// <param name="e">The <see cref="RoutedEventArgs" /> instance containing the event data.</param>
         public void SaveAsButton_Click()
         {
+            _telemetry.TrackEvent("MainGameSaveAsClicked");
+
             OnSaveCityAsClicked();
         }
 
@@ -1585,6 +1641,8 @@ namespace Micropolis.ViewModels
         /// <param name="e">The <see cref="RoutedEventArgs" /> instance containing the event data.</param>
         public void ExitButton_Click()
         {
+            _telemetry.TrackEvent("MainGameExitClicked");
+
             CloseWindow();
         }
 
@@ -1595,6 +1653,8 @@ namespace Micropolis.ViewModels
         /// <param name="e">The <see cref="RoutedEventArgs" /> instance containing the event data.</param>
         public void AutoBudgetMenuItem_Click()
         {
+            _telemetry.TrackEvent("MainGameAutoBudgetClicked");
+
             OnAutoBudgetClicked();
         }
 
@@ -1605,6 +1665,7 @@ namespace Micropolis.ViewModels
         /// <param name="e">The <see cref="RoutedEventArgs" /> instance containing the event data.</param>
         public void AutoBulldozeCheckBox_Click()
         {
+            _telemetry.TrackEvent("MainGameAutoBulldozeCheckboxClicked");
             OnAutoBulldozeClicked();
         }
 
@@ -1615,6 +1676,8 @@ namespace Micropolis.ViewModels
         /// <param name="e">The <see cref="RoutedEventArgs" /> instance containing the event data.</param>
         public void DisastersCheckBox_Click()
         {
+            _telemetry.TrackEvent("MainGameDisasterCheckboxClicked");
+
             OnDisastersClicked();
         }
 
@@ -1625,6 +1688,8 @@ namespace Micropolis.ViewModels
         /// <param name="e">The <see cref="RoutedEventArgs" /> instance containing the event data.</param>
         public void SoundCheckBox_Click()
         {
+            _telemetry.TrackEvent("MainGameSoundCheckBoxClicked");
+
             OnSoundClicked();
         }
 
@@ -1635,6 +1700,8 @@ namespace Micropolis.ViewModels
         /// <param name="e">The <see cref="RoutedEventArgs" /> instance containing the event data.</param>
         public void ZoomInButton_Click()
         {
+            _telemetry.TrackEvent("MainGameZoomInClicked");
+
             DoZoom(1);
         }
 
@@ -1645,6 +1712,8 @@ namespace Micropolis.ViewModels
         /// <param name="e">The <see cref="RoutedEventArgs" /> instance containing the event data.</param>
         public void ZoomOutButton_Click()
         {
+            _telemetry.TrackEvent("MainGameZoomOutClicked");
+
             DoZoom(-1);
         }
 
@@ -1655,6 +1724,8 @@ namespace Micropolis.ViewModels
         /// <param name="e">The <see cref="RoutedEventArgs" /> instance containing the event data.</param>
         public void MonsterButton_Click()
         {
+            _telemetry.TrackEvent("MainGameMonsterClicked");
+
             OnInvokeDisasterClicked(Disaster.MONSTER);
         }
 
@@ -1665,6 +1736,8 @@ namespace Micropolis.ViewModels
         /// <param name="e">The <see cref="RoutedEventArgs" /> instance containing the event data.</param>
         public void FireButton_Click()
         {
+            _telemetry.TrackEvent("MainGameFireClicked");
+
             OnInvokeDisasterClicked(Disaster.FIRE);
         }
 
@@ -1675,6 +1748,8 @@ namespace Micropolis.ViewModels
         /// <param name="e">The <see cref="RoutedEventArgs" /> instance containing the event data.</param>
         public void FloodButton_Click()
         {
+            _telemetry.TrackEvent("MainGameFloodClicked");
+
             OnInvokeDisasterClicked(Disaster.FLOOD);
         }
 
@@ -1685,6 +1760,8 @@ namespace Micropolis.ViewModels
         /// <param name="e">The <see cref="RoutedEventArgs" /> instance containing the event data.</param>
         public void MeltdownButton_Click()
         {
+            _telemetry.TrackEvent("MainGameMeltdownClicked");
+
             OnInvokeDisasterClicked(Disaster.MELTDOWN);
         }
 
@@ -1695,6 +1772,8 @@ namespace Micropolis.ViewModels
         /// <param name="e">The <see cref="RoutedEventArgs" /> instance containing the event data.</param>
         public void TornadoButton_Click()
         {
+            _telemetry.TrackEvent("MainGameTornadoClicked");
+
             OnInvokeDisasterClicked(Disaster.TORNADO);
         }
 
@@ -1703,6 +1782,8 @@ namespace Micropolis.ViewModels
         /// </summary>
         public void EarthquakeButton_Click()
         {
+            _telemetry.TrackEvent("MainGameEarthquakeClicked");
+
             OnInvokeDisasterClicked(Disaster.EARTHQUAKE);
         }
 
@@ -1711,6 +1792,8 @@ namespace Micropolis.ViewModels
         /// </summary>
         public void BudgetButton_Click()
         {
+            _telemetry.TrackEvent("MainGameBudgetClicked");
+
             OnViewBudgetClicked();
         }
 
@@ -1719,6 +1802,8 @@ namespace Micropolis.ViewModels
         /// </summary>
         public void EvaluationButton_Click()
         {
+            _telemetry.TrackEvent("MainGameEvaluationClicked");
+
             OnViewEvaluationClicked();
         }
 
@@ -1727,6 +1812,8 @@ namespace Micropolis.ViewModels
         /// </summary>
         public void GraphButton_Click()
         {
+            _telemetry.TrackEvent("MainGameGraphClicked");
+
             OnViewGraphClicked();
         }
 
@@ -1735,6 +1822,8 @@ namespace Micropolis.ViewModels
         /// </summary>
         public void AboutButton_Click()
         {
+            _telemetry.TrackEvent("MainGameAboutClicked");
+
             OnAboutClicked();
         }
 
@@ -2084,6 +2173,8 @@ namespace Micropolis.ViewModels
             var target = _drawingAreaScroll;
             if (ev.GetCurrentPoint(target).Properties.IsRightButtonPressed)
             {
+                _telemetry.TrackEvent("MainGameQueryWithRightClick");
+
                 var posX =
                     (int) ((ev.GetCurrentPoint(target).Position.X + DrawingAreaScrollHorizontalOffset)/zoomFactor);
                 var posY = (int) ((ev.GetCurrentPoint(target).Position.Y + DrawingAreaScrollVerticalOffset)/zoomFactor);
@@ -2621,6 +2712,10 @@ namespace Micropolis.ViewModels
             EvaluationPaneIsVisible = EvaluationPaneIsVisible == false
                 ? true
                 : false;
+            if (EvaluationPaneIsVisible)
+            {
+                _telemetry.TrackPageView("EvaluationPane");
+            }
         }
 
         /// <summary>
@@ -2632,6 +2727,10 @@ namespace Micropolis.ViewModels
                 ? true
                 : false;
             _graphsPaneViewModel.Repaint();
+            if (GraphsPaneIsVisible)
+            {
+                _telemetry.TrackPageView("GraphPane");
+            }
         }
 
         /// <summary>
@@ -2668,6 +2767,7 @@ namespace Micropolis.ViewModels
         /// </summary>
         private void ShowBudgetDialog(bool EnableTimerWhenClosing)
         {
+            _telemetry.TrackPageView("BudgetDialog");
             _newBudgetDialogViewModel.SetEngine(Engine);
             NewBudgetDialogPaneOuterIsVisible = true;
             _newBudgetDialogViewModel.EnableTimerWhenClosing = EnableTimerWhenClosing;

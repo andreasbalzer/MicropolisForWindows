@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.Foundation;
 using Windows.Storage;
 using Windows.UI.ApplicationSettings;
 using Windows.UI.Core;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Imaging;
@@ -42,6 +44,9 @@ namespace Micropolis.Screens
         public MainMenuPage()
         {
            InitializeComponent();
+           _telemetry = new TelemetryClient();
+           _telemetry.TrackPageView("MainMenuPage");
+
            _viewModel = new MainMenuViewModel();
            this.DataContext = _viewModel;
            App.MainMenuReference = this;
@@ -51,8 +56,24 @@ namespace Micropolis.Screens
 
             // Register handler for CommandsRequested events from the settings pane
             SettingsPane.GetForCurrentView().CommandsRequested += SettingsCharm.OnCommandsInMenuRequested;
-            _telemetry = new TelemetryClient();
-            _telemetry.TrackPageView("MainMenuPage");
+
+            Loaded += MainMenuPage_Loaded;
+        }
+
+        void MainMenuPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            bool informAboutTelemetry = 
+                ((ISupportsAppCommands) Application.Current).AppCommands.Any(
+                    s => s.Instruction == AppCommands.UPDATEDVERSION && s.Value == "informAboutTelemetry");
+            
+            if (informAboutTelemetry)
+            {
+                var itemToRemove = ((ISupportsAppCommands) Application.Current).AppCommands.First(
+                    s => s.Instruction == AppCommands.UPDATEDVERSION && s.Value == "informAboutTelemetry");
+                ((ISupportsAppCommands) Application.Current).AppCommands.Remove(itemToRemove);
+                MessageDialog dialog = new MessageDialog(Strings.GetString("InformAboutTelemetryContent"),Strings.GetString("InformAboutTelemetryTitle"));
+                dialog.ShowAsync();
+            }
         }
 
         private TelemetryClient _telemetry;
@@ -68,11 +89,20 @@ namespace Micropolis.Screens
             string state;
 
             if (size.Width <= 320)
+            {
                 state = "Snapped";
+                _telemetry.TrackEvent("MainMenuSnappedLayout");
+            }
             else if (size.Width <= 500)
+            {
                 state = "Narrow";
+                _telemetry.TrackEvent("MainMenuNarrowLayout");
+            }
             else
+            {
                 state = "DefaultLayout";
+                _telemetry.TrackEvent("MainMenuDefaultLayout");
+            }
 
 
             VisualStateManager.GoToState(this, state, true);
@@ -89,6 +119,9 @@ namespace Micropolis.Screens
             var button = (Button) sender;
             var textBlock = (TextBlock) ((StackPanel) ((Grid) button.Content).Children[1]).Children[0];
             var title = textBlock.Text;
+            
+            _telemetry.TrackEvent("MainMenuLaunchMap"+title);
+
             _viewModel.LoadGameFile(title);
         }
     }

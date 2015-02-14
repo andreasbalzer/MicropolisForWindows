@@ -8,6 +8,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using Engine;
 using Micropolis.Common;
+using Microsoft.ApplicationInsights;
 
 namespace Micropolis.ViewModels
 {
@@ -158,6 +159,9 @@ namespace Micropolis.ViewModels
 
             btn.ClickCommand = new DelegateCommand(() =>
             {
+                TelemetryClient telemetry = new TelemetryClient();
+                telemetry.TrackEvent("ToolbarToolUsed"+tool.Name);
+
                 SelectTool(tool); 
                 if (_mode == ToolBarMode.FLYOUT)
                 {

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq.Expressions;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -10,6 +11,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using Engine;
 using Micropolis.Common;
+using Microsoft.ApplicationInsights;
 
 namespace Micropolis.ViewModels
 {
@@ -41,6 +43,8 @@ namespace Micropolis.ViewModels
             DismissCommand = new DelegateCommand(Dismiss);
             TenYearsCommand = new DelegateCommand(TenYearsButton_Click);
             OneTwentyYearsCommand = new DelegateCommand(OneTwentyYearsButton_Click);
+
+            _telemetry = new TelemetryClient();
         }
 
         public DelegateCommand DismissCommand { get; private set; }
@@ -104,6 +108,7 @@ namespace Micropolis.ViewModels
         }
 
         internal Dictionary<GraphData, GraphPaneToggleButtonViewModel> DataBtns = new Dictionary<GraphData, GraphPaneToggleButtonViewModel>();
+        private TelemetryClient _telemetry;
         public ObservableCollection<GraphPaneToggleButtonViewModel> Buttons { get; set; }
 
         /// <summary>
@@ -111,6 +116,8 @@ namespace Micropolis.ViewModels
         /// </summary>
         public void TenYearsButton_Click()
         {
+            _telemetry.TrackEvent("GraphsPaneTenYearsClicked");
+
             SetTimePeriod(TimePeriod.TEN_YEARS);
         }
 
@@ -119,6 +126,8 @@ namespace Micropolis.ViewModels
         /// </summary>
         public void OneTwentyYearsButton_Click()
         {
+            _telemetry.TrackEvent("GraphsPaneOneTwentyYearsClicked");
+
             SetTimePeriod(TimePeriod.ONETWENTY_YEARS);
         }
 
@@ -147,6 +156,8 @@ namespace Micropolis.ViewModels
         /// </summary>
         private void Dismiss()
         {
+            _telemetry.TrackEvent("GraphsPaneDismissClicked");
+
             _mainPageViewModel.HideGraphsPane();
         }
 
@@ -174,6 +185,7 @@ namespace Micropolis.ViewModels
             buttonViewModel.ClickCommand = new DelegateCommand(
                 () =>
                 {
+                    _telemetry.TrackEvent("GraphsPaneButton" + graph + "Clicked");
                     _graphAreaViewModel.Repaint();
                 });
 
