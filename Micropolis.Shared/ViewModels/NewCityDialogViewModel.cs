@@ -171,7 +171,7 @@ namespace Micropolis.ViewModels
                 {
                     var newEngine = new Engine.Micropolis();
                     Stream stream = await file.OpenStreamForReadAsync();
-                    await newEngine.LoadFile(stream);
+                    newEngine.LoadFile(stream);
                     StartPlaying(newEngine, file);
                     MainPageViewModel.HideNewGameDialogPanel();
                 }

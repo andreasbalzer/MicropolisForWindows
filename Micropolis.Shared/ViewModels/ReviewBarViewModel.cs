@@ -138,7 +138,7 @@ namespace Micropolis.ViewModels
             bool showFeedback;
             var content = Prefs.GetString("feedbackSent", INITIALTIMEUNTILFEEDBACK);
             showFeedback = content == SHOWFEEDBACK;
-            if (showFeedback || true)
+            if (showFeedback && false)
             {
                 FeedbackIsVisible = true;
             }

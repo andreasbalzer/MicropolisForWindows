@@ -24,7 +24,7 @@
     <SccProvider>
     </SccProvider>
     <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
-    <AppxBundlePlatforms>neutral</AppxBundlePlatforms>
+    <AppxBundlePlatforms>x86</AppxBundlePlatforms>
     <PackageCertificateThumbprint>3B124B1EA9446437BC315C48BD0B33985F8E439A</PackageCertificateThumbprint>
     <AppxBundle>Always</AppxBundle>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
