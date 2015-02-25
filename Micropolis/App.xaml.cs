@@ -37,6 +37,11 @@ namespace Micropolis
         /// <summary>
         /// Allows tracking page views, exceptions and other telemetry through the Microsoft Application Insights service.
         /// </summary>
+        public static TelemetryClient TelemetryClient;
+
+        /// <summary>
+        /// Allows tracking page views, exceptions and other telemetry through the Microsoft Application Insights service.
+        /// </summary>
         public TelemetryClient _telemetry;
 
         private Frame rootFrame;
@@ -47,6 +52,8 @@ namespace Micropolis
         /// </summary>
         public App()
         {
+            TelemetryClient = new TelemetryClient();
+
             InitializeComponent();
             _telemetry=new TelemetryClient();
             AppCommands = new List<AppCommand>();

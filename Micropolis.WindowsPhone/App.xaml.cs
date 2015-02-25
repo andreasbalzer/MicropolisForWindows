@@ -39,6 +39,8 @@ namespace Micropolis
         /// </summary>
         public App()
         {
+            TelemetryClient = new TelemetryClient();
+
             InitializeComponent();
             AppCommands = new List<AppCommand>();
             CheckVersion();
