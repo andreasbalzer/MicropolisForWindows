@@ -61,8 +61,11 @@ namespace Micropolis.Screens
             B1.Content = Strings.GetString("license.B1");
             pageTitle.Text = Strings.GetString("license.Title");
 
-            _telemetry = new TelemetryClient();
-            _telemetry.TrackPageView("LicensePage");
+            try { 
+                _telemetry = new TelemetryClient();
+                _telemetry.TrackPageView("LicensePage");
+            }
+            catch (Exception) { }
         }
         private TelemetryClient _telemetry;
 
@@ -132,14 +135,21 @@ namespace Micropolis.Screens
             if (success)
             {
                 // URI launched
-                _telemetry.TrackEvent("LicenseGnuButtonPageOpened");
+                try { 
+                    _telemetry.TrackEvent("LicenseGnuButtonPageOpened");
+                }
+                catch (Exception) { }
             }
             else
             {
                 // URI launch failed
                 MessageDialog dialog = new MessageDialog(Strings.GetString("license.InternetError"));
                 await dialog.ShowAsync();
-                _telemetry.TrackEvent("LicenseGnuButtonNoInternet");
+
+                try { 
+                    _telemetry.TrackEvent("LicenseGnuButtonNoInternet");
+                }
+                catch (Exception) { }
             }
 
 
@@ -147,7 +157,11 @@ namespace Micropolis.Screens
 
         private async void B1_OnClick(object sender, RoutedEventArgs e)
         {
-            _telemetry.TrackEvent("LicenseAccepted");
+            try { 
+                _telemetry.TrackEvent("LicenseAccepted");
+            }
+            catch (Exception) { }
+
             StorageFolder appFolder = ApplicationData.Current.LocalFolder;
             await appFolder.CreateFileAsync("licenseAccepted.txt",
                 CreationCollisionOption.ReplaceExisting);
@@ -158,13 +172,21 @@ namespace Micropolis.Screens
             bool skipMenu = skipCommand != null;
             if (skipMenu)
             {
-                _telemetry.TrackEvent("LicenseAppLaunchedToGame");
+                try { 
+                    _telemetry.TrackEvent("LicenseAppLaunchedToGame");
+                }
+                catch (Exception) { }
+
                 current.AppCommands.Remove(skipCommand);
                 Frame.Navigate(typeof(MainGamePage));
             }
             else
             {
+                try { 
                 _telemetry.TrackEvent("LicenseAppLaunchedToMenu");
+                }
+                catch (Exception) { }
+
                 Frame.Navigate(typeof(MainMenuPage));
             }
         }

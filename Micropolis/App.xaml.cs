@@ -34,11 +34,7 @@ namespace Micropolis
     /// </summary>
     sealed partial class App : Application, ISupportsAppCommands
     {
-        /// <summary>
-        /// Allows tracking page views, exceptions and other telemetry through the Microsoft Application Insights service.
-        /// </summary>
-        public static TelemetryClient TelemetryClient;
-
+        
         /// <summary>
         /// Allows tracking page views, exceptions and other telemetry through the Microsoft Application Insights service.
         /// </summary>
@@ -52,10 +48,12 @@ namespace Micropolis
         /// </summary>
         public App()
         {
-            TelemetryClient = new TelemetryClient();
-
             InitializeComponent();
-            _telemetry=new TelemetryClient();
+            try { 
+                _telemetry=new TelemetryClient();
+            }
+            catch (Exception) { }
+
             AppCommands = new List<AppCommand>();
             CheckVersion();
             Suspending += OnSuspending;
@@ -107,7 +105,11 @@ namespace Micropolis
         {
             if (MainPageReference != null)
             {
-                _telemetry.TrackEvent("AppResumed");
+                try
+                {
+                    _telemetry.TrackEvent("AppResumed");
+                }
+                catch (Exception) { }
                 MainPageReference.ViewModel.OnWindowReopend();
             }
         }
@@ -122,8 +124,10 @@ namespace Micropolis
                 if (Convert.ToDouble(ApplicationData.Current.RoamingSettings.Values["Version"]) == 1.00)
                 {
                     AppCommands.Add(new AppCommand(Micropolis.Model.Entities.AppCommands.UPDATEDVERSION,"informAboutTelemetry"));
-              
-                    _telemetry.TrackEvent("AppUpdatedFrom1.00");
+                    try { 
+                        _telemetry.TrackEvent("AppUpdatedFrom1.00");
+                    }
+                    catch (Exception) { }
                 }
             }
              // ToDo: add version checks for new version
@@ -139,7 +143,10 @@ namespace Micropolis
         /// <param name="e">The <see cref="UnhandledExceptionEventArgs" /> instance containing the event data.</param>
         private void App_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
-            _telemetry.TrackException(e.Exception);
+            try { 
+                _telemetry.TrackException(e.Exception);
+            }
+            catch (Exception) { }
 
             var x = ""; // Bug: Todo
             //e.Handled = true;
@@ -181,7 +188,10 @@ namespace Micropolis
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {
                     //TODO: Zustand von zuvor angehaltener Anwendung laden
-                    _telemetry.TrackEvent("AppPreviouslyTerminated");
+                    try { 
+                        _telemetry.TrackEvent("AppPreviouslyTerminated");
+                    }
+                    catch (Exception) { }
                 }
 
                 // Den Rahmen im aktuellen Fenster platzieren
@@ -207,8 +217,13 @@ namespace Micropolis
         /// <param name="e">Details über den Navigationsfehler</param>
         private void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
         {
-            _telemetry.TrackEvent("AppNavigationFailed"+e.SourcePageType.FullName);
-            _telemetry.TrackException(e.Exception);
+            try
+            {
+                _telemetry.TrackEvent("AppNavigationFailed" + e.SourcePageType.FullName);
+                _telemetry.TrackException(e.Exception);
+            }
+            catch (Exception) { }
+
             throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
         }
 
@@ -223,8 +238,10 @@ namespace Micropolis
         {
             var deferral = e.SuspendingOperation.GetDeferral();
             //TODO: Anwendungszustand speichern und alle Hintergrundaktivitäten beenden
-
-            _telemetry.TrackEvent("AppSuspending");
+            try { 
+                _telemetry.TrackEvent("AppSuspending");
+            }
+            catch (Exception) { }
 
             if (MainPageReference != null)
             {
@@ -240,7 +257,10 @@ namespace Micropolis
         /// <param name="args">Die Ereignisdaten für das Ereignis.</param>
         protected override void OnFileActivated(FileActivatedEventArgs args)
         {
-            _telemetry.TrackEvent("AppLoadFileViaFileHandler");
+            try { 
+                _telemetry.TrackEvent("AppLoadFileViaFileHandler");
+            }
+            catch (Exception) { }
             // TODO: check if there is any game running already.
 
             if (args.Files.Any())

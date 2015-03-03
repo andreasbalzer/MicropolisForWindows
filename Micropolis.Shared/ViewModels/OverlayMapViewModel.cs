@@ -25,7 +25,10 @@ namespace Micropolis.ViewModels
         public OverlayMapViewModel(Grid layoutRoot)
         {
             _layoutRoot = layoutRoot;
+            try { 
             _telemetry = new TelemetryClient();
+            }
+            catch (Exception) { }
         }
 
 
@@ -895,8 +898,11 @@ namespace Micropolis.ViewModels
                 return;
             }
 
+            try { 
             _telemetry.TrackEvent("OverlayMapClicked");
-            
+            }
+            catch (Exception) { }
+
             if (e.Pointer.PointerDeviceType == PointerDeviceType.Mouse || e.Pointer.PointerDeviceType == PointerDeviceType.Pen || e.Pointer.PointerDeviceType == PointerDeviceType.Touch)
             {
                 _isMouseDown = true;

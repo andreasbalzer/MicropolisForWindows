@@ -21,7 +21,10 @@ namespace Micropolis.ViewModels
 
         public ReviewBarViewModel()
         {
+            try { 
             _telemetry = new TelemetryClient();
+            }
+            catch (Exception) { }
 
             SendFeedbackText = Strings.GetString("feedback.sendFeedbackText");
             SorryMessageText = Strings.GetString("feedback.sorryMessageText");
@@ -48,7 +51,10 @@ namespace Micropolis.ViewModels
                 SetProperty(ref _feedbackIsVisible, value);
                 if (value)
                 {
+                    try { 
                     _telemetry.TrackEvent("ReviewShowReviewBar");
+                    }
+                    catch (Exception) { }
                 }
             }
         }
@@ -75,12 +81,18 @@ namespace Micropolis.ViewModels
         private void ShowFeedback()
         {
             SorryMessageIsVisible = true;
+            try { 
             _telemetry.TrackEvent("ReviewShowFeedbackWithSorryMessage");
+            }
+            catch (Exception) { }
         }
 
         private void OpenStoreRatingPage()
         {
+            try { 
             _telemetry.TrackEvent("ReviewOpenRatingPage");
+            }
+            catch (Exception) { }
 
             Launcher.LaunchUriAsync(
                 new Uri("ms-windows-store:review?PFN=62155AndreasBalzer.MicropolisforWindows_rqaffv28461by",
@@ -90,7 +102,11 @@ namespace Micropolis.ViewModels
 
         private void SendFeedback()
         {
+            try { 
             _telemetry.TrackEvent("ReviewSendFeedback");
+            }
+            catch (Exception) { }
+
             var feedbackTitle = Strings.GetString("feedback.title");
             var feedbackBody = Strings.GetString("feedback.body");
             Launcher.LaunchUriAsync(

@@ -26,7 +26,10 @@ namespace Micropolis.ViewModels
 
         public NewCityDialogViewModel(OverlayMapViewModel mapPaneViewModel)
         {
+            try { 
             _telemetry = new TelemetryClient();
+            }
+            catch (Exception) { }
 
             _mapPaneViewModel = mapPaneViewModel;
             Levels=new ObservableCollection<LevelButtonViewModel>();
@@ -123,7 +126,10 @@ namespace Micropolis.ViewModels
         /// </summary>
         private void OnPreviousMapClicked()
         {
+            try { 
             _telemetry.TrackEvent("NewCityDialogPreviousMapClicked");
+            }
+            catch (Exception) { }
 
             if (_previousMaps.Count == 0)
                 return;
@@ -140,7 +146,10 @@ namespace Micropolis.ViewModels
         /// </summary>
         private void OnNextMapClicked()
         {
+            try { 
             _telemetry.TrackEvent("NewCityDialogNextMapClicked");
+            }
+            catch (Exception) { }
 
             if (_nextMaps.Count == 0)
             {
@@ -161,7 +170,11 @@ namespace Micropolis.ViewModels
         /// </summary>
         private async void OnLoadCityClicked()
         {
+            try {
             _telemetry.TrackEvent("NewCityDialogLoadMapClicked");
+            }
+            catch (Exception) { }
+
             try
             {
                 var picker = new FileOpenPicker();
@@ -201,7 +214,10 @@ namespace Micropolis.ViewModels
         /// </summary>
         private void OnPlayClicked()
         {
+            try { 
             _telemetry.TrackEvent("NewCityDialogPlayMapClicked");
+            }
+            catch (Exception) { }
 
             _engine.SetGameLevel(GetSelectedGameLevel());
             _engine.SetFunds(GameLevel.GetStartingFunds(_engine.GameLevel));
@@ -215,7 +231,10 @@ namespace Micropolis.ViewModels
         /// </summary>
         private void OnCancelClicked()
         {
+            try { 
             _telemetry.TrackEvent("NewCityDialogCancelMapClicked");
+            }
+            catch (Exception) { }
 
             MainGamePageViewModel win = _mainPageViewModel;
             win.HideNewGameDialogPanel();
@@ -243,7 +262,10 @@ namespace Micropolis.ViewModels
         /// <param name="level">level to set engine to</param>
         private void SetGameLevel(int level)
         {
+            try { 
             _telemetry.TrackEvent("NewCityDialogSelectLevel"+level);
+            }
+            catch (Exception) { }
 
             foreach (int lev in _levelBtns.Keys)
             {

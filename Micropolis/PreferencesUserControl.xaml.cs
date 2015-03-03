@@ -47,8 +47,11 @@ namespace Micropolis
                 Language.Items.First(s => ((ComboBoxItem) s).Name == Prefs.GetString("Language", "automatic"));
             _isInit = true;
 
-            _telemetry = new TelemetryClient();
-            _telemetry.TrackPageView("PreferencesUserControl");
+            try { 
+                _telemetry = new TelemetryClient();
+                _telemetry.TrackPageView("PreferencesUserControl");
+            }
+            catch (Exception) { }
 
         }
         private TelemetryClient _telemetry;

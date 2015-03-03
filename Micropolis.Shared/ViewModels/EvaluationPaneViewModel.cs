@@ -40,7 +40,13 @@ namespace Micropolis.ViewModels
         {
             DismissCommand = new DelegateCommand(OnDismissClicked);
 
-            _telemetry = new TelemetryClient();
+            try
+            {
+                _telemetry = new TelemetryClient();
+            }
+            catch (Exception)
+            {
+            }
         }
 
 
@@ -49,7 +55,10 @@ namespace Micropolis.ViewModels
         /// </summary>
         private void OnDismissClicked()
         {
-            _telemetry.TrackEvent("EvaluationPaneDismissClicked");
+            try { 
+                _telemetry.TrackEvent("EvaluationPaneDismissClicked");
+            }
+            catch (Exception) { }
 
             _mainPageViewModel.HideEvaluationPane();
         }

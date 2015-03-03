@@ -363,9 +363,11 @@ namespace Micropolis.Screens
             helpP144.Inlines.Add(new Run() {Text = Strings.GetString("help.P144")});
             helpP145.Inlines.Add(new Run() {Text = Strings.GetString("help.P145")});
 
-            _telemetry = new TelemetryClient();
-            _telemetry.TrackPageView("HelpPage");
-
+            try { 
+                _telemetry = new TelemetryClient();
+                _telemetry.TrackPageView("HelpPage");
+            }
+            catch (Exception) { }
         }
 
         private TelemetryClient _telemetry;

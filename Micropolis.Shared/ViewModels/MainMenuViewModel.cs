@@ -35,7 +35,10 @@ namespace Micropolis.ViewModels
 
         public MainMenuViewModel()
         {
+            try { 
             _telemetry = new TelemetryClient();
+            }
+            catch (Exception) { }
 
             Cities = new ObservableCollection<City>();
 
@@ -145,7 +148,10 @@ namespace Micropolis.ViewModels
             if (_unsavedFileExists != null)
 #endif
             {
+                try { 
                 _telemetry.TrackEvent("MainMenuUnsavedGameDetected");
+                }
+                catch (Exception) { }
 
                 LoadUnsavedGameButtonIsVisible = true;
             }
@@ -156,7 +162,10 @@ namespace Micropolis.ViewModels
         /// </summary>
         private void NewGame()
         {
+            try { 
             _telemetry.TrackEvent("MainMenuLoadNewGameClicked");
+            }
+            catch (Exception) { }
 
             App.MainMenuReference.Frame.Navigate(typeof (MainGamePage));
         }
@@ -167,7 +176,10 @@ namespace Micropolis.ViewModels
         /// </summary>
         private void LoadUnsavedGame()
         {
+            try { 
             _telemetry.TrackEvent("MainMenuLoadUnsavedGameClicked");
+            }
+            catch (Exception) { }
 
             ((ISupportsAppCommands) Application.Current).AppCommands.Add(new AppCommand(AppCommands.LOADFILEASNEWCITYANDDELETE,
                 _unsavedFileExists));
@@ -215,7 +227,10 @@ namespace Micropolis.ViewModels
 
         public async Task LoadGameFile(string title)
         {
+            try { 
             _telemetry.TrackEvent("MainMenuLoadGameFile"+title);
+            }
+            catch (Exception) { }
 
             var path = new Uri("ms-appx:///resources/cities/" + title, UriKind.Absolute);
             var file = await StorageFile.GetFileFromApplicationUriAsync(path);

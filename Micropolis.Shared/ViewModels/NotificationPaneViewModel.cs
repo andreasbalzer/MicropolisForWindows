@@ -19,8 +19,10 @@ namespace Micropolis.ViewModels
         public NotificationPaneViewModel()
         {
             Messages=new ObservableCollection<string>();
-
+            try { 
             _telemetry = new TelemetryClient();
+            }
+            catch (Exception) { }
         }
 
         private static readonly Size VIEWPORT_SIZE = new Size(160, 160);
@@ -50,7 +52,10 @@ namespace Micropolis.ViewModels
         /// </summary>
         private void OnDismissClicked()
         {
+            try { 
             _telemetry.TrackEvent("NotificationPaneDismissClicked");
+            }
+            catch (Exception) { }
 
             _mainPageViewModel.HideNotificationPanel();
         }
@@ -80,7 +85,10 @@ namespace Micropolis.ViewModels
         /// <param name="ypos">ypos in map</param>
         public void ShowMessage(MicropolisMessage msg, int xpos, int ypos)
         {
+            try { 
             _telemetry.TrackEvent("NotificationPaneMessageShown"+msg.Name);
+            }
+            catch (Exception) { }
 
             SetPicture(xpos, ypos);
 

@@ -33,9 +33,12 @@ namespace Micropolis
         {
             this.InitializeComponent();
             PrivacyText.Text = Strings.GetString("privacy.Text");
-            
-            _telemetry = new TelemetryClient();
-            _telemetry.TrackPageView("PrivacyUserControl");
+
+            try { 
+                _telemetry = new TelemetryClient();
+                _telemetry.TrackPageView("PrivacyUserControl");
+            }
+            catch (Exception) { }
 
         }
         private TelemetryClient _telemetry;

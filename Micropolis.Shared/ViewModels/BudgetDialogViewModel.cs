@@ -71,7 +71,10 @@ namespace Micropolis.ViewModels
             ContinueCommand = new DelegateCommand(Continue);
             ResetCommand = new DelegateCommand(Reset);
 
+            try { 
             _telemetry = new TelemetryClient();
+            }
+            catch (Exception) { }
         }
 
         public DelegateCommand ContinueCommand { get; private set; }
@@ -216,13 +219,20 @@ namespace Micropolis.ViewModels
             set
             {
                 SetProperty(ref _isAutoBudget, value);
-                if (value)
+
+                try
                 {
-                    _telemetry.TrackEvent("BudgetDialogAutoBudgetEnabled");
+                    if (value)
+                    {
+                        _telemetry.TrackEvent("BudgetDialogAutoBudgetEnabled");
+                    }
+                    else
+                    {
+                        _telemetry.TrackEvent("BudgetDialogAutoBudgetDisabled");
+                    }
                 }
-                else
+                catch (Exception)
                 {
-                    _telemetry.TrackEvent("BudgetDialogAutoBudgetDisabled");
                 }
             }
         }
@@ -233,13 +243,19 @@ namespace Micropolis.ViewModels
             set
             {
                 SetProperty(ref _isPause, value);
-                if (value)
+                try
                 {
-                    _telemetry.TrackEvent("BudgetDialogPauseEnabled");
+                    if (value)
+                    {
+                        _telemetry.TrackEvent("BudgetDialogPauseEnabled");
+                    }
+                    else
+                    {
+                        _telemetry.TrackEvent("BudgetDialogPauseDisabled");
+                    }
                 }
-                else
+                catch (Exception)
                 {
-                    _telemetry.TrackEvent("BudgetDialogPauseDisabled");
                 }
             }
         }
@@ -495,7 +511,13 @@ namespace Micropolis.ViewModels
         /// </summary>
         private void Continue()
         {
-            _telemetry.TrackEvent("BudgetDialogContinueClicked");
+            try
+            {
+                _telemetry.TrackEvent("BudgetDialogContinueClicked");
+            }
+            catch (Exception)
+            {
+            }
 
             if (IsAutoBudget != _engine.AutoBudget)
             {
@@ -521,7 +543,14 @@ namespace Micropolis.ViewModels
         /// </summary>
         private void Reset()
         {
-            _telemetry.TrackEvent("BudgetDialogResetClicked");
+            try
+            {
+                _telemetry.TrackEvent("BudgetDialogResetClicked");
+            }
+            catch (Exception)
+            {
+            }
+
 
             _engine.CityTax = _origTaxRate;
             _engine.RoadPercent = _origRoadPct;

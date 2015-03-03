@@ -36,8 +36,12 @@ namespace Micropolis
             InitializeComponent();
             AboutText.Text = Strings.GetString("about.Text");
             AboutTitle.Text = Strings.GetString("about.Title");
-            _telemetry = new TelemetryClient();
-            _telemetry.TrackPageView("AboutUserControl");
+
+            try { 
+                _telemetry = new TelemetryClient();
+                _telemetry.TrackPageView("AboutUserControl");
+            }
+            catch (Exception) { }
 
         }
         private TelemetryClient _telemetry;

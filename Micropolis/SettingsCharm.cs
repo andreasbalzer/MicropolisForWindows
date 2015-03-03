@@ -1,4 +1,5 @@
-﻿using Windows.UI.ApplicationSettings;
+﻿using System;
+using Windows.UI.ApplicationSettings;
 using Windows.UI.Xaml.Controls;
 using Micropolis.Screens;
 using Microsoft.ApplicationInsights;
@@ -25,7 +26,10 @@ namespace Micropolis
 
         static SettingsCharm()
         {
-            _telemetry = new TelemetryClient();
+            try { 
+                _telemetry = new TelemetryClient();
+            }
+            catch (Exception) { }
         }
         /// <summary>
         ///     Called when commands are requested by settings charm. Adds an about, preferences, help and privacy command.
@@ -39,7 +43,10 @@ namespace Micropolis
             // Add an About command
             var about = new SettingsCommand("about", Strings.GetString("settingsCharm.About"), handler =>
             {
-                _telemetry.TrackEvent("SettingsCharmMainGameAboutClicked");
+                try { 
+                    _telemetry.TrackEvent("SettingsCharmMainGameAboutClicked");
+                }
+                catch (Exception) { }
 
                 var settings = new SettingsFlyout();
                 settings.Content = new AboutUserControl();
@@ -54,7 +61,10 @@ namespace Micropolis
             var license = new SettingsCommand("license", Strings.GetString("settingsCharm.License"),
                 handler =>
                 {
-                    _telemetry.TrackEvent("SettingsCharmMainGameLicenseClicked");
+                    try { 
+                        _telemetry.TrackEvent("SettingsCharmMainGameLicenseClicked");
+                    }
+                    catch (Exception) { }
 
                     App.MainPageReference.Frame.Navigate(typeof (LicensePage));
                 });
@@ -64,7 +74,10 @@ namespace Micropolis
             // Add a Preferences command
             var preferences = new SettingsCommand("preferences", Strings.GetString("settingsCharm.Preferences"), handler =>
             {
-                _telemetry.TrackEvent("SettingsCharmMainGamePreferencesClicked");
+                try { 
+                    _telemetry.TrackEvent("SettingsCharmMainGamePreferencesClicked");
+                }
+                catch (Exception) { }
 
                 var settings = new SettingsFlyout();
                 settings.Content = new PreferencesUserControl();
@@ -77,8 +90,11 @@ namespace Micropolis
             // Add an Help command
             var help = new SettingsCommand("help", Strings.GetString("settingsCharm.Help"),
                 handler => {
-                    _telemetry.TrackEvent("SettingsCharmMainGameHelpClicked");
-                    
+                    try { 
+                        _telemetry.TrackEvent("SettingsCharmMainGameHelpClicked");
+                    }
+                    catch (Exception) { }
+
                     App.MainPageReference.Frame.Navigate(typeof (HelpPage));
                 });
 
@@ -87,7 +103,11 @@ namespace Micropolis
             // Add a Privacy command
             var privacy = new SettingsCommand("privacy", Strings.GetString("settingsCharm.Privacy"), handler =>
             {
-                _telemetry.TrackEvent("SettingsCharmMainGamePrivacyClicked");
+                try
+                {
+                    _telemetry.TrackEvent("SettingsCharmMainGamePrivacyClicked");
+                }
+                catch (Exception) { }
 
                 var settings = new SettingsFlyout();
                 settings.Content = new PrivacyUserControl();
@@ -110,7 +130,10 @@ namespace Micropolis
             // Add an About command
             var about = new SettingsCommand("about", Strings.GetString("settingsCharm.About"), handler =>
             {
-                _telemetry.TrackEvent("SettingsCharmMainMenuAboutClicked");
+                try { 
+                    _telemetry.TrackEvent("SettingsCharmMainMenuAboutClicked");
+                }
+                catch (Exception) { }
 
                 var settings = new SettingsFlyout();
                 settings.Content = new AboutUserControl();
@@ -123,7 +146,10 @@ namespace Micropolis
 
             var license = new SettingsCommand("license", Strings.GetString("settingsCharm.License"),
                 handler => {
-                    _telemetry.TrackEvent("SettingsCharmMainMenuLicenseClicked");
+                    try { 
+                        _telemetry.TrackEvent("SettingsCharmMainMenuLicenseClicked");
+                    }
+                    catch (Exception) { }
 
                     App.MainMenuReference.Frame.Navigate(typeof (LicensePage));
             });
@@ -133,7 +159,10 @@ namespace Micropolis
             // Add a Preferences command
             var preferences = new SettingsCommand("preferences", Strings.GetString("settingsCharm.Preferences"), handler =>
             {
-                _telemetry.TrackEvent("SettingsCharmMainMenuPreferencesClicked");
+                try { 
+                    _telemetry.TrackEvent("SettingsCharmMainMenuPreferencesClicked");
+                }
+                catch (Exception) { }
 
                 var settings = new SettingsFlyout();
                 settings.Content = new PreferencesUserControl();
@@ -147,7 +176,10 @@ namespace Micropolis
             var help = new SettingsCommand("help", Strings.GetString("settingsCharm.Help"),
                 handler =>
                 {
+                    try { 
                     _telemetry.TrackEvent("SettingsCharmMainMenuHelpClicked");
+                    }
+                    catch (Exception) { }
 
                     App.MainMenuReference.Frame.Navigate(typeof (HelpPage));
                 });
@@ -157,7 +189,10 @@ namespace Micropolis
             // Add a Privacy command
             var privacy = new SettingsCommand("privacy", Strings.GetString("settingsCharm.Privacy"), handler =>
             {
+                try { 
                 _telemetry.TrackEvent("SettingsCharmMainMenuPrivacyClicked");
+                }
+                catch (Exception) { }
 
                 var settings = new SettingsFlyout();
                 settings.Content = new PrivacyUserControl();

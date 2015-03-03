@@ -44,7 +44,13 @@ namespace Micropolis.ViewModels
             TenYearsCommand = new DelegateCommand(TenYearsButton_Click);
             OneTwentyYearsCommand = new DelegateCommand(OneTwentyYearsButton_Click);
 
-            _telemetry = new TelemetryClient();
+            try
+            {
+                _telemetry = new TelemetryClient();
+            }
+            catch (Exception)
+            {
+            }
         }
 
         public DelegateCommand DismissCommand { get; private set; }
@@ -116,7 +122,13 @@ namespace Micropolis.ViewModels
         /// </summary>
         public void TenYearsButton_Click()
         {
-            _telemetry.TrackEvent("GraphsPaneTenYearsClicked");
+            try
+            {
+                _telemetry.TrackEvent("GraphsPaneTenYearsClicked");
+            }
+            catch (Exception)
+            {
+            }
 
             SetTimePeriod(TimePeriod.TEN_YEARS);
         }
@@ -126,7 +138,13 @@ namespace Micropolis.ViewModels
         /// </summary>
         public void OneTwentyYearsButton_Click()
         {
-            _telemetry.TrackEvent("GraphsPaneOneTwentyYearsClicked");
+            try
+            {
+                _telemetry.TrackEvent("GraphsPaneOneTwentyYearsClicked");
+            }
+            catch (Exception)
+            {
+            }
 
             SetTimePeriod(TimePeriod.ONETWENTY_YEARS);
         }
@@ -156,7 +174,13 @@ namespace Micropolis.ViewModels
         /// </summary>
         private void Dismiss()
         {
-            _telemetry.TrackEvent("GraphsPaneDismissClicked");
+            try
+            {
+                _telemetry.TrackEvent("GraphsPaneDismissClicked");
+            }
+            catch (Exception)
+            {
+            }
 
             _mainPageViewModel.HideGraphsPane();
         }
@@ -185,7 +209,14 @@ namespace Micropolis.ViewModels
             buttonViewModel.ClickCommand = new DelegateCommand(
                 () =>
                 {
-                    _telemetry.TrackEvent("GraphsPaneButton" + graph + "Clicked");
+                    try
+                    {
+                        _telemetry.TrackEvent("GraphsPaneButton" + graph + "Clicked");
+                    }
+                    catch (Exception)
+                    {
+                    }
+
                     _graphAreaViewModel.Repaint();
                 });
 

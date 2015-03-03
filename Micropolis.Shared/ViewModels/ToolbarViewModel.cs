@@ -159,8 +159,12 @@ namespace Micropolis.ViewModels
 
             btn.ClickCommand = new DelegateCommand(() =>
             {
+                try { 
                 TelemetryClient telemetry = new TelemetryClient();
+
                 telemetry.TrackEvent("ToolbarToolUsed"+tool.Name);
+                }
+                catch (Exception) { }
 
                 SelectTool(tool); 
                 if (_mode == ToolBarMode.FLYOUT)

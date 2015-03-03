@@ -44,8 +44,11 @@ namespace Micropolis.Screens
         public MainMenuPage()
         {
            InitializeComponent();
-           _telemetry = new TelemetryClient();
-           _telemetry.TrackPageView("MainMenuPage");
+           try { 
+               _telemetry = new TelemetryClient();
+               _telemetry.TrackPageView("MainMenuPage");
+           }
+           catch (Exception) { }
 
            _viewModel = new MainMenuViewModel();
            this.DataContext = _viewModel;
@@ -91,17 +94,26 @@ namespace Micropolis.Screens
             if (size.Width <= 320)
             {
                 state = "Snapped";
-                _telemetry.TrackEvent("MainMenuSnappedLayout");
+                try { 
+                    _telemetry.TrackEvent("MainMenuSnappedLayout");
+                }
+                catch (Exception) { }
             }
             else if (size.Width <= 500)
             {
                 state = "Narrow";
-                _telemetry.TrackEvent("MainMenuNarrowLayout");
+                try { 
+                    _telemetry.TrackEvent("MainMenuNarrowLayout");
+                }
+                catch (Exception) { }
             }
             else
             {
                 state = "DefaultLayout";
-                _telemetry.TrackEvent("MainMenuDefaultLayout");
+                try { 
+                    _telemetry.TrackEvent("MainMenuDefaultLayout");
+                }
+                catch (Exception) { }
             }
 
 
@@ -119,8 +131,11 @@ namespace Micropolis.Screens
             var button = (Button) sender;
             var textBlock = (TextBlock) ((StackPanel) ((Grid) button.Content).Children[1]).Children[0];
             var title = textBlock.Text;
-            
-            _telemetry.TrackEvent("MainMenuLaunchMap"+title);
+
+            try { 
+                _telemetry.TrackEvent("MainMenuLaunchMap"+title);
+            }
+            catch (Exception) { }
 
             _viewModel.LoadGameFile(title);
         }

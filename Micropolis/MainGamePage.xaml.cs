@@ -49,9 +49,11 @@ namespace Micropolis
             Window.Current.SizeChanged += Window_SizeChanged;
             DetermineVisualState();
 
-            _telemetry = new TelemetryClient();
-            _telemetry.TrackPageView("MainGamePage");
-
+            try { 
+                _telemetry = new TelemetryClient();
+                _telemetry.TrackPageView("MainGamePage");
+            }
+            catch (Exception) { }
         }
         private TelemetryClient _telemetry;
 
