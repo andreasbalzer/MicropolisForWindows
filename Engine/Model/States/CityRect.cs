@@ -13,7 +13,9 @@ namespace Engine
     // See the README file, included in this distribution, for details.
     // Project website: http://code.google.com/p/micropolis/
 
-
+    /// <summary>
+    /// Specifies a rectangular area in the city's coordinate space. 
+    /// </summary>
     public class CityRect : IEquatable<CityRect>
     {
         /// <summary>
