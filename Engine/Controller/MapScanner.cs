@@ -105,7 +105,7 @@
         /// <returns></returns>
         private bool SetZonePower()
         {
-            bool oldPower = (RawTile & TileConstants.PWRBIT) == TileConstants.PWRBIT;
+            bool oldPower = City.IsTilePowered(Xpos, Ypos);
             bool newPower = (
                 Tile == TileConstants.NUCLEAR ||
                 Tile == TileConstants.POWERPLANT ||
@@ -114,12 +114,12 @@
 
             if (newPower && !oldPower)
             {
-                City.SetTile(Xpos, Ypos, (char) (RawTile | TileConstants.PWRBIT));
+                City.SetTilePower(Xpos, Ypos, true);
                 City.PowerZone(Xpos, Ypos, TileConstants.GetZoneSizeFor(Tile));
             }
             else if (!newPower && oldPower)
             {
-                City.SetTile(Xpos, Ypos, (char) (RawTile & (~TileConstants.PWRBIT)));
+                City.SetTilePower(Xpos, Ypos, false);
                 City.ShutdownZone(Xpos, Ypos, TileConstants.GetZoneSizeFor(Tile));
             }
 
@@ -169,9 +169,8 @@
                 }
             }
 
-            // refresh rawTile, tile
-            RawTile = City.Map[Ypos][Xpos];
-            Tile = (char) (RawTile & TileConstants.LOMASK);
+            // refresh own tile property 
+            Tile = City.GetTile(Xpos, Ypos);
 
             SetZonePower();
             return true;
@@ -870,8 +869,10 @@
             {
                 // downgrade from full-size zone to 8 little houses
 
-                int pwrBit = (RawTile & TileConstants.PWRBIT);
-                City.SetTile(Xpos, Ypos, (char) (TileConstants.RESCLR | pwrBit));
+                bool pwr = City.IsTilePowered(Xpos, Ypos);
+                City.SetTile(Xpos,Ypos,TileConstants.RESCLR);
+                City.SetTilePower(Xpos, Ypos, pwr);
+                
                 for (int x = Xpos - 1; x <= Xpos + 1; x++)
                 {
                     for (int y = Ypos - 1; y <= Ypos + 1; y++)

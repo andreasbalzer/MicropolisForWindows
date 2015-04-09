@@ -230,10 +230,7 @@ namespace Engine
 
             if (tden != newLevel)
             {
-                int z = (((RawTile & TileConstants.LOMASK) - TileConstants.ROADBASE) & 15) +
-                        TrafficDensityTab[newLevel];
-                z += RawTile & TileConstants.ALLBITS;
-
+                int z = ((Tile - TileConstants.ROADBASE) & 15) + TrafficDensityTab[newLevel];
                 City.SetTile(Xpos, Ypos, (char) z);
             }
         }

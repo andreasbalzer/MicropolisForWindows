@@ -943,6 +943,9 @@ namespace Engine
         /// <summary>
         ///     Sets the tile at coordinates.
         /// </summary>
+        /// <remarks>
+        ///     Note: this method clears the PWRBIT of the given location.
+        /// </remarks>
         /// <param name="xpos">The xpos.</param>
         /// <param name="ypos">The ypos.</param>
         /// <param name="newTile">The new tile.</param>
@@ -954,6 +957,17 @@ namespace Engine
                 FireTileChanged(xpos, ypos);
             }
         }
+        /// <summary>
+        /// Sets power for the specfic tile
+        /// </summary>
+        /// <param name="xpos">x-position</param>
+        /// <param name="ypos">y-position</param>
+        /// <param name="power">true, if power, otherwise false</param>
+        public void setTilePower(int xpos, int ypos, bool power) 
+     	{
+            Map[ypos][xpos] = (char)(Map[ypos][xpos] & (~TileConstants.PWRBIT) | (power ? TileConstants.PWRBIT : 0)); 
+     	} 
+
 
         /// <summary>
         ///     Tests the coordinate for validity.

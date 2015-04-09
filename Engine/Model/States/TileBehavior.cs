@@ -27,11 +27,6 @@ namespace Engine
         protected Micropolis City;
 
         /// <summary>
-        ///     The raw tile content
-        /// </summary>
-        protected int RawTile;
-
-        /// <summary>
         ///     The tile content
         /// </summary>
         protected int Tile;
@@ -65,8 +60,7 @@ namespace Engine
         {
             Xpos = xpos;
             Ypos = ypos;
-            RawTile = City.GetTileRaw(xpos, ypos);
-            Tile = RawTile & TileConstants.LOMASK;
+            Tile = City.GetTile(xpos, ypos);
             Apply();
         }
 
