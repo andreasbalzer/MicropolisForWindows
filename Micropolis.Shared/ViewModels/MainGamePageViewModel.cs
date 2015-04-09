@@ -238,7 +238,8 @@ namespace Micropolis.ViewModels
             OverlayMapViewModel mapViewViewModel, NewCityDialogViewModel newCityDialogViewModel)
         {
             _newCityDialogViewModel = newCityDialogViewModel;
-            _newCityDialogViewModel.MainPageViewModel = this;
+            _newCityDialogViewModel.PlayClicked += _newCityDialogViewModel_PlayClicked;
+            _newCityDialogViewModel.CancelClicked += _newCityDialogViewModel_CancelClicked;
             _mapViewViewModel = mapViewViewModel;
 
             ShowToolsButtonText = Strings.GetString("main.showTools");
@@ -306,6 +307,20 @@ namespace Micropolis.ViewModels
             catch (Exception)
             {
             }
+        }
+
+        void _newCityDialogViewModel_CancelClicked(object sender, EventArgs e)
+        {
+            HideNewGameDialogPanel();
+        }
+
+        void _newCityDialogViewModel_PlayClicked(object sender, Tuple<Engine.Micropolis, IStorageFile, int> e)
+        {
+            SetEngine(e.Item1);
+            CurrentFile = (StorageFile)e.Item2;
+            MakeClean();
+            OnDifficultyClicked(e.Item3);
+            HideNewGameDialogPanel();
         }
 
         private TelemetryClient _telemetry;

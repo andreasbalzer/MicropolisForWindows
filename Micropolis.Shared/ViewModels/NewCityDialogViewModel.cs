@@ -16,7 +16,7 @@ namespace Micropolis.ViewModels
 {
     public class NewCityDialogViewModel : BindableBase
     {
-         private readonly Dictionary<int, LevelButtonViewModel> _levelBtns = new Dictionary<int, LevelButtonViewModel>();
+        private readonly Dictionary<int, LevelButtonViewModel> _levelBtns = new Dictionary<int, LevelButtonViewModel>();
         private readonly Stack<Engine.Micropolis> _nextMaps = new Stack<Engine.Micropolis>();
         private readonly Stack<Engine.Micropolis> _previousMaps = new Stack<Engine.Micropolis>();
         private Engine.Micropolis _engine;
@@ -64,9 +64,21 @@ namespace Micropolis.ViewModels
 
             LoadCityCommand = new DelegateCommand(() => { OnLoadCityClicked(); });
 
-            
+            CancelCommand = new DelegateCommand(() =>
+            {
+                OnCancelClicked();
+            });
+            ThisMapCommand = new DelegateCommand(() =>
+            {
+                OnPlayClicked();
+            });    
 
         }
+
+        
+        public event EventHandler<Tuple<Engine.Micropolis, IStorageFile, int>> PlayClicked;
+        public event EventHandler CancelClicked;
+
 
         private string _titleTextBlockText;
         public string TitleTextBlockText { get { return _titleTextBlockText; } set { SetProperty(ref _titleTextBlockText, value); } }
@@ -103,23 +115,9 @@ namespace Micropolis.ViewModels
 
         private DelegateCommand _cancelCommand;
         private OverlayMapViewModel _mapPaneViewModel;
-        private MainGamePageViewModel _mainPageViewModel;
         private TelemetryClient _telemetry;
         public DelegateCommand CancelCommand { get { return _cancelCommand; } set { SetProperty(ref _cancelCommand, value); } }
-        public MainGamePageViewModel MainPageViewModel { get { return _mainPageViewModel; } set
-        {
-            _mainPageViewModel = value; 
-            CancelCommand = new DelegateCommand(() =>
-            {
-                MainPageViewModel.HideNewGameDialogPanel();
-                OnCancelClicked();
-            });
-            ThisMapCommand = new DelegateCommand(() =>
-            {
-                MainPageViewModel.HideNewGameDialogPanel();
-                OnPlayClicked();
-            });
-        } }
+        
 
         /// <summary>
         /// Called when user clicked previous map button to go to the preview map.
@@ -182,11 +180,18 @@ namespace Micropolis.ViewModels
                 StorageFile file = await picker.PickSingleFileAsync();
                 if (file != null)
                 {
-                    var newEngine = new Engine.Micropolis();
+                    _engine = new Engine.Micropolis();
                     Stream stream = await file.OpenStreamForReadAsync();
-                    newEngine.LoadFile(stream);
-                    StartPlaying(newEngine, file);
-                    MainPageViewModel.HideNewGameDialogPanel();
+                    _engine.LoadFile(stream);
+                    
+                    Tuple<Engine.Micropolis, IStorageFile, int> engineAndDifficulty = new Tuple<Engine.Micropolis, IStorageFile, int>(_engine, file, GetSelectedGameLevel());
+
+                    if (PlayClicked != null)
+                    {
+                        PlayClicked(this, engineAndDifficulty);
+
+                        //set engine, set currentfile = null, makeclean, set difficulty
+                    }
                 }
             }
             catch (Exception e)
@@ -194,19 +199,6 @@ namespace Micropolis.ViewModels
                 var dialog = new MessageDialog(Strings.GetString("main.error_caption") + e);
                 dialog.ShowAsync();
             }
-        }
-
-        /// <summary>
-        /// Start to play the specified file with the specified engine.
-        /// </summary>
-        /// <param name="newEngine">engine to play with</param>
-        /// <param name="file">file to load and play</param>
-        private void StartPlaying(Engine.Micropolis newEngine, StorageFile file)
-        {
-            MainGamePageViewModel win = _mainPageViewModel;
-            win.SetEngine(newEngine);
-            win.CurrentFile = file;
-            win.MakeClean();
         }
 
         /// <summary>
@@ -221,9 +213,15 @@ namespace Micropolis.ViewModels
 
             _engine.SetGameLevel(GetSelectedGameLevel());
             _engine.SetFunds(GameLevel.GetStartingFunds(_engine.GameLevel));
-            StartPlaying(_engine, null);
-            MainGamePageViewModel win = _mainPageViewModel;
-            win.OnDifficultyClicked(GetSelectedGameLevel());
+            
+            Tuple<Engine.Micropolis, IStorageFile, int> engineAndDifficulty = new Tuple<Engine.Micropolis, IStorageFile, int>(_engine, null, GetSelectedGameLevel());
+            
+            if (PlayClicked != null)
+            {
+                PlayClicked(this, engineAndDifficulty);
+
+                //set engine, set currentfile = null, makeclean, set difficulty
+            }
         }
 
         /// <summary>
@@ -236,8 +234,10 @@ namespace Micropolis.ViewModels
             }
             catch (Exception) { }
 
-            MainGamePageViewModel win = _mainPageViewModel;
-            win.HideNewGameDialogPanel();
+            if (CancelClicked != null)
+            {
+                CancelClicked(this, null);
+            }
         }
 
         /// <summary>
