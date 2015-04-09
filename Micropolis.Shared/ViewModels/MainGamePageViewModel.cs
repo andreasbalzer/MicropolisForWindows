@@ -1088,8 +1088,8 @@ namespace Micropolis.ViewModels
             }
             else if (loadCityAsNewAndDelete)
             {
-                var file = (StorageFile)loadCityAsNewCommand.File;
-                currentApp.AppCommands.Remove(loadCityAsNewCommand);
+                var file = (StorageFile)loadCityAsNewAndDelteCommand.File;
+                currentApp.AppCommands.Remove(loadCityAsNewAndDelteCommand);
 
                 LoadGameFile(file, true, false);
             }

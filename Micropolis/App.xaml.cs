@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Globalization;
@@ -143,7 +144,7 @@ namespace Micropolis
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="UnhandledExceptionEventArgs" /> instance containing the event data.</param>
-        private void App_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        private async void App_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
             try { 
                 _telemetry.TrackException(e.Exception);
@@ -157,8 +158,8 @@ namespace Micropolis
                     "Unfortunately Micropolis experienced an issue it could not resolve.\n The game will now exit and you can manually restart it. Provided you participate in the Microsoft Customer Experience Improvement Program, we will then be notified of the issue and do our very best to fix it.",
                     "Your citizens riot.");
 
-            dialog.ShowAsync();
-        }
+            await dialog.ShowAsync();
+    }
 
         /// <summary>
         ///     Wird aufgerufen, wenn die Anwendung durch den Endbenutzer normal gestartet wird.  Weitere Einstiegspunkte
