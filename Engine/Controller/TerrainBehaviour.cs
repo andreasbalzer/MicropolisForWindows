@@ -339,7 +339,7 @@ namespace Engine
 
             if (GetBoatDis() < 300/16 && PRNG.Next(8) == 0)
             {
-                if ((RawTile & 1) != 0)
+                if ((Tile & 1) != 0)
                 {
                     // vertical bridge
                     if (Xpos < City.GetWidth() - 1)
