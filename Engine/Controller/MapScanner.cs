@@ -1020,12 +1020,13 @@
 
             for (int y = 0; y < 4; y++)
             {
-                for (int x = 0; x < 4; x++, zoneBase++)
+                for (int x = 0; x < 4; x++)
                 {
-                    City.SetTile(Xpos - 1 + x, Ypos - 1 + y,
-                        (char) (zoneBase | (x == 1 && y == 1 ? (TileConstants.PWRBIT) : 0)));
+                    City.SetTile(Xpos - 1 + x, Ypos - 1 + y, (char) zoneBase);
+                    zoneBase++;
                 }
             }
+            City.SetTilePower(Xpos, Ypos, true);
         }
 
 

@@ -963,7 +963,7 @@ namespace Engine
         /// <param name="xpos">x-position</param>
         /// <param name="ypos">y-position</param>
         /// <param name="power">true, if power, otherwise false</param>
-        public void setTilePower(int xpos, int ypos, bool power) 
+        public void SetTilePower(int xpos, int ypos, bool power) 
      	{
             Map[ypos][xpos] = (char)(Map[ypos][xpos] & (~TileConstants.PWRBIT) | (power ? TileConstants.PWRBIT : 0)); 
      	} 
