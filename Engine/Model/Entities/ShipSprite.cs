@@ -13,6 +13,11 @@
 
 
     /// <summary>
+    /// Implements the cargo ship. 
+    /// The cargo ship is created if the city contains a sea port. 
+    /// It follows the river "channel" that was originally generated. 
+    /// It frequently turns around. 
+    ///
     ///     A ship travelling across rivers and the sea.
     /// </summary>
     public class ShipSprite : Sprite

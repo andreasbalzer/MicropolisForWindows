@@ -13,6 +13,11 @@
 
 
     /// <summary>
+    /// Implements the helicopter. 
+    /// The helicopter appears if the city contains an airport. 
+    /// It usually flies to the location in the city with the highest 
+    /// traffic density, but sometimes flies to other locations. 
+    ///
     ///     A helicopter flying across the map. It broadcasts news on high traffic areas, tornados and monsters. When it does
     ///     not have enough fuel to make it back to the airport, it will crash.
     /// </summary>

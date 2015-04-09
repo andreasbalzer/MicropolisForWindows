@@ -12,6 +12,11 @@
     // Project website: http://code.google.com/p/micropolis/
 
     /// <summary>
+    /// Implements the commuter train. 
+    /// The commuter train appears if the city has a certain amount of 
+    /// railroad track. It wanders around the city's available track 
+    /// randomly. 
+    ///  
     ///     A train offers transportation for citizens when shopping
     /// </summary>
     public class TrainSprite : Sprite

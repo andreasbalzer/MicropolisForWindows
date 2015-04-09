@@ -12,6 +12,7 @@
     // Project website: http://code.google.com/p/micropolis/
 
     /// <summary>
+    ///     Implements a tornado (one of the Micropolis disasters).
     ///     A tornado moved across land and destroys everything in its path. This is the graphical representation.
     /// </summary>
     public class TornadoSprite : Sprite

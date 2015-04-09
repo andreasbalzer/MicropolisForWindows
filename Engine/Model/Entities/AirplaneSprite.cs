@@ -14,7 +14,10 @@
     */
 
     /// <summary>
-    ///     Airplane flying across the map and taking off and landing at airports.
+    ///     Implements the airplane. 
+    ///     The airplane appears if the city contains an airport. 
+    ///     It first takes off, then flies around randomly, 
+    ///     occassionally crashing. 
     /// </summary>
     /// <remarks>
     ///     An airplane needs some fields on the east of an airport in order to take off.

@@ -15,6 +15,10 @@ namespace Engine
 
 
     /// <summary>
+    /// Represents a mobile entity on the city map, such as a tornado 
+    /// or a train. There can be any number present in a city, and each one 
+    /// gets a chance to act on every tick of the simulation. 
+    ///
     ///     A sprite is an object on the game map, e.g. a ship, airplane, residential zone.
     /// </summary>
     public abstract class Sprite

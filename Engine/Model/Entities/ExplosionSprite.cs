@@ -12,7 +12,9 @@
     // Project website: http://code.google.com/p/micropolis/
 
     /// <summary>
-    ///     Explosion causing a fire disaster.
+    ///     Implements an explosion. 
+    ///     An explosion occurs when certain sprites collide, 
+    ///     or when a zone is demolished by fire. 
     /// </summary>
     public class ExplosionSprite : Sprite
     {

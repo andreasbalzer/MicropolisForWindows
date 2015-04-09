@@ -12,6 +12,7 @@
     // Project website: http://code.google.com/p/micropolis/
 
     /// <summary>
+    ///     Implements a monster (one of the Micropolis disasters).
     ///     A monster walking over the map, destroying everything in its path. It either originates from water or from the
     ///     middle of the map.
     /// </summary>
