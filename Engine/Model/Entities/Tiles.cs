@@ -21,6 +21,7 @@ namespace Engine
     // Project website: http://code.google.com/p/micropolis/
 
     /// <summary>
+    ///     Provides global methods for loading tile specifications.
     ///     Specified tiles available in the game
     /// </summary>
     public class Tiles
@@ -103,10 +104,10 @@ namespace Engine
         }
 
         /// <summary>
-        ///     Gets the specified tile number.
+        ///     Gets the specified tile specification by index number.
         /// </summary>
         /// <param name="tileNumber">The tile number.</param>
-        /// <returns>the tile spec</returns>
+        /// <returns>a tile specification, or null if there is no tile with the given number</returns>
         public static TileSpec Get(int tileNumber)
         {
             if (_tiles == null)
