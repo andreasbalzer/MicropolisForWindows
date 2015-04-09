@@ -121,10 +121,8 @@ namespace Micropolis
         {
             if (ApplicationData.Current.RoamingSettings.Values.ContainsKey("Version"))
             {
-                double versionStored = 0;
-                bool isVersion100 =
-                    Double.TryParse(ApplicationData.Current.RoamingSettings.Values["Version"].ToString(),
-                        out versionStored) && versionStored == 1.00;
+                string versionStored = ApplicationData.Current.RoamingSettings.Values["Version"].ToString();
+                bool isVersion100 = versionStored == "1.00";
                 if (isVersion100)
                 {
                     AppCommands.Add(new AppCommand(Micropolis.Model.Entities.AppCommands.UPDATEDVERSION,"informAboutTelemetry"));
