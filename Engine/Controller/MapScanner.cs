@@ -763,7 +763,6 @@
             if (z > 128)
                 return;
 
-            Tile = RawTile & TileConstants.LOMASK;
             if (Tile == TileConstants.RESCLR)
             {
                 if (pop < 8)
