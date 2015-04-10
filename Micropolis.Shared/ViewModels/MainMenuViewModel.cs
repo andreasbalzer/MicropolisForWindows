@@ -16,6 +16,7 @@ namespace Micropolis.ViewModels
     public class MainMenuViewModel : BindableBase
     {
         private readonly BitmapImage _blackHeader;
+        private readonly TelemetryClient _telemetry;
         private readonly BitmapImage _whiteHeader;
         private string _citiesHubSectionHeaderText;
         private string _citiesHubSectionNarrowHeaderText;
@@ -24,6 +25,7 @@ namespace Micropolis.ViewModels
         private string _loadGameButtonText;
         private bool _loadUnsavedGameButtonIsVisible;
         private DelegateCommand _loadUnsavedGameCommand;
+        private string _newCityDialogHeaderText;
         private DelegateCommand _newGameCommand;
         private string _startNewGameButtonText;
         private IStorageItem _unsavedFileExists;
@@ -31,14 +33,16 @@ namespace Micropolis.ViewModels
         private string _unsavedGameButtonWideText;
         private string _unsavedGameMessageText;
         private string _unsavedGameMessageWideText;
-        private TelemetryClient _telemetry;
 
         public MainMenuViewModel()
         {
-            try { 
-            _telemetry = new TelemetryClient();
+            try
+            {
+                _telemetry = new TelemetryClient();
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
 
             Cities = new ObservableCollection<City>();
 
@@ -48,6 +52,7 @@ namespace Micropolis.ViewModels
             GeneralHubSectionHeaderText = Strings.GetString("GeneralHubSection");
             LoadGameButtonText = Strings.GetString("LoadGameButton");
             StartNewGameButtonText = Strings.GetString("StartNewGameButton");
+            NewCityDialogHeaderText = Strings.GetString("NewCityDialogHeaderText");
 
             LoadUnsavedGameCommand = new DelegateCommand(LoadUnsavedGame);
             NewGameCommand = new DelegateCommand(NewGame);
@@ -59,6 +64,12 @@ namespace Micropolis.ViewModels
             _blackHeader = new BitmapImage(blackLogoUri);
             var whiteLogoUri = new Uri("ms-appx:///Assets/Logo/LogoWhite800.png", UriKind.RelativeOrAbsolute);
             _whiteHeader = new BitmapImage(whiteLogoUri);
+        }
+
+        public string NewCityDialogHeaderText
+        {
+            get { return _newCityDialogHeaderText; }
+            set { SetProperty(ref _newCityDialogHeaderText, value); }
         }
 
         public DelegateCommand LoadUnsavedGameCommand
@@ -123,8 +134,25 @@ namespace Micropolis.ViewModels
 
         public ObservableCollection<City> Cities { get; set; }
 
-        private void MainMenuPage_Loaded(object sender, RoutedEventArgs e)
+        public void RegisterNewCityDialogViewModel(NewCityDialogViewModel newCityDialogViewModel)
         {
+            newCityDialogViewModel.PlayClicked += newCityDialogViewModel_PlayClicked;
+        }
+
+        private void newCityDialogViewModel_PlayClicked(object sender, Tuple<Engine.Micropolis, IStorageFile, int> e)
+        {
+            try
+            {
+                _telemetry.TrackEvent("MainMenuThisMapClicked");
+            }
+            catch (Exception)
+            {
+            }
+
+            ((ISupportsAppCommands) Application.Current).AppCommands.Add(
+                new AppCommand(AppCommands.LOADFILEASNEWCITYANDDELETE,
+                    e));
+            App.MainMenuReference.Frame.Navigate(typeof (MainGamePage));
         }
 
         /// <summary>
@@ -148,10 +176,13 @@ namespace Micropolis.ViewModels
             if (_unsavedFileExists != null)
 #endif
             {
-                try { 
-                _telemetry.TrackEvent("MainMenuUnsavedGameDetected");
+                try
+                {
+                    _telemetry.TrackEvent("MainMenuUnsavedGameDetected");
                 }
-                catch (Exception) { }
+                catch (Exception)
+                {
+                }
 
                 LoadUnsavedGameButtonIsVisible = true;
             }
@@ -162,10 +193,13 @@ namespace Micropolis.ViewModels
         /// </summary>
         private void NewGame()
         {
-            try { 
-            _telemetry.TrackEvent("MainMenuLoadNewGameClicked");
+            try
+            {
+                _telemetry.TrackEvent("MainMenuLoadNewGameClicked");
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
 
             App.MainMenuReference.Frame.Navigate(typeof (MainGamePage));
         }
@@ -176,13 +210,17 @@ namespace Micropolis.ViewModels
         /// </summary>
         private void LoadUnsavedGame()
         {
-            try { 
-            _telemetry.TrackEvent("MainMenuLoadUnsavedGameClicked");
+            try
+            {
+                _telemetry.TrackEvent("MainMenuLoadUnsavedGameClicked");
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
 
-            ((ISupportsAppCommands) Application.Current).AppCommands.Add(new AppCommand(AppCommands.LOADFILEASNEWCITYANDDELETE,
-                _unsavedFileExists));
+            ((ISupportsAppCommands) Application.Current).AppCommands.Add(
+                new AppCommand(AppCommands.LOADFILEASNEWCITYANDDELETE,
+                    _unsavedFileExists));
             App.MainMenuReference.Frame.Navigate(typeof (MainGamePage));
         }
 
@@ -227,10 +265,13 @@ namespace Micropolis.ViewModels
 
         public async Task LoadGameFile(string title)
         {
-            try { 
-            _telemetry.TrackEvent("MainMenuLoadGameFile"+title);
+            try
+            {
+                _telemetry.TrackEvent("MainMenuLoadGameFile" + title);
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
 
             var path = new Uri("ms-appx:///resources/cities/" + title, UriKind.Absolute);
             var file = await StorageFile.GetFileFromApplicationUriAsync(path);

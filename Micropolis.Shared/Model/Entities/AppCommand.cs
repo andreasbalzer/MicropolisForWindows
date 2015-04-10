@@ -1,4 +1,5 @@
-﻿using Windows.Storage;
+﻿using System;
+using Windows.Storage;
 
 namespace Micropolis.Model.Entities
 {
@@ -36,6 +37,16 @@ namespace Micropolis.Model.Entities
         {
             Instruction = instruction;
             Value = value;
+            Difficulty = -1;
+            File = null;
+        }
+
+        public AppCommand(AppCommands instruction, Tuple<Engine.Micropolis, IStorageFile, int> gameSpecification)
+        {
+            Instruction = instruction;
+            Engine = gameSpecification.Item1;
+            File = gameSpecification.Item2;
+            Difficulty = gameSpecification.Item3;
         }
 
         /// <summary>
@@ -47,6 +58,8 @@ namespace Micropolis.Model.Entities
         {
             Instruction = instruction;
             File = file;
+            Difficulty = -1;
+            Engine = null;
         }
 
         /// <summary>
@@ -63,5 +76,15 @@ namespace Micropolis.Model.Entities
         /// The file to execute on.
         /// </summary>
         public IStorageItem File { get; set; }
+
+        /// <summary>
+        /// Difficulty of game to start
+        /// </summary>
+        public int Difficulty { get; set; }
+
+        /// <summary>
+        /// Engine to start
+        /// </summary>
+        public Engine.Micropolis Engine { get; set; }
     }
 }

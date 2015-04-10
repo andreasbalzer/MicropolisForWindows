@@ -52,7 +52,7 @@ namespace Micropolis.Screens
 
            _viewModel = new MainMenuViewModel();
            this.DataContext = _viewModel;
-           App.MainMenuReference = this;
+            App.MainMenuReference = this;
                      
             Window.Current.SizeChanged += Window_SizeChanged;
             DetermineVisualState();
@@ -138,6 +138,11 @@ namespace Micropolis.Screens
             catch (Exception) { }
 
             _viewModel.LoadGameFile(title);
+        }
+
+        private void NewCityDialogPane_OnLoaded(object sender, RoutedEventArgs e)
+        {
+            _viewModel.RegisterNewCityDialogViewModel(((NewCityDialog) sender).ViewModel);
         }
     }
 }

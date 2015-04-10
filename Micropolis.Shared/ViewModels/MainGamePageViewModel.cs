@@ -1089,24 +1089,60 @@ namespace Micropolis.ViewModels
 
             if (loadCity)
             {
-                var file = (StorageFile) loadCityCommand.File;
-                currentApp.AppCommands.Remove(loadCityCommand);
+                if (loadCityCommand.File != null)
+                {
+                    var file = (StorageFile) loadCityCommand.File;
+                    currentApp.AppCommands.Remove(loadCityCommand);
 
-                LoadGameFile(file);
+                    LoadGameFile(file);
+                }
+                else if (loadCityCommand.Engine != null)
+                {
+                    SetEngine(loadCityCommand.Engine);
+                }
+                if (loadCityCommand.Difficulty != -1)
+                {
+                    OnDifficultyClicked(loadCityCommand.Difficulty);
+                }
+ 
             }
             else if (loadCityAsNew)
             {
-                var file = (StorageFile) loadCityAsNewCommand.File;
-                currentApp.AppCommands.Remove(loadCityAsNewCommand);
+                if (loadCityAsNewCommand.File != null)
+                {
+                    var file = (StorageFile)loadCityAsNewCommand.File;
+                    currentApp.AppCommands.Remove(loadCityAsNewCommand);
 
-                LoadGameFile(file, false, false);
+                    LoadGameFile(file, false, false);
+                }
+                else if (loadCityAsNewCommand.Engine != null)
+                {
+                    SetEngine(loadCityAsNewCommand.Engine);
+                }
+                if (loadCityAsNewCommand.Difficulty != -1)
+                {
+                    OnDifficultyClicked(loadCityAsNewCommand.Difficulty);
+                }
+
             }
             else if (loadCityAsNewAndDelete)
             {
-                var file = (StorageFile)loadCityAsNewAndDelteCommand.File;
-                currentApp.AppCommands.Remove(loadCityAsNewAndDelteCommand);
+                if (loadCityAsNewAndDelteCommand.File != null)
+                {
+                    var file = (StorageFile)loadCityAsNewAndDelteCommand.File;
+                    currentApp.AppCommands.Remove(loadCityAsNewAndDelteCommand);
 
-                LoadGameFile(file, true, false);
+                    LoadGameFile(file, true, false);
+                }
+                else if (loadCityAsNewAndDelteCommand.Engine != null)
+                {
+                    SetEngine(loadCityAsNewAndDelteCommand.Engine);
+                }
+                if (loadCityAsNewAndDelteCommand.Difficulty != -1)
+                {
+                    OnDifficultyClicked(loadCityAsNewAndDelteCommand.Difficulty);
+                }
+
             }
             else if (_firstRun)
             {
