@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Windows.Storage;
 using Windows.System;
 using Micropolis.Common;
 using Microsoft.ApplicationInsights;
@@ -12,27 +11,27 @@ namespace Micropolis.ViewModels
         private readonly TelemetryClient _telemetry;
         private readonly string DONEFEEDBACK = "disabled";
         private readonly string INITIALTIMEUNTILFEEDBACK = "5";
-        private readonly string POSTPONETIMEUNTILFEEDBACK = "20";
-        private readonly string SHOWFEEDBACK = "0";
+        private readonly string POSTPONETIMEUNTILFEEDBACK = "10";
+        private readonly string SHOWFEEDBACK = "1";
         private bool _feedbackIsVisible;
+        private string _feedbackMessageText;
+        private string _rateText;
         private string _sendFeedbackText;
-        private bool _sorryMessageIsVisible;
-        private string _sorryMessageText;
 
         public ReviewBarViewModel()
         {
-            try { 
-            _telemetry = new TelemetryClient();
+            try
+            {
+                _telemetry = new TelemetryClient();
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
 
             SendFeedbackText = Strings.GetString("feedback.sendFeedbackText");
-            SorryMessageText = Strings.GetString("feedback.sorryMessageText");
-            Star1Command = new DelegateCommand(ShowFeedback);
-            Star2Command = new DelegateCommand(ShowFeedback);
-            Star3Command = new DelegateCommand(ShowFeedback);
-            Star4Command = new DelegateCommand(OpenStoreRatingPage);
-            Star5Command = new DelegateCommand(OpenStoreRatingPage);
+            RateText = Strings.GetString("feedback.rateText");
+            FeedbackMessageText = Strings.GetString("feedback.feedbackMessageText");
+            RateCommand = new DelegateCommand(OpenStoreRatingPage);
             SendFeedbackCommand = new DelegateCommand(SendFeedback);
             CheckForPreviousFeedback();
         }
@@ -51,48 +50,41 @@ namespace Micropolis.ViewModels
                 SetProperty(ref _feedbackIsVisible, value);
                 if (value)
                 {
-                    try { 
-                    _telemetry.TrackEvent("ReviewShowReviewBar");
+                    try
+                    {
+                        _telemetry.TrackEvent("ReviewShowReviewBar");
                     }
-                    catch (Exception) { }
+                    catch (Exception)
+                    {
+                    }
                 }
             }
         }
 
-        public string SorryMessageText
+        public string RateText
         {
-            get { return _sorryMessageText; }
-            set { SetProperty(ref _sorryMessageText, value); }
+            get { return _rateText; }
+            set { SetProperty(ref _rateText, value); }
         }
 
-        public bool SorryMessageIsVisible
+        public string FeedbackMessageText
         {
-            get { return _sorryMessageIsVisible; }
-            set { SetProperty(ref _sorryMessageIsVisible, value); }
+            get { return _feedbackMessageText; }
+            set { SetProperty(ref _feedbackMessageText, value); }
         }
 
-        public DelegateCommand Star1Command { get; private set; }
-        public DelegateCommand Star2Command { get; private set; }
-        public DelegateCommand Star3Command { get; private set; }
-        public DelegateCommand Star4Command { get; private set; }
-        public DelegateCommand Star5Command { get; private set; }
+        public DelegateCommand RateCommand { get; private set; }
         public DelegateCommand SendFeedbackCommand { get; private set; }
-
-        private void ShowFeedback()
-        {
-            SorryMessageIsVisible = true;
-            try { 
-            _telemetry.TrackEvent("ReviewShowFeedbackWithSorryMessage");
-            }
-            catch (Exception) { }
-        }
 
         private void OpenStoreRatingPage()
         {
-            try { 
-            _telemetry.TrackEvent("ReviewOpenRatingPage");
+            try
+            {
+                _telemetry.TrackEvent("ReviewOpenRatingPage");
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
 
             Launcher.LaunchUriAsync(
                 new Uri("ms-windows-store:review?PFN=62155AndreasBalzer.MicropolisforWindows_rqaffv28461by",
@@ -102,37 +94,26 @@ namespace Micropolis.ViewModels
 
         private void SendFeedback()
         {
-            try { 
-            _telemetry.TrackEvent("ReviewSendFeedback");
+            try
+            {
+                _telemetry.TrackEvent("ReviewSendFeedback");
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
 
             var feedbackTitle = Strings.GetString("feedback.title");
             var feedbackBody = Strings.GetString("feedback.body");
             Launcher.LaunchUriAsync(
                 new Uri("mailto:micropolis@andreas-balzer.de?subject=" + feedbackTitle + "&body=" + feedbackBody,
                     UriKind.Absolute));
-            Postpone();
+            Disable();
         }
 
         private async Task CheckForPreviousFeedback()
         {
-            var folder = ApplicationData.Current.RoamingFolder;
-
-#if WINDOWS_PHONE_APP
-            try
-            {
-                var previousFeedbackFile = await folder.GetFileAsync("feedbackSent.txt");
-                ShowFeedbackOrDecrementCounter();
-            }
-            catch {
-                FeedbackIsVisible = false;
-                CreateFeedbackSetting();
-            }
-#else
-
-            var fileExists = Prefs.ContainsKey("feedbackSent");
-            if (!fileExists)
+            var feedbackSent = Prefs.ContainsKey("feedbackSent");
+            if (!feedbackSent)
             {
                 FeedbackIsVisible = false;
                 CreateFeedbackSetting();
@@ -141,7 +122,6 @@ namespace Micropolis.ViewModels
             {
                 ShowFeedbackOrDecrementCounter();
             }
-#endif
         }
 
         private async Task CreateFeedbackSetting()
@@ -154,9 +134,10 @@ namespace Micropolis.ViewModels
             bool showFeedback;
             var content = Prefs.GetString("feedbackSent", INITIALTIMEUNTILFEEDBACK);
             showFeedback = content == SHOWFEEDBACK;
-            if (showFeedback && false)
+            if (showFeedback)
             {
                 FeedbackIsVisible = true;
+                Postpone();
             }
             else
             {

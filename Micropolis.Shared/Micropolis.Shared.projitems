@@ -196,10 +196,11 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\SmallLogo.scale-240.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\SplashScreen.scale-100.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\SplashScreen.scale-240.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Square310x310Logo.scale-100.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Square71x71Logo.scale-240.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\StoreLogo.scale-100.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\StoreLogo.scale-240.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\WideLogo.scale-240.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\WideLogo.scale-100.png" />
     <Content Include="$(MSBuildThisFileDirectory)FILE_FORMAT.txt" />
     <Content Include="$(MSBuildThisFileDirectory)graphics\airport.png" />
     <Content Include="$(MSBuildThisFileDirectory)graphics\airport_3x3.png" />

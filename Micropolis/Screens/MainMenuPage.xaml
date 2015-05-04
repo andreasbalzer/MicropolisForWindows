@@ -572,7 +572,7 @@
                     </DataTemplate>
                 </HubSection.ContentTemplate>
             </HubSection>
-            <HubSection x:Name="NewCityPanel" VerticalContentAlignment="Stretch">
+            <!--<HubSection x:Name="NewCityPanel" VerticalContentAlignment="Stretch">
                 <HubSection.Header>
                     <TextBlock x:Uid="CitiesHeader" x:Name="NewCityHubSectionWideHeader" TextLineBounds="TrimToBaseline"
                                OpticalMarginAlignment="TrimSideBearings" Text="{Binding NewCityDialogHeaderText}"
@@ -582,7 +582,7 @@
                         <micropolis:NewCityDialog x:Name="NewCityDialogPane" Loaded="NewCityDialogPane_OnLoaded" />
                     </DataTemplate>
                 </HubSection.ContentTemplate>
-            </HubSection>
+            </HubSection>-->
             <HubSection x:Name="CityPanelWide" VerticalContentAlignment="Stretch">
                 <HubSection.Header>
                     <TextBlock x:Uid="CitiesHeader" x:Name="CitiesHubSectionWideHeader" TextLineBounds="TrimToBaseline"
