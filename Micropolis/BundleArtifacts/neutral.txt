@@ -1,5 +1,5 @@
-MainPackage=C:\micro\micropolis RT\dev\Micropolis\Micropolis\bin\Release\Micropolis_1.1.0.16_Bundle\Micropolis_1.1.0.16_AnyCPU.appx
-SymbolPackage=C:\micro\micropolis RT\dev\Micropolis\Micropolis\AppPackages\Micropolis_1.1.0.16_Test\Micropolis_1.1.0.16_AnyCPU.appxsym
-ResourcePack=C:\micro\micropolis RT\dev\Micropolis\Micropolis\bin\Release\Micropolis_1.1.0.16_Bundle\Micropolis_1.1.0.16_language-en.appx
-ResourcePack=C:\micro\micropolis RT\dev\Micropolis\Micropolis\bin\Release\Micropolis_1.1.0.16_Bundle\Micropolis_1.1.0.16_scale-140.appx
-ResourcePack=C:\micro\micropolis RT\dev\Micropolis\Micropolis\bin\Release\Micropolis_1.1.0.16_Bundle\Micropolis_1.1.0.16_scale-180.appx
+MainPackage=C:\Repos\Micro\Micropolis\bin\Release\Micropolis_1.1.0.22_Bundle\Micropolis_1.1.0.22_AnyCPU.appx
+SymbolPackage=C:\Repos\Micro\Micropolis\AppPackages\Micropolis_1.1.0.22_Test\Micropolis_1.1.0.22_AnyCPU.appxsym
+ResourcePack=C:\Repos\Micro\Micropolis\bin\Release\Micropolis_1.1.0.22_Bundle\Micropolis_1.1.0.22_language-en.appx
+ResourcePack=C:\Repos\Micro\Micropolis\bin\Release\Micropolis_1.1.0.22_Bundle\Micropolis_1.1.0.22_scale-140.appx
+ResourcePack=C:\Repos\Micro\Micropolis\bin\Release\Micropolis_1.1.0.22_Bundle\Micropolis_1.1.0.22_scale-180.appx

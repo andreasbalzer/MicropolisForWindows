@@ -47,8 +47,6 @@ namespace Micropolis
             Suspending += OnSuspending;
             UnhandledException += App_UnhandledException;
             Resuming += App_Resuming;
-
-            HideSystemTray();
         }
 
         private async Task HideSystemTray()
@@ -137,6 +135,8 @@ namespace Micropolis
                 DebugSettings.EnableFrameRateCounter = true;
             }
 #endif
+
+            HideSystemTray();
 
             rootFrame = Window.Current.Content as Frame;
 
