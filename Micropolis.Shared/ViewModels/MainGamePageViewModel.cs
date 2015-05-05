@@ -1060,9 +1060,13 @@ namespace Micropolis.ViewModels
 
         public void MainGamePage_VisualStateChanged(object sender, VisualStateEventInformation e)
         {
+#if WINDOWS_PHONE_APP
+            _toolsPanelViewModel.Mode = ToolBarMode.WIDE;
+#else
             _toolsPanelViewModel.Mode = (e.State == "Snapped" || e.State == "Narrow")
                 ? ToolBarMode.FLYOUT
                 : ToolBarMode.NORMAL;
+#endif
         }
 
         /// <summary>
