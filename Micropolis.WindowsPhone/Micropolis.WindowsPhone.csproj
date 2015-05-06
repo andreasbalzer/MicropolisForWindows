@@ -104,6 +104,8 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controller\Notifier.cs" />
+    <Compile Include="Controller\NotifierTask.cs" />
     <Compile Include="MainGamePage.xaml.cs">
       <DependentUpon>MainGamePage.xaml</DependentUpon>
     </Compile>

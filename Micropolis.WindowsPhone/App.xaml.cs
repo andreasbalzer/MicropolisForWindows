@@ -12,6 +12,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
+using Micropolis.Controller;
 using Micropolis.Model.Entities;
 using Micropolis.Screens;
 using Microsoft.ApplicationInsights;
@@ -137,6 +138,8 @@ namespace Micropolis
 #endif
 
             HideSystemTray();
+
+            NotifierHelper.RegisterNotifier();
 
             rootFrame = Window.Current.Content as Frame;
 
