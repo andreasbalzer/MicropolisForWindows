@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Background;
@@ -35,9 +36,14 @@ namespace BackgroundTasks
             var toastElement = ((XmlElement)toastXml.SelectSingleNode("/toast"));
             toastElement.SetAttribute("launch", toastNavigationUriString);
 
+            // delete old toast
+            var history = typeof (ToastNotificationManager).GetRuntimeProperties().Single(x => x.Name == "History").GetValue(typeof (ToastNotificationManager));
+            history.GetType().GetRuntimeMethod("Remove", new[] {typeof (String)}).Invoke(history, new Object[] {"M1"});
+            
             // Create the toast notification based on the XML content you've specified.
             ToastNotification toast = new ToastNotification(toastXml);
-
+            toast.GetType().GetRuntimeProperties().Single(x => x.Name == "Tag").SetValue(toast, "M1");
+            
             // Send your toast notification.
             ToastNotificationManager.CreateToastNotifier().Show(toast);
         }
