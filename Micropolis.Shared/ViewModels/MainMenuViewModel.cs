@@ -1,8 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.Foundation;
+#if WINDOWS_PHONE_APP
+using Windows.Media.SpeechRecognition;
+#endif
 using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media;
@@ -33,6 +37,8 @@ namespace Micropolis.ViewModels
         private string _unsavedGameButtonWideText;
         private string _unsavedGameMessageText;
         private string _unsavedGameMessageWideText;
+        private string _speechOutputText;
+        private DelegateCommand _speechCommand;
 
         public MainMenuViewModel()
         {
@@ -64,6 +70,106 @@ namespace Micropolis.ViewModels
             _blackHeader = new BitmapImage(blackLogoUri);
             var whiteLogoUri = new Uri("ms-appx:///Assets/Logo/LogoWhite800.png", UriKind.RelativeOrAbsolute);
             _whiteHeader = new BitmapImage(whiteLogoUri);
+
+            SpeechOutputText = Strings.GetString("SpeechWhatCanIDo");
+
+#if WINDOWS_PHONE_APP
+            SpeechCommand = new DelegateCommand(RunSpeechRecognition);
+            
+            RunSpeechRecognition();
+#endif
+
+        }
+
+        #if WINDOWS_PHONE_APP
+        private void RunSpeechRecognition()
+        {
+            RunSpeechRecognitionAsync();
+        }
+
+        private async Task RunSpeechRecognitionAsync()
+        {
+            List<string> speechCommands = new List<string>();
+            speechCommands.Add("create new city");
+            speechCommands.Add("load city");
+            speechCommands.Add("start about");
+            speechCommands.Add("start badnews");
+            speechCommands.Add("start bruce");
+            speechCommands.Add("start deadwood");
+            speechCommands.Add("start finnigan");
+            speechCommands.Add("start freds");
+            speechCommands.Add("start haight");
+            speechCommands.Add("start happisle");
+            speechCommands.Add("start joffburg");
+            speechCommands.Add("start kamakura");
+            speechCommands.Add("start kobe");
+            speechCommands.Add("start kowloon");
+            speechCommands.Add("start kyoto");
+            speechCommands.Add("start linecity");
+            speechCommands.Add("start med_isle");
+            speechCommands.Add("start ndulls");
+            speechCommands.Add("start neatmap");
+            speechCommands.Add("start radial");
+            speechCommands.Add("start senri");
+            speechCommands.Add("start southpac");
+            speechCommands.Add("start splats");
+            speechCommands.Add("start wetcity");
+            speechCommands.Add("start yokohama");
+
+            SpeechRecognizer sr = new SpeechRecognizer();
+
+            //add dication grammar to the recognizer
+            SpeechRecognitionListConstraint topicConstraint =
+                new SpeechRecognitionListConstraint(speechCommands);
+
+            sr.Constraints.Add(topicConstraint);
+            await sr.CompileConstraintsAsync();
+
+            sr.UIOptions.AudiblePrompt = Strings.GetString("SpeechWhatCanIDo");
+            sr.UIOptions.ExampleText = Strings.GetString("SpeechCreateNewCity") + "\n"
+                                       + Strings.GetString("SpeechLoadCity") + "\n"
+                                       + Strings.GetString("SpeechStart") + " linecity"; 
+
+            SpeechRecognitionResult result = await sr.RecognizeWithUIAsync();
+            if (result.Confidence == SpeechRecognitionConfidence.High ||
+                result.Confidence == SpeechRecognitionConfidence.Medium)
+            {
+                SpeechOutputText = result.Text;
+                var lower = result.Text.ToLower();
+                if (lower == Strings.GetString("SpeechCreateNewCity").ToLower())
+                {
+                    NewGame();
+
+                }
+                else if (lower == Strings.GetString("SpeechLoadCity").ToLower())
+                {
+                    NewGame();
+                }
+                else if (lower.StartsWith(Strings.GetString("SpeechStart").ToLower()))
+                {
+                    var map = lower.Substring(Strings.GetString("SpeechStart").Length+1).Trim();
+                    foreach (var city in Cities)
+                    {
+                        var cityname = city.Title.Substring(0, city.Title.IndexOf(".cty")).ToLower().Trim();
+                        if (cityname == map)
+                        {
+                            LoadGameFile(city.Title);
+                            return;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                SpeechOutputText = Strings.GetString("SpeechDidNotGetYou");
+            }
+        }
+#endif
+
+        public string SpeechOutputText
+        {
+            get { return _speechOutputText; }
+            set { SetProperty(ref _speechOutputText, value); }
         }
 
         public string NewCityDialogHeaderText
@@ -76,6 +182,12 @@ namespace Micropolis.ViewModels
         {
             get { return _loadUnsavedGameCommand; }
             set { SetProperty(ref _loadUnsavedGameCommand, value); }
+        }
+
+        public DelegateCommand SpeechCommand
+        {
+            get { return _speechCommand; }
+            set { SetProperty(ref _speechCommand, value); }
         }
 
         public DelegateCommand NewGameCommand

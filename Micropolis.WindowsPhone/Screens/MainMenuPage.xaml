@@ -431,6 +431,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
 
@@ -610,5 +611,13 @@
                 </HubSection.ContentTemplate>
             </HubSection>
         </Hub>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Foreground="Black" Grid.Column="0" Text="{Binding SpeechOutputText}" />
+            <Button Grid.Column="1" Foreground="Black" Content="" FontFamily="Segoe UI Symbol" Command="{Binding SpeechCommand}" />
+        </Grid>
     </Grid>
 </Page>
