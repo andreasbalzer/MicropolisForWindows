@@ -92,6 +92,10 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <ProjectReference Include="..\BackgroundTasks\BackgroundTasks.csproj">
+      <Project>{375b5c22-81d6-4840-a5c3-f8311abfab67}</Project>
+      <Name>BackgroundTasks</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Engine\Engine.csproj">
       <Project>{0b1c00f0-5fb0-42c1-9f6c-f6ab8c172968}</Project>
       <Name>Engine</Name>
@@ -105,7 +109,6 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controller\Notifier.cs" />
-    <Compile Include="Controller\NotifierTask.cs" />
     <Compile Include="MainGamePage.xaml.cs">
       <DependentUpon>MainGamePage.xaml</DependentUpon>
     </Compile>

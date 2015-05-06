@@ -20,6 +20,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{CCAEEC
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackgroundTasks", "BackgroundTasks\BackgroundTasks.csproj", "{375B5C22-81D6-4840-A5C3-F8311ABFAB67}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Micropolis.Shared\Micropolis.Shared.projitems*{741f3547-6d94-42c4-abd8-a39b4cd1fd93}*SharedItemsImports = 4
@@ -91,6 +93,16 @@ Global
 		{0B1C00F0-5FB0-42C1-9F6C-F6AB8C172968}.Release|ARM.ActiveCfg = Release|Any CPU
 		{0B1C00F0-5FB0-42C1-9F6C-F6AB8C172968}.Release|x64.ActiveCfg = Release|Any CPU
 		{0B1C00F0-5FB0-42C1-9F6C-F6AB8C172968}.Release|x86.ActiveCfg = Release|Any CPU
+		{375B5C22-81D6-4840-A5C3-F8311ABFAB67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{375B5C22-81D6-4840-A5C3-F8311ABFAB67}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{375B5C22-81D6-4840-A5C3-F8311ABFAB67}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{375B5C22-81D6-4840-A5C3-F8311ABFAB67}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{375B5C22-81D6-4840-A5C3-F8311ABFAB67}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{375B5C22-81D6-4840-A5C3-F8311ABFAB67}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{375B5C22-81D6-4840-A5C3-F8311ABFAB67}.Release|Any CPU.Build.0 = Release|Any CPU
+		{375B5C22-81D6-4840-A5C3-F8311ABFAB67}.Release|ARM.ActiveCfg = Release|Any CPU
+		{375B5C22-81D6-4840-A5C3-F8311ABFAB67}.Release|x64.ActiveCfg = Release|Any CPU
+		{375B5C22-81D6-4840-A5C3-F8311ABFAB67}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -99,5 +111,6 @@ Global
 		{741F3547-6D94-42C4-ABD8-A39B4CD1FD93} = {AF4A8BB5-9A2C-4A07-9728-FB0C1C1D80BD}
 		{BB5D2B87-CE0C-4126-9BC3-3AFAD160CA90} = {AF4A8BB5-9A2C-4A07-9728-FB0C1C1D80BD}
 		{0CD40BCE-5884-45C2-8AA3-A86EE33696F1} = {AF4A8BB5-9A2C-4A07-9728-FB0C1C1D80BD}
+		{375B5C22-81D6-4840-A5C3-F8311ABFAB67} = {AF4A8BB5-9A2C-4A07-9728-FB0C1C1D80BD}
 	EndGlobalSection
 EndGlobal

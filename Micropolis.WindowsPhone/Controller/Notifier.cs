@@ -9,7 +9,9 @@ namespace Micropolis.Controller
 {
     public static class NotifierHelper
     {
-        private const string taskName = "Notifier Background Task";
+        private const string entryPoint = "BackgroundTasks.NotifierTask";
+        private const int minutesUntilToast = 1380; // 23 hours
+
         public static void RegisterNotifier()
         {
             UnregisterTask();
@@ -19,13 +21,13 @@ namespace Micropolis.Controller
 
         private static void RegisterNewTask()
         {
-            TimeTrigger trigger23hours = new TimeTrigger(30, true); //1380
+            TimeTrigger trigger23hours = new TimeTrigger(minutesUntilToast, true);
             BackgroundExecutionManager.RequestAccessAsync();
 
             var builder = new BackgroundTaskBuilder();
 
-            builder.Name = taskName;
-            builder.TaskEntryPoint = "Micropolis.Controller.NotifierTask";
+            builder.Name = Strings.GetString("NotifierMessage");
+            builder.TaskEntryPoint = entryPoint;
             builder.SetTrigger(trigger23hours);
             BackgroundTaskRegistration task = builder.Register();
         }
@@ -36,7 +38,7 @@ namespace Micropolis.Controller
 
             foreach (var curTask in BackgroundTaskRegistration.AllTasks)
             {
-                if (curTask.Value.Name == taskName)
+                if (curTask.Value.Name == Strings.GetString("NotifierMessage"))
                 {
                     curTask.Value.Unregister(true);
                     break;

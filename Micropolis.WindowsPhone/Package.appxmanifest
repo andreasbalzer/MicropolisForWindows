@@ -35,7 +35,7 @@
             </SupportedFileTypes>
           </FileTypeAssociation>
         </Extension>
-        <Extension Category="windows.backgroundTasks" EntryPoint="Micropolis.Controller.NotifierTask">
+        <Extension Category="windows.backgroundTasks" EntryPoint="BackgroundTasks.NotifierTask">
           <BackgroundTasks>
             <Task Type="timer" />
           </BackgroundTasks>

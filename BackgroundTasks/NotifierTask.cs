@@ -7,13 +7,13 @@ using Windows.ApplicationModel.Background;
 using Windows.Data.Xml.Dom;
 using Windows.UI.Notifications;
 
-namespace Micropolis.Controller
+namespace BackgroundTasks
 {
-    public class NotifierTask :IBackgroundTask
+    public sealed class NotifierTask :IBackgroundTask
     {
         public async void Run(IBackgroundTaskInstance taskInstance)
         {
-            ShowToastNotification("Play a bit more?");
+            ShowToastNotification(taskInstance.Task.Name);
         }
 
         private void ShowToastNotification(String message)

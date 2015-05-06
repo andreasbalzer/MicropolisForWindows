@@ -12,6 +12,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using Micropolis.Common;
+using Micropolis.Controller;
 using Micropolis.Model.Entities;
 using Microsoft.ApplicationInsights;
 
@@ -73,7 +74,7 @@ namespace Micropolis.ViewModels
 #if WINDOWS_PHONE_APP
             SpeechCommand = new DelegateCommand(RunSpeechRecognition);
             
-            RunSpeechRecognition();
+            NotifierHelper.RegisterNotifier();
 #endif
 
         }
