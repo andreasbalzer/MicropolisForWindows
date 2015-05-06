@@ -37,7 +37,6 @@ namespace Micropolis.ViewModels
         private string _unsavedGameButtonWideText;
         private string _unsavedGameMessageText;
         private string _unsavedGameMessageWideText;
-        private string _speechOutputText;
         private DelegateCommand _speechCommand;
 
         public MainMenuViewModel()
@@ -70,8 +69,6 @@ namespace Micropolis.ViewModels
             _blackHeader = new BitmapImage(blackLogoUri);
             var whiteLogoUri = new Uri("ms-appx:///Assets/Logo/LogoWhite800.png", UriKind.RelativeOrAbsolute);
             _whiteHeader = new BitmapImage(whiteLogoUri);
-
-            SpeechOutputText = Strings.GetString("SpeechWhatCanIDo");
 
 #if WINDOWS_PHONE_APP
             SpeechCommand = new DelegateCommand(RunSpeechRecognition);
@@ -134,7 +131,6 @@ namespace Micropolis.ViewModels
             if (result.Confidence == SpeechRecognitionConfidence.High ||
                 result.Confidence == SpeechRecognitionConfidence.Medium)
             {
-                SpeechOutputText = result.Text;
                 var lower = result.Text.ToLower();
                 if (lower == Strings.GetString("SpeechCreateNewCity").ToLower())
                 {
@@ -159,18 +155,8 @@ namespace Micropolis.ViewModels
                     }
                 }
             }
-            else
-            {
-                SpeechOutputText = Strings.GetString("SpeechDidNotGetYou");
-            }
         }
 #endif
-
-        public string SpeechOutputText
-        {
-            get { return _speechOutputText; }
-            set { SetProperty(ref _speechOutputText, value); }
-        }
 
         public string NewCityDialogHeaderText
         {
