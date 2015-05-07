@@ -230,7 +230,12 @@
                                        FontWeight="{StaticResource NormalFontWeight}"
                                        Foreground="{StaticResource NormalForeground}"
                                        Margin="{StaticResource NormalMargin}" x:Name="licenseP16">Some icons in the main game UI have been designed by Freepik and published in set "universal 05" with CC BY 3.0 license http://www.freepik.com/, downloaded from http://www.flaticon.com/packs/universal-05. The GNU GPL does not apply to these icons.</Paragraph>
-                        </RichTextBlock>
+                            <Paragraph TextAlignment="{StaticResource NormalTextAlignment}"
+                                       FontSize="{StaticResource NormalFontSize}"
+                                       FontWeight="{StaticResource NormalFontWeight}"
+                                       Foreground="{StaticResource NormalForeground}"
+                                       Margin="{StaticResource SectionHeaderMargin}" x:Name="licenseP17">Privacy statement online http://bit.ly/1F0XuPt.</Paragraph>
+                    </RichTextBlock>
                        
                 </StackPanel>
             </ScrollViewer>

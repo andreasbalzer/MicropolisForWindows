@@ -4,7 +4,7 @@
   <Properties>
     <DisplayName>Micropolis for Windows</DisplayName>
     <PublisherDisplayName>Andreas Balzer</PublisherDisplayName>
-    <Logo>Assets\StoreLogo.png</Logo>
+    <Logo>Assets\Logo.50.png</Logo>
   </Properties>
   <Prerequisites>
     <OSMinVersion>6.3.0</OSMinVersion>
@@ -15,15 +15,15 @@
   </Resources>
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="Micropolis.App">
-      <m2:VisualElements DisplayName="ms-resource:AppTitle" Square150x150Logo="Assets\Logo.png" Square30x30Logo="Assets\SmallLogo.png" Description="ms-resource:Description" ForegroundText="light" BackgroundColor="#464646" ToastCapable="false">
-        <m2:DefaultTile ShortName="Micropolis" Wide310x150Logo="Assets\WideLogo.png" Square310x310Logo="Assets\Square310x310Logo.png" DefaultSize="square150x150Logo">
+      <m2:VisualElements DisplayName="ms-resource:AppTitle" Square150x150Logo="Assets\Logo.150.png" Square30x30Logo="Assets\Logo.30.png" Description="ms-resource:Description" ForegroundText="light" BackgroundColor="#464646" ToastCapable="false">
+        <m2:DefaultTile ShortName="Micropolis" Wide310x150Logo="Assets\WideLogo.310.png" Square310x310Logo="Assets\Logo.310.png" DefaultSize="square150x150Logo" Square70x70Logo="Assets\Logo.70.png">
           <m2:ShowNameOnTiles>
             <m2:ShowOn Tile="square150x150Logo" />
             <m2:ShowOn Tile="wide310x150Logo" />
             <m2:ShowOn Tile="square310x310Logo" />
           </m2:ShowNameOnTiles>
         </m2:DefaultTile>
-        <m2:SplashScreen Image="Assets\SplashScreen.png" />
+        <m2:SplashScreen Image="Assets\SplashScreen.620.png" />
         <m2:InitialRotationPreference>
           <m2:Rotation Preference="portrait" />
           <m2:Rotation Preference="landscape" />
