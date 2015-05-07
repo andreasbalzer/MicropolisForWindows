@@ -8,6 +8,7 @@ using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Imaging;
+using Windows.UI.Xaml.Navigation;
 using Micropolis.Model.Entities;
 using Micropolis.ViewModels;
 
@@ -84,6 +85,15 @@ namespace Micropolis.Screens
             var textBlock = (TextBlock) ((StackPanel) ((Grid) button.Content).Children[1]).Children[0];
             var title = textBlock.Text;
             _viewModel.LoadGameFile(title);
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            if (this.Frame.BackStack.Count >= 3)
+            {
+                this.Frame.BackStack.RemoveAt(this.Frame.BackStack.Count - 2); // removes the page before this, e.g. landing page
+            }
         }
     }
 }
