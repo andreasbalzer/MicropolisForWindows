@@ -90,7 +90,7 @@ namespace Micropolis.Screens
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            if (this.Frame.BackStack.Count >= 3)
+            if (this.Frame.BackStack.Count >= 2)
             {
                 this.Frame.BackStack.RemoveAt(this.Frame.BackStack.Count - 2); // removes the page before this, e.g. landing page
             }

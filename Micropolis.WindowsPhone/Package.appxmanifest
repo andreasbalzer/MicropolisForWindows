@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest" xmlns:m3="http://schemas.microsoft.com/appx/2014/manifest" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest">
-  <Identity Name="62155AndreasBalzer.MicropolisforWindows" Publisher="CN=DF151369-BF2A-4390-919A-40CE0C57CC96" Version="1.1.0.2" />
+  <Identity Name="62155AndreasBalzer.MicropolisforWindows" Publisher="CN=DF151369-BF2A-4390-919A-40CE0C57CC96" Version="1.1.0.4" />
   <mp:PhoneIdentity PhoneProductId="191940ae-1d72-49de-bede-abf0e1156ff7" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>Micropolis for Windows</DisplayName>

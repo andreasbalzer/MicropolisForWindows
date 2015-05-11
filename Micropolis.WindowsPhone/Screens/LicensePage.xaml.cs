@@ -1,51 +1,46 @@
-﻿using Windows.Storage;
-using Windows.UI.Popups;
-using Windows.UI.Xaml.Documents;
-using Micropolis.Common;
-using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+using Windows.Storage;
+using Windows.System;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Documents;
 using Windows.UI.Xaml.Navigation;
-
-// Die Elementvorlage "Standardseite" ist unter http://go.microsoft.com/fwlink/?LinkId=234237 dokumentiert.
 using Micropolis.Model.Entities;
+// Die Elementvorlage "Standardseite" ist unter http://go.microsoft.com/fwlink/?LinkId=234237 dokumentiert.
 
 namespace Micropolis.Screens
 {
     /// <summary>
-    /// Eine Standardseite mit Eigenschaften, die die meisten Anwendungen aufweisen.
+    ///     Eine Standardseite mit Eigenschaften, die die meisten Anwendungen aufweisen.
     /// </summary>
     public sealed partial class LicensePage : Page
     {
-
-      
-
         public LicensePage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
             LicenseTextTB.Inlines.Clear();
-            LicenseTextTB.Inlines.Add(new Run(){Text=Strings.GetString("license.P1")});
+            LicenseTextTB.Inlines.Add(new Run {Text = Strings.GetString("license.P1")});
             B1.Content = Strings.GetString("license.B1");
             pageTitle.Text = Strings.GetString("license.Title");
         }
 
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
 
-      
+            if (Frame.BackStack.Count >= 2)
+            {
+                Frame.BackStack.RemoveAt(Frame.BackStack.Count - 2);
+                    // removes the page before this, e.g. main menu page
+            }
+        }
 
         private async void GnuGplButton_Clicked(object sender, RoutedEventArgs e)
         {
             // The URI to launch
-            string uriToLaunch = @"http://www.gnu.org/licenses";
+            var uriToLaunch = @"http://www.gnu.org/licenses";
 
             // Create a Uri object from a URI string 
             var uri = new Uri(uriToLaunch);
@@ -53,7 +48,7 @@ namespace Micropolis.Screens
             // Launch the URI
 
             // Launch the URI
-            var success = await Windows.System.Launcher.LaunchUriAsync(uri);
+            var success = await Launcher.LaunchUriAsync(uri);
 
             if (success)
             {
@@ -62,31 +57,29 @@ namespace Micropolis.Screens
             else
             {
                 // URI launch failed
-                MessageDialog dialog = new MessageDialog(Strings.GetString("license.InternetError"));
+                var dialog = new MessageDialog(Strings.GetString("license.InternetError"));
                 await dialog.ShowAsync();
             }
-
-
         }
 
         private async void B1_OnClick(object sender, RoutedEventArgs e)
         {
-            StorageFolder appFolder = ApplicationData.Current.LocalFolder;
+            var appFolder = ApplicationData.Current.LocalFolder;
             await appFolder.CreateFileAsync("licenseAccepted.txt",
                 CreationCollisionOption.ReplaceExisting);
 
-            ISupportsAppCommands current = (ISupportsAppCommands)App.Current;
-            AppCommand skipCommand = current.AppCommands.FirstOrDefault(s => s.Instruction == AppCommands.SKIPMENU);
+            var current = (ISupportsAppCommands) Application.Current;
+            var skipCommand = current.AppCommands.FirstOrDefault(s => s.Instruction == AppCommands.SKIPMENU);
 
-            bool skipMenu = skipCommand != null;
+            var skipMenu = skipCommand != null;
             if (skipMenu)
             {
                 current.AppCommands.Remove(skipCommand);
-                Frame.Navigate(typeof(MainGamePage));
+                Frame.Navigate(typeof (MainGamePage));
             }
             else
             {
-                Frame.Navigate(typeof(MainMenuPage));
+                Frame.Navigate(typeof (MainMenuPage));
             }
         }
     }
