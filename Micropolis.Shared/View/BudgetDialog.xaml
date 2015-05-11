@@ -75,17 +75,17 @@
                 <TextBlock x:Name="payedTbl" Text="{Binding PayedTextBlockText}"  Grid.Row="0" Grid.Column="3" HorizontalAlignment="Right" />
 
                 <TextBlock x:Name="trafficExpensesTbl" Text="{Binding TrafficExpensesTextBlockText}"  Grid.Row="1" Grid.Column="0" />
-                <Slider x:Name="roadFundEntry" Value="{Binding RoadFundEntry}" Grid.Row="1" Grid.Column="1" Minimum="0" Maximum="100" />
+                <Slider x:Name="roadFundEntry" Value="{Binding RoadFundEntry, Mode=TwoWay}" Grid.Row="1" Grid.Column="1" Minimum="0" Maximum="100" />
                 <TextBlock x:Name="roadFundRequest" Text="{Binding RoadFundRequest}"  Grid.Row="1" Grid.Column="2" HorizontalAlignment="Right" />
                 <TextBlock x:Name="roadFundAlloc" Text="{Binding RoadFundAlloc}"  Grid.Row="1" Grid.Column="3" HorizontalAlignment="Right" />
 
                 <TextBlock x:Name="policeExpensesTbl" Text="{Binding PoliceExpensesTextBlockText}"  Grid.Row="2" Grid.Column="0" />
-                <Slider x:Name="policeFundEntry" Value="{Binding PoliceFundEntry}" Grid.Row="2" Grid.Column="1" Minimum="0" Maximum="100" />
+                <Slider x:Name="policeFundEntry" Value="{Binding PoliceFundEntry, Mode=TwoWay}" Grid.Row="2" Grid.Column="1" Minimum="0" Maximum="100" />
                 <TextBlock x:Name="policeFundRequest" Text="{Binding PoliceFundRequest}"  Grid.Row="2" Grid.Column="2" HorizontalAlignment="Right" />
                 <TextBlock x:Name="policeFundAlloc" Text="{Binding PoliceFundAlloc}"  Grid.Row="2" Grid.Column="3" HorizontalAlignment="Right" />
 
                 <TextBlock x:Name="fireExpensesTbl" Text="{Binding FireExpensesTextBlockText}"  Grid.Row="3" Grid.Column="0" />
-                <Slider x:Name="fireFundEntry" Value="{Binding FireFundEntry}"  Grid.Row="3" Grid.Column="1" Minimum="0" Maximum="100"  />
+                <Slider x:Name="fireFundEntry" Value="{Binding FireFundEntry, Mode=TwoWay}"  Grid.Row="3" Grid.Column="1" Minimum="0" Maximum="100"  />
                 <TextBlock x:Name="fireFundRequest" Text="{Binding FireFundRequest}"  Grid.Row="3" Grid.Column="2" HorizontalAlignment="Right" />
                 <TextBlock x:Name="fireFundAlloc" Text="{Binding FireFundAlloc}"  Grid.Row="3" Grid.Column="3" HorizontalAlignment="Right" />
             </Grid>
