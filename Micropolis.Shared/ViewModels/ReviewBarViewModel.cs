@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Windows.System;
+using Windows.UI.Popups;
 using Micropolis.Common;
 using Microsoft.ApplicationInsights;
 
@@ -137,6 +138,32 @@ namespace Micropolis.ViewModels
             if (showFeedback)
             {
                 FeedbackIsVisible = true;
+#if WINDOWS_PHONE_APP
+#else
+                var dlg = new MessageDialog(FeedbackMessageText);
+                dlg.Commands.Add(new UICommand(RateText, null, "rate"));
+                dlg.Commands.Add(new UICommand(SendFeedbackText, null, "feedback"));
+                dlg.Commands.Add(new UICommand(Strings.GetString("feedback.cancel"), null, "cancel"));
+
+                var result = "";
+
+                try
+                {
+                    result = (string)(await dlg.ShowAsync()).Id;
+                    if (result == "rate")
+                    {
+                        OpenStoreRatingPage();
+                    }
+                    else if (result == "feedback")
+                    {
+                        SendFeedback();
+                    }
+                }
+                catch (Exception)
+                {
+                    //	this may happen if any other modal window is shown at the moment (ie, Windows query about running application background task)
+                }
+#endif
                 Postpone();
             }
             else
