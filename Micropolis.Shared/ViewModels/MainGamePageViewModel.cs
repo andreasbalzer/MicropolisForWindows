@@ -1040,7 +1040,7 @@ namespace Micropolis.ViewModels
                 //Bug: Add settings
 #else
                 // Register handler for CommandsRequested events from the settings pane
-                SettingsPane.GetForCurrentView().CommandsRequested += SettingsCharm.OnCommandsInGameRequested;
+                //Bug:SettingsPane.GetForCurrentView().CommandsRequested += SettingsCharm.OnCommandsInGameRequested;
 #endif
                 var engineExists = Engine != null;
                 // If we loaded another game via app commands, we already have an engine.

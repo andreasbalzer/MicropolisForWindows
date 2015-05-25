@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Package
+  xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
+  xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest"
+  xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+  IgnorableNamespaces="uap mp">
+
+  <Identity
+    Name="85e8d12f-2053-480f-a5e3-7f10da1fcd98"
+    Publisher="CN=Andreas"
+    Version="1.0.0.0" />
+
+  <mp:PhoneIdentity PhoneProductId="85e8d12f-2053-480f-a5e3-7f10da1fcd98" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+
+  <Properties>
+    <DisplayName>Micropolis.W10</DisplayName>
+    <PublisherDisplayName>Andreas</PublisherDisplayName>
+    <Logo>Assets\StoreLogo.png</Logo>
+  </Properties>
+
+  <Dependencies>
+    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.10069.0" MaxVersionTested="10.0.10069.0" />
+  </Dependencies>
+
+  <Resources>
+    <Resource Language="x-generate"/>
+  </Resources>
+
+  <Applications>
+    <Application Id="App"
+      Executable="$targetnametoken$.exe"
+      EntryPoint="Micropolis.App">
+      <uap:VisualElements
+        DisplayName="Micropolis.W10"
+        Square150x150Logo="Assets\Logo.150.png"
+        Square44x44Logo="Assets\SmallLogo.44.png"
+        Description="Micropolis.W10"
+        BackgroundColor="#464646">
+        <uap:SplashScreen Image="Assets\SplashScreen.480.png" />
+      </uap:VisualElements>
+    </Application>
+  </Applications>
+
+  <Capabilities>
+    <Capability Name="internetClient" />
+  </Capabilities>
+</Package>
