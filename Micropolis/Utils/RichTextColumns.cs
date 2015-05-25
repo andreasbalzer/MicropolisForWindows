@@ -10,6 +10,13 @@ using Windows.UI.Xaml.Documents;
 
 namespace Micropolis.Utils
 {
+    //// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF 
+    //// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO 
+    //// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A 
+    //// PARTICULAR PURPOSE. 
+    //// 
+    //// Copyright (c) Microsoft Corporation. All rights reserved     
+    ////
     /// <summary>
     /// Wrapper for <see cref="RichTextBlock"/> that creates as many additional overflow
     /// columns as needed to fit the available content.
