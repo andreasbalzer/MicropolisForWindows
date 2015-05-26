@@ -8,6 +8,7 @@ using Windows.Foundation;
 using Windows.Media.SpeechRecognition;
 #endif
 using Windows.Storage;
+using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
@@ -39,6 +40,7 @@ namespace Micropolis.ViewModels
         private string _unsavedGameMessageText;
         private string _unsavedGameMessageWideText;
         private DelegateCommand _speechCommand;
+        private DelegateCommand _feedbackCommand;
 
         public MainMenuViewModel()
         {
@@ -73,6 +75,7 @@ namespace Micropolis.ViewModels
 
 #if WINDOWS_PHONE_APP
             SpeechCommand = new DelegateCommand(RunSpeechRecognition);
+            FeedbackCommand = new DelegateCommand(RunFeedback);
             
             NotifierHelper.RegisterNotifier();
 #endif
@@ -83,6 +86,15 @@ namespace Micropolis.ViewModels
         private void RunSpeechRecognition()
         {
             RunSpeechRecognitionAsync();
+        }
+
+        private void RunFeedback()
+        {
+            var feedbackTitle = Strings.GetString("feedback.title");
+            var feedbackBody = Strings.GetString("feedback.body");
+            Launcher.LaunchUriAsync(
+                new Uri("mailto:micropolis@andreas-balzer.de?subject=" + feedbackTitle + "&body=" + feedbackBody,
+                    UriKind.Absolute));
         }
 
         private async Task RunSpeechRecognitionAsync()
@@ -175,6 +187,12 @@ namespace Micropolis.ViewModels
         {
             get { return _speechCommand; }
             set { SetProperty(ref _speechCommand, value); }
+        }
+
+        public DelegateCommand FeedbackCommand
+        {
+            get { return _feedbackCommand; }
+            set { SetProperty(ref _feedbackCommand, value); }
         }
 
         public DelegateCommand NewGameCommand

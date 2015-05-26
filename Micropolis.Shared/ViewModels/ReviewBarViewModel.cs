@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.Store;
 using Windows.System;
 using Windows.UI.Popups;
 using Micropolis.Common;
@@ -87,9 +88,13 @@ namespace Micropolis.ViewModels
             {
             }
 
+#if WINDOWS_PHONE_APP
+            Windows.System.Launcher.LaunchUriAsync(new Uri("ms-windows-store:reviewapp?appid=" + CurrentApp.AppId));
+#else
             Launcher.LaunchUriAsync(
                 new Uri("ms-windows-store:review?PFN=62155AndreasBalzer.MicropolisforWindows_rqaffv28461by",
                     UriKind.Absolute));
+#endif
             Disable();
         }
 
