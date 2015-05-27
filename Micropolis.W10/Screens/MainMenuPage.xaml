@@ -255,324 +255,247 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <!-- http://igrali.com/2015/04/12/getting-started-with-splitview-control-in-universal-apps/-->
+        <SolidColorBrush x:Key="NavButtonPressedBackgroundBrush" Color="White" Opacity="0.3" />
+        <SolidColorBrush x:Key="NavButtonCheckedBackgroundBrush" Color="White" Opacity="0.2" />
+        <SolidColorBrush x:Key="NavButtonHoverBackgroundBrush" Color="White" Opacity="0.1" />
+
+        <Style x:Key="NavRadioButtonStyle" TargetType="RadioButton">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Padding" Value="3"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RadioButton">
+                        <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Height="38">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal"/>
+                                    <VisualState x:Name="PointerOver">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="BackgroundGrid">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource NavButtonHoverBackgroundBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Pressed">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="BackgroundGrid">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource NavButtonPressedBackgroundBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Disabled" />
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="CheckStates">
+                                    <VisualState x:Name="Checked">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="BackgroundGrid">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource NavButtonCheckedBackgroundBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Unchecked"/>
+                                    <VisualState x:Name="Indeterminate"/>
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="FocusStates">
+                                    <VisualState x:Name="Focused"/>
+                                    <VisualState x:Name="Unfocused"/>
+                                    <VisualState x:Name="PointerFocused"/>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Grid Name="BackgroundGrid" Background="Transparent" VerticalAlignment="Stretch">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="48"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock FontSize="20" Height="20" Text="{TemplateBinding Tag}" FontFamily="Segoe MDL2 Assets" Margin="5,8,5,5" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                <ContentPresenter x:Name="ContentPresenter" AutomationProperties.AccessibilityView="Raw" ContentTemplate="{TemplateBinding ContentTemplate}" ContentTransitions="{TemplateBinding ContentTransitions}" Content="{TemplateBinding Content}" Grid.Column="1" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" TextWrapping="Wrap" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Page.Resources>
 
-    <Grid Background="#FFEDEDE9">
-        <VisualStateManager.VisualStateGroups>
-            <!-- Visual states reflect the application's window size -->
-            <VisualStateGroup>
-                <VisualState x:Name="DefaultLayout">
-                    <Storyboard>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                       Storyboard.TargetName="UnsavedGameMessageWide">
-                            <DiscreteObjectKeyFrame KeyTime="0">
-                                <DiscreteObjectKeyFrame.Value>
-                                    <Visibility>Visible</Visibility>
-                                </DiscreteObjectKeyFrame.Value>
-                            </DiscreteObjectKeyFrame>
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                       Storyboard.TargetName="UnsavedGameButtonWide">
-                            <DiscreteObjectKeyFrame KeyTime="0">
-                                <DiscreteObjectKeyFrame.Value>
-                                    <Visibility>Visible</Visibility>
-                                </DiscreteObjectKeyFrame.Value>
-                            </DiscreteObjectKeyFrame>
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                       Storyboard.TargetName="MessageContainerNarrow">
-                            <DiscreteObjectKeyFrame KeyTime="0">
-                                <DiscreteObjectKeyFrame.Value>
-                                    <Visibility>Collapsed</Visibility>
-                                </DiscreteObjectKeyFrame.Value>
-                            </DiscreteObjectKeyFrame>
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Orientation"
-                                                       Storyboard.TargetName="MainMenuHub">
-                            <DiscreteObjectKeyFrame KeyTime="0">
-                                <DiscreteObjectKeyFrame.Value>
-                                    <Orientation>Horizontal</Orientation>
-                                </DiscreteObjectKeyFrame.Value>
-                            </DiscreteObjectKeyFrame>
-                        </ObjectAnimationUsingKeyFrames>
-
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                       Storyboard.TargetName="CityPanelNarrow">
-                            <DiscreteObjectKeyFrame KeyTime="0">
-                                <DiscreteObjectKeyFrame.Value>
-                                    <Visibility>Collapsed</Visibility>
-                                </DiscreteObjectKeyFrame.Value>
-                            </DiscreteObjectKeyFrame>
-                        </ObjectAnimationUsingKeyFrames>
-
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                       Storyboard.TargetName="CityPanelWide">
-                            <DiscreteObjectKeyFrame KeyTime="0">
-                                <DiscreteObjectKeyFrame.Value>
-                                    <Visibility>Visible</Visibility>
-                                </DiscreteObjectKeyFrame.Value>
-                            </DiscreteObjectKeyFrame>
-                        </ObjectAnimationUsingKeyFrames>
-                    </Storyboard>
-                </VisualState>
-
-                <VisualState x:Name="Snapped">
-                    <Storyboard>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                       Storyboard.TargetName="UnsavedGameMessageWide">
-                            <DiscreteObjectKeyFrame KeyTime="0">
-                                <DiscreteObjectKeyFrame.Value>
-                                    <Visibility>Collapsed</Visibility>
-                                </DiscreteObjectKeyFrame.Value>
-                            </DiscreteObjectKeyFrame>
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                       Storyboard.TargetName="UnsavedGameButtonWide">
-                            <DiscreteObjectKeyFrame KeyTime="0">
-                                <DiscreteObjectKeyFrame.Value>
-                                    <Visibility>Collapsed</Visibility>
-                                </DiscreteObjectKeyFrame.Value>
-                            </DiscreteObjectKeyFrame>
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                       Storyboard.TargetName="MessageContainerNarrow">
-                            <DiscreteObjectKeyFrame KeyTime="0">
-                                <DiscreteObjectKeyFrame.Value>
-                                    <Visibility>Visible</Visibility>
-                                </DiscreteObjectKeyFrame.Value>
-                            </DiscreteObjectKeyFrame>
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Orientation"
-                                                       Storyboard.TargetName="MainMenuHub">
-                            <DiscreteObjectKeyFrame KeyTime="0">
-                                <DiscreteObjectKeyFrame.Value>
-                                    <Orientation>Vertical</Orientation>
-                                </DiscreteObjectKeyFrame.Value>
-                            </DiscreteObjectKeyFrame>
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                       Storyboard.TargetName="CityPanelNarrow">
-                            <DiscreteObjectKeyFrame KeyTime="0">
-                                <DiscreteObjectKeyFrame.Value>
-                                    <Visibility>Visible</Visibility>
-                                </DiscreteObjectKeyFrame.Value>
-                            </DiscreteObjectKeyFrame>
-                        </ObjectAnimationUsingKeyFrames>
-
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                       Storyboard.TargetName="CityPanelWide">
-                            <DiscreteObjectKeyFrame KeyTime="0">
-                                <DiscreteObjectKeyFrame.Value>
-                                    <Visibility>Collapsed</Visibility>
-                                </DiscreteObjectKeyFrame.Value>
-                            </DiscreteObjectKeyFrame>
-                        </ObjectAnimationUsingKeyFrames>
-                    </Storyboard>
-                </VisualState>
-                <VisualState x:Name="Narrow">
-                    <Storyboard>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                       Storyboard.TargetName="UnsavedGameMessageWide">
-                            <DiscreteObjectKeyFrame KeyTime="0">
-                                <DiscreteObjectKeyFrame.Value>
-                                    <Visibility>Collapsed</Visibility>
-                                </DiscreteObjectKeyFrame.Value>
-                            </DiscreteObjectKeyFrame>
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                       Storyboard.TargetName="UnsavedGameButtonWide">
-                            <DiscreteObjectKeyFrame KeyTime="0">
-                                <DiscreteObjectKeyFrame.Value>
-                                    <Visibility>Collapsed</Visibility>
-                                </DiscreteObjectKeyFrame.Value>
-                            </DiscreteObjectKeyFrame>
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                       Storyboard.TargetName="MessageContainerNarrow">
-                            <DiscreteObjectKeyFrame KeyTime="0">
-                                <DiscreteObjectKeyFrame.Value>
-                                    <Visibility>Visible</Visibility>
-                                </DiscreteObjectKeyFrame.Value>
-                            </DiscreteObjectKeyFrame>
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Orientation"
-                                                       Storyboard.TargetName="MainMenuHub">
-                            <DiscreteObjectKeyFrame KeyTime="0">
-                                <DiscreteObjectKeyFrame.Value>
-                                    <Orientation>Vertical</Orientation>
-                                </DiscreteObjectKeyFrame.Value>
-                            </DiscreteObjectKeyFrame>
-                        </ObjectAnimationUsingKeyFrames>
-
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                       Storyboard.TargetName="CityPanelNarrow">
-                            <DiscreteObjectKeyFrame KeyTime="0">
-                                <DiscreteObjectKeyFrame.Value>
-                                    <Visibility>Visible</Visibility>
-                                </DiscreteObjectKeyFrame.Value>
-                            </DiscreteObjectKeyFrame>
-                        </ObjectAnimationUsingKeyFrames>
-
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                       Storyboard.TargetName="CityPanelWide">
-                            <DiscreteObjectKeyFrame KeyTime="0">
-                                <DiscreteObjectKeyFrame.Value>
-                                    <Visibility>Collapsed</Visibility>
-                                </DiscreteObjectKeyFrame.Value>
-                            </DiscreteObjectKeyFrame>
-                        </ObjectAnimationUsingKeyFrames>
-                    </Storyboard>
-                </VisualState>
-            </VisualStateGroup>
-        </VisualStateManager.VisualStateGroups>
-        <!--<Grid.Background>
-            <ImageBrush ImageSource="/Assets/Background.jpg" />
-        </Grid.Background>-->
+    <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="30" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Background="#D7C5AD">
+            <TextBlock FontSize="16" VerticalAlignment="Center" Foreground="White" Margin="10,0,0,0">Micropolis for Windows</TextBlock>
+        </StackPanel>
+        <SplitView x:Name="SplitView" Background="#E6E6E6" OpenPaneLength="240" CompactPaneLength="48" 
+        DisplayMode="CompactOverlay"  IsPaneOpen="{Binding SplitViewIsOpen}" PaneBackground="White" Grid.Row="1">
+            <SplitView.Pane>
+                <StackPanel x:Name="SplitViewPanePanel">
+                    <RadioButton x:Name="HamburgerRadioButton" Command="{Binding ToggleSplitViewCommand}" Style="{StaticResource NavRadioButtonStyle}" Tag="" Content="Menu" GroupName="Hamburger"/>
+                    <RadioButton x:Name="NewRadioButton" Style="{StaticResource NavRadioButtonStyle}" Tag="" Content="New" GroupName="New"/>
+                    <RadioButton x:Name="LoadRadioButton" Command="{Binding NewGameCommand}" Style="{StaticResource NavRadioButtonStyle}" Tag="" Content="Load" GroupName="Load"/>
+                    <!--<RadioButton x:Name="SaveRadioButton" Style="{StaticResource NavRadioButtonStyle}" Tag="" Content="Save" GroupName="Save"/>
+                    <RadioButton x:Name="SaveAsRadioButton" Style="{StaticResource NavRadioButtonStyle}" Tag="" Content="Save as" GroupName="SaveAs"/>-->
+                    <RadioButton x:Name="HelpRadioButton" Command="{Binding HelpCommand}" Style="{StaticResource NavRadioButtonStyle}" Tag="" Content="Help" GroupName="Help"/>
+                    <RadioButton x:Name="PrivacyRadioButton" Command="{Binding PrivacyCommand}" Style="{StaticResource NavRadioButtonStyle}" Tag="" Content="Privacy" GroupName="Help"/>
+                    <RadioButton x:Name="RatingRadioButton" Command="{Binding RateCommand}" Style="{StaticResource NavRadioButtonStyle}" Tag="" Content="Rating" GroupName="Rating"/>
+                    <RadioButton x:Name="SettingsRadioButton" Command="{Binding SettingsCommand}" Style="{StaticResource NavRadioButtonStyle}" Tag="" Content="Settings" GroupName="Settings"/>
+                    <RadioButton x:Name="LicenseRadioButton" Command="{Binding LicenseCommand}"  Style="{StaticResource NavRadioButtonStyle}" Tag="" Content="License" GroupName="License"/>
+                    <RadioButton x:Name="AboutRadioButton" Command="{Binding AboutCommand}" Style="{StaticResource NavRadioButtonStyle}" Tag="" Content="About" GroupName="About"/>
+                </StackPanel>
+            </SplitView.Pane>
+            <SplitView.Content>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
 
 
-        <Grid Grid.Row="0">
-            <Grid x:Name="LoadUnsavedGameButton" Background="DarkRed" HorizontalAlignment="Stretch" MinHeight="70"
+                    <Grid Grid.Row="0">
+
+                        <Grid x:Name="LoadUnsavedGameButton" Background="DarkRed" HorizontalAlignment="Stretch" MinHeight="70"
                   Visibility="{Binding LoadUnsavedGameButtonIsVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="5" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="5" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
 
-                <StackPanel Background="Green" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" />
-                <TextBlock Grid.Row="1" Grid.Column="0" TextWrapping="Wrap" FontSize="20" HorizontalAlignment="Left"
+                            <StackPanel Background="Green" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" />
+                            <TextBlock Grid.Row="1" Grid.Column="0" TextWrapping="Wrap" FontSize="20" HorizontalAlignment="Left"
                            VerticalAlignment="Center" Margin="20,10,10,10" x:Name="UnsavedGameMessageWide"
                            Text="{Binding UnsavedGameMessageText}" />
-                <Button Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center"
+                            <Button Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center"
                         Margin="10,10,10,10" FontSize="20" Command="{Binding LoadUnsavedGameCommand}"
                         x:Name="UnsavedGameButtonWide" Content="{Binding UnsavedGameButtonText}" />
 
-                <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                            <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
                             x:Name="MessageContainerNarrow" Visibility="Collapsed">
-                    <TextBlock TextWrapping="Wrap" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center"
+                                <TextBlock TextWrapping="Wrap" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center"
                                Margin="20,10,10,10" x:Name="UnsavedGameMessageNarrow"
                                Text="{Binding UnsavedGameMessageText}" />
-                    <Button HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10,10,10,10" FontSize="20"
+                                <Button HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10,10,10,10" FontSize="20"
                             Command="{Binding LoadUnsavedGameCommand}" x:Name="UnsavedGameButtonNarrow"
                             Content="{Binding UnsavedGameButtonText}" />
-                </StackPanel>
+                            </StackPanel>
 
-            </Grid>
-        </Grid>
-        <Hub Grid.Row="1" x:Name="MainMenuHub" LayoutUpdated="MainMenuHub_OnLayoutUpdated">
-            <!--LayoutUpdated="FrameworkElement_OnLayoutUpdated"-->
-            <Hub.Header>
-                <Image x:Name="HubHeaderImage" Height="100" IsHitTestVisible="false" HorizontalAlignment="Right"
+                        </Grid>
+                    </Grid>
+                    <Hub Grid.Row="1" x:Name="MainMenuHub" LayoutUpdated="MainMenuHub_OnLayoutUpdated">
+                        <!--LayoutUpdated="FrameworkElement_OnLayoutUpdated"-->
+                        <Hub.Header>
+                            <Image x:Name="HubHeaderImage" Height="100" IsHitTestVisible="false" HorizontalAlignment="Right"
                        VerticalAlignment="Bottom" Source="{Binding HubHeaderImageSource}" />
-            </Hub.Header>
-            <HubSection Width="700">
+                        </Hub.Header>
+                        <HubSection Width="700">
 
-                <HubSection.Background>
+                            <HubSection.Background>
 
-                    <ImageBrush ImageSource="/Assets/MainMenuTeaser.png" Stretch="UniformToFill" />
+                                <ImageBrush ImageSource="/Assets/MainMenuTeaser.png" Stretch="UniformToFill" />
 
-                </HubSection.Background>
+                            </HubSection.Background>
 
-            </HubSection>
+                        </HubSection>
 
-            <HubSection x:Name="GeneralHubSection">
-                <HubSection.Header>
-                    <TextBlock x:Uid="GeneralHeader" x:Name="GeneralHubSectionHeader" TextLineBounds="TrimToBaseline"
+                        <HubSection x:Name="GeneralHubSection">
+                            <HubSection.Header>
+                                <TextBlock x:Uid="GeneralHeader" x:Name="GeneralHubSectionHeader" TextLineBounds="TrimToBaseline"
                                OpticalMarginAlignment="TrimSideBearings" Text="{Binding GeneralHubSectionHeaderText}"
                                Foreground="Black" />
-                </HubSection.Header>
-                <HubSection.ContentTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Vertical">
-                            <micropolis:ReviewBar />
-                            <Button x:Name="NewGameButton" Command="{Binding NewGameCommand}"
+                            </HubSection.Header>
+                            <HubSection.ContentTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Vertical">
+                                        <micropolis:ReviewBar />
+                                        <Button x:Name="NewGameButton" Command="{Binding NewGameCommand}"
                                     Style="{StaticResource MenuButtonStyle}" VerticalAlignment="Top" Width="200"
                                     Height="100">
-                                <Grid Background="LightGray">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="*" />
-                                        <RowDefinition Height="Auto" />
-                                    </Grid.RowDefinitions>
-                                    <TextBlock Foreground="Gray" Grid.Row="0" FontSize="40"
+                                            <Grid Background="LightGray">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="*" />
+                                                    <RowDefinition Height="Auto" />
+                                                </Grid.RowDefinitions>
+                                                <TextBlock Foreground="Gray" Grid.Row="0" FontSize="40"
                                                FontFamily="Segoe UI Symbol">
                                         
-                                    </TextBlock>
-                                    <StackPanel Orientation="Horizontal" Background="Green" Height="30" Grid.Row="1"
+                                                </TextBlock>
+                                                <StackPanel Orientation="Horizontal" Background="Green" Height="30" Grid.Row="1"
                                                 Width="200">
-                                        <TextBlock x:Name="StartNewGameButtonTB" Foreground="White" Margin="9,1,0,0"
+                                                    <TextBlock x:Name="StartNewGameButtonTB" Foreground="White" Margin="9,1,0,0"
                                                    FontWeight="SemiLight" Text="{Binding StartNewGameButtonText}" />
-                                    </StackPanel>
-                                </Grid>
-                            </Button>
-                            <Button x:Name="LoadGameButton" Command="{Binding NewGameCommand}"
+                                                </StackPanel>
+                                            </Grid>
+                                        </Button>
+                                        <Button x:Name="LoadGameButton" Command="{Binding NewGameCommand}"
                                     Style="{StaticResource MenuButtonStyle}" VerticalAlignment="Top" Height="100"
                                     Width="200">
-                                <Grid Background="LightGray">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="*" />
-                                        <RowDefinition Height="Auto" />
-                                    </Grid.RowDefinitions>
-                                    <TextBlock Foreground="Gray" Grid.Row="0" FontSize="40"
+                                            <Grid Background="LightGray">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="*" />
+                                                    <RowDefinition Height="Auto" />
+                                                </Grid.RowDefinitions>
+                                                <TextBlock Foreground="Gray" Grid.Row="0" FontSize="40"
                                                FontFamily="Segoe UI Symbol">
                                         
-                                    </TextBlock>
-                                    <StackPanel Orientation="Horizontal" Background="Green" Height="30" Grid.Row="1"
+                                                </TextBlock>
+                                                <StackPanel Orientation="Horizontal" Background="Green" Height="30" Grid.Row="1"
                                                 Width="200">
-                                        <TextBlock Foreground="White" Margin="9,1,0,0" FontWeight="SemiLight"
+                                                    <TextBlock Foreground="White" Margin="9,1,0,0" FontWeight="SemiLight"
                                                    x:Name="LoadGameButtonTB" Text="{Binding LoadGameButtonText}" />
+                                                </StackPanel>
+                                            </Grid>
+                                        </Button>
                                     </StackPanel>
-                                </Grid>
-                            </Button>
-                        </StackPanel>
-                    </DataTemplate>
-                </HubSection.ContentTemplate>
-            </HubSection>
-            <HubSection x:Name="CityPanelNarrow">
-                <HubSection.Header>
-                    <TextBlock x:Uid="CitiesHeader" x:Name="CitiesHubSectionNarrowHeader"
+                                </DataTemplate>
+                            </HubSection.ContentTemplate>
+                        </HubSection>
+                        <HubSection x:Name="CityPanelNarrow">
+                            <HubSection.Header>
+                                <TextBlock x:Uid="CitiesHeader" x:Name="CitiesHubSectionNarrowHeader"
                                TextLineBounds="TrimToBaseline"
                                OpticalMarginAlignment="TrimSideBearings" Text="{Binding CitiesHubSectionHeaderText}"
                                Foreground="Black" />
-                </HubSection.Header>
-                <HubSection.ContentTemplate>
-                    <DataTemplate>
-                        <ItemsControl ItemsSource="{Binding Path=Cities}"
-                                      VerticalContentAlignment="Stretch">
-                            <ItemsControl.ItemTemplate>
+                            </HubSection.Header>
+                            <HubSection.ContentTemplate>
                                 <DataTemplate>
-                                    <Button Click="ButtonBase_OnClick" Style="{StaticResource TileButtonStyle}">
-                                        <Grid Width="140" Height="140">
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="*" />
-                                                <RowDefinition Height="Auto" />
-                                            </Grid.RowDefinitions>
+                                    <ItemsControl ItemsSource="{Binding Path=Cities}"
+                                      VerticalContentAlignment="Stretch">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Button Click="ButtonBase_OnClick" Style="{StaticResource TileButtonStyle}">
+                                                    <Grid Width="140" Height="140">
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition Height="*" />
+                                                            <RowDefinition Height="Auto" />
+                                                        </Grid.RowDefinitions>
 
-                                            <Image Grid.Row="0" Source="{Binding ImageSource}" Stretch="Fill" />
-                                            <StackPanel Grid.Row="1" Background="Green" Height="25"
+                                                        <Image Grid.Row="0" Source="{Binding ImageSource}" Stretch="Fill" />
+                                                        <StackPanel Grid.Row="1" Background="Green" Height="25"
                                                         HorizontalAlignment="Stretch">
-                                                <TextBlock Text="{Binding Title}" Height="20" Foreground="White" />
-                                            </StackPanel>
-                                        </Grid>
-                                    </Button>
+                                                            <TextBlock Text="{Binding Title}" Height="20" Foreground="White" />
+                                                        </StackPanel>
+                                                    </Grid>
+                                                </Button>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                        <ItemsControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <WrapGrid Orientation="Horizontal" MaximumRowsOrColumns="2" />
+                                            </ItemsPanelTemplate>
+                                        </ItemsControl.ItemsPanel>
+                                    </ItemsControl>
                                 </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                            <ItemsControl.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <WrapGrid Orientation="Horizontal" MaximumRowsOrColumns="2" />
-                                </ItemsPanelTemplate>
-                            </ItemsControl.ItemsPanel>
-                        </ItemsControl>
-                    </DataTemplate>
-                </HubSection.ContentTemplate>
-            </HubSection>
-            <!--<HubSection x:Name="NewCityPanel" VerticalContentAlignment="Stretch">
+                            </HubSection.ContentTemplate>
+                        </HubSection>
+                        <!--<HubSection x:Name="NewCityPanel" VerticalContentAlignment="Stretch">
                 <HubSection.Header>
                     <TextBlock x:Uid="CitiesHeader" x:Name="NewCityHubSectionWideHeader" TextLineBounds="TrimToBaseline"
                                OpticalMarginAlignment="TrimSideBearings" Text="{Binding NewCityDialogHeaderText}"
@@ -583,43 +506,46 @@
                     </DataTemplate>
                 </HubSection.ContentTemplate>
             </HubSection>-->
-            <HubSection x:Name="CityPanelWide" VerticalContentAlignment="Stretch">
-                <HubSection.Header>
-                    <TextBlock x:Uid="CitiesHeader" x:Name="CitiesHubSectionWideHeader" TextLineBounds="TrimToBaseline"
+                        <HubSection x:Name="CityPanelWide" VerticalContentAlignment="Stretch">
+                            <HubSection.Header>
+                                <TextBlock x:Uid="CitiesHeader" x:Name="CitiesHubSectionWideHeader" TextLineBounds="TrimToBaseline"
                                OpticalMarginAlignment="TrimSideBearings" Text="{Binding CitiesHubSectionHeaderText}"
                                Foreground="Black" />
-                </HubSection.Header>
-                <HubSection.ContentTemplate>
-                    <DataTemplate>
-                        <ItemsControl ItemsSource="{Binding Path=Cities}"
-                                      VerticalContentAlignment="Stretch">
-                            <ItemsControl.ItemTemplate>
+                            </HubSection.Header>
+                            <HubSection.ContentTemplate>
                                 <DataTemplate>
-                                    <Button Click="ButtonBase_OnClick" Style="{StaticResource TileButtonStyle}">
-                                        <Grid Width="140" Height="140">
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="*" />
-                                                <RowDefinition Height="Auto" />
-                                            </Grid.RowDefinitions>
+                                    <ItemsControl ItemsSource="{Binding Path=Cities}"
+                                      VerticalContentAlignment="Stretch">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Button Click="ButtonBase_OnClick" Style="{StaticResource TileButtonStyle}">
+                                                    <Grid Width="140" Height="140">
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition Height="*" />
+                                                            <RowDefinition Height="Auto" />
+                                                        </Grid.RowDefinitions>
 
-                                            <Image Grid.Row="0" Source="{Binding ImageSource}" Stretch="Fill" />
-                                            <StackPanel Grid.Row="1" Background="Green" Height="25"
+                                                        <Image Grid.Row="0" Source="{Binding ImageSource}" Stretch="Fill" />
+                                                        <StackPanel Grid.Row="1" Background="Green" Height="25"
                                                         HorizontalAlignment="Stretch">
-                                                <TextBlock Text="{Binding Title}" Height="20" Foreground="White" />
-                                            </StackPanel>
-                                        </Grid>
-                                    </Button>
+                                                            <TextBlock Text="{Binding Title}" Height="20" Foreground="White" />
+                                                        </StackPanel>
+                                                    </Grid>
+                                                </Button>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                        <ItemsControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <WrapGrid Orientation="Vertical" MaximumRowsOrColumns="4" />
+                                            </ItemsPanelTemplate>
+                                        </ItemsControl.ItemsPanel>
+                                    </ItemsControl>
                                 </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                            <ItemsControl.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <WrapGrid Orientation="Vertical" MaximumRowsOrColumns="4" />
-                                </ItemsPanelTemplate>
-                            </ItemsControl.ItemsPanel>
-                        </ItemsControl>
-                    </DataTemplate>
-                </HubSection.ContentTemplate>
-            </HubSection>
-        </Hub>
+                            </HubSection.ContentTemplate>
+                        </HubSection>
+                    </Hub>
+                </Grid>
+            </SplitView.Content>
+        </SplitView>
     </Grid>
 </Page>

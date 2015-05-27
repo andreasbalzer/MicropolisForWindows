@@ -1,20 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.Foundation;
-#if WINDOWS_PHONE_APP
-using Windows.Media.SpeechRecognition;
-#endif
 using Windows.Storage;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using Micropolis.Common;
-using Micropolis.Controller;
 using Micropolis.Model.Entities;
+using Micropolis.Screens;
 using Microsoft.ApplicationInsights;
+
+#if WINDOWS_PHONE_APP
+using Windows.Media.SpeechRecognition;
+#endif
 
 namespace Micropolis.ViewModels
 {
@@ -39,6 +40,50 @@ namespace Micropolis.ViewModels
         private string _unsavedGameMessageText;
         private string _unsavedGameMessageWideText;
         private DelegateCommand _speechCommand;
+        private bool _splitViewIsOpen;
+        private DelegateCommand _toggleSplitViewCommand;
+        private DelegateCommand _helpCommand;
+        private DelegateCommand _privacyCommand;
+        private DelegateCommand _settingsCommand;
+        private DelegateCommand _licenseCommand;
+        private DelegateCommand _aboutCommand;
+
+        public DelegateCommand HelpCommand
+        {
+            get { return _helpCommand; }
+            set { SetProperty(ref _helpCommand, value); }
+        }
+
+        public DelegateCommand PrivacyCommand
+        {
+            get { return _privacyCommand; }
+            set { SetProperty(ref _privacyCommand, value); }
+        }
+
+        public DelegateCommand SettingsCommand
+        {
+            get { return _settingsCommand; }
+            set { SetProperty(ref _settingsCommand, value); }
+        }
+
+        public DelegateCommand LicenseCommand
+        {
+            get { return _licenseCommand; }
+            set { SetProperty(ref _licenseCommand, value); }
+        }
+
+        public DelegateCommand AboutCommand
+        {
+            get { return _aboutCommand; }
+            set { SetProperty(ref _aboutCommand, value); }
+        }
+
+
+        public bool SplitViewIsOpen
+        {
+            get { return _splitViewIsOpen; }
+            set { SetProperty(ref _splitViewIsOpen, value); }
+        }
 
         public MainMenuViewModel()
         {
@@ -62,6 +107,13 @@ namespace Micropolis.ViewModels
 
             LoadUnsavedGameCommand = new DelegateCommand(LoadUnsavedGame);
             NewGameCommand = new DelegateCommand(NewGame);
+            ToggleSplitViewCommand = new DelegateCommand(ToggleSplitView);
+
+            SettingsCommand = new DelegateCommand(OpenSettings);
+            AboutCommand = new DelegateCommand(OpenAbout);
+            LicenseCommand = new DelegateCommand(OpenLicense);
+            PrivacyCommand = new DelegateCommand(OpenPrivacy);
+            HelpCommand = new DelegateCommand(OpenHelp);
 
             CheckForPreviousGame();
             LoadCities();
@@ -76,10 +128,84 @@ namespace Micropolis.ViewModels
             
             NotifierHelper.RegisterNotifier();
 #endif
-
         }
 
-        #if WINDOWS_PHONE_APP
+        private void OpenSettings()
+        {
+            try
+            {
+                _telemetry.TrackEvent("MainMenuPreferencesClicked");
+            }
+            catch (Exception)
+            {
+            }
+
+            var settings = new SettingsFlyout();
+            settings.Content = new PreferencesUserControl();
+            settings.Title = Strings.GetString("settingsCharm.Preferences");
+            settings.ShowIndependent();
+        }
+
+        private void OpenLicense()
+        {
+            try
+            {
+                _telemetry.TrackEvent("MainMenuLicenseClicked");
+            }
+            catch (Exception)
+            {
+            }
+
+            App.MainMenuReference.Frame.Navigate(typeof (LicensePage));
+        }
+
+        private void OpenAbout()
+        {
+            try
+            {
+                _telemetry.TrackEvent("MainMenuAboutClicked");
+            }
+            catch (Exception)
+            {
+            }
+
+            var settings = new SettingsFlyout();
+            settings.Content = new AboutUserControl();
+
+            settings.Title = Strings.GetString("settingsCharm.About");
+            settings.ShowIndependent();
+        }
+
+        private void OpenPrivacy()
+        {
+            try
+            {
+                _telemetry.TrackEvent("MainMenuPrivacyClicked");
+            }
+            catch (Exception)
+            {
+            }
+
+            var settings = new SettingsFlyout();
+            settings.Content = new PrivacyUserControl();
+            settings.Title = Strings.GetString("settingsCharm.Privacy");
+            settings.ShowIndependent();
+        }
+
+        private void OpenHelp()
+        {
+            try
+            {
+                _telemetry.TrackEvent("MainMenuHelpClicked");
+            }
+            catch (Exception)
+            {
+            }
+
+            App.MainMenuReference.Frame.Navigate(typeof (HelpPage));
+        }
+
+#if WINDOWS_PHONE_APP
         private void RunSpeechRecognition()
         {
             RunSpeechRecognitionAsync();
@@ -169,6 +295,25 @@ namespace Micropolis.ViewModels
         {
             get { return _loadUnsavedGameCommand; }
             set { SetProperty(ref _loadUnsavedGameCommand, value); }
+        }
+
+        public DelegateCommand ToggleSplitViewCommand
+        {
+            get { return _toggleSplitViewCommand; }
+            set { SetProperty(ref _toggleSplitViewCommand, value); }
+        }
+
+        private void ToggleSplitView()
+        {
+            if (!_splitViewIsOpen)
+            {
+                _telemetry.TrackEvent("MainMenu_OpenSplitView");
+            }
+            else
+            {
+                _telemetry.TrackEvent("MainMenu_CloseSplitView");
+            }
+            SplitViewIsOpen = !SplitViewIsOpen;
         }
 
         public DelegateCommand SpeechCommand
