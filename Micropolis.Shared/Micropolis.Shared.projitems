@@ -91,6 +91,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)View\NewCityDialog.xaml.cs">
       <DependentUpon>NewCityDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)View\NewCityDialogSmall.xaml.cs">
+      <DependentUpon>NewCityDialogSmall.xaml</DependentUpon>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)View\NotificationPane.xaml.cs">
       <DependentUpon>NotificationPane.xaml</DependentUpon>
     </Compile>
@@ -160,6 +163,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="$(MSBuildThisFileDirectory)View\NewCityDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)View\NewCityDialogSmall.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

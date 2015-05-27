@@ -26,7 +26,7 @@ namespace Micropolis
     ///     Eine leere Seite, die eigenständig verwendet werden kann oder auf die innerhalb eines Rahmens navigiert werden
     ///     kann.
     /// </summary>
-    public sealed partial class MainGamePage
+    public sealed partial class MainGamePage : Page
     {
         private readonly MainGamePageViewModel _viewModel;
 
