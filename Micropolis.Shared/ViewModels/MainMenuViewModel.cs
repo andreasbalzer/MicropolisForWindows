@@ -13,6 +13,8 @@ using Micropolis.Common;
 using Micropolis.Model.Entities;
 using Micropolis.Screens;
 using Microsoft.ApplicationInsights;
+using System.Collections.Generic;
+using Micropolis.Controller;
 
 #if WINDOWS_PHONE_APP
 using Windows.Media.SpeechRecognition;
@@ -338,6 +340,8 @@ namespace Micropolis.ViewModels
             get { return _feedbackCommand; }
             set { SetProperty(ref _feedbackCommand, value); }
         }
+
+        private DelegateCommand _feedbackCommand;
 
         public DelegateCommand NewGameCommand
         {

@@ -29,11 +29,11 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" x:Name="Title" HorizontalAlignment="Center" FontSize="20" TextWrapping="Wrap" Text="{Binding TitleTextBlockText}" VerticalAlignment="Top"/>
-
-        <local:OverlayMapView x:Name="mapPane" Grid.Row="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
-        <Button Grid.Row="1" x:Name="previousMapBtn" Command="{Binding PreviousMapCommand}" Content="" IsEnabled="{Binding PreviousMapButtonIsEnabled}" HorizontalAlignment="Left" />
-        <Button Grid.Row="1" x:Name="nextMapBtn" Command="{Binding NextMapCommand}" Content="" HorizontalAlignment="Right"/>
-        
+        <Grid Grid.Row="1">
+        <local:OverlayMapView x:Name="mapPane" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+        <Button x:Name="previousMapBtn" Command="{Binding PreviousMapCommand}" Content="" IsEnabled="{Binding PreviousMapButtonIsEnabled}" HorizontalAlignment="Left" />
+        <Button x:Name="nextMapBtn" Command="{Binding NextMapCommand}" Content="" HorizontalAlignment="Right"/>
+        </Grid>
             <ItemsControl Grid.Row="2" VerticalAlignment="Center" x:Name="levelBox" ItemsSource="{Binding Levels, Mode=TwoWay}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -47,7 +47,7 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
             
-            <Button Grid.Grid="3"  x:Name="thisMapBtn" Command="{Binding ThisMapCommand}" Content="{Binding ThisMapButtonText}"/>
+            <Button Grid.Row="3"  x:Name="thisMapBtn" Command="{Binding ThisMapCommand}" Content="{Binding ThisMapButtonText}"/>
             
         
         
