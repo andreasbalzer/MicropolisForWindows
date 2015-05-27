@@ -14,7 +14,7 @@ namespace Micropolis
     // Project website: http://code.google.com/p/micropolis/
 
     /// <summary>
-    ///     User preferences to load from and store in roaming data
+    ///     User preferences to load from and store in local data
     /// </summary>
     public class Prefs
     {
@@ -26,11 +26,11 @@ namespace Micropolis
         /// <returns></returns>
         internal static bool GetBoolean(string key, bool defaultValue)
         {
-            if (!ApplicationData.Current.RoamingSettings.Values.ContainsKey(key))
+            if (!ApplicationData.Current.LocalSettings.Values.ContainsKey(key))
             {
-                ApplicationData.Current.RoamingSettings.Values.Add(key, defaultValue);
+                ApplicationData.Current.LocalSettings.Values.Add(key, defaultValue);
             }
-            return (bool) ApplicationData.Current.RoamingSettings.Values[key];
+            return (bool) ApplicationData.Current.LocalSettings.Values[key];
         }
 
         /// <summary>
@@ -41,11 +41,11 @@ namespace Micropolis
         /// <returns></returns>
         internal static string GetString(string key, string defaultValue)
         {
-            if (!ApplicationData.Current.RoamingSettings.Values.ContainsKey(key))
+            if (!ApplicationData.Current.LocalSettings.Values.ContainsKey(key))
             {
-                ApplicationData.Current.RoamingSettings.Values.Add(key, defaultValue);
+                ApplicationData.Current.LocalSettings.Values.Add(key, defaultValue);
             }
-            return (string) ApplicationData.Current.RoamingSettings.Values[key];
+            return (string) ApplicationData.Current.LocalSettings.Values[key];
         }
 
         /// <summary>
@@ -55,13 +55,13 @@ namespace Micropolis
         /// <param name="value">if set to <c>true</c> [value].</param>
         internal static void PutBoolean(string key, bool value)
         {
-            if (!ApplicationData.Current.RoamingSettings.Values.ContainsKey(key))
+            if (!ApplicationData.Current.LocalSettings.Values.ContainsKey(key))
             {
-                ApplicationData.Current.RoamingSettings.Values.Add(key, value);
+                ApplicationData.Current.LocalSettings.Values.Add(key, value);
             }
             else
             {
-                ApplicationData.Current.RoamingSettings.Values[key] = value;
+                ApplicationData.Current.LocalSettings.Values[key] = value;
             }
         }
 
@@ -72,13 +72,13 @@ namespace Micropolis
         /// <param name="value">if set to <c>true</c> [value].</param>
         internal static void PutString(string key, string value)
         {
-            if (!ApplicationData.Current.RoamingSettings.Values.ContainsKey(key))
+            if (!ApplicationData.Current.LocalSettings.Values.ContainsKey(key))
             {
-                ApplicationData.Current.RoamingSettings.Values.Add(key, value);
+                ApplicationData.Current.LocalSettings.Values.Add(key, value);
             }
             else
             {
-                ApplicationData.Current.RoamingSettings.Values[key] = value;
+                ApplicationData.Current.LocalSettings.Values[key] = value;
             }
         }
 
@@ -89,7 +89,7 @@ namespace Micropolis
         /// <returns>Preference identified by key stored (true), otherwise false.</returns>
         internal static bool ContainsKey(string key)
         {
-            return ApplicationData.Current.RoamingSettings.Values.ContainsKey(key);
+            return ApplicationData.Current.LocalSettings.Values.ContainsKey(key);
         }
     }
 }

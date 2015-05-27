@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.Store;
 using Windows.System;
 using Windows.UI.Popups;
 using Micropolis.Common;
@@ -31,7 +32,7 @@ namespace Micropolis.ViewModels
 
             SendFeedbackText = Strings.GetString("feedback.sendFeedbackText");
             RateText = Strings.GetString("feedback.rateText");
-            FeedbackMessageText = Strings.GetString("feedback.feedbackMessageText");
+            FeedbackMessageText = Strings.GetString("feedback.feedbackRateMessageText");
             RateCommand = new DelegateCommand(OpenStoreRatingPage);
             SendFeedbackCommand = new DelegateCommand(SendFeedback);
             CheckForPreviousFeedback();
@@ -87,9 +88,13 @@ namespace Micropolis.ViewModels
             {
             }
 
+#if WINDOWS_PHONE_APP
+            Windows.System.Launcher.LaunchUriAsync(new Uri("ms-windows-store:reviewapp?appid=" + CurrentApp.AppId));
+#else
             Launcher.LaunchUriAsync(
                 new Uri("ms-windows-store:review?PFN=62155AndreasBalzer.MicropolisforWindows_rqaffv28461by",
                     UriKind.Absolute));
+#endif
             Disable();
         }
 
@@ -138,32 +143,47 @@ namespace Micropolis.ViewModels
             if (showFeedback)
             {
                 FeedbackIsVisible = true;
-#if WINDOWS_PHONE_APP
-#else
-                var dlg = new MessageDialog(FeedbackMessageText);
-                dlg.Commands.Add(new UICommand(RateText, null, "rate"));
-                dlg.Commands.Add(new UICommand(SendFeedbackText, null, "feedback"));
+
+                var dlg = new MessageDialog(Strings.GetString("feedback.rateMessageText"));
+                dlg.Commands.Add(new UICommand(Strings.GetString("feedback.rateText"), null, "rate"));
+                //dlg.Commands.Add(new UICommand(SendFeedbackText, null, "feedback"));
                 dlg.Commands.Add(new UICommand(Strings.GetString("feedback.cancel"), null, "cancel"));
 
                 var result = "";
 
                 try
                 {
-                    result = (string)(await dlg.ShowAsync()).Id;
+                    result = (string) (await dlg.ShowAsync()).Id;
                     if (result == "rate")
                     {
                         OpenStoreRatingPage();
                     }
-                    else if (result == "feedback")
+                    if (result == "rate" || result == "cancel")
                     {
-                        SendFeedback();
+                        dlg = new MessageDialog(Strings.GetString("feedback.feedbackMessageText"));
+                        dlg.Commands.Add(new UICommand(Strings.GetString("feedback.sendFeedbackText"), null, "feedback"));
+                        //dlg.Commands.Add(new UICommand(SendFeedbackText, null, "feedback"));
+                        dlg.Commands.Add(new UICommand(Strings.GetString("feedback.cancel"), null, "cancel"));
+
+                        result = "";
+
+
+                        result = (string) (await dlg.ShowAsync()).Id;
+                        if (result == "feedback")
+                        {
+                            SendFeedback();
+                        }
+                        else if (result == "cancel")
+                        {
+
+                        }
                     }
                 }
                 catch (Exception)
                 {
                     //	this may happen if any other modal window is shown at the moment (ie, Windows query about running application background task)
                 }
-#endif
+
                 Postpone();
             }
             else

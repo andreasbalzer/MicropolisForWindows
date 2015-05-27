@@ -616,7 +616,10 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="1" Foreground="Black" Content="" FontFamily="Segoe UI Symbol" Command="{Binding SpeechCommand}" />
+            <StackPanel Orientation="Horizontal" Grid.Column="1">
+                <Button Foreground="Black" Content="" FontFamily="Segoe UI Symbol" Command="{Binding FeedbackCommand}" />
+                <Button Foreground="Black" Content="" FontFamily="Segoe UI Symbol" Command="{Binding SpeechCommand}" />
+            </StackPanel>
         </Grid>
     </Grid>
 </Page>
