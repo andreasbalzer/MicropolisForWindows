@@ -147,7 +147,14 @@ namespace Micropolis.Screens
 
         private void NewCityDialogPane_OnLoaded(object sender, RoutedEventArgs e)
         {
-            _viewModel.RegisterNewCityDialogViewModel(((NewCityDialog)sender).ViewModel);
+            if (sender is NewCityDialog)
+            {
+                _viewModel.RegisterNewCityDialogViewModel(((NewCityDialog)sender).ViewModel);
+            }
+            else if (sender is NewCityDialogSmall)
+            {
+                _viewModel.RegisterNewCityDialogViewModel(((NewCityDialogSmall)sender).ViewModel);
+            }
         }
     }
 }
