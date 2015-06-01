@@ -335,17 +335,17 @@
         DisplayMode="CompactOverlay"  IsPaneOpen="{Binding SplitViewIsOpen}" PaneBackground="White" Grid.Row="1">
             <SplitView.Pane>
                 <StackPanel x:Name="SplitViewPanePanel">
-                    <RadioButton x:Name="HamburgerRadioButton" Command="{Binding ToggleSplitViewCommand}" Style="{StaticResource NavRadioButtonStyle}" Tag="" Content="Menu" GroupName="Hamburger"/>
-                    <RadioButton x:Name="NewRadioButton" Style="{StaticResource NavRadioButtonStyle}" Tag="" Content="New" GroupName="New"/>
-                    <RadioButton x:Name="LoadRadioButton" Command="{Binding NewGameCommand}" Style="{StaticResource NavRadioButtonStyle}" Tag="" Content="Load" GroupName="Load"/>
-                    <!--<RadioButton x:Name="SaveRadioButton" Style="{StaticResource NavRadioButtonStyle}" Tag="" Content="Save" GroupName="Save"/>
-                    <RadioButton x:Name="SaveAsRadioButton" Style="{StaticResource NavRadioButtonStyle}" Tag="" Content="Save as" GroupName="SaveAs"/>-->
-                    <RadioButton x:Name="HelpRadioButton" Command="{Binding HelpCommand}" Style="{StaticResource NavRadioButtonStyle}" Tag="" Content="Help" GroupName="Help"/>
-                    <RadioButton x:Name="PrivacyRadioButton" Command="{Binding PrivacyCommand}" Style="{StaticResource NavRadioButtonStyle}" Tag="" Content="Privacy" GroupName="Help"/>
-                    <RadioButton x:Name="RatingRadioButton" Command="{Binding RateCommand}" Style="{StaticResource NavRadioButtonStyle}" Tag="" Content="Rating" GroupName="Rating"/>
-                    <RadioButton x:Name="SettingsRadioButton" Command="{Binding SettingsCommand}" Style="{StaticResource NavRadioButtonStyle}" Tag="" Content="Settings" GroupName="Settings"/>
-                    <RadioButton x:Name="LicenseRadioButton" Command="{Binding LicenseCommand}"  Style="{StaticResource NavRadioButtonStyle}" Tag="" Content="License" GroupName="License"/>
-                    <RadioButton x:Name="AboutRadioButton" Command="{Binding AboutCommand}" Style="{StaticResource NavRadioButtonStyle}" Tag="" Content="About" GroupName="About"/>
+                    <RadioButton x:Name="HamburgerRadioButton" Command="{Binding ToggleSplitViewCommand}" Style="{StaticResource NavRadioButtonStyle}" Tag="" Content="{Binding HamburgerHomeText}" GroupName="Hamburger"/>
+                    <RadioButton x:Name="NewRadioButton" Style="{StaticResource NavRadioButtonStyle}" Tag="" Content="{Binding HamburgerNewText}" GroupName="New"/>
+                    <RadioButton x:Name="LoadRadioButton" Command="{Binding NewGameCommand}" Style="{StaticResource NavRadioButtonStyle}" Tag="" Content="{Binding HamburgerLoadText}" GroupName="Load"/>
+                    <!--<RadioButton x:Name="SaveRadioButton" Style="{StaticResource NavRadioButtonStyle}" Tag="" Content="{Binding HamburgerSaveText}" GroupName="Save"/>
+                    <RadioButton x:Name="SaveAsRadioButton" Style="{StaticResource NavRadioButtonStyle}" Tag="" Content="{Binding HamburgerSaveAsText}" GroupName="SaveAs"/>-->
+                    <RadioButton x:Name="HelpRadioButton" Command="{Binding HelpCommand}" Style="{StaticResource NavRadioButtonStyle}" Tag="" Content="{Binding HamburgerHelpText}" GroupName="Help"/>
+                    <RadioButton x:Name="PrivacyRadioButton" Command="{Binding PrivacyCommand}" Style="{StaticResource NavRadioButtonStyle}" Tag="" Content="{Binding HamburgerPrivacyText}" GroupName="Help"/>
+                    <RadioButton x:Name="RatingRadioButton" Command="{Binding RateCommand}" Style="{StaticResource NavRadioButtonStyle}" Tag="" Content="{Binding HamburgerRatingText}" GroupName="Rating"/>
+                    <RadioButton x:Name="SettingsRadioButton" Command="{Binding SettingsCommand}" Style="{StaticResource NavRadioButtonStyle}" Tag="" Content="{Binding HamburgerSettingsText}" GroupName="Settings"/>
+                    <RadioButton x:Name="LicenseRadioButton" Command="{Binding LicenseCommand}"  Style="{StaticResource NavRadioButtonStyle}" Tag="" Content="{Binding HamburgerLicenseText}" GroupName="License"/>
+                    <RadioButton x:Name="AboutRadioButton" Command="{Binding AboutCommand}" Style="{StaticResource NavRadioButtonStyle}" Tag="" Content="{Binding HamburgerAboutText}" GroupName="About"/>
                 </StackPanel>
             </SplitView.Pane>
             <SplitView.Content>

@@ -24,6 +24,19 @@ namespace Micropolis.ViewModels
 {
     public class MainMenuViewModel : BindableBase
     {
+
+
+        private string _hamburgerHomeText;
+        private string _hamburgerNewText;
+        private string _hamburgerLoadText;
+        private string _hamburgerSaveText;
+        private string _hamburgerSaveAsText;
+        private string _hamburgerPrivacyText;
+        private string _hamburgerHelpText;
+        private string _hamburgerAboutText;
+        private string _hamburgerSettingsText;
+        private string _hamburgerLicenseText;
+        private string _hamburgerRatingText;
         private readonly BitmapImage _blackHeader;
         private readonly TelemetryClient _telemetry;
         private readonly BitmapImage _whiteHeader;
@@ -50,6 +63,18 @@ namespace Micropolis.ViewModels
         private DelegateCommand _settingsCommand;
         private DelegateCommand _licenseCommand;
         private DelegateCommand _aboutCommand;
+
+        public string HamburgerHomeText { get { return _hamburgerHomeText; } set { SetProperty(ref _hamburgerHomeText, value); } }
+        public string HamburgerNewText { get { return _hamburgerNewText; } set { SetProperty(ref _hamburgerNewText, value); } }
+        public string HamburgerLoadText { get { return _hamburgerLoadText; } set { SetProperty(ref _hamburgerLoadText, value); } }
+        public string HamburgerSaveText { get { return _hamburgerSaveText; } set { SetProperty(ref _hamburgerSaveText, value); } }
+        public string HamburgerSaveAsText { get { return _hamburgerSaveAsText; } set { SetProperty(ref _hamburgerSaveAsText, value); } }
+        public string HamburgerPrivacyText { get { return _hamburgerPrivacyText; } set { SetProperty(ref _hamburgerPrivacyText, value); } }
+        public string HamburgerHelpText { get { return _hamburgerHelpText; } set { SetProperty(ref _hamburgerHelpText, value); } }
+        public string HamburgerAboutText { get { return _hamburgerAboutText; } set { SetProperty(ref _hamburgerAboutText, value); } }
+        public string HamburgerSettingsText { get { return _hamburgerSettingsText; } set { SetProperty(ref _hamburgerSettingsText, value); } }
+        public string HamburgerLicenseText { get { return _hamburgerLicenseText; } set { SetProperty(ref _hamburgerLicenseText, value); } }
+        public string HamburgerRatingText { get { return _hamburgerRatingText; } set { SetProperty(ref _hamburgerRatingText, value); } }
 
         public DelegateCommand HelpCommand
         {
@@ -107,6 +132,18 @@ namespace Micropolis.ViewModels
             LoadGameButtonText = Strings.GetString("LoadGameButton");
             StartNewGameButtonText = Strings.GetString("StartNewGameButton");
             NewCityDialogHeaderText = Strings.GetString("NewCityDialogHeaderText");
+
+            HamburgerHomeText = Strings.GetString("hamburgerMenu.Home");
+            HamburgerNewText = Strings.GetString("hamburgerMenu.New");
+            HamburgerLoadText = Strings.GetString("hamburgerMenu.Load");
+            HamburgerSaveText = Strings.GetString("hamburgerMenu.Save");
+            HamburgerSaveAsText = Strings.GetString("hamburgerMenu.SaveAs");
+            HamburgerPrivacyText = Strings.GetString("hamburgerMenu.Privacy");
+            HamburgerHelpText = Strings.GetString("hamburgerMenu.Help");
+            HamburgerAboutText = Strings.GetString("hamburgerMenu.About");
+            HamburgerSettingsText = Strings.GetString("hamburgerMenu.Settings");
+            HamburgerLicenseText = Strings.GetString("hamburgerMenu.License");
+            HamburgerRatingText = Strings.GetString("hamburgerMenu.Rating");
 
             LoadUnsavedGameCommand = new DelegateCommand(LoadUnsavedGame);
             NewGameCommand = new DelegateCommand(NewGame);
