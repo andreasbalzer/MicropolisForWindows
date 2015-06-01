@@ -154,6 +154,7 @@ namespace Micropolis.ViewModels
             LicenseCommand = new DelegateCommand(OpenLicense);
             PrivacyCommand = new DelegateCommand(OpenPrivacy);
             HelpCommand = new DelegateCommand(OpenHelp);
+            RateCommand = new DelegateCommand(OpenRatingAndFeedback);
 
             CheckForPreviousGame();
             LoadCities();
@@ -246,12 +247,28 @@ namespace Micropolis.ViewModels
             App.MainMenuReference.Frame.Navigate(typeof (HelpPage));
         }
 
-        #if WINDOWS_PHONE_APP
+        private void OpenRatingAndFeedback()
+        {
+            try
+            {
+                _telemetry.TrackEvent("MainMenuRatingClicked");
+            }
+            catch (Exception)
+            {
+            }
+
+            var settings = new SettingsFlyout();
+            settings.Content = new RatingFlyout();
+            settings.Title = Strings.GetString("settingsCharm.Rating");
+            settings.ShowIndependent();
+        }
+
+#if WINDOWS_PHONE_APP
         private void RunSpeechRecognition()
         {
             RunSpeechRecognitionAsync();
         }
-
+                
         private void RunFeedback()
         {
             var feedbackTitle = Strings.GetString("feedback.title");
@@ -347,6 +364,12 @@ namespace Micropolis.ViewModels
             set { SetProperty(ref _loadUnsavedGameCommand, value); }
         }
 
+        public DelegateCommand RateCommand
+        {
+            get { return _openRatingAndFeedbackCommand; }
+            set { SetProperty(ref _openRatingAndFeedbackCommand, value); }
+        }
+
         public DelegateCommand ToggleSplitViewCommand
         {
             get { return _toggleSplitViewCommand; }
@@ -379,6 +402,7 @@ namespace Micropolis.ViewModels
         }
 
         private DelegateCommand _feedbackCommand;
+        private DelegateCommand _openRatingAndFeedbackCommand;
 
         public DelegateCommand NewGameCommand
         {
