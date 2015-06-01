@@ -1663,7 +1663,7 @@ namespace Micropolis.ViewModels
         ///     Determines whether game needs to be saved and if so displays a message on screen for user confirmation.
         /// </summary>
         /// <returns>whether game needs to be saved and has not yet been saved by user (true), otherwise (false)</returns>
-        private async Task<bool> MaybeSaveCity()
+        public async Task<bool> MaybeSaveCity()
         {
             if (NeedsSaved())
             {

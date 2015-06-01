@@ -15,6 +15,7 @@ using Micropolis.Screens;
 using Microsoft.ApplicationInsights;
 using System.Collections.Generic;
 using Micropolis.Controller;
+using Windows.Storage.Pickers;
 
 #if WINDOWS_PHONE_APP
 using Windows.Media.SpeechRecognition;
@@ -82,6 +83,12 @@ namespace Micropolis.ViewModels
             set { SetProperty(ref _helpCommand, value); }
         }
 
+        public DelegateCommand LoadGameCommand
+        {
+            get { return _loadGameCommand; }
+            set { SetProperty(ref _loadGameCommand, value); }
+        }
+
         public DelegateCommand PrivacyCommand
         {
             get { return _privacyCommand; }
@@ -147,6 +154,7 @@ namespace Micropolis.ViewModels
 
             LoadUnsavedGameCommand = new DelegateCommand(LoadUnsavedGame);
             NewGameCommand = new DelegateCommand(NewGame);
+            LoadGameCommand = new DelegateCommand(LoadGame);
             ToggleSplitViewCommand = new DelegateCommand(ToggleSplitView);
 
             SettingsCommand = new DelegateCommand(OpenSettings);
@@ -170,6 +178,28 @@ namespace Micropolis.ViewModels
             
             NotifierHelper.RegisterNotifier();
 #endif
+        }
+
+        private async void LoadGame()
+        {
+            if (App.MainPageReference != null && App.MainPageReference.ViewModel != null)
+            {
+                var saveNeeded = await App.MainPageReference.ViewModel.MaybeSaveCity();
+            }
+            var picker = new FileOpenPicker();
+            picker.FileTypeFilter.Add(".cty");
+            picker.FileTypeFilter.Add(".cty_file");
+#if UWP || WINDOWS_PHONE
+                var file = await picker.PickSingleFileAndContinue();
+#else
+            var file = await picker.PickSingleFileAsync();
+#endif
+
+            if (file != null)
+            {
+                var loadCommand = new AppCommand(AppCommands.LOADFILE, file);
+                ((ISupportsAppCommands)App.Current).AppCommands.Add(loadCommand);
+            }
         }
 
         private void OpenSettings()
@@ -403,6 +433,7 @@ namespace Micropolis.ViewModels
 
         private DelegateCommand _feedbackCommand;
         private DelegateCommand _openRatingAndFeedbackCommand;
+        private DelegateCommand _loadGameCommand;
 
         public DelegateCommand NewGameCommand
         {

@@ -126,7 +126,7 @@ namespace Micropolis.Screens
 
         private void MainMenuHub_OnLayoutUpdated(object sender, object e)
         {
-            var relativePoint = GeneralHubSection.TransformToVisual(MainMenuHub).TransformPoint(new Point(0, 0));
+            var relativePoint = NewCityPanel.TransformToVisual(MainMenuHub).TransformPoint(new Point(0, 0));
             _viewModel.UpdateLogoColor(relativePoint);
         }
 

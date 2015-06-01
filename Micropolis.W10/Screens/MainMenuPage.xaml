@@ -337,7 +337,7 @@
                 <StackPanel x:Name="SplitViewPanePanel">
                     <RadioButton x:Name="HamburgerRadioButton" Command="{Binding ToggleSplitViewCommand}" Style="{StaticResource NavRadioButtonStyle}" Tag="" Content="{Binding HamburgerHomeText}" GroupName="Hamburger"/>
                     <RadioButton x:Name="NewRadioButton" Style="{StaticResource NavRadioButtonStyle}" Tag="" Content="{Binding HamburgerNewText}" GroupName="New"/>
-                    <RadioButton x:Name="LoadRadioButton" Command="{Binding NewGameCommand}" Style="{StaticResource NavRadioButtonStyle}" Tag="" Content="{Binding HamburgerLoadText}" GroupName="Load"/>
+                    <RadioButton x:Name="LoadRadioButton" Command="{Binding LoadGameCommand}" Style="{StaticResource NavRadioButtonStyle}" Tag="" Content="{Binding HamburgerLoadText}" GroupName="Load"/>
                     <!--<RadioButton x:Name="SaveRadioButton" Style="{StaticResource NavRadioButtonStyle}" Tag="" Content="{Binding HamburgerSaveText}" GroupName="Save"/>
                     <RadioButton x:Name="SaveAsRadioButton" Style="{StaticResource NavRadioButtonStyle}" Tag="" Content="{Binding HamburgerSaveAsText}" GroupName="SaveAs"/>-->
                     <RadioButton x:Name="HelpRadioButton" Command="{Binding HelpCommand}" Style="{StaticResource NavRadioButtonStyle}" Tag="" Content="{Binding HamburgerHelpText}" GroupName="Help"/>
@@ -402,99 +402,12 @@
                                 <ImageBrush ImageSource="/Assets/MainMenuTeaser.png" Stretch="UniformToFill" />
 
                             </HubSection.Background>
-
-                        </HubSection>
-
-                        <HubSection x:Name="GeneralHubSection">
-                            <HubSection.Header>
-                                <TextBlock x:Uid="GeneralHeader" x:Name="GeneralHubSectionHeader" TextLineBounds="TrimToBaseline"
-                               OpticalMarginAlignment="TrimSideBearings" Text="{Binding GeneralHubSectionHeaderText}"
-                               Foreground="Black" />
-                            </HubSection.Header>
                             <HubSection.ContentTemplate>
                                 <DataTemplate>
-                                    <StackPanel Orientation="Vertical">
-                                        <micropolis:ReviewBar />
-                                        <Button x:Name="NewGameButton" Command="{Binding NewGameCommand}"
-                                    Style="{StaticResource MenuButtonStyle}" VerticalAlignment="Top" Width="200"
-                                    Height="100">
-                                            <Grid Background="LightGray">
-                                                <Grid.RowDefinitions>
-                                                    <RowDefinition Height="*" />
-                                                    <RowDefinition Height="Auto" />
-                                                </Grid.RowDefinitions>
-                                                <TextBlock Foreground="Gray" Grid.Row="0" FontSize="40"
-                                               FontFamily="Segoe UI Symbol">
-                                        
-                                                </TextBlock>
-                                                <StackPanel Orientation="Horizontal" Background="Green" Height="30" Grid.Row="1"
-                                                Width="200">
-                                                    <TextBlock x:Name="StartNewGameButtonTB" Foreground="White" Margin="9,1,0,0"
-                                                   FontWeight="SemiLight" Text="{Binding StartNewGameButtonText}" />
-                                                </StackPanel>
-                                            </Grid>
-                                        </Button>
-                                        <Button x:Name="LoadGameButton" Command="{Binding NewGameCommand}"
-                                    Style="{StaticResource MenuButtonStyle}" VerticalAlignment="Top" Height="100"
-                                    Width="200">
-                                            <Grid Background="LightGray">
-                                                <Grid.RowDefinitions>
-                                                    <RowDefinition Height="*" />
-                                                    <RowDefinition Height="Auto" />
-                                                </Grid.RowDefinitions>
-                                                <TextBlock Foreground="Gray" Grid.Row="0" FontSize="40"
-                                               FontFamily="Segoe UI Symbol">
-                                        
-                                                </TextBlock>
-                                                <StackPanel Orientation="Horizontal" Background="Green" Height="30" Grid.Row="1"
-                                                Width="200">
-                                                    <TextBlock Foreground="White" Margin="9,1,0,0" FontWeight="SemiLight"
-                                                   x:Name="LoadGameButtonTB" Text="{Binding LoadGameButtonText}" />
-                                                </StackPanel>
-                                            </Grid>
-                                        </Button>
-                                    </StackPanel>
+                                    <micropolis:ReviewBar />
                                 </DataTemplate>
                             </HubSection.ContentTemplate>
                         </HubSection>
-                        <!--<HubSection x:Name="CityPanelNarrow">
-                            <HubSection.Header>
-                                <TextBlock x:Uid="CitiesHeader" x:Name="CitiesHubSectionNarrowHeader"
-                               TextLineBounds="TrimToBaseline"
-                               OpticalMarginAlignment="TrimSideBearings" Text="{Binding CitiesHubSectionHeaderText}"
-                               Foreground="Black" />
-                            </HubSection.Header>
-                            <HubSection.ContentTemplate>
-                                <DataTemplate>
-                                    <ItemsControl ItemsSource="{Binding Path=Cities}"
-                                      VerticalContentAlignment="Stretch">
-                                        <ItemsControl.ItemTemplate>
-                                            <DataTemplate>
-                                                <Button Click="ButtonBase_OnClick" Style="{StaticResource TileButtonStyle}">
-                                                    <Grid Width="140" Height="140">
-                                                        <Grid.RowDefinitions>
-                                                            <RowDefinition Height="*" />
-                                                            <RowDefinition Height="Auto" />
-                                                        </Grid.RowDefinitions>
-
-                                                        <Image Grid.Row="0" Source="{Binding ImageSource}" Stretch="Fill" />
-                                                        <StackPanel Grid.Row="1" Background="Green" Height="25"
-                                                        HorizontalAlignment="Stretch">
-                                                            <TextBlock Text="{Binding Title}" Height="20" Foreground="White" />
-                                                        </StackPanel>
-                                                    </Grid>
-                                                </Button>
-                                            </DataTemplate>
-                                        </ItemsControl.ItemTemplate>
-                                        <ItemsControl.ItemsPanel>
-                                            <ItemsPanelTemplate>
-                                                <WrapGrid Orientation="Horizontal" MaximumRowsOrColumns="2" />
-                                            </ItemsPanelTemplate>
-                                        </ItemsControl.ItemsPanel>
-                                    </ItemsControl>
-                                </DataTemplate>
-                            </HubSection.ContentTemplate>
-                        </HubSection>-->
                         <HubSection x:Name="NewCityPanel" VerticalContentAlignment="Stretch">
                             <HubSection.Header>
                                 <TextBlock x:Uid="CitiesHeader" x:Name="NewCityHubSectionWideHeader" TextLineBounds="TrimToBaseline"
