@@ -151,18 +151,14 @@ namespace Micropolis.ViewModels
             };
             btn.CheckedStateImageBrush = imageBrushSelected;
 
-           
-
-            //var tip = new ToolTip {Content = tipText};
-            //ToolTipService.SetToolTip(btn, tip);
-            //ToDo: re-add ToolTip
-
+            btn.ToolTip = tipText;  
+            
             btn.ClickCommand = new DelegateCommand(() =>
             {
                 try { 
-                TelemetryClient telemetry = new TelemetryClient();
+                    TelemetryClient telemetry = new TelemetryClient();
 
-                telemetry.TrackEvent("ToolbarToolUsed"+tool.Name);
+                    telemetry.TrackEvent("ToolbarToolUsed"+tool.Name);
                 }
                 catch (Exception) { }
 

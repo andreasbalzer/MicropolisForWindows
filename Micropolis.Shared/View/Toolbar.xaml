@@ -109,7 +109,8 @@
                     <RadioButton Style="{StaticResource ToolbarRadioButtonStyle}"
                                  Background="{Binding CurrentStateImageBrush}" Content="{Binding Text}"
                                  Command="{Binding ClickCommand}" IsChecked="{Binding IsChecked}" Height="{Binding Height}"
-                                 Width="{Binding Width}" />
+                                 Width="{Binding Width}" 
+                                 ToolTipService.ToolTip="{Binding ToolTip}" />
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>

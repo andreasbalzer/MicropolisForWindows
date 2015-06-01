@@ -44,6 +44,9 @@ namespace Micropolis.ViewModels
         private string _text;
         public string Text { get { return _text; } set { SetProperty(ref _text, value); } }
 
+        private string _toolTip;
+        public string ToolTip { get { return _toolTip; } set { SetProperty(ref _toolTip, value); } }
+
         private double _height;
         public double Height { get { return _height; } set { SetProperty(ref _height, value); } }
 
