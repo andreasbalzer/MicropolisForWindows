@@ -30,6 +30,11 @@ namespace Micropolis
     {
         private readonly MainGamePageViewModel _viewModel;
 
+       /* private void ToggleSplitView(object sender, RoutedEventHandler e)
+        {
+            
+        }*/
+
         public MainGamePage()
         {
             InitializeComponent();
@@ -190,6 +195,11 @@ namespace Micropolis
         public void DrawingAreaScrollChangeView(double horizontalPos, double verticalPos, float zoomFactor)
         {
             DrawingAreaScroll.ChangeView(horizontalPos, verticalPos, zoomFactor);
+        }
+
+        private void HamburgerRadioButton_Click(object sender, RoutedEventArgs e)
+        {
+            SplitView.IsPaneOpen = !SplitView.IsPaneOpen;
         }
     }
 }

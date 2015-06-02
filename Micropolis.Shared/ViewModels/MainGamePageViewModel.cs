@@ -59,6 +59,81 @@ namespace Micropolis.ViewModels
         private string _budgetButtonText;
         private bool _confirmBarIsVisible;
 
+        private string _hamburgerHomeText;
+        private string _hamburgerNewText;
+        private string _hamburgerLoadText;
+        private string _hamburgerSaveText;
+        private string _hamburgerSaveAsText;
+        private string _hamburgerPrivacyText;
+        private string _hamburgerHelpText;
+        private string _hamburgerAboutText;
+        private string _hamburgerSettingsText;
+        private string _hamburgerLicenseText;
+        private string _hamburgerRatingText;
+
+        private bool _splitViewIsOpen;
+        private DelegateCommand _toggleSplitViewCommand;
+        private DelegateCommand _helpCommand;
+        private DelegateCommand _privacyCommand;
+        private DelegateCommand _settingsCommand;
+        private DelegateCommand _licenseCommand;
+        private DelegateCommand _aboutCommand;
+
+        public string HamburgerHomeText { get { return _hamburgerHomeText; } set { SetProperty(ref _hamburgerHomeText, value); } }
+        public string HamburgerNewText { get { return _hamburgerNewText; } set { SetProperty(ref _hamburgerNewText, value); } }
+        public string HamburgerLoadText { get { return _hamburgerLoadText; } set { SetProperty(ref _hamburgerLoadText, value); } }
+        public string HamburgerSaveText { get { return _hamburgerSaveText; } set { SetProperty(ref _hamburgerSaveText, value); } }
+        public string HamburgerSaveAsText { get { return _hamburgerSaveAsText; } set { SetProperty(ref _hamburgerSaveAsText, value); } }
+        public string HamburgerPrivacyText { get { return _hamburgerPrivacyText; } set { SetProperty(ref _hamburgerPrivacyText, value); } }
+        public string HamburgerHelpText { get { return _hamburgerHelpText; } set { SetProperty(ref _hamburgerHelpText, value); } }
+        public string HamburgerAboutText { get { return _hamburgerAboutText; } set { SetProperty(ref _hamburgerAboutText, value); } }
+        public string HamburgerSettingsText { get { return _hamburgerSettingsText; } set { SetProperty(ref _hamburgerSettingsText, value); } }
+        public string HamburgerLicenseText { get { return _hamburgerLicenseText; } set { SetProperty(ref _hamburgerLicenseText, value); } }
+        public string HamburgerRatingText { get { return _hamburgerRatingText; } set { SetProperty(ref _hamburgerRatingText, value); } }
+
+        public DelegateCommand HelpCommand
+        {
+            get { return _helpCommand; }
+            set { SetProperty(ref _helpCommand, value); }
+        }
+
+        public DelegateCommand LoadGameCommand
+        {
+            get { return _loadGameCommand; }
+            set { SetProperty(ref _loadGameCommand, value); }
+        }
+
+        public DelegateCommand PrivacyCommand
+        {
+            get { return _privacyCommand; }
+            set { SetProperty(ref _privacyCommand, value); }
+        }
+
+        public DelegateCommand SettingsCommand
+        {
+            get { return _settingsCommand; }
+            set { SetProperty(ref _settingsCommand, value); }
+        }
+
+        public DelegateCommand LicenseCommand
+        {
+            get { return _licenseCommand; }
+            set { SetProperty(ref _licenseCommand, value); }
+        }
+
+        public DelegateCommand AboutCommand
+        {
+            get { return _aboutCommand; }
+            set { SetProperty(ref _aboutCommand, value); }
+        }
+
+
+        public bool SplitViewIsOpen
+        {
+            get { return _splitViewIsOpen; }
+            set { SetProperty(ref _splitViewIsOpen, value); }
+        }
+
         /// <summary>
         ///     The current earthquake occuring.
         /// </summary>
@@ -299,6 +374,32 @@ namespace Micropolis.ViewModels
             SpeedFastCommand = new DelegateCommand(SpeedFast);
             SpeedSuperFastCommand = new DelegateCommand(SpeedSuperFast);
 
+            HamburgerHomeText = Strings.GetString("hamburgerMenu.Home");
+            HamburgerNewText = Strings.GetString("hamburgerMenu.New");
+            HamburgerLoadText = Strings.GetString("hamburgerMenu.Load");
+            HamburgerSaveText = Strings.GetString("hamburgerMenu.Save");
+            HamburgerSaveAsText = Strings.GetString("hamburgerMenu.SaveAs");
+            HamburgerPrivacyText = Strings.GetString("hamburgerMenu.Privacy");
+            HamburgerHelpText = Strings.GetString("hamburgerMenu.Help");
+            HamburgerAboutText = Strings.GetString("hamburgerMenu.About");
+            HamburgerSettingsText = Strings.GetString("hamburgerMenu.Settings");
+            HamburgerLicenseText = Strings.GetString("hamburgerMenu.License");
+            HamburgerRatingText = Strings.GetString("hamburgerMenu.Rating");
+
+            NewGameCommand = new DelegateCommand(NewGame);
+            LoadGameCommand = new DelegateCommand(LoadButton_Click);
+            SaveGameCommand = new DelegateCommand(SaveButton_Click);
+            SaveGameAsCommand = new DelegateCommand(SaveAsButton_Click);
+            ToggleSplitViewCommand = new DelegateCommand(ToggleSplitView);
+
+            SettingsCommand = new DelegateCommand(OpenSettings);
+            AboutCommand = new DelegateCommand(OpenAbout);
+            LicenseCommand = new DelegateCommand(OpenLicense);
+            PrivacyCommand = new DelegateCommand(OpenPrivacy);
+            HelpCommand = new DelegateCommand(OpenHelp);
+            RateCommand = new DelegateCommand(OpenRatingAndFeedback);
+
+
             try
             {
                 _telemetry = new TelemetryClient();
@@ -307,6 +408,156 @@ namespace Micropolis.ViewModels
             catch (Exception)
             {
             }
+        }
+
+        private void ToggleSplitView()
+        {
+            SplitViewIsOpen = !SplitViewIsOpen;
+        }
+
+        private void OpenSettings()
+        {
+            try
+            {
+                _telemetry.TrackEvent("MainMenuPreferencesClicked");
+            }
+            catch (Exception)
+            {
+            }
+
+            var settings = new SettingsFlyout();
+            settings.Content = new PreferencesUserControl();
+            settings.Title = Strings.GetString("settingsCharm.Preferences");
+            settings.ShowIndependent();
+        }
+
+        private void OpenLicense()
+        {
+            try
+            {
+                _telemetry.TrackEvent("MainMenuLicenseClicked");
+            }
+            catch (Exception)
+            {
+            }
+
+            App.MainMenuReference.Frame.Navigate(typeof(Screens.LicensePage));
+        }
+
+        private void OpenAbout()
+        {
+            try
+            {
+                _telemetry.TrackEvent("MainMenuAboutClicked");
+            }
+            catch (Exception)
+            {
+            }
+
+            var settings = new SettingsFlyout();
+            settings.Content = new AboutUserControl();
+
+            settings.Title = Strings.GetString("settingsCharm.About");
+            settings.ShowIndependent();
+        }
+
+        private void OpenPrivacy()
+        {
+            try
+            {
+                _telemetry.TrackEvent("MainMenuPrivacyClicked");
+            }
+            catch (Exception)
+            {
+            }
+
+            var settings = new SettingsFlyout();
+            settings.Content = new PrivacyUserControl();
+            settings.Title = Strings.GetString("settingsCharm.Privacy");
+            settings.ShowIndependent();
+        }
+
+        private void OpenHelp()
+        {
+            try
+            {
+                _telemetry.TrackEvent("MainMenuHelpClicked");
+            }
+            catch (Exception)
+            {
+            }
+
+            App.MainMenuReference.Frame.Navigate(typeof(Screens.HelpPage));
+        }
+
+        private void OpenRatingAndFeedback()
+        {
+            try
+            {
+                _telemetry.TrackEvent("MainMenuRatingClicked");
+            }
+            catch (Exception)
+            {
+            }
+
+            var settings = new SettingsFlyout();
+            settings.Content = new RatingFlyout();
+            settings.Title = Strings.GetString("settingsCharm.Rating");
+            settings.ShowIndependent();
+        }
+
+
+
+        /// <summary>
+        ///     Handles the Click event of the NewGameButton control and loads the game page.
+        /// </summary>
+        private void NewGame()
+        {
+            try
+            {
+                _telemetry.TrackEvent("MainMenuLoadNewGameClicked");
+            }
+            catch (Exception)
+            {
+            }
+           
+            var saveNeeded = MaybeSaveCity().ContinueWith((e) => {
+                App.MainPageReference.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                {
+                    App.MainPageReference.Frame.Navigate(typeof(Screens.MainMenuPage));
+                });
+            });
+        }
+
+        public DelegateCommand RateCommand
+        {
+            get { return _openRatingAndFeedbackCommand; }
+            set { SetProperty(ref _openRatingAndFeedbackCommand, value); }
+        }
+
+        public DelegateCommand NewGameCommand
+        {
+            get { return _newGameCommand; }
+            set { SetProperty(ref _newGameCommand, value); }
+        }
+
+
+        public DelegateCommand ToggleSplitViewCommand
+        {
+            get { return _toggleSplitViewCommand; }
+            set { SetProperty(ref _toggleSplitViewCommand, value); }
+        }
+
+        public DelegateCommand SaveGameCommand
+        {
+            get { return _saveGameCommand; }
+            set { SetProperty(ref _saveGameCommand, value); }
+        }
+
+        public DelegateCommand SaveGameAsCommand
+        {
+            get { return _saveGameAsCommand; }
+            set { SetProperty(ref _saveGameAsCommand, value); }
         }
 
         void _newCityDialogViewModel_CancelClicked(object sender, EventArgs e)
@@ -1334,6 +1585,16 @@ namespace Micropolis.ViewModels
 
         private bool _telemetryMouseWheelUsedReported;
         private bool _telemetryTouchUsedReported;
+        private DelegateCommand _loadGameCommand;
+        private DelegateCommand _newGameCommand;
+        private DelegateCommand _openRatingAndFeedbackCommand;
+        private DelegateCommand _saveGameAsCommand;
+        private DelegateCommand _saveGameCommand;
+
+
+
+
+
 
         /// <summary>
         ///     Handles the PointerWheelChanged event of the DrawingArea control for zooming.
