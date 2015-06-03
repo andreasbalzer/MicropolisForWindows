@@ -84,7 +84,7 @@ namespace Micropolis
         }
 
         /// <summary>
-        ///     http://marcominerva.wordpress.com/2013/10/16/handling-visualstate-in-windows-8-1-store-apps/
+        /////     http://marcominerva.wordpress.com/2013/10/16/handling-visualstate-in-windows-8-1-store-apps/
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

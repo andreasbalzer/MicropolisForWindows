@@ -13,7 +13,7 @@ namespace Micropolis.ViewModels
         private readonly TelemetryClient _telemetry;
         private readonly string DONEFEEDBACK = "disabled";
         private readonly string INITIALTIMEUNTILFEEDBACK = "5";
-        private readonly string POSTPONETIMEUNTILFEEDBACK = "10";
+        private readonly string POSTPONETIMEUNTILFEEDBACK = "11";
         private readonly string SHOWFEEDBACK = "1";
         private bool _feedbackIsVisible;
         private string _feedbackMessageText;
@@ -139,6 +139,13 @@ namespace Micropolis.ViewModels
         {
             bool showFeedback;
             var content = Prefs.GetString("feedbackSent", INITIALTIMEUNTILFEEDBACK);
+
+            if (content != DONEFEEDBACK)
+            {
+                content = (Int32.Parse(content) - 1).ToString();
+                Prefs.PutString("feedbackSent", content);
+            }
+
             showFeedback = content == SHOWFEEDBACK;
             if (showFeedback)
             {
@@ -188,11 +195,6 @@ namespace Micropolis.ViewModels
             }
             else
             {
-                if (content != DONEFEEDBACK)
-                {
-                    var newContent = (Int32.Parse(content) - 1).ToString();
-                    Prefs.PutString("feedbackSent", newContent);
-                }
                 FeedbackIsVisible = false;
             }
         }
