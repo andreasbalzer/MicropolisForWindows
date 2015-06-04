@@ -261,6 +261,7 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\WP\Logo.150.scale-180.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\WP\Logo.150.scale-240.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\WP\Logo.150.scale-80.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\WP\Logo.300.png" />
     <Content Include="$(MSBuildThisFileDirectory)FILE_FORMAT.txt" />
     <Content Include="$(MSBuildThisFileDirectory)graphics\airport.png" />
     <Content Include="$(MSBuildThisFileDirectory)graphics\airport_3x3.png" />
