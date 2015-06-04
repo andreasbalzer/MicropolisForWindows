@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest">
-  <Identity Name="62155AndreasBalzer.MicropolisforWindows" Publisher="CN=DF151369-BF2A-4390-919A-40CE0C57CC96" Version="1.1.0.26" />
+  <Identity Name="62155AndreasBalzer.MicropolisforWindows" Publisher="CN=DF151369-BF2A-4390-919A-40CE0C57CC96" Version="1.1.0.27" />
   <Properties>
     <DisplayName>Micropolis for Windows</DisplayName>
     <PublisherDisplayName>Andreas Balzer</PublisherDisplayName>
