@@ -48,51 +48,51 @@ namespace Micropolis.View
 
 
 
-        public bool IsShowTopArrow
+        public bool IsTopArrowVisible
         {
-            get { return (bool)GetValue(IsShowTopArrowProperty); }
-            set { SetValue(IsShowTopArrowProperty, value); }
+            get { return (bool)GetValue(IsTopArrowVisibleProperty); }
+            set { SetValue(IsTopArrowVisibleProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for IsShowTopArrow.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty IsShowTopArrowProperty =
-            DependencyProperty.Register("IsShowTopArrow", typeof(bool), typeof(MenuButton), new PropertyMetadata(false));
+        // Using a DependencyProperty as the backing store for IsTopArrowVisible.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty IsTopArrowVisibleProperty =
+            DependencyProperty.Register("IsTopArrowVisible", typeof(bool), typeof(MenuButton), new PropertyMetadata(false));
 
 
 
-        public bool IsShowBottomArrow
+        public bool IsBottomArrowVisible
         {
-            get { return (bool)GetValue(IsShowBottomArrowProperty); }
-            set { SetValue(IsShowBottomArrowProperty, value); }
+            get { return (bool)GetValue(IsBottomArrowVisibleProperty); }
+            set { SetValue(IsBottomArrowVisibleProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for IsShowBottomArrow.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty IsShowBottomArrowProperty =
-            DependencyProperty.Register("IsShowBottomArrow", typeof(bool), typeof(MenuButton), new PropertyMetadata(false));
+        // Using a DependencyProperty as the backing store for IsBottomArrowVisible.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty IsBottomArrowVisibleProperty =
+            DependencyProperty.Register("IsBottomArrowVisible", typeof(bool), typeof(MenuButton), new PropertyMetadata(false));
 
 
 
-        public bool IsShowImage
+        public bool IsImageVisible
         {
-            get { return (bool)GetValue(IsShowImageProperty); }
-            set { SetValue(IsShowImageProperty, value); }
+            get { return (bool)GetValue(IsImageVisibleProperty); }
+            set { SetValue(IsImageVisibleProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for IsShowImage.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty IsShowImageProperty =
-            DependencyProperty.Register("IsShowImage", typeof(bool), typeof(MenuButton), new PropertyMetadata(false));
+        // Using a DependencyProperty as the backing store for IsImageVisible.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty IsImageVisibleProperty =
+            DependencyProperty.Register("IsImageVisible", typeof(bool), typeof(MenuButton), new PropertyMetadata(false));
 
 
 
-        public bool IsShowText
+        public bool IsTextVisible
         {
-            get { return (bool)GetValue(IsShowTextProperty); }
-            set { SetValue(IsShowTextProperty, value); }
+            get { return (bool)GetValue(IsTextVisibleProperty); }
+            set { SetValue(IsTextVisibleProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for IsShowText.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty IsShowTextProperty =
-            DependencyProperty.Register("IsShowText", typeof(bool), typeof(MenuButton), new PropertyMetadata(true));
+        // Using a DependencyProperty as the backing store for IsTextVisible.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty IsTextVisibleProperty =
+            DependencyProperty.Register("IsTextVisible", typeof(bool), typeof(MenuButton), new PropertyMetadata(true));
 
 
     }
