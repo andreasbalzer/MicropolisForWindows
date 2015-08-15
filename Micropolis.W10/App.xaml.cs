@@ -1,4 +1,20 @@
-﻿using Micropolis.Model.Entities;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.ApplicationModel;
+using Windows.ApplicationModel.Activation;
+using Windows.Foundation;
+using Windows.Foundation.Collections;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Primitives;
+using Windows.UI.Xaml.Data;
+using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Navigation;
+using Micropolis.Model.Entities;
 using Micropolis.Screens;
 using Microsoft.ApplicationInsights;
 using System;
@@ -21,7 +37,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=402347&clcid=0x409
+
 
 namespace Micropolis
 {
@@ -37,7 +53,7 @@ namespace Micropolis
     // Project website: http://code.google.com/p/micropolis/
 
     /// <summary>
-    ///     Stellt das anwendungsspezifische Verhalten bereit, um die Standardanwendungsklasse zu ergänzen.
+    /// Provides application-specific behavior to supplement the default Application class.
     /// </summary>
     sealed partial class App : Application, ISupportsAppCommands
     {
@@ -45,8 +61,9 @@ namespace Micropolis
         /// Allows tracking page views, exceptions and other telemetry through the Microsoft Application Insights service.
         /// </summary>
         public TelemetryClient _telemetry;
-        
+
         private Frame rootFrame;
+
 
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
@@ -54,6 +71,9 @@ namespace Micropolis
         /// </summary>
         public App()
         {
+            Microsoft.ApplicationInsights.WindowsAppInitializer.InitializeAsync(
+                Microsoft.ApplicationInsights.WindowsCollectors.Metadata |
+                Microsoft.ApplicationInsights.WindowsCollectors.Session);
             _telemetry = new Microsoft.ApplicationInsights.TelemetryClient();
 
             this.InitializeComponent();
@@ -68,7 +88,9 @@ namespace Micropolis
             Suspending += OnSuspending;
             UnhandledException += App_UnhandledException;
             Resuming += App_Resuming;
+
         }
+
 
         /// <summary>
         ///     Indicates if user navigated away from main page.
@@ -148,6 +170,7 @@ namespace Micropolis
 
         }
 
+
         /// <summary>
         ///     Handles the UnhandledException event of the App control to catch them during debug.
         /// </summary>
@@ -171,6 +194,7 @@ namespace Micropolis
             await dialog.ShowAsync();
         }
 
+
         /// <summary>
         /// Invoked when the application is launched normally by the end user.  Other entry points
         /// will be used such as when the application is launched to open a specific file.
@@ -186,7 +210,7 @@ namespace Micropolis
             }
 #endif
 
-            Frame rootFrame = Window.Current.Content as Frame;
+            rootFrame = Window.Current.Content as Frame;
 
             // Do not repeat app initialization when the Window already has content,
             // just ensure that the window is active
@@ -200,11 +224,6 @@ namespace Micropolis
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {
                     //TODO: Load state from previously suspended application
-                    try
-                    {
-                        _telemetry.TrackEvent("AppPreviouslyTerminated");
-                    }
-                    catch (Exception) { }
                 }
 
                 // Place the frame in the current Window
@@ -315,5 +334,6 @@ namespace Micropolis
                 Window.Current.Activate();
             }
         }
+
     }
 }

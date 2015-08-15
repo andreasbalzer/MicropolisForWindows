@@ -368,6 +368,7 @@
     <MainPackageIdentityName>62155AndreasBalzer.Megalopolis</MainPackageIdentityName>
     <MainPackageIdentityName>62155AndreasBalzer.MegalopolisforWindows</MainPackageIdentityName>
     <MainPackageIdentityName>62155AndreasBalzer.Micropolis</MainPackageIdentityName>
+    <MainPackageIdentityName>62155AndreasBalzer.MicropolisforWindowsClosedBeta</MainPackageIdentityName>
     <MainPackageIdentityName>62155AndreasBalzer.MicropolisfrWindows</MainPackageIdentityName>
     <MainPackageIdentityName>62155AndreasBalzer.14353CB885B66</MainPackageIdentityName>
     <MainPackageIdentityName>62155AndreasBalzer.Spiegel-App</MainPackageIdentityName>
@@ -377,22 +378,22 @@
       <PackageInfo>
         <OsMinVersion>6.3.0.0</OsMinVersion>
         <PackageArchitecture>Neutral</PackageArchitecture>
-        <PackageMaxArchitectureVersion>1.1.0.26</PackageMaxArchitectureVersion>
+        <PackageMaxArchitectureVersion>1.1.0.27</PackageMaxArchitectureVersion>
       </PackageInfo>
       <PackageInfo>
         <OsMinVersion>6.3.0.0</OsMinVersion>
         <PackageArchitecture>Neutral</PackageArchitecture>
-        <PackageMaxArchitectureVersion>1.1.0.26</PackageMaxArchitectureVersion>
+        <PackageMaxArchitectureVersion>1.1.0.27</PackageMaxArchitectureVersion>
       </PackageInfo>
       <PackageInfo>
         <OsMinVersion>6.3.0.0</OsMinVersion>
         <PackageArchitecture>Neutral</PackageArchitecture>
-        <PackageMaxArchitectureVersion>1.1.0.26</PackageMaxArchitectureVersion>
+        <PackageMaxArchitectureVersion>1.1.0.27</PackageMaxArchitectureVersion>
       </PackageInfo>
       <PackageInfo>
         <OsMinVersion>6.3.0.0</OsMinVersion>
         <PackageArchitecture>Neutral</PackageArchitecture>
-        <PackageMaxArchitectureVersion>1.1.0.26</PackageMaxArchitectureVersion>
+        <PackageMaxArchitectureVersion>1.1.0.27</PackageMaxArchitectureVersion>
       </PackageInfo>
     </BundleInfo>
   </PackageInfoList>
