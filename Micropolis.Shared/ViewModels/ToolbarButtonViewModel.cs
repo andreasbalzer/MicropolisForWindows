@@ -9,39 +9,39 @@ namespace Micropolis.ViewModels
     public class ToolbarButtonViewModel : BindableBase
     {
 
-        private ImageBrush _uncheckedStateImageBrush;
-        public ImageBrush UncheckedStateImageBrush
+        private ImageSource _uncheckedStateImageSource;
+        public ImageSource UncheckedStateImageSource
         {
-            get { return _uncheckedStateImageBrush; }
+            get { return _uncheckedStateImageSource; }
             set
             {
-                SetProperty(ref _uncheckedStateImageBrush, value);
+                SetProperty(ref _uncheckedStateImageSource, value);
                 if (!IsChecked)
                 {
-                    CurrentStateImageBrush = UncheckedStateImageBrush;
+                    CurrentStateImageSource = UncheckedStateImageSource;
                 }
             }
         }
 
-        private ImageBrush _checkedStateImageBrush;
-        public ImageBrush CheckedStateImageBrush
+        private ImageSource _checkedStateImageSource;
+        public ImageSource CheckedStateImageSource
         {
-            get { return _checkedStateImageBrush; }
+            get { return _checkedStateImageSource; }
             set
             {
-                SetProperty(ref _checkedStateImageBrush, value);
+                SetProperty(ref _checkedStateImageSource, value);
 
                 if (IsChecked)
                 {
-                    CurrentStateImageBrush = CheckedStateImageBrush;
+                    CurrentStateImageSource = CheckedStateImageSource;
                 }
             }
         }
 
-        private ImageBrush _currentStateImageBrush = null;
-        public ImageBrush CurrentStateImageBrush { get { return _currentStateImageBrush; } set { SetProperty(ref _currentStateImageBrush, value); } }
+        private ImageSource _currentStateImageBrush = null;
+        public ImageSource CurrentStateImageSource { get { return _currentStateImageBrush; } set { SetProperty(ref _currentStateImageBrush, value); } }
 
-        private string _text;
+        private string _text="";
         public string Text { get { return _text; } set { SetProperty(ref _text, value); } }
 
         private string _toolTip;
@@ -64,12 +64,12 @@ namespace Micropolis.ViewModels
 
         public void Uncheck()
         {
-            CurrentStateImageBrush = this.UncheckedStateImageBrush;
+            CurrentStateImageSource = this.UncheckedStateImageSource;
         }
 
         public void Check()
         {
-            CurrentStateImageBrush = this.CheckedStateImageBrush;
+            CurrentStateImageSource = this.CheckedStateImageSource;
         }
     }
 }

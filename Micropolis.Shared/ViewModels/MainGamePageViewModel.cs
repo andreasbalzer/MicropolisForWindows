@@ -1314,7 +1314,7 @@ namespace Micropolis.ViewModels
 #if WINDOWS_PHONE_APP
             _toolsPanelViewModel.Mode = ToolBarMode.WIDE;
 #else
-            _toolsPanelViewModel.Mode = (e.State == "Snapped" || e.State == "Narrow")
+            _toolsPanelViewModel.Mode = (e.State == "Snapped" || e.State == "Narrow" || e.State == "sub1337")
                 ? ToolBarMode.FLYOUT
                 : ToolBarMode.NORMAL;
 #endif

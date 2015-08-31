@@ -17,7 +17,34 @@ namespace Micropolis.ViewModels
         private MainGamePageViewModel _mainPageViewModel;
         private Dictionary<MicropolisTool, ToolbarButtonViewModel> _toolBtns;
 
+        private int _height;
+        private int _width;
+
         private ToolBarMode _mode;
+
+        /// <summary>
+        /// Height
+        /// </summary>
+        public int Height
+        {
+            get { return _height; }
+            set
+            {
+                SetProperty(ref _height, value);
+            }
+        }
+
+        /// <summary>
+        /// Width
+        /// </summary>
+        public int Width
+        {
+            get { return _width; }
+            set
+            {
+                SetProperty(ref _width, value);
+            }
+        }
 
         /// <summary>
         /// Mode of the toolbar.
@@ -125,31 +152,32 @@ namespace Micropolis.ViewModels
 
             if (_mode == ToolBarMode.NORMAL)
             {
-                btn = new ToolbarButtonViewModel { Width = 32, Height = 32 };
+                btn = new ToolbarButtonViewModel { Width = 40, Height = 40 };
+                Width = 50;
+                Height = 50;
             }
             else if (_mode == ToolBarMode.FLYOUT || _mode == ToolBarMode.WIDE)
             {
                 btn = new ToolbarButtonViewModel { Width = 64, Height = 64 };
+                Width = 64;
+                Height = 64;
             }
             else
             {
                 btn = new ToolbarButtonViewModel { Width = 32, Height = 32 };
+                Width = 32;
+                Height = 32;
             }
 
+
+
+            var imageSource = new BitmapImage(new Uri(iconName, UriKind.RelativeOrAbsolute));
             
+            btn.UncheckedStateImageSource = imageSource;
 
-            var imageBrush = new ImageBrush
-            {
-                ImageSource = new BitmapImage(new Uri(iconName, UriKind.RelativeOrAbsolute))
-            };
-
-            btn.UncheckedStateImageBrush = imageBrush;
-
-            var imageBrushSelected = new ImageBrush
-            {
-                ImageSource = new BitmapImage(new Uri(iconSelectedName, UriKind.RelativeOrAbsolute))
-            };
-            btn.CheckedStateImageBrush = imageBrushSelected;
+            var imageSourceSelected = new BitmapImage(new Uri(iconSelectedName, UriKind.RelativeOrAbsolute));
+            
+            btn.CheckedStateImageSource = imageSourceSelected;
 
             btn.ToolTip = tipText;  
             

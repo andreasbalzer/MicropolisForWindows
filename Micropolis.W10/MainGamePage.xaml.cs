@@ -60,6 +60,7 @@ namespace Micropolis
             }
             catch (Exception) { }
         }
+
         private TelemetryClient _telemetry;
 
         void _viewModel_PlaySound(object sender, Uri file)
@@ -100,6 +101,8 @@ namespace Micropolis
         /// </summary>
         private void DetermineVisualState()
         {
+            var oldState = _state;
+
             Rect size = Window.Current.Bounds;
             
                 if (size.Width >= 1337)
@@ -110,10 +113,13 @@ namespace Micropolis
                     _state = "Narrow";
                 else
                     _state = "Sub1337";
-            
 
-            VisualStateManager.GoToState(this, _state, true);
-            OnVisualStateChanged();
+
+            //VisualStateManager.GoToState(this, _state, true);
+            if (oldState != _state)
+            {
+                OnVisualStateChanged();
+            }
         }
 
         private void OnVisualStateChanged()

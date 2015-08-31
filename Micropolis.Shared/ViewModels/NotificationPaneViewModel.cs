@@ -100,7 +100,12 @@ namespace Micropolis.ViewModels
             HeaderTextBlockText = Strings.GetString(msg.Name + ".title");
             HeaderSPBackground = new SolidColorBrush(ColorParser.ParseColor(Strings.GetString(msg.Name + ".color")));
 
-            Messages.Add(Strings.GetString(msg.Name + ".detail"));
+            Messages.Clear();
+            string[] messages = Strings.GetString(msg.Name + ".detail").Split(new string[] { "<br>" }, StringSplitOptions.RemoveEmptyEntries);
+            foreach (string message in messages)
+            {
+                Messages.Add(message);
+            }
             
             DetailPaneIsVisible = true;
         }

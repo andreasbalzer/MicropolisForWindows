@@ -63,7 +63,7 @@
                 <TextBlock x:Name="notificationGrowthTextBlock" Grid.Row="5" Grid.Column="0" Foreground="Black" Text="{Binding NotificationGrowthTextBlockText}" />
                 <TextBlock x:Name="growthRateStrTextBlock" Grid.Row="5" Grid.Column="2" Foreground="Black" Text="{Binding GrowthRateStrTextBlockText}" />
             </Grid>
-            <ItemsControl x:Name="detailPane" ItemsSource="{Binding Messages, Mode=TwoWay}" Visibility="{Binding DetailPaneIsVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <ItemsControl x:Name="detailPane" Margin="5" ItemsSource="{Binding Messages, Mode=TwoWay}" Visibility="{Binding DetailPaneIsVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel Orientation="Vertical" />
@@ -71,7 +71,7 @@
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding}" Foreground="Black" />
+                        <TextBlock Text="{Binding}" Foreground="Black" TextWrapping="Wrap" />
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>

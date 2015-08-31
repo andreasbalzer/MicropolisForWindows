@@ -706,6 +706,23 @@
     <None Include="$(MSBuildThisFileDirectory)strings\CityStrings_fr.properties" />
     <None Include="$(MSBuildThisFileDirectory)strings\GuiStrings_fr.properties" />
     <None Include="$(MSBuildThisFileDirectory)strings\StatusMessages_fr.properties" />
+    <None Include="$(MSBuildThisFileDirectory)View\BudgetDialog.xaml" />
+    <None Include="$(MSBuildThisFileDirectory)View\ConfirmationBar.xaml" />
+    <None Include="$(MSBuildThisFileDirectory)View\DemandIndicator.xaml" />
+    <None Include="$(MSBuildThisFileDirectory)View\EvaluationPane.xaml" />
+    <None Include="$(MSBuildThisFileDirectory)View\GraphArea.xaml" />
+    <None Include="$(MSBuildThisFileDirectory)View\GraphsPane.xaml" />
+    <None Include="$(MSBuildThisFileDirectory)View\MenuButton.xaml" />
+    <None Include="$(MSBuildThisFileDirectory)View\MessagesPane.xaml" />
+    <None Include="$(MSBuildThisFileDirectory)View\MicropolisDrawingArea.xaml" />
+    <None Include="$(MSBuildThisFileDirectory)View\NewCityDialog.xaml" />
+    <None Include="$(MSBuildThisFileDirectory)View\NewCityDialogSmall.xaml" />
+    <None Include="$(MSBuildThisFileDirectory)View\NotificationPane.xaml" />
+    <None Include="$(MSBuildThisFileDirectory)View\OverlayMapView.xaml" />
+    <None Include="$(MSBuildThisFileDirectory)View\RatingFlyout.xaml" />
+    <None Include="$(MSBuildThisFileDirectory)View\ReviewBar.xaml" />
+    <None Include="$(MSBuildThisFileDirectory)View\ThumbnailRenderer.xaml" />
+    <None Include="$(MSBuildThisFileDirectory)View\Toolbar.xaml" />
   </ItemGroup>
   <ItemGroup>
     <PRIResource Include="$(MSBuildThisFileDirectory)strings\de-de\Resources.resw" />

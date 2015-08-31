@@ -40,7 +40,7 @@
                         <Setter Property="Background" Value="Transparent" />
                         <Setter Property="Foreground" Value="{StaticResource RadioButtonContentForegroundThemeBrush}" />
                         <Setter Property="Padding" Value="0,0,0,0" />
-                        <Setter Property="HorizontalAlignment" Value="Stretch" />
+                        <Setter Property="HorizontalAlignment" Value="Left" />
                         <Setter Property="VerticalAlignment" Value="Center" />
                         <Setter Property="HorizontalContentAlignment" Value="Left" />
                         <Setter Property="VerticalContentAlignment" Value="Top" />
@@ -71,12 +71,6 @@
                                             </VisualStateGroup>
                                         </VisualStateManager.VisualStateGroups>
                                         <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="Auto" />
-                                                <ColumnDefinition Width="*" />
-                                            </Grid.ColumnDefinitions>
-                                            <!--<Rectangle x:Name="FocusVisualWhite" Height="29" Opacity="0" StrokeDashOffset="1.5" StrokeEndLineCap="Square" Stroke="{StaticResource FocusVisualWhiteStrokeThemeBrush}" StrokeDashArray="1,1" VerticalAlignment="Top" Width="29"/>
-                                            <Rectangle x:Name="FocusVisualBlack" Height="29" Opacity="0" StrokeDashOffset="0.5" StrokeEndLineCap="Square" Stroke="{StaticResource FocusVisualBlackStrokeThemeBrush}" StrokeDashArray="1,1" VerticalAlignment="Top" Width="29"/>-->
                                             <ContentPresenter x:Name="ContentPresenter"
                                                               ContentTemplate="{TemplateBinding ContentTemplate}"
                                                               ContentTransitions="{TemplateBinding ContentTransitions}"
@@ -97,20 +91,24 @@
     <Grid Visibility="{Binding ToolBarIsVisible, Converter={StaticResource BooleanToVisibilityConverter}}" Margin="0,4,0,-4">
         <ItemsControl Background="White" x:Name="toolBar" HorizontalAlignment="Left"
                       Margin="0"
-                      ItemsSource="{Binding ToolBarItems}">
+                      ItemsSource="{Binding ToolBarItems}" HorizontalContentAlignment="Left">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <WrapGrid Orientation="Vertical" VerticalAlignment="Stretch" HorizontalChildrenAlignment="Left"
-                              Margin="0" />
+                    <WrapGrid Orientation="Vertical" VerticalAlignment="Stretch" HorizontalChildrenAlignment="Left" HorizontalAlignment="Stretch"
+                              Margin="0" Background="Red" ItemHeight="{Binding Height, Mode=TwoWay}" ItemWidth="{Binding Width, Mode=TwoWay}" />
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <RadioButton Style="{StaticResource ToolbarRadioButtonStyle}"
-                                 Background="{Binding CurrentStateImageBrush}" Content="{Binding Text}"
+                    <RadioButton Style="{StaticResource ToolbarRadioButtonStyle}" HorizontalContentAlignment="Left" HorizontalAlignment="Left"
+                                 Content="{Binding Text}"
                                  Command="{Binding ClickCommand}" IsChecked="{Binding IsChecked}" Height="{Binding Height}"
                                  Width="{Binding Width}" 
-                                 ToolTipService.ToolTip="{Binding ToolTip}" />
+                                 ToolTipService.ToolTip="{Binding ToolTip}">
+                        <RadioButton.Background>
+                            <ImageBrush ImageSource="{Binding CurrentStateImageSource}" Stretch="Fill" />
+                        </RadioButton.Background>
+                    </RadioButton>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
