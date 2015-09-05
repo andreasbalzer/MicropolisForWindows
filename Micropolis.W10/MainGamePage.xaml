@@ -157,8 +157,8 @@
                     <RadioButton x:Name="HamburgerRadioButton" Command="{Binding ToggleSplitViewCommand}" Style="{StaticResource NavRadioButtonStyle}" Tag="" Content="{Binding HamburgerHomeText}" GroupName="Hamburger"/>
                     <RadioButton x:Name="NewRadioButton" Command="{Binding NewGameCommand}" Style="{StaticResource NavRadioButtonStyle}" Tag="" Content="{Binding HamburgerNewText}" GroupName="New"/>
                     <RadioButton x:Name="LoadRadioButton" Command="{Binding LoadGameCommand}" Style="{StaticResource NavRadioButtonStyle}" Tag="" Content="{Binding HamburgerLoadText}" GroupName="Load"/>
-                    <RadioButton x:Name="SaveRadioButton" Style="{StaticResource NavRadioButtonStyle}" Tag="" Content="{Binding HamburgerSaveText}" GroupName="Save"/>
-                    <RadioButton x:Name="SaveAsRadioButton" Style="{StaticResource NavRadioButtonStyle}" Tag="" Content="{Binding HamburgerSaveAsText}" GroupName="SaveAs"/>
+                    <RadioButton x:Name="SaveRadioButton" Command="{Binding SaveCommand}" Style="{StaticResource NavRadioButtonStyle}" Tag="" Content="{Binding HamburgerSaveText}" GroupName="Save"/>
+                    <RadioButton x:Name="SaveAsRadioButton" Command="{Binding SaveAsCommand}" Style="{StaticResource NavRadioButtonStyle}" Tag="" Content="{Binding HamburgerSaveAsText}" GroupName="SaveAs"/>
                     <RadioButton x:Name="HelpRadioButton" Command="{Binding HelpCommand}" Style="{StaticResource NavRadioButtonStyle}" Tag="" Content="{Binding HamburgerHelpText}" GroupName="Help"/>
                     <RadioButton x:Name="PrivacyRadioButton" Command="{Binding PrivacyCommand}" Style="{StaticResource NavRadioButtonStyle}" Tag="" Content="{Binding HamburgerPrivacyText}" GroupName="Help"/>
                     <RadioButton x:Name="RatingRadioButton" Command="{Binding RateCommand}" Style="{StaticResource NavRadioButtonStyle}" Tag="" Content="{Binding HamburgerRatingText}" GroupName="Rating"/>
@@ -183,22 +183,6 @@
                         <StackPanel Orientation="Horizontal">
 
                             <Button x:Name="MenuSmallButton" Margin="0,0,40,0" Style="{StaticResource BarSmallTopButtonStyle}" Command="{Binding ToggleSplitViewCommand}">
-                                <!--<Button.Flyout>
-                                <MenuFlyout MenuFlyoutPresenterStyle="{StaticResource MenuFlyoutPresenterStyle1}">
-                                    <MenuFlyoutItem x:Name="NewSmallButton" Padding="32,10,20,12"
-                                            Text="{Binding NewButtonText}"
-                                            Command="{Binding NewCommand, Mode=OneWay}" />
-                                    <MenuFlyoutItem x:Name="LoadSmallButton" Padding="32,10,20,12"
-                                            Text="{Binding LoadButtonText}"
-                                            Command="{Binding LoadCommand, Mode=OneWay}" />
-                                    <MenuFlyoutItem x:Name="SaveSmallButton" Padding="32,10,20,12"
-                                            Text="{Binding SaveButtonText}"
-                                            Command="{Binding SaveCommmand, Mode=OneWay}" />
-                                    <MenuFlyoutItem x:Name="SaveAsSmallButton" Padding="32,10,20,12"
-                                            Text="{Binding SaveAsButtonText}"
-                                            Command="{Binding SaveAsCommand, Mode=OneWay}" />
-                                </MenuFlyout>
-                            </Button.Flyout>-->
                                 <StackPanel Orientation="Vertical">
                                     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5,10,0,0">
                                         <Rectangle Fill="Black" Height="3" Width="20" />
@@ -210,27 +194,12 @@
                                 </StackPanel>
                             </Button>
                             <Button x:Name="MenuButton" Margin="0,0,40,0" Style="{StaticResource BarButtonStyle}" Command="{Binding ToggleSplitViewCommand}">
-                                <!--<Button.Flyout>
-                                <MenuFlyout MenuFlyoutPresenterStyle="{StaticResource MenuFlyoutPresenterStyle1}">
-                                    <MenuFlyoutItem x:Name="NewButton" Padding="32,10,20,12" Text="{Binding NewButtonText}"
-                                            Command="{Binding NewCommand, Mode=OneWay}" />
-                                    <MenuFlyoutItem x:Name="LoadButton" Padding="32,10,20,12" Text="{Binding LoadButtonText}"
-                                            Command="{Binding LoadCommand, Mode=OneWay}" />
-                                    <MenuFlyoutItem x:Name="SaveButton" Padding="32,10,20,12" Text="{Binding SaveButtonText}"
-                                            Command="{Binding SaveCommmand, Mode=OneWay}" />
-                                    <MenuFlyoutItem x:Name="SaveAsButton" Padding="32,10,20,12"
-                                            Text="{Binding SaveAsButtonText}"
-                                            Command="{Binding SaveAsCommand, Mode=OneWay}" />
-                                </MenuFlyout>
-                            </Button.Flyout>-->
                                 <StackPanel Orientation="Horizontal">
-
                                     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                                         <Rectangle Fill="Black" Height="3" Width="20" />
                                         <Rectangle Fill="Black" Height="3" Margin="0,4,0,4" Width="20" />
                                         <Rectangle Fill="Black" Height="3" Width="20" />
                                     </StackPanel>
-
                                     <TextBlock x:Name="Title" FontSize="20" FontWeight="SemiLight" Margin="12,0,0,1"
                                    Text="{Binding TitleTextBlockText}" VerticalAlignment="Center" />
                                 </StackPanel>

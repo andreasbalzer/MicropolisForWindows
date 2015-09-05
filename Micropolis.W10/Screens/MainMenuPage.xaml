@@ -313,10 +313,10 @@
                             <StackPanel Background="Green" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" />
                             <TextBlock Grid.Row="1" Grid.Column="0" TextWrapping="Wrap" FontSize="20" HorizontalAlignment="Left"
                            VerticalAlignment="Center" Margin="20,10,10,10" x:Name="UnsavedGameMessageWide"
-                           Text="{Binding UnsavedGameMessageText}" />
+                           Text="{Binding UnsavedGameMessageText}" Foreground="White" />
                             <Button Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center"
                         Margin="10,10,10,10" FontSize="20" Command="{Binding LoadUnsavedGameCommand}"
-                        x:Name="UnsavedGameButtonWide" Content="{Binding UnsavedGameButtonText}" />
+                        x:Name="UnsavedGameButtonWide" Content="{Binding UnsavedGameButtonText}" Foreground="White" />
 
                             <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
                             x:Name="MessageContainerNarrow" Visibility="Collapsed">

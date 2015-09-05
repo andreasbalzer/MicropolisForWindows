@@ -17,15 +17,15 @@ namespace Micropolis.ViewModels
         private MainGamePageViewModel _mainPageViewModel;
         private Dictionary<MicropolisTool, ToolbarButtonViewModel> _toolBtns;
 
-        private int _height;
-        private int _width;
+        private double _height;
+        private double _width;
 
         private ToolBarMode _mode;
 
         /// <summary>
         /// Height
         /// </summary>
-        public int Height
+        public double Height
         {
             get { return _height; }
             set
@@ -37,7 +37,7 @@ namespace Micropolis.ViewModels
         /// <summary>
         /// Width
         /// </summary>
-        public int Width
+        public double Width
         {
             get { return _width; }
             set
@@ -152,21 +152,21 @@ namespace Micropolis.ViewModels
 
             if (_mode == ToolBarMode.NORMAL)
             {
-                btn = new ToolbarButtonViewModel { Width = 40, Height = 40 };
-                Width = 50;
-                Height = 50;
+                btn = new ToolbarButtonViewModel { Width = 32, Height = 32 };
+                Width = Double.NaN;
+                Height = Double.NaN;
             }
             else if (_mode == ToolBarMode.FLYOUT || _mode == ToolBarMode.WIDE)
             {
                 btn = new ToolbarButtonViewModel { Width = 64, Height = 64 };
-                Width = 64;
-                Height = 64;
+                Width = Double.NaN;
+                Height = Double.NaN;
             }
             else
             {
                 btn = new ToolbarButtonViewModel { Width = 32, Height = 32 };
-                Width = 32;
-                Height = 32;
+                Width = Double.NaN;
+                Height = Double.NaN;
             }
 
 
