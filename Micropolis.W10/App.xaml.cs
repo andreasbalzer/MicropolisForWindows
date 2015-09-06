@@ -36,8 +36,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-
-
+using System.Threading.Tasks;
 
 namespace Micropolis
 {
@@ -277,7 +276,7 @@ namespace Micropolis
 
             if (MainPageReference != null)
             {
-                MainPageReference.ViewModel.OnAppClosed();
+                MainPageReference.ViewModel.OnAppClosed().Wait();
             }
 
             deferral.Complete();

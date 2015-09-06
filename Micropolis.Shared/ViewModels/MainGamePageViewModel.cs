@@ -1425,11 +1425,11 @@ namespace Micropolis.ViewModels
                         }
                         MakeClean();
                     });
+                    if (deleteGameFileAfterLoading)
+                    {
+                        file.DeleteAsync();
+                    }
                 });
-                if (deleteGameFileAfterLoading)
-                {
-                    file.DeleteAsync();
-                }
             }
         }
 
@@ -3390,16 +3390,16 @@ namespace Micropolis.ViewModels
         /// <summary>
         ///     Called when app gets suspended. Saves current game if necessary and initiates app shutdown.
         /// </summary>
-        internal void OnAppClosed()
+        internal async Task OnAppClosed()
         {
-            SaveToInternalStorage();
+            await SaveToInternalStorage();
             OnWindowClosed();
         }
 
         /// <summary>
         ///     Saves to internal storage file autosave.cty.
         /// </summary>
-        private async void SaveToInternalStorage()
+        private async Task SaveToInternalStorage()
         {
             bool needsSaved = NeedsSaved();
             if (needsSaved)

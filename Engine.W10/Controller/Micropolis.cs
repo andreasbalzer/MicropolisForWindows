@@ -2577,7 +2577,7 @@ namespace Engine
         /// <returns></returns>
         public async Task Save(StorageFile file)
         {
-            MapSaver.Save(file, this);
+            await MapSaver.Save(file, this);
         }
 
         /// <summary>
