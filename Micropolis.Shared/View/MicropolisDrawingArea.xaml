@@ -28,5 +28,6 @@
         </Grid>
         <Image x:Name="ImageOutput" Canvas.ZIndex="0" HorizontalAlignment="Left" VerticalAlignment="Top" />
         <Image x:Name="ImageCursor" IsHitTestVisible="False" Canvas.ZIndex="1" HorizontalAlignment="Left" VerticalAlignment="Top" />
+        <Image x:Name="ImageCursorZone" IsHitTestVisible="False" Canvas.ZIndex="1" HorizontalAlignment="Left" VerticalAlignment="Top" />
     </Grid>
 </UserControl>

@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using Engine;
 using Micropolis.Lib.graphics;
+using System.Diagnostics;
 
 namespace Micropolis.ViewModels
 {
@@ -250,6 +251,8 @@ namespace Micropolis.ViewModels
             }
         }
 
+        Point toolCursorPosition = new Point(0, 0);
+
         /// <summary>
         ///     Positions tool cursor at specified coordinate.
         /// </summary>
@@ -257,60 +260,29 @@ namespace Micropolis.ViewModels
         /// <param name="mouseY">ypos</param>
         public void PositionToolCursor(double mouseX, double mouseY)
         {
-            double newX = 0;
-            double newY = 0;
-            TranslateTransform exTr = null;
-
-            if (!(_imageCursor.RenderTransform is MatrixTransform))
-            {
-                exTr = (TranslateTransform) _imageCursor.RenderTransform;
-                newX = exTr.X;
-                newY = exTr.Y;
+            if (toolCursor == null) {
+                return;
             }
 
-            if (toolCursor != null)
+            if (toolCursor.Rect.Height == 3)
             {
-                _imageCursor.Visibility = Visibility.Visible;
-
-                if (toolCursor.Rect.Height == 3)
-                {
-                    // big cursor like residential zone
-                    newX = Math.Ceiling(mouseX/TILE_WIDTH - 2)*TILE_WIDTH;
-                    newY = Math.Ceiling(mouseY/TILE_HEIGHT - 2)*TILE_HEIGHT;
-                }
-                else if (toolCursor.Rect.Height == 1)
-                {
-                    // small cursor like park
-                    newX = Math.Ceiling(mouseX/TILE_WIDTH - 1)*TILE_WIDTH;
-                    newY = Math.Ceiling(mouseY/TILE_HEIGHT - 1)*TILE_HEIGHT;
-                }
-                else if (toolCursor.Rect.Height == 4)
-                {
-                    // huge cursor like power plant
-                    newX = Math.Ceiling(mouseX/TILE_WIDTH - 2)*TILE_WIDTH;
-                    newY = Math.Ceiling(mouseY/TILE_HEIGHT - 2)*TILE_HEIGHT;
-                }
-                else if (toolCursor.Rect.Height == 6)
-                {
-                    // huger than huge cursor like airport
-                    newX = Math.Ceiling(mouseX/TILE_WIDTH - 2)*TILE_WIDTH;
-                    newY = Math.Ceiling(mouseY/TILE_HEIGHT - 2)*TILE_HEIGHT;
-                }
-                else if (toolCursor.Rect.Height == 0)
-                {
-                    _imageCursor.Visibility = Visibility.Collapsed;
-                }
+                // big cursor like residential zone
+                toolCursorPosition = new Point(Math.Ceiling(mouseX / TILE_WIDTH - 2) * TILE_WIDTH, Math.Ceiling(mouseY / TILE_HEIGHT - 2) * TILE_HEIGHT);
             }
-            else
+            else if (toolCursor.Rect.Height == 1)
             {
-                _imageCursor.Visibility = Visibility.Collapsed;
+                // small cursor like park
+                toolCursorPosition = new Point(Math.Ceiling(mouseX / TILE_WIDTH - 1) * TILE_WIDTH, Math.Ceiling(mouseY / TILE_HEIGHT - 1) * TILE_HEIGHT);
             }
-
-            bool positionNeedsToBeUpdated = exTr == null || (exTr.X != newX || exTr.Y != newY);
-            if (positionNeedsToBeUpdated)
+            else if (toolCursor.Rect.Height == 4)
             {
-                var transTrans = new TranslateTransform {X = newX, Y = newY};
-                _imageCursor.RenderTransform = transTrans;
+                // huge cursor like power plant
+                toolCursorPosition = new Point(Math.Ceiling(mouseX / TILE_WIDTH - 2) * TILE_WIDTH, Math.Ceiling(mouseY / TILE_HEIGHT - 2) * TILE_HEIGHT);
+            }
+            else if (toolCursor.Rect.Height == 6)
+            {
+                // huger than huge cursor like airport
+                toolCursorPosition = new Point(Math.Ceiling(mouseX / TILE_WIDTH - 2) * TILE_WIDTH, Math.Ceiling(mouseY / TILE_HEIGHT - 2) * TILE_HEIGHT);
             }
         }
 
@@ -633,6 +605,30 @@ namespace Micropolis.ViewModels
         /// </summary>
         private void PaintCursor()
         {
+           
+            TranslateTransform exTr = null;
+
+            if (!(_imageCursor.RenderTransform is MatrixTransform))
+            {
+                exTr = (TranslateTransform)_imageCursor.RenderTransform;
+            }
+
+            if (toolCursor == null || toolCursor.Rect.Height == 0)
+            {
+                _imageCursor.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                _imageCursor.Visibility = Visibility.Visible;
+            }
+
+            bool positionNeedsToBeUpdated = exTr == null || (exTr.X != toolCursorPosition.X || exTr.Y != toolCursorPosition.Y);
+            if (positionNeedsToBeUpdated)
+            {
+                var transTrans = new TranslateTransform { X = toolCursorPosition.X, Y = toolCursorPosition.Y };
+                _imageCursor.RenderTransform = transTrans;
+            }
+            
             if (toolPreview != null)
             {
                 if (cursor.PixelWidth != (toolPreview.GetBounds().Width + 10)*TILE_WIDTH ||
