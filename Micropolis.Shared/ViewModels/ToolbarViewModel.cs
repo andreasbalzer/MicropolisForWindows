@@ -17,32 +17,32 @@ namespace Micropolis.ViewModels
         private MainGamePageViewModel _mainPageViewModel;
         private Dictionary<MicropolisTool, ToolbarButtonViewModel> _toolBtns;
 
-        private double _height;
-        private double _width;
+        private double _toolHeight;
+        private double _toolWidth;
 
         private ToolBarMode _mode;
 
         /// <summary>
         /// Height
         /// </summary>
-        public double Height
+        public double ToolHeight
         {
-            get { return _height; }
+            get { return _toolHeight; }
             set
             {
-                SetProperty(ref _height, value);
+                SetProperty(ref _toolHeight, value);
             }
         }
 
         /// <summary>
         /// Width
         /// </summary>
-        public double Width
+        public double ToolWidth
         {
-            get { return _width; }
+            get { return _toolWidth; }
             set
             {
-                SetProperty(ref _width, value);
+                SetProperty(ref _toolWidth, value);
             }
         }
 
@@ -153,20 +153,20 @@ namespace Micropolis.ViewModels
             if (_mode == ToolBarMode.NORMAL)
             {
                 btn = new ToolbarButtonViewModel { Width = 32, Height = 32 };
-                Width = Double.NaN;
-                Height = Double.NaN;
+                ToolWidth = Double.NaN;
+                ToolHeight = Double.NaN;
             }
             else if (_mode == ToolBarMode.FLYOUT || _mode == ToolBarMode.WIDE)
             {
                 btn = new ToolbarButtonViewModel { Width = 64, Height = 64 };
-                Width = Double.NaN;
-                Height = Double.NaN;
+                ToolWidth = Double.NaN;
+                ToolHeight = Double.NaN;
             }
             else
             {
                 btn = new ToolbarButtonViewModel { Width = 32, Height = 32 };
-                Width = Double.NaN;
-                Height = Double.NaN;
+                ToolWidth = Double.NaN;
+                ToolHeight = Double.NaN;
             }
 
 

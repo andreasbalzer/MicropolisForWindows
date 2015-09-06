@@ -93,14 +93,14 @@
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapGrid Orientation="Vertical" VerticalAlignment="Stretch" 
-                              Margin="0" ItemHeight="{Binding Height, Mode=TwoWay}" ItemWidth="{Binding Width, Mode=TwoWay}"  HorizontalChildrenAlignment="Left" />
+                              Margin="0" ItemHeight="{Binding ToolHeight, Mode=TwoWay}" ItemWidth="{Binding ToolWidth, Mode=TwoWay}"  HorizontalChildrenAlignment="Left" />
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <RadioButton Style="{StaticResource ToolbarRadioButtonStyle}" HorizontalContentAlignment="Left" HorizontalAlignment="Left"
                                  Command="{Binding ClickCommand}" IsChecked="{Binding IsChecked}" Height="{Binding Height}" Width="{Binding Width}"
-                                 ToolTipService.ToolTip="{Binding ToolTip}">
+                                 ToolTipService.ToolTip="{Binding ToolTip}" MinWidth="{Binding Width}" MinHeight="{Binding Height}">
                         <Grid Height="{Binding Height}" Width="{Binding Width}">
                             <Image Source="{Binding CurrentStateImageSource}" Stretch="Fill" />
                             <TextBlock Text="{Binding Text}" />
