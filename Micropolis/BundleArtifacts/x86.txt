@@ -1,5 +1,0 @@
-MainPackage=C:\Repos\Micropolis\Micropolis\bin\x86\Release\Micropolis_1.1.0.21_Bundle\Micropolis_1.1.0.21_x86.appx
-SymbolPackage=C:\Repos\Micropolis\Micropolis\AppPackages\Micropolis_1.1.0.21_Test\Micropolis_1.1.0.21_x86.appxsym
-ResourcePack=C:\Repos\Micropolis\Micropolis\bin\x86\Release\Micropolis_1.1.0.21_Bundle\Micropolis_1.1.0.21_language-en.appx
-ResourcePack=C:\Repos\Micropolis\Micropolis\bin\x86\Release\Micropolis_1.1.0.21_Bundle\Micropolis_1.1.0.21_scale-140.appx
-ResourcePack=C:\Repos\Micropolis\Micropolis\bin\x86\Release\Micropolis_1.1.0.21_Bundle\Micropolis_1.1.0.21_scale-180.appx

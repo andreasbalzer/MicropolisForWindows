@@ -1,5 +1,0 @@
-MainPackage=C:\Users\Andreas\Source\Repos\MicropolisForWindows\Micropolis\bin\Release\Micropolis_1.1.0.27_AnyCPU.appx
-SymbolPackage=C:\Users\Andreas\Source\Repos\MicropolisForWindows\Micropolis\AppPackages\Micropolis_1.1.0.27_Test\Micropolis_1.1.0.27_AnyCPU.appxsym
-ResourcePack=C:\Users\Andreas\Source\Repos\MicropolisForWindows\Micropolis\bin\Release\Micropolis_1.1.0.27_language-en.appx
-ResourcePack=C:\Users\Andreas\Source\Repos\MicropolisForWindows\Micropolis\bin\Release\Micropolis_1.1.0.27_scale-140.appx
-ResourcePack=C:\Users\Andreas\Source\Repos\MicropolisForWindows\Micropolis\bin\Release\Micropolis_1.1.0.27_scale-180.appx
