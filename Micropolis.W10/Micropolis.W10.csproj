@@ -98,6 +98,11 @@
     <Content Include="Assets\Logo.150.scale-150.png" />
     <Content Include="Assets\Logo.150.scale-200.png" />
     <Content Include="Assets\Logo.150.scale-400.png" />
+    <Content Include="Assets\Logo.24.png" />
+    <Content Include="Assets\Logo.30.scale-125.png" />
+    <Content Include="Assets\Logo.30.scale-150.png" />
+    <Content Include="Assets\Logo.30.scale-200.png" />
+    <Content Include="Assets\Logo.30.scale-400.png" />
     <Content Include="Assets\Logo.310.scale-125.png" />
     <Content Include="Assets\Logo.310.scale-150.png" />
     <Content Include="Assets\Logo.310.scale-200.png" />
@@ -110,6 +115,14 @@
     <Content Include="Assets\Logo.44.targetsize-24.png" />
     <Content Include="Assets\Logo.44.targetsize-256.png" />
     <Content Include="Assets\Logo.44.targetsize-48.png" />
+    <Content Include="Assets\Logo.50.scale-125.png" />
+    <Content Include="Assets\Logo.50.scale-150.png" />
+    <Content Include="Assets\Logo.50.scale-200.png" />
+    <Content Include="Assets\Logo.50.scale-400.png" />
+    <Content Include="Assets\Logo.70.scale-125.png" />
+    <Content Include="Assets\Logo.70.scale-150.png" />
+    <Content Include="Assets\Logo.70.scale-200.png" />
+    <Content Include="Assets\Logo.70.scale-400.png" />
     <Content Include="Assets\Logo.71.scale-125.png" />
     <Content Include="Assets\Logo.71.scale-150.png" />
     <Content Include="Assets\Logo.71.scale-200.png" />
