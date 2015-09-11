@@ -111,19 +111,8 @@ namespace Micropolis
                         }
 
                         // try to see whether language files for language are available
-                        IStorageFile file;
-#if WINDOWS_APP
-                file = await folder.TryGetItemAsync("CityMessages_"+possibleLanguageModifier+".properties") as IStorageFile;
-#else
-                        try
-                        {
-                            file = await folder.GetFileAsync("CityMessages_" + possibleLanguageModifier + ".properties");
-                        }
-                        catch (FileNotFoundException)
-                        {
-                            file = null;
-                        }
-#endif
+                        IStorageFile file = await folder.TryGetItemAsync("CityMessages_"+possibleLanguageModifier+".properties") as IStorageFile;
+
                         if (file != null) // the language is available in language files
                         {
                             languageModifier = "_" + possibleLanguageModifier;
