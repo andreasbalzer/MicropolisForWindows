@@ -252,6 +252,7 @@
     <Compile Include="Common\SuspensionManager.cs" />
     <Compile Include="Controller\IListener.cs" />
     <Compile Include="Controller\Installer.cs" />
+    <Compile Include="Controller\NotifierHelper.cs" />
     <Compile Include="Controller\ThumbnailCreator.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Converters\LocalizationProvider.cs" />
@@ -876,6 +877,10 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BackgroundTasks\BackgroundTasks.csproj">
+      <Project>{e105c760-8420-414a-8f12-6d320848133b}</Project>
+      <Name>BackgroundTasks</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Engine.W10\Engine.W10.csproj">
       <Project>{2133f955-d342-4d70-a80e-30e4eea8fb6b}</Project>
       <Name>Engine.W10</Name>

@@ -178,6 +178,7 @@ namespace Micropolis.ViewModels
             
             NotifierHelper.RegisterNotifier();
 #endif
+            NotifierHelper.RegisterNotifier();
         }
 
         private async void LoadGame()
