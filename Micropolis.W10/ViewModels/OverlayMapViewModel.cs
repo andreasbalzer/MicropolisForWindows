@@ -257,7 +257,7 @@ namespace Micropolis.ViewModels
         public static async Task Initialize(CancellationToken cancelToken)
         {
             Utils.ThreadCancellation.CheckCancellation(cancelToken);
-            _tileArrayImage = await LoadImage(@"ms-appx:///resources/images/Game/tiles/tilessm.png");
+            _tileArrayImage = await LoadImage(@"ms-appx:///Assets/resources/images/Game/tiles/tilessm.png");
         }
 
 

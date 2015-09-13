@@ -4,7 +4,7 @@
     xmlns:local="using:Micropolis">
     
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="/resources/styles/controls/button.xaml"/>
+        <ResourceDictionary Source="/Assets/resources/styles/controls/button.xaml"/>
     </ResourceDictionary.MergedDictionaries>
     
 </ResourceDictionary>

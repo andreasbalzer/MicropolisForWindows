@@ -85,12 +85,8 @@ namespace Micropolis
             string languageModifier = String.Empty;
             
             StorageFolder installFolder = Package.Current.InstalledLocation;
-            StorageFolder folderb = await installFolder.GetFolderAsync("Assets");
-            foreach (var p in await folderb.GetFoldersAsync())
-            {
-                Debug.WriteLine(p.Name);
-            }
-            StorageFolder folder = await folderb.GetFolderAsync("strings");
+            StorageFolder folder = await installFolder.GetFolderAsync("Assets");
+            folder = await folder.GetFolderAsync("strings");
 
             try
             {

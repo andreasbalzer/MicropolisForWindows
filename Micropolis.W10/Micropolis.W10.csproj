@@ -218,24 +218,56 @@
     <None Include="Assets\resources\psd-2000\icwirehi.psd" />
     <None Include="Assets\resources\psd-2000\legendmm.psd" />
     <None Include="Assets\resources\psd-2000\legendpm.psd" />
-    <None Include="Assets\strings\CityMessages.properties" />
-    <None Include="Assets\strings\CityMessages_de.properties" />
-    <None Include="Assets\strings\CityMessages_fr.properties" />
-    <None Include="Assets\strings\CityMessages_sv.properties" />
-    <None Include="Assets\strings\CityStrings.properties" />
-    <None Include="Assets\strings\CityStrings_de.properties" />
-    <None Include="Assets\strings\CityStrings_fr.properties" />
-    <None Include="Assets\strings\CityStrings_sv.properties" />
+    <Content Include="Assets\strings\CityMessages.properties">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\strings\CityMessages_de.properties">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\strings\CityMessages_fr.properties">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\strings\CityMessages_sv.properties">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\strings\CityStrings.properties">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\strings\CityStrings_de.properties">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\strings\CityStrings_fr.properties">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\strings\CityStrings_sv.properties">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <PRIResource Include="Assets\strings\de-de\Resources.resw" />
     <PRIResource Include="Assets\strings\en-us\Resources.resw" />
-    <None Include="Assets\strings\GuiStrings.properties" />
-    <None Include="Assets\strings\GuiStrings_de.properties" />
-    <None Include="Assets\strings\GuiStrings_fr.properties" />
-    <None Include="Assets\strings\GuiStrings_sv.properties" />
-    <None Include="Assets\strings\StatusMessages.properties" />
-    <None Include="Assets\strings\StatusMessages_de.properties" />
-    <None Include="Assets\strings\StatusMessages_fr.properties" />
-    <None Include="Assets\strings\StatusMessages_sv.properties" />
+    <Content Include="Assets\strings\GuiStrings.properties">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\strings\GuiStrings_de.properties">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\strings\GuiStrings_fr.properties">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\strings\GuiStrings_sv.properties">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\strings\StatusMessages.properties">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\strings\StatusMessages_de.properties">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\strings\StatusMessages_fr.properties">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\strings\StatusMessages_sv.properties">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AboutUserControl.xaml.cs">
