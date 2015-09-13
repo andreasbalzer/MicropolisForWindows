@@ -57,7 +57,7 @@ namespace Engine
         {
             var tilesList = new List<TileSpec>();
 
-            StorageFile file = await LoadFiles.GetPackagedFile("graphics", "tiles.rc");
+            StorageFile file = await LoadFiles.GetPackagedFile("Assets/graphics", "tiles.rc");
 
             IList<string> lines = await FileIO.ReadLinesAsync(file);
 

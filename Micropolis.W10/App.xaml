@@ -9,14 +9,15 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/resources/styles/colors.xaml"/>
-                <ResourceDictionary Source="/resources/styles/controls.xaml"/>
-                <ResourceDictionary Source="/resources/styles/pathicons.xaml"/>
+                <!--
+                <ResourceDictionary Source="/Assets/resources/styles/colors.xaml"/>
+                <ResourceDictionary Source="/Assets/resources/styles/controls.xaml"/>
+                <ResourceDictionary Source="/Assets/resources/styles/pathicons.xaml"/>-->
             </ResourceDictionary.MergedDictionaries>
 
             <!--<FontFamily x:Key="ContentControlThemeFontFamily">/resources/fonts/dos437.ttf#Perfect DOS VGA 437 Win</FontFamily>-->
 
-            <converters:LocalizationProvider x:Key="Strings"/>
+            <!--<converters:LocalizationProvider x:Key="Assets/Strings"/>-->
         </ResourceDictionary>
     </Application.Resources>
 

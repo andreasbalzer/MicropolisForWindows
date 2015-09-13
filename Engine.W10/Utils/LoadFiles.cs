@@ -22,7 +22,12 @@ namespace Engine.Libs
 
             if (folderName != null)
             {
-                StorageFolder subFolder = await installFolder.GetFolderAsync(folderName);
+                StorageFolder subFolder = installFolder;
+                string[] path = folderName.Split('/');
+                foreach (var sub in path)
+                {
+                    subFolder = await subFolder.GetFolderAsync(sub);
+                }
                 return await subFolder.GetFileAsync(fileName);
             }
             else

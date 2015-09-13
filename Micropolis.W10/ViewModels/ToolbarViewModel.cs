@@ -138,10 +138,10 @@ namespace Micropolis.ViewModels
         private ToolbarButtonViewModel MakeToolBtn(MicropolisTool tool)
         {
             String iconName = Strings.ContainsKey("tool." + tool.Name + ".icon")
-                ? "ms-appx:///resources/images/GameUI" + Strings.GetString("tool." + tool.Name + ".icon")
-                : "ms-appx:///graphics/tools/" + tool.Name.ToLower() + ".png";
+                ? "ms-appx:///Assets/resources/images/GameUI" + Strings.GetString("tool." + tool.Name + ".icon")
+                : "ms-appx:///Assets/graphics/tools/" + tool.Name.ToLower() + ".png";
             String iconSelectedName = Strings.ContainsKey("tool." + tool.Name + ".selected_icon")
-                ? "ms-appx:///resources/images/GameUI" + Strings.GetString("tool." + tool.Name + ".selected_icon")
+                ? "ms-appx:///Assets/resources/images/GameUI" + Strings.GetString("tool." + tool.Name + ".selected_icon")
                 : iconName;
             String tipText = Strings.ContainsKey("tool." + tool.Name + ".tip")
                 ? Strings.GetString("tool." + tool.Name + ".tip")

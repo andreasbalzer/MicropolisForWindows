@@ -85,7 +85,12 @@ namespace Micropolis
             string languageModifier = String.Empty;
             
             StorageFolder installFolder = Package.Current.InstalledLocation;
-            StorageFolder folder = await installFolder.GetFolderAsync("strings");
+            StorageFolder folderb = await installFolder.GetFolderAsync("Assets");
+            foreach (var p in await folderb.GetFoldersAsync())
+            {
+                Debug.WriteLine(p.Name);
+            }
+            StorageFolder folder = await folderb.GetFolderAsync("strings");
 
             try
             {
@@ -132,10 +137,10 @@ namespace Micropolis
                     // a language different from english should be loaded (english is loaded below as default and fall back)
                 {
                     Micropolis.Utils.ThreadCancellation.CheckCancellation(cancelToken);
-                    await LoadAndParseFile("strings", "CityMessages_" + languageModifier + ".properties");
-                    await LoadAndParseFile("strings", "CityStrings_" + languageModifier + ".properties");
-                    await LoadAndParseFile("strings", "GuiStrings_" + languageModifier + ".properties");
-                    await LoadAndParseFile("strings", "StatusMessages_" + languageModifier + ".properties");
+                    await LoadAndParseFile("Assets/strings", "CityMessages_" + languageModifier + ".properties");
+                    await LoadAndParseFile("Assets/strings", "CityStrings_" + languageModifier + ".properties");
+                    await LoadAndParseFile("Assets/strings", "GuiStrings_" + languageModifier + ".properties");
+                    await LoadAndParseFile("Assets/strings", "StatusMessages_" + languageModifier + ".properties");
                 }
             }
             catch
@@ -143,10 +148,10 @@ namespace Micropolis
             }
             Micropolis.Utils.ThreadCancellation.CheckCancellation(cancelToken);
             // load english items in case something is missing in language packs. also loads generic filenames
-            await LoadAndParseFile("strings", "CityMessages.properties");
-            await LoadAndParseFile("strings", "CityStrings.properties");
-            await LoadAndParseFile("strings", "GuiStrings.properties");
-            await LoadAndParseFile("strings", "StatusMessages.properties");
+            await LoadAndParseFile("Assets/strings", "CityMessages.properties");
+            await LoadAndParseFile("Assets/strings", "CityStrings.properties");
+            await LoadAndParseFile("Assets/strings", "GuiStrings.properties");
+            await LoadAndParseFile("Assets/strings", "StatusMessages.properties");
         }
 
         private static async Task LoadAndParseFile(string folder, string file)
