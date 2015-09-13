@@ -300,6 +300,7 @@
     <Compile Include="Screens\MainMenuPage.xaml.cs">
       <DependentUpon>MainMenuPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Utils\BackButton.cs" />
     <Compile Include="Utils\RichTextColumns.cs" />
     <Compile Include="Utils\ThreadCancellation.cs" />
     <Compile Include="Utils\WriteableBitmapDrawExtensions.cs" />

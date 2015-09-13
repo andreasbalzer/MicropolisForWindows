@@ -26,37 +26,10 @@
         {
             ThreadCancellation.CheckCancellation(cancelToken);
             StorageFolder localFolder = ApplicationData.Current.LocalFolder;
-            IStorageItem cityThumbs=null;
-#if WINDOWS_PHONE_APP
-            try
-            {
-                cityThumbs = await localFolder.GetFolderAsync("cityThumbs");
-            }
-            catch (Exception exp)
-            {
-            }
-#else
-            cityThumbs = await localFolder.TryGetItemAsync("cityThumbs");
-#endif
+            IStorageItem cityThumbs = await localFolder.TryGetItemAsync("cityThumbs");
             bool cityThumbsExists = cityThumbs != null;
-            bool installComplete = false;
-            if (cityThumbsExists)
-            {
-#if WINDOWS_PHONE_APP
-            try
-            {
-
-                installComplete = (await ((StorageFolder)cityThumbs).GetFileAsync("installComplete.txt"))!=null;
-            }
-            catch (Exception exp)
-            {
-            }
-#else
-                installComplete = (await ((StorageFolder) cityThumbs).TryGetItemAsync("installComplete.txt"))
-                                  != null;
-#endif
-            }
-
+            bool installComplete = (await ((StorageFolder) cityThumbs).TryGetItemAsync("installComplete.txt")) != null;
+            
             bool cityThumbImagesExist = cityThumbsExists
                                         && installComplete;
             if (!cityThumbsExists || !cityThumbImagesExist)

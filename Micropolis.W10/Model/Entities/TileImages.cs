@@ -210,22 +210,8 @@ namespace Micropolis
             folder = await folder.GetFolderAsync("images");
             folder = await folder.GetFolderAsync("Game");
             folder = await folder.GetFolderAsync("sprites");
-            IStorageItem file = null;
+            IStorageItem file = await folder.TryGetItemAsync(iconUri.AbsoluteUri.Substring(iconUri.AbsoluteUri.LastIndexOf("/", StringComparison.Ordinal) + 1));
 
-#if WINDOWS_PHONE_APP
-            try
-            {
-                file = await folder.GetFileAsync(
-                    iconUri.AbsoluteUri.Substring(iconUri.AbsoluteUri.LastIndexOf("/", StringComparison.Ordinal) + 1));
-            }
-            catch (FileNotFoundException)
-            {
-                file = null;
-            }
-#else
-
-            file = await folder.TryGetItemAsync(iconUri.AbsoluteUri.Substring(iconUri.AbsoluteUri.LastIndexOf("/", StringComparison.Ordinal) + 1));
-#endif
             if (file != null)
             {
 
@@ -237,18 +223,7 @@ namespace Micropolis
 
             iconUri = new Uri(resourceName + ".png", UriKind.RelativeOrAbsolute);
             
-#if WINDOWS_PHONE_APP
-            try
-            {
-                file = await folder.GetFileAsync(resourceName.Substring(resourceName.LastIndexOf("/", StringComparison.Ordinal) + 1) + ".png");
-            }
-            catch (FileNotFoundException)
-            {
-                file = null;
-            }
-#else
             file = await folder.TryGetItemAsync(resourceName.Substring(resourceName.LastIndexOf("/", StringComparison.Ordinal) + 1) + ".png");
-#endif
 
             if (file == null)
             {

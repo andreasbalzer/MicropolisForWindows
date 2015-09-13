@@ -190,11 +190,8 @@ namespace Micropolis.ViewModels
             var picker = new FileOpenPicker();
             picker.FileTypeFilter.Add(".cty");
             picker.FileTypeFilter.Add(".cty_file");
-#if UWP || WINDOWS_PHONE
-                var file = await picker.PickSingleFileAndContinue();
-#else
+
             var file = await picker.PickSingleFileAsync();
-#endif
 
             if (file != null)
             {
@@ -520,19 +517,8 @@ namespace Micropolis.ViewModels
         {
             var folder = ApplicationData.Current.LocalFolder;
 
-#if WINDOWS_PHONE_APP
-            try
-            {
-                _unsavedFileExists = await folder.GetFileAsync("autosave.cty");
-            }
-            catch
-            {
-                return;
-            }
-#else
             _unsavedFileExists = await folder.TryGetItemAsync("autosave.cty");
             if (_unsavedFileExists != null)
-#endif
             {
                 try
                 {
@@ -603,15 +589,7 @@ namespace Micropolis.ViewModels
 
                     var iconUri = new Uri(cityThumbs.Path + "/" + fileName, UriKind.Absolute);
 
-#if WINDOWS_PHONE_APP
-                    try
-                    {
-                        var voidi = await cityThumbs.GetFileAsync(fileName);
-                    }
-                    catch
-#else
                     if (await cityThumbs.TryGetItemAsync(fileName) == null)
-#endif
                     {
                         iconUri = new Uri(cityFolder.Path + "/unknown.png", UriKind.Absolute);
                     }

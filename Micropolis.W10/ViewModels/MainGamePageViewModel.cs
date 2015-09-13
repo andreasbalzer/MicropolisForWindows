@@ -22,10 +22,7 @@ using Windows.Foundation;
 using Windows.Storage;
 using Windows.Storage.Pickers;
 using Windows.System;
-#if WINDOWS_PHONE_APP
-#else
 using Windows.UI.ApplicationSettings;
-#endif
 using Windows.UI.Core;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
@@ -1287,12 +1284,9 @@ namespace Micropolis.ViewModels
         {
             if (_firstRun)
             {
-#if WINDOWS_PHONE_APP
-                //Bug: Add settings
-#else
                 // Register handler for CommandsRequested events from the settings pane
                 //Bug:SettingsPane.GetForCurrentView().CommandsRequested += SettingsCharm.OnCommandsInGameRequested;
-#endif
+
                 var engineExists = Engine != null;
                 // If we loaded another game via app commands, we already have an engine.
                 if (!engineExists)
@@ -3299,16 +3293,7 @@ namespace Micropolis.ViewModels
 
                 var folder = Package.Current.InstalledLocation;
                 folder = await folder.GetFolderAsync("resources");
-#if WINDOWS_PHONE_APP
-                try
-                {
-                    var file = await
-                        folder.GetFileAsync(
-                            iconUrl.AbsoluteUri.Substring(
-                                iconUrl.AbsoluteUri.LastIndexOf("/", StringComparison.Ordinal) + 1));
-                }
-                catch
-#else
+
                 var file =
                     await
                         folder.TryGetItemAsync(
@@ -3316,8 +3301,6 @@ namespace Micropolis.ViewModels
                                 iconUrl.AbsoluteUri.LastIndexOf("/", StringComparison.Ordinal) + 1));
 
                 if (file != null)
-#endif
-
                 {
                     ImageSource iSource = new BitmapImage(iconUrl);
 
