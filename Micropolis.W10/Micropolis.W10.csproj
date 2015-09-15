@@ -146,29 +146,29 @@
     <Content Include="Assets\resources\UIButtons\SuperFast-Icon.png" />
     <None Include="Micropolis.W10_StoreKey.pfx" />
     <None Include="project.json" />
-    <None Include="Assets\resources\cities\about.cty" />
-    <None Include="Assets\resources\cities\badnews.cty" />
-    <None Include="Assets\resources\cities\bruce.cty" />
-    <None Include="Assets\resources\cities\deadwood.cty" />
-    <None Include="Assets\resources\cities\finnigan.cty" />
-    <None Include="Assets\resources\cities\freds.cty" />
-    <None Include="Assets\resources\cities\haight.cty" />
-    <None Include="Assets\resources\cities\happisle.cty" />
-    <None Include="Assets\resources\cities\joffburg.cty" />
-    <None Include="Assets\resources\cities\kamakura.cty" />
-    <None Include="Assets\resources\cities\kobe.cty" />
-    <None Include="Assets\resources\cities\kowloon.cty" />
-    <None Include="Assets\resources\cities\kyoto.cty" />
-    <None Include="Assets\resources\cities\linecity.cty" />
-    <None Include="Assets\resources\cities\med_isle.cty" />
-    <None Include="Assets\resources\cities\ndulls.cty" />
-    <None Include="Assets\resources\cities\neatmap.cty" />
-    <None Include="Assets\resources\cities\radial.cty" />
-    <None Include="Assets\resources\cities\senri.cty" />
-    <None Include="Assets\resources\cities\southpac.cty" />
-    <None Include="Assets\resources\cities\splats.cty" />
-    <None Include="Assets\resources\cities\wetcity.cty" />
-    <None Include="Assets\resources\cities\yokohama.cty" />
+    <Content Include="Assets\resources\cities\about.cty" />
+    <Content Include="Assets\resources\cities\badnews.cty" />
+    <Content Include="Assets\resources\cities\bruce.cty" />
+    <Content Include="Assets\resources\cities\deadwood.cty" />
+    <Content Include="Assets\resources\cities\finnigan.cty" />
+    <Content Include="Assets\resources\cities\freds.cty" />
+    <Content Include="Assets\resources\cities\haight.cty" />
+    <Content Include="Assets\resources\cities\happisle.cty" />
+    <Content Include="Assets\resources\cities\joffburg.cty" />
+    <Content Include="Assets\resources\cities\kamakura.cty" />
+    <Content Include="Assets\resources\cities\kobe.cty" />
+    <Content Include="Assets\resources\cities\kowloon.cty" />
+    <Content Include="Assets\resources\cities\kyoto.cty" />
+    <Content Include="Assets\resources\cities\linecity.cty" />
+    <Content Include="Assets\resources\cities\med_isle.cty" />
+    <Content Include="Assets\resources\cities\ndulls.cty" />
+    <Content Include="Assets\resources\cities\neatmap.cty" />
+    <Content Include="Assets\resources\cities\radial.cty" />
+    <Content Include="Assets\resources\cities\senri.cty" />
+    <Content Include="Assets\resources\cities\southpac.cty" />
+    <Content Include="Assets\resources\cities\splats.cty" />
+    <Content Include="Assets\resources\cities\wetcity.cty" />
+    <Content Include="Assets\resources\cities\yokohama.cty" />
     <Content Include="Assets\resources\fonts\dos437.ttf" />
     <None Include="Assets\resources\psd-2000\demandg.psd" />
     <None Include="Assets\resources\psd-2000\fire.psd" />
@@ -430,7 +430,6 @@
     <Content Include="Assets\Logo.50.scale-100.png" />
     <Content Include="Assets\Logo.70.scale-100.png" />
     <Content Include="Assets\Logo.71.scale-100.png" />
-    <Content Include="Assets\Logo\Logo800.png" />
     <Content Include="Assets\Logo\LogoBlack800.png" />
     <Content Include="Assets\Logo\LogoWhite800.png" />
     <Content Include="Assets\MainMenuTeaser.png" />
@@ -712,10 +711,18 @@
     <Content Include="Assets\resources\images\Game\sprites\obj8-1.png" />
     <Content Include="Assets\resources\images\Game\sprites\obj8-2.png" />
     <Content Include="Assets\resources\images\Game\sprites\obj8-3.png" />
-    <Content Include="Assets\resources\images\Game\tiles\tiles.png" />
-    <Content Include="Assets\resources\images\Game\tiles\tilessm.png" />
-    <Content Include="Assets\resources\images\Game\tiles\tiles_32x32.png" />
-    <Content Include="Assets\resources\images\Game\tiles\tiles_8x8.png" />
+    <Content Include="Assets\resources\images\Game\tiles\tiles.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\resources\images\Game\tiles\tilessm.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\resources\images\Game\tiles\tiles_32x32.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\resources\images\Game\tiles\tiles_8x8.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Assets\resources\images\screens\mainmenu\background.jpg" />
     <Content Include="Assets\resources\images\screens\mainmenu\board_background.png" />
     <Content Include="Assets\resources\ind.png" />

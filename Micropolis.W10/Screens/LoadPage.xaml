@@ -23,11 +23,11 @@
     xmlns:view="using:Micropolis.View"
     mc:Ignorable="d">
 
-    <Grid Background="#545654">
+    <Grid Background="white">
         <!-- ThumbnailRenderer used to render maps on startup when non existent -->
         <Grid Height="400" Width="400" VerticalAlignment="Top">
             <view:ThumbnailRenderer x:Name="ThumbRender" Height="400" Width="400" x:FieldModifier="public" IsHitTestVisible="False" />
-            <StackPanel Background="#545654" Height="400" Width="400" />
+            <StackPanel Background="white" Height="400" Width="400" />
         </Grid>
         <!-- end of ThumbnailRenderer -->
 
@@ -38,11 +38,11 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
                 
-                    <Image Grid.Row="0" Source="ms-appx:///Assets/Logo/Logo800.png" MaxHeight="100" ImageOpened="Image_ImageOpened"/>
-                    <ProgressBar Grid.Row="1" x:Name="ProgressIn" Background="#ACAAAC" Foreground="Yellow" Height="25" IsIndeterminate="False" Margin="0,35,0,0" Minimum="0" Maximum="7" Value="0"/>
-                    <TextBlock Grid.Row="2" TextWrapping="Wrap" Text="Micropolis http://andreas-balzer.de/micropolis/" HorizontalAlignment="Center" Margin="0,20,0,0" FontFamily="/resources/fonts/dos437.ttf#Perfect DOS VGA 437 Win" FontSize="16"/>
+                    <Image Grid.Row="0" Source="ms-appx:///Assets/Logo/LogoBlack800.png" MaxHeight="100" ImageOpened="Image_ImageOpened"/>
+                    <ProgressBar Grid.Row="1" x:Name="ProgressIn" Background="#ACAAAC" Foreground="Black" Height="25" IsIndeterminate="False" Margin="0,35,0,0" Minimum="0" Maximum="7" Value="0"/>
+                    <TextBlock Grid.Row="2" TextWrapping="Wrap" Text="Micropolis http://andreas-balzer.de/micropolis/" HorizontalAlignment="Center" Margin="0,20,0,0" FontFamily="/resources/fonts/dos437.ttf#Perfect DOS VGA 437 Win" FontSize="16" Foreground="Black"/>
         </Grid>
-        <TextBlock x:Name="CopyrightTB" Text="GNU GPL" HorizontalAlignment="Center" Margin="0,0,0,15" TextWrapping="Wrap" FontFamily="/resources/fonts/dos437.ttf#Perfect DOS VGA 437 Win" VerticalAlignment="Bottom" FontSize="16"/>
+        <TextBlock x:Name="CopyrightTB" Text="GNU GPL" HorizontalAlignment="Center" Margin="0,0,0,15" TextWrapping="Wrap" FontFamily="/resources/fonts/dos437.ttf#Perfect DOS VGA 437 Win" VerticalAlignment="Bottom" FontSize="16" Foreground="Black"/>
     </Grid>
 
 </Page>

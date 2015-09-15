@@ -38,7 +38,8 @@
                 //ToDo: copy precreated images there from resources
 
                 StorageFolder installFolder = Package.Current.InstalledLocation;
-                StorageFolder cityFolder = await installFolder.GetFolderAsync("resources");
+                StorageFolder cityFolder = await installFolder.GetFolderAsync("Assets");
+                cityFolder = await cityFolder.GetFolderAsync("resources");
                 cityFolder = await cityFolder.GetFolderAsync("cities");
 
                 ThreadCancellation.CheckCancellation(cancelToken);

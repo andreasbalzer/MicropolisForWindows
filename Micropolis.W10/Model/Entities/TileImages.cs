@@ -88,12 +88,12 @@ namespace Micropolis
             if (size != 16)
             {
                 WriteableBitmap[] result =
-                    await LoadTileImages("ms-appx:///resources/images/Game/tiles/tiles_" + size + "x" + size + ".png", size);
+                    await LoadTileImages("ms-appx:///Assets/resources/images/Game/tiles/tiles_" + size + "x" + size + ".png", size);
                 App.LoadPageReference.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => { _images = result; });
             }
             else
             {
-                WriteableBitmap[] result = await LoadTileImages("ms-appx:///resources/images/Game/tiles/tiles.png", 16);
+                WriteableBitmap[] result = await LoadTileImages("ms-appx:///Assets/resources/images/Game/tiles/tiles.png", 16);
                 App.LoadPageReference.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => { _images = result; });
             }
 
@@ -198,7 +198,7 @@ namespace Micropolis
         /// <returns></returns>
         private async Task<WriteableBitmap> LoadSpriteImage(SpriteKind kind, int frameNo)
         {
-            String resourceName = "ms-appx:///resources/images/Game/sprites/obj" + kind.ObjectId + "-" + frameNo;
+            String resourceName = "ms-appx:///Assets/resources/images/Game/sprites/obj" + kind.ObjectId + "-" + frameNo;
 
             // first, try to load specific size image
             var iconUri = new Uri(resourceName + "_" + TileWidth + "x" + TileHeight + ".png",
@@ -206,6 +206,7 @@ namespace Micropolis
 
 
             StorageFolder folder = Package.Current.InstalledLocation;
+            folder = await folder.GetFolderAsync("Assets");
             folder = await folder.GetFolderAsync("resources");
             folder = await folder.GetFolderAsync("images");
             folder = await folder.GetFolderAsync("Game");

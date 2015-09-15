@@ -482,7 +482,8 @@ namespace Micropolis.ViewModels
         private async Task LoadCities()
         {
             var installFolder = Package.Current.InstalledLocation;
-            var cityFolder = await installFolder.GetFolderAsync("resources");
+            var cityFolder = await installFolder.GetFolderAsync("Assets");
+            cityFolder = await cityFolder.GetFolderAsync("resources");
             cityFolder = await cityFolder.GetFolderAsync("cities");
 
             var localFolder = ApplicationData.Current.LocalFolder;
@@ -520,7 +521,7 @@ namespace Micropolis.ViewModels
             {
             }
 
-            var path = new Uri("ms-appx:///resources/cities/" + title, UriKind.Absolute);
+            var path = new Uri("ms-appx:///Assets/resources/cities/" + title, UriKind.Absolute);
             var file = await StorageFile.GetFileFromApplicationUriAsync(path);
 
             ((ISupportsAppCommands) Application.Current).AppCommands.Add(new AppCommand(AppCommands.LOADFILEASNEWCITY,

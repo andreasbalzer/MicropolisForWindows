@@ -40,7 +40,7 @@ namespace Engine
                 return null;
             }
 
-            String n2 = "ms-appx:///resources/sounds/" + _wavName + ".wav";
+            String n2 = "ms-appx:///Assets/resources/sounds/" + _wavName + ".wav";
             var u = new Uri(n2, UriKind.RelativeOrAbsolute);
             return u;
         }

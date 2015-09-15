@@ -26,7 +26,7 @@
         <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     </UserControl.Resources>
     <Grid x:Name="ImageSize" Height="47" Width="39">
-        <Image x:Name="ImageOutput" Source="/resources/images/GameUI/demandg.png" VerticalAlignment="Top" HorizontalAlignment="Left" />
+        <Image x:Name="ImageOutput" Source="/Assets/resources/images/GameUI/demandg.png" VerticalAlignment="Top" HorizontalAlignment="Left" />
         <Rectangle Fill="Green" Stroke="Black" StrokeThickness="1" x:Name="ResRectangle" Height="{Binding ResRectangleHeight}" Width="{Binding ResRectangleWidth}" Visibility="{Binding ResRectangleIsVisible, Converter={StaticResource BooleanToVisibilityConverter}}" VerticalAlignment="Top" HorizontalAlignment="Left">
             <Rectangle.RenderTransform>
                 <TranslateTransform X="{Binding ResRectangleX}" Y="{Binding ResRectangleY}" />

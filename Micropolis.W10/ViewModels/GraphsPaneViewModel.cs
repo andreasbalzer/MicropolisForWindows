@@ -193,8 +193,8 @@ namespace Micropolis.ViewModels
         private void MakeDataBtn(GraphData graph)
         {
             GraphPaneToggleButtonViewModel buttonViewModel = new GraphPaneToggleButtonViewModel();
-            String icon1Name = "ms-appx:///resources/images/GameUI/" + Strings.GetString("graph_button." + graph);
-            String icon2Name = "ms-appx:///resources/images/GameUI/" +
+            String icon1Name = "ms-appx:///Assets/resources/images/GameUI/" + Strings.GetString("graph_button." + graph);
+            String icon2Name = "ms-appx:///Assets/resources/images/GameUI/" +
                                Strings.GetString("graph_button." + graph + ".selected");
 
             var uri1 = new Uri(icon1Name, UriKind.RelativeOrAbsolute);

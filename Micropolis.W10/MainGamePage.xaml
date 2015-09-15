@@ -207,7 +207,7 @@
                             <StackPanel Orientation="Horizontal">
                                 <Button x:Name="SpeedButton" Style="{StaticResource BarSmallTopButtonStyle}">
                                     <StackPanel Orientation="Vertical">
-                                        <Image x:Name="SpeedButtonContent" Source="/resources/images/GameUI/bars/clock.png"
+                                        <Image x:Name="SpeedButtonContent" Source="/Assets/resources/images/GameUI/bars/clock.png"
                                    Height="30" />
                                         <TextBlock FontSize="6" Margin="12,0,0,0" Text="&#xE099;" VerticalAlignment="Center"
                                        FontFamily="Segoe UI Symbol" />
@@ -230,34 +230,34 @@
                                 <Button x:Name="SpeedPauseButton"
                             Background="{Binding IsSpeedPause, Converter={StaticResource SpeedButtonToBackgroundConverter}}"
                             Style="{StaticResource BarButtonStyle}" Command="{Binding SpeedPauseCommand}">
-                                    <Image Source="/resources/UIButtons/Pause-Icon.png" />
+                                    <Image Source="/Assets/resources/UIButtons/Pause-Icon.png" />
                                 </Button>
                                 <Button x:Name="SpeedSlowButton"
                             Background="{Binding IsSpeedSlow, Converter={StaticResource SpeedButtonToBackgroundConverter}}"
                             Style="{StaticResource BarButtonStyle}" Command="{Binding SpeedSlowCommand}">
-                                    <Image Source="/resources/UIButtons/Slow-Icon.png" />
+                                    <Image Source="/Assets/resources/UIButtons/Slow-Icon.png" />
                                 </Button>
                                 <Button x:Name="SpeedNormalButton"
                             Background="{Binding IsSpeedNormal, Converter={StaticResource SpeedButtonToBackgroundConverter}}"
                             Style="{StaticResource BarButtonStyle}" Command="{Binding SpeedNormalCommand}">
-                                    <Image Source="/resources/UIButtons/Normal-Icon.png" />
+                                    <Image Source="/Assets/resources/UIButtons/Normal-Icon.png" />
                                 </Button>
                                 <Button x:Name="SpeedFastButton"
                             Background="{Binding IsSpeedFast, Converter={StaticResource SpeedButtonToBackgroundConverter}}"
                             Style="{StaticResource BarButtonStyle}" Command="{Binding SpeedFastCommand}">
-                                    <Image Source="/resources/UIButtons/Fast-Icon.png" />
+                                    <Image Source="/Assets/resources/UIButtons/Fast-Icon.png" />
                                 </Button>
                                 <Button x:Name="SpeedSuperFastButton"
                             Background="{Binding IsSpeedSuperFast, Converter={StaticResource SpeedButtonToBackgroundConverter}}"
                             Style="{StaticResource BarButtonStyle}" Command="{Binding SpeedSuperFastCommand}">
-                                    <Image Source="/resources/UIButtons/SuperFast-Icon.png" />
+                                    <Image Source="/Assets/resources/UIButtons/SuperFast-Icon.png" />
                                 </Button>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
                                 <Button x:Name="NumbersButtonSmall" Style="{StaticResource BarSmallTopButtonStyle}">
                                     <Grid>
                                         <StackPanel Orientation="Vertical">
-                                            <Image Source="/resources/images/GameUI/bars/numbers.png" Height="30" />
+                                            <Image Source="/Assets/resources/images/GameUI/bars/numbers.png" Height="30" />
                                             <TextBlock FontSize="6" Margin="12,0,0,0" Text="&#xE099;" VerticalAlignment="Center"
                                            FontFamily="Segoe UI Symbol" />
                                         </StackPanel>
@@ -341,13 +341,13 @@
                                     <Grid>
                                         <StackPanel Orientation="Vertical"
                                         Visibility="{Binding IsMessagesVisible, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=inverted, FallbackValue=Collapsed}">
-                                            <Image Source="/resources/images/GameUI/bars/messages.png" Height="30" />
+                                            <Image Source="/Assets/resources/images/GameUI/bars/messages.png" Height="30" />
                                             <TextBlock FontSize="6" Margin="12,0,0,0" Text="&#xE099;" VerticalAlignment="Center"
                                            FontFamily="Segoe UI Symbol" />
                                         </StackPanel>
                                         <StackPanel Orientation="Vertical"
                                         Visibility="{Binding IsMessagesVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
-                                            <Image Source="/resources/images/GameUI/bars/messages.png" Height="30" />
+                                            <Image Source="/Assets/resources/images/GameUI/bars/messages.png" Height="30" />
                                             <TextBlock FontSize="6" Margin="12,0,0,2" Text="&#xE098;" VerticalAlignment="Center"
                                            FontFamily="Segoe UI Symbol" />
                                         </StackPanel>
@@ -379,13 +379,13 @@
                                     <Grid>
                                         <StackPanel Orientation="Vertical"
                                         Visibility="{Binding IsMiniMapVisible, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=inverted, FallbackValue=Collapsed}">
-                                            <Image Source="/resources/images/GameUI/bars/map.png" Height="30" />
+                                            <Image Source="/Assets/resources/images/GameUI/bars/map.png" Height="30" />
                                             <TextBlock FontSize="6" Margin="12,0,0,0" Text="&#xE099;" VerticalAlignment="Center"
                                            FontFamily="Segoe UI Symbol" />
                                         </StackPanel>
                                         <StackPanel Orientation="Vertical"
                                         Visibility="{Binding IsMiniMapVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
-                                            <Image Source="/resources/images/GameUI/bars/map.png" Height="30" />
+                                            <Image Source="/Assets/resources/images/GameUI/bars/map.png" Height="30" />
                                             <TextBlock FontSize="6" Margin="12,0,0,2" Text="&#xE098;" VerticalAlignment="Center"
                                            FontFamily="Segoe UI Symbol" />
                                         </StackPanel>
@@ -424,13 +424,13 @@
                                     Visibility="{Binding ViewModel.ToolBarIsVisible, ElementName=ToolsPanel, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=inverted, FallbackValue=Collapsed}">
                                         <TextBlock FontSize="6" Margin="12,0,0,0" Text="&#xE098;" VerticalAlignment="Top"
                                        FontFamily="Segoe UI Symbol" Height="10" />
-                                        <Image Source="/resources/images/GameUI/bars/tools.png" Height="30" />
+                                        <Image Source="/Assets/resources/images/GameUI/bars/tools.png" Height="30" />
                                     </StackPanel>
                                     <StackPanel Orientation="Vertical"
                                     Visibility="{Binding ViewModel.ToolBarIsVisible, ElementName=ToolsPanel, Converter={StaticResource BooleanToVisibilityConverter}}">
                                         <TextBlock FontSize="6" Margin="12,0,0,2" Text="&#xE099;" VerticalAlignment="Center"
                                        FontFamily="Segoe UI Symbol" />
-                                        <Image Source="/resources/images/GameUI/bars/tools.png" Height="30" />
+                                        <Image Source="/Assets/resources/images/GameUI/bars/tools.png" Height="30" />
                                     </StackPanel>
                                 </Grid>
                             </Button>
@@ -460,7 +460,7 @@
                                     <TextBlock FontSize="6" Margin="12,0,0,0" Text="&#xE098;" VerticalAlignment="Top"
                                    FontFamily="Segoe UI Symbol" Height="10" />
                                     <Image x:Name="DifficultySmallButtonContent"
-                               Source="/resources/images/GameUI/bars/difficulty.png" Height="30" />
+                               Source="/Assets/resources/images/GameUI/bars/difficulty.png" Height="30" />
                                 </StackPanel>
                                 <Button.Flyout>
                                     <Flyout>
@@ -510,7 +510,7 @@
                                 <StackPanel Orientation="Vertical">
                                     <TextBlock FontSize="6" Margin="12,0,0,0" Text="&#xE098;" VerticalAlignment="Top"
                                    FontFamily="Segoe UI Symbol" Height="10" />
-                                    <Image x:Name="SettingsSmallButtonContent" Source="/resources/images/GameUI/bars/settings.png"
+                                    <Image x:Name="SettingsSmallButtonContent" Source="/Assets/resources/images/GameUI/bars/settings.png"
                                Height="30" />
                                 </StackPanel>
                                 <Button.Flyout>
@@ -559,7 +559,7 @@
                                 <StackPanel Orientation="Vertical">
                                     <TextBlock FontSize="6" Margin="12,0,0,0" Text="&#xE098;" VerticalAlignment="Top"
                                    FontFamily="Segoe UI Symbol" Height="10" />
-                                    <Image x:Name="DisasterSmallButtonContent" Source="/resources/images/GameUI/bars/disaster.png"
+                                    <Image x:Name="DisasterSmallButtonContent" Source="/Assets/resources/images/GameUI/bars/disaster.png"
                                Height="30" />
                                 </StackPanel>
                                 <Button.Flyout>
@@ -601,7 +601,7 @@
 
                             <Button x:Name="BudgetSmallButton" Command="{Binding BudgetCommand}"
                         Style="{StaticResource BarSmallBottomButtonStyle}">
-                                <Image x:Name="BudgetSmallButtonContent" Source="/resources/images/GameUI/bars/budget.png"
+                                <Image x:Name="BudgetSmallButtonContent" Source="/Assets/resources/images/GameUI/bars/budget.png"
                            Height="30" />
                             </Button>
                             <Button Content="{Binding BudgetButtonText}" x:Name="BudgetButton" Command="{Binding BudgetCommand}"
@@ -609,7 +609,7 @@
 
                             <Button x:Name="EvaluationSmallButton"
                         Command="{Binding EvaluationCommand}" Style="{StaticResource BarSmallBottomButtonStyle}">
-                                <Image x:Name="EvaluationSmallButtonContent" Source="/resources/images/GameUI/bars/evaluation.png"
+                                <Image x:Name="EvaluationSmallButtonContent" Source="/Assets/resources/images/GameUI/bars/evaluation.png"
                            Height="30" />
                             </Button>
                             <Button Content="{Binding EvaluationButtonText}" x:Name="EvaluationButton"
@@ -617,7 +617,7 @@
 
                             <Button x:Name="GraphSmallButton" Command="{Binding GraphCommand}"
                         Style="{StaticResource BarSmallBottomButtonStyle}">
-                                <Image x:Name="GraphSmallButtonContent" Source="/resources/images/GameUI/bars/graph.png"
+                                <Image x:Name="GraphSmallButtonContent" Source="/Assets/resources/images/GameUI/bars/graph.png"
                            Height="30" />
                             </Button>
                             <Button Content="{Binding GraphButtonText}" x:Name="GraphButton" Command="{Binding GraphCommand}"
