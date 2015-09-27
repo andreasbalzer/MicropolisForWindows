@@ -1,0 +1,36 @@
+﻿<!--
+    // This file is part of Micropolis for WinRT.
+    // Copyright (C) 2014 Andreas Balzer, Felix Dietrich, Florian Thurnwald and Ivo Vutov
+    // Portions Copyright (C) MicropolisJ by Jason Long
+    // Portions Copyright (C) Micropolis Don Hopkins
+    // Portions Copyright (C) 1989-2007 Electronic Arts Inc.
+    //
+    // Micropolis for WinRT is free software; you can redistribute it and/or modify
+    // it under the terms of the GNU GPLv3, with Additional terms.
+    // See the README file, included in this distribution, for details.
+    // Project website: http://code.google.com/p/micropolis/
+    -->
+    <UserControl
+    x:Class="Micropolis.MessagesPane"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Micropolis"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+    
+    <ItemsControl x:Name="MessagesListView" ItemsSource="{Binding Messages, Mode=TwoWay}">
+        <ItemsControl.ItemsPanel>
+            <ItemsPanelTemplate>
+                <StackPanel Orientation="Vertical" />
+            </ItemsPanelTemplate>
+        </ItemsControl.ItemsPanel>
+        <ItemsControl.ItemTemplate>
+            <DataTemplate>
+                <TextBlock Style="{StaticResource BodyTextBlockStyle}" Text="{Binding}" Foreground="Black" />
+            </DataTemplate>
+</ItemsControl.ItemTemplate>
+    </ItemsControl>
+</UserControl>
