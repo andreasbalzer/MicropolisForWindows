@@ -647,9 +647,9 @@
                                     <RowDefinition Height="*" />
                                     <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
-                                <controls:WrapPanel Grid.Row="1" Orientation="Horizontal">
+                                <controls:WrapPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Stretch">
                                     <Border x:Name="MessagesScrollViewerPane" Background="White" BorderBrush="#2B2B2B"
-                                BorderThickness="1,0,1,1" HorizontalAlignment="Right" Margin="0,0,37,0"
+                                BorderThickness="1,0,1,1" HorizontalAlignment="Right" Margin="0,0,36,0"
                                 VerticalAlignment="Top"
                                 Height="100" Width="300"
                                 Visibility="{Binding IsMessagesVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
