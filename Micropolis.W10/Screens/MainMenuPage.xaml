@@ -333,7 +333,7 @@
                     <Hub Grid.Row="1" x:Name="MainMenuHub" LayoutUpdated="MainMenuHub_OnLayoutUpdated">
                         <!--LayoutUpdated="FrameworkElement_OnLayoutUpdated"-->
                         <Hub.Header>
-                            <Image x:Name="HubHeaderImage" Height="100" IsHitTestVisible="false" HorizontalAlignment="Right"
+                            <Image x:Name="HubHeaderImage" Height="90" Margin="20,30" IsHitTestVisible="false" HorizontalAlignment="Right"
                        VerticalAlignment="Bottom" Source="{Binding HubHeaderImageSource}" />
                         </Hub.Header>
                         <HubSection Width="700">
