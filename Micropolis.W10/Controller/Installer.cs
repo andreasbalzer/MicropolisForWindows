@@ -28,7 +28,11 @@
             StorageFolder localFolder = ApplicationData.Current.LocalFolder;
             IStorageItem cityThumbs = await localFolder.TryGetItemAsync("cityThumbs");
             bool cityThumbsExists = cityThumbs != null;
-            bool installComplete = (await ((StorageFolder) cityThumbs).TryGetItemAsync("installComplete.txt")) != null;
+            bool installComplete = false;
+            if (cityThumbsExists)
+            {
+                installComplete = (await ((StorageFolder)cityThumbs).TryGetItemAsync("installComplete.txt")) != null;
+            }
             
             bool cityThumbImagesExist = cityThumbsExists
                                         && installComplete;
