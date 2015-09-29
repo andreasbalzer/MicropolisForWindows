@@ -177,22 +177,43 @@ namespace Micropolis
         /// <param name="e">The <see cref="UnhandledExceptionEventArgs" /> instance containing the event data.</param>
         private async void App_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
-            try
-            {
-                _telemetry.TrackException(e.Exception);
-            }
-            catch (Exception) { }
-
             var x = ""; // Bug: Todo
-            //e.Handled = true;
+            e.Handled = true;
+
+            string inner = e.Exception.InnerException != null ? ("\n\nReal cause: " + e.Exception.InnerException.Message) : "";
             var dialog =
                 new MessageDialog(
-                    "Unfortunately Micropolis experienced an issue it could not resolve.\n The game will now exit and you can manually restart it. Provided you participate in the Microsoft Customer Experience Improvement Program, we will then be notified of the issue and do our very best to fix it.",
+                    "Unfortunately Micropolis experienced an issue it could not resolve.\nThe game will now exit and you can manually restart it. Provided you participate in the Microsoft Customer Experience Improvement Program, we will then be notified of the issue and do our very best to fix it.\n\nCause of riot: "+ e.Message + inner,
                     "Your citizens riot.");
-
-            await dialog.ShowAsync();
+            dialog.Commands.Add(new UICommand("Report now", delegate (IUICommand command)
+            {
+                try
+                {
+                    _telemetry.TrackException(e.Exception);
+                }
+                catch (Exception) { }
+            }));
+            dialog.Commands.Add(new UICommand("Close"));
+            await ShowDialog(dialog);
+            
+            Application.Current.Exit();
         }
 
+        private static IAsyncOperation<IUICommand> messageDialogCommand = null;
+        public async static Task<bool> ShowDialog(MessageDialog dlg)
+        {
+
+            // Close the previous one out
+            if (messageDialogCommand != null)
+            {
+                messageDialogCommand.Cancel();
+                messageDialogCommand = null;
+            }
+
+            messageDialogCommand = dlg.ShowAsync();
+            await messageDialogCommand;
+            return true;
+        }
 
         /// <summary>
         /// Invoked when the application is launched normally by the end user.  Other entry points

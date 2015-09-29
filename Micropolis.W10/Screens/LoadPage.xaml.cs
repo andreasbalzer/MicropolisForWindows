@@ -107,7 +107,7 @@ namespace Micropolis.Screens
         /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         private void Image_ImageOpened(object sender, RoutedEventArgs e)
         {
-            LoadData();
+            LoadData().Wait();
         }
 
         public void CancelLoading()
@@ -137,9 +137,9 @@ namespace Micropolis.Screens
             {
 
                 Task t1 = Strings.Initialize(this._cancelToken).ContinueWith(
-                    (e) =>
+                    async (e) =>
                     {
-                        App.LoadPageReference.Dispatcher.RunAsync(
+                        await App.LoadPageReference.Dispatcher.RunAsync(
                             CoreDispatcherPriority.Normal,
                             () =>
                             {
@@ -149,7 +149,7 @@ namespace Micropolis.Screens
                                     _telemetry.TrackEvent("LoadCopyrightSuccessful");
                                 }
                                 catch (Exception) { }
-                            });
+                            }).AsTask();
                     }); // async load language files
                 Task t2 = TileImages.Initialize(this._cancelToken).ContinueWith(
                     (e) =>
@@ -160,17 +160,17 @@ namespace Micropolis.Screens
                 catch (Exception) { } });
                     });
                 Task t3 = Tiles.Initialize().ContinueWith(
-                    (e) =>
+                   async (e) =>
                     {
-                        App.LoadPageReference.Dispatcher.RunAsync(
+                        await App.LoadPageReference.Dispatcher.RunAsync(
                             CoreDispatcherPriority.Normal,
                             () => { ProgressIn.Value += 1; try { _telemetry.TrackEvent("LoadTilesInitializedSuccessful");}
                 catch (Exception) { } });
                     });
                 Task t5 = OverlayMapViewModel.Initialize(this._cancelToken).ContinueWith(
-                    (e) =>
+                    async (e) =>
                     {
-                        App.LoadPageReference.Dispatcher.RunAsync(
+                       await App.LoadPageReference.Dispatcher.RunAsync(
                             CoreDispatcherPriority.Normal,
                             () =>
                             {
@@ -183,11 +183,11 @@ namespace Micropolis.Screens
                 // Render thumbnail images, after required images are loaded
                 //beginning of section that blacks out screen
                 Task t6 = t5.ContinueWith(
-                    (f) =>
+                    async (f) =>
                     {
                         Installer.CreateCityFolderAndThumbnails(this._cancelToken).Wait(this._cancelToken);
 
-                        App.LoadPageReference.Dispatcher.RunAsync(
+                        await App.LoadPageReference.Dispatcher.RunAsync(
                             CoreDispatcherPriority.Normal,
                             () =>
                             {
@@ -199,12 +199,12 @@ namespace Micropolis.Screens
                             });
                     });
                 //end of setion that blacks out screen
-                Task loadingTask = new Task(() =>
+                Task loadingTask = new Task(async () =>
                 {
-                Task.WhenAll(new List<Task> {t1, t2, t3, t6}).ContinueWith(
-                    (e) =>
+                await Task.WhenAll(new List<Task> {t1, t2, t3, t6}).ContinueWith(
+                   async (e) =>
                     {
-                        App.LoadPageReference.Dispatcher.RunAsync(
+                        await App.LoadPageReference.Dispatcher.RunAsync(
                             CoreDispatcherPriority.Normal,
                             () =>
                             {

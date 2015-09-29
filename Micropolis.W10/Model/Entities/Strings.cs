@@ -8,6 +8,7 @@ using Windows.System.UserProfile;
 
 namespace Micropolis
 {
+    using Microsoft.ApplicationInsights;
     using System.Diagnostics;
     using System.Threading;
 
@@ -112,11 +113,11 @@ namespace Micropolis
                         }
 
                         // try to see whether language files for language are available
-                        IStorageFile file = await folder.TryGetItemAsync("CityMessages_"+possibleLanguageModifier+".properties") as IStorageFile;
+                        IStorageFile file = await folder.TryGetItemAsync("CityMessages_" + possibleLanguageModifier + ".properties") as IStorageFile;
 
                         if (file != null) // the language is available in language files
                         {
-                            languageModifier = "_" + possibleLanguageModifier;
+                            languageModifier = possibleLanguageModifier;
                             break;
                         }
                     }
@@ -127,10 +128,10 @@ namespace Micropolis
                 }
                 else if (Prefs.ContainsKey("Language"))
                 {
-                    languageModifier = (string) Prefs.GetString("Language","en");
+                    languageModifier = (string)Prefs.GetString("Language", "en");
                 }
                 if (languageModifier != "en")
-                    // a language different from english should be loaded (english is loaded below as default and fall back)
+                // a language different from english should be loaded (english is loaded below as default and fall back)
                 {
                     Micropolis.Utils.ThreadCancellation.CheckCancellation(cancelToken);
                     await LoadAndParseFile("Assets/strings", "CityMessages_" + languageModifier + ".properties");
@@ -139,15 +140,24 @@ namespace Micropolis
                     await LoadAndParseFile("Assets/strings", "StatusMessages_" + languageModifier + ".properties");
                 }
             }
-            catch
+            catch (Exception e)
             {
+                try
+                {
+                    var telemetry = new TelemetryClient();
+                    telemetry.TrackException(e);
+                }
+                catch (Exception) { }
             }
-            Micropolis.Utils.ThreadCancellation.CheckCancellation(cancelToken);
-            // load english items in case something is missing in language packs. also loads generic filenames
-            await LoadAndParseFile("Assets/strings", "CityMessages.properties");
-            await LoadAndParseFile("Assets/strings", "CityStrings.properties");
-            await LoadAndParseFile("Assets/strings", "GuiStrings.properties");
-            await LoadAndParseFile("Assets/strings", "StatusMessages.properties");
+            finally
+            {
+                Micropolis.Utils.ThreadCancellation.CheckCancellation(cancelToken);
+                // load english items in case something is missing in language packs. also loads generic filenames
+                await LoadAndParseFile("Assets/strings", "CityMessages.properties");
+                await LoadAndParseFile("Assets/strings", "CityStrings.properties");
+                await LoadAndParseFile("Assets/strings", "GuiStrings.properties");
+                await LoadAndParseFile("Assets/strings", "StatusMessages.properties");
+            }
         }
 
         private static async Task LoadAndParseFile(string folder, string file)
@@ -168,6 +178,7 @@ namespace Micropolis
                 Debug.WriteLine(name+" was not found in strings");
                 throw new KeyNotFoundException("The string "+name+" could not been found in language files.");
             }
+
             return _strings[name];
         }
 

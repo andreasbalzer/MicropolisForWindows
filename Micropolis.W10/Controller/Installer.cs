@@ -50,7 +50,7 @@
 
 
                 var completionSource = new TaskCompletionSource<bool>();
-                App.LoadPageReference.Dispatcher.RunAsync(
+                await App.LoadPageReference.Dispatcher.RunAsync(
                     CoreDispatcherPriority.Normal,
                     async () =>
                     {
@@ -62,7 +62,7 @@
                             }
                         }
                         completionSource.SetResult(true);
-                    });
+                    }).AsTask();
 
                 await ((StorageFolder) cityThumbs).CreateFileAsync(
                     "installComplete.txt",
