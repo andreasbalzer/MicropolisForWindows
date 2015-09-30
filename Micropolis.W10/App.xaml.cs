@@ -295,12 +295,25 @@ namespace Micropolis
             }
             catch (Exception) { }
 
-            if (MainPageReference != null)
+            try
             {
-                MainPageReference.ViewModel.OnAppClosed().Wait();
+                if (MainPageReference != null)
+                {
+                    MainPageReference.ViewModel.OnAppClosed().Wait();
+                }
             }
-
-            deferral.Complete();
+            catch(Exception exp)
+            {
+                try
+                {
+                    _telemetry.TrackException(exp);
+                }
+                catch (Exception) { }
+            }
+            finally
+            {
+                deferral.Complete();
+            }
         }
 
         /// <summary>
