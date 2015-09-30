@@ -917,6 +917,30 @@ namespace Micropolis.ViewModels
             var height = (int) notificationPanelViewportSize.Height;
             int yend = ystart + height;
 
+            if (xstart < 0)
+            {
+                xend += (0 - xstart);
+                xstart = 0;
+            }
+
+            if (ystart < 0)
+            {
+                yend += (0 - ystart);
+                ystart = 0;
+            }
+
+            if (xend > _imageOutput.Width)
+            {
+                xstart -= xend - (int)_imageOutput.Width;
+                xend = (int)_imageOutput.Width - 1;
+            }
+
+            if (yend > _imageOutput.Height)
+            {
+                ystart -= yend - (int)_imageOutput.Height;
+                yend = (int)_imageOutput.Height - 1;
+            }
+
             PaintComponent(false, xstart, ystart, xend, yend);
 
             WriteableBitmap clonedImg = Image.Crop(xstart, ystart, width, height);
