@@ -32,7 +32,7 @@ namespace Micropolis.ViewModels
         }
 
 
-        private readonly int FRAMES_PER_SECOND = 3;
+        private readonly int FRAMES_PER_SECOND = 10;
         private static WriteableBitmap _tileArrayImage;
         private static readonly int TILE_WIDTH = 3;
         private static readonly int TILE_HEIGHT = 3;
@@ -705,10 +705,23 @@ namespace Micropolis.ViewModels
             {
                 Rect rect = getViewRect(_views[0]);
 
+                int width = (int)rect.Width;
+                int height = (int)rect.Height;
+
+                if (width > ImageOutputWidth)
+                {
+                    width = (int) ImageOutputWidth;
+                }
+
+                if (height > ImageOutputHeight)
+                {
+                    height = (int)ImageOutputHeight;
+                }
+
                 ViewPortRectangleX = (int) rect.X;
                 ViewPortRectangleY = (int) rect.Y;
-                ViewPortRectangleHeight = ((int) (rect.Height));
-                ViewPortRectangleWidth = ((int) (rect.Width));
+                ViewPortRectangleHeight = ((int) (height));
+                ViewPortRectangleWidth = ((int) (width));
             }
         }
 

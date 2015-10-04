@@ -589,6 +589,11 @@ namespace Micropolis.ViewModels
 
         private void DrawTile(Stream output, int x, int y, int shake, byte[] tilePixelEncoded, int width)
         {
+            if (x < 0 || y < 0)
+            {
+                return;
+            }
+
             int startPosInMap = y * TILE_HEIGHT * width * 4 + x * TILE_WIDTH * 4;
 
             for (int index = 0; index < TILE_HEIGHT; ++index)
@@ -740,6 +745,7 @@ namespace Micropolis.ViewModels
                     cursor = cursor.Resize((toolPreview.GetBounds().Width + 10)*TILE_WIDTH,
                         (toolPreview.GetBounds().Height + 10)*TILE_HEIGHT,
                         WriteableBitmapExtensions.Interpolation.Bilinear);
+                    _cursorStream = WindowsRuntimeBufferExtensions.AsStream(this.cursor.PixelBuffer);
                     _imageCursor.Source = cursor;
                 }
             }
