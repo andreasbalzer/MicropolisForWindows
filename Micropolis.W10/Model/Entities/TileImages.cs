@@ -13,6 +13,7 @@ using Micropolis.Lib.graphics;
 
 namespace Micropolis
 {
+    using System.Runtime.InteropServices.WindowsRuntime;
     using System.Threading;
 
     // This file is part of Micropolis for WinRT.
@@ -46,8 +47,8 @@ namespace Micropolis
         /// </summary>
         public int TileWidth;
 
-        private WriteableBitmap[] _images;
-        private Dictionary<SpriteKind, Dictionary<int, WriteableBitmap>> _spriteImages;
+        private byte[][] _images;
+        private Dictionary<SpriteKind, Dictionary<int, byte[]>> _spriteImages;
 
         private TileImages(int size)
         {
@@ -87,13 +88,13 @@ namespace Micropolis
         {
             if (size != 16)
             {
-                WriteableBitmap[] result =
+                byte[][] result =
                     await LoadTileImages("ms-appx:///Assets/resources/images/Game/tiles/tiles_" + size + "x" + size + ".png", size);
                 App.LoadPageReference.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => { _images = result; });
             }
             else
             {
-                WriteableBitmap[] result = await LoadTileImages("ms-appx:///Assets/resources/images/Game/tiles/tiles.png", 16);
+                byte[][] result = await LoadTileImages("ms-appx:///Assets/resources/images/Game/tiles/tiles.png", 16);
                 App.LoadPageReference.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => { _images = result; });
             }
 
@@ -115,7 +116,7 @@ namespace Micropolis
         /// </summary>
         /// <param name="cell">The cell.</param>
         /// <returns></returns>
-        public WriteableBitmap GetTileImage(int cell)
+        public byte[] GetTileImage(int cell)
         {
             int tile = (cell & TileConstants.LOMASK)%_images.Length;
             return _images[tile];
@@ -127,34 +128,35 @@ namespace Micropolis
         /// <param name="resourceName">Name of the resource.</param>
         /// <param name="srcSize">Size of the source.</param>
         /// <returns></returns>
-        private async Task<WriteableBitmap[]> LoadTileImages(String resourceName, int srcSize)
+        private async Task<byte[][]> LoadTileImages(String resourceName, int srcSize)
         {
             var iconUrl = new Uri(resourceName, UriKind.RelativeOrAbsolute);
             var refImage = new WriteableBitmap(10, 10);
             refImage = await refImage.FromContent(iconUrl);
 
-            var images = new List<WriteableBitmap>();
+            int elements = refImage.PixelHeight / srcSize;
 
-            int elements = refImage.PixelHeight/srcSize;
+            byte[][] images = new byte[elements][];
 
+            
+            byte[] sourcePixel = refImage.PixelBuffer.ToArray();
 
             using (refImage.GetBitmapContext())
             {
                 for (int i = 0; i < elements; i++)
                 {
-                    var bi = new WriteableBitmap(TileWidth, TileHeight);
-                    using (bi.GetBitmapContext())
-                    {
-                        bi.DrawInto(refImage, 0, 0,
-                            0, i*srcSize,
-                            srcSize, i*srcSize + srcSize);
+                    byte[] tilePixel = new byte[TileWidth * TileHeight * 4];
 
-                        images.Add(bi);
+                    for (int j = 0; j < TileWidth * TileHeight * 4; j++)
+                    {
+                        tilePixel[j] = sourcePixel[i * TileWidth * TileHeight * 4 + j];
                     }
+
+                    images[i] = tilePixel;
                 }
             }
 
-            return images.ToArray<WriteableBitmap>();
+            return images;
         }
 
         /// <summary>
@@ -163,7 +165,7 @@ namespace Micropolis
         /// <param name="kind">The kind.</param>
         /// <param name="frameNumber">The frame number.</param>
         /// <returns></returns>
-        public WriteableBitmap GetSpriteImage(SpriteKind kind, int frameNumber)
+        public byte[] GetSpriteImage(SpriteKind kind, int frameNumber)
         {
             return _spriteImages[kind][frameNumber];
         }
@@ -174,16 +176,17 @@ namespace Micropolis
         /// <returns></returns>
         private async Task LoadSpriteImages()
         {
-            _spriteImages = new Dictionary<SpriteKind, Dictionary<int, WriteableBitmap>>();
+            _spriteImages = new Dictionary<SpriteKind, Dictionary<int, byte[]>>();
             foreach (SpriteKind kind in SpriteKinds.SpriteKind.Values)
             {
-                var imgs = new Dictionary<int, WriteableBitmap>();
+                var imgs = new Dictionary<int, byte[]>();
                 for (int i = 0; i < kind.NumFrames; i++)
                 {
                     WriteableBitmap img = await LoadSpriteImage(kind, i);
                     if (img != null)
                     {
-                        imgs.Add(i, img);
+                        byte[] spritePixel = img.PixelBuffer.ToArray();
+                        imgs.Add(i, spritePixel);
                     }
                 }
                 _spriteImages.Add(kind, imgs);
