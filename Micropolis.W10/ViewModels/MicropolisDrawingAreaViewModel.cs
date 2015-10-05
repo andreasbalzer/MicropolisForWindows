@@ -37,7 +37,6 @@ namespace Micropolis.ViewModels
         private readonly TextBlock _textBlockToRender;
 
         private Stream _imageStream;
-        private Stream _cursorStream;
 
         /// <summary>
         ///     height of one tile in pixel
@@ -510,7 +509,6 @@ namespace Micropolis.ViewModels
                 cursor = new WriteableBitmap(10*TILE_WIDTH + 4, 10*TILE_HEIGHT + 4);
                 Image = new WriteableBitmap(width*TILE_WIDTH, height*TILE_HEIGHT);
                 _imageStream = WindowsRuntimeBufferExtensions.AsStream(this.Image.PixelBuffer);
-                _cursorStream = WindowsRuntimeBufferExtensions.AsStream(this.cursor.PixelBuffer);
 
                 _dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                 {
@@ -713,7 +711,7 @@ namespace Micropolis.ViewModels
         /// </summary>
         private void PaintCursor()
         {
-           
+
             TranslateTransform exTr = null;
 
             if (!(_imageCursor.RenderTransform is MatrixTransform))
@@ -736,16 +734,15 @@ namespace Micropolis.ViewModels
                 var transTrans = new TranslateTransform { X = toolCursorPosition.X, Y = toolCursorPosition.Y };
                 _imageCursor.RenderTransform = transTrans;
             }
-            
+
             if (toolPreview != null)
             {
-                if (cursor.PixelWidth != (toolPreview.GetBounds().Width + 10)*TILE_WIDTH ||
-                    cursor.PixelHeight != (toolPreview.GetBounds().Height + 10)*TILE_HEIGHT)
+                if (cursor.PixelWidth != (toolPreview.GetBounds().Width + 10) * TILE_WIDTH ||
+                    cursor.PixelHeight != (toolPreview.GetBounds().Height + 10) * TILE_HEIGHT)
                 {
-                    cursor = cursor.Resize((toolPreview.GetBounds().Width + 10)*TILE_WIDTH,
-                        (toolPreview.GetBounds().Height + 10)*TILE_HEIGHT,
+                    cursor = cursor.Resize((toolPreview.GetBounds().Width + 10) * TILE_WIDTH,
+                        (toolPreview.GetBounds().Height + 10) * TILE_HEIGHT,
                         WriteableBitmapExtensions.Interpolation.Bilinear);
-                    _cursorStream = WindowsRuntimeBufferExtensions.AsStream(this.cursor.PixelBuffer);
                     _imageCursor.Source = cursor;
                 }
             }
@@ -761,20 +758,20 @@ namespace Micropolis.ViewModels
                     int height = m.GetHeight();
 
                     int x0 = 0;
-                    double x1 = (0 + toolCursor.Rect.Width)*tileWidthCalc;
+                    double x1 = (0 + toolCursor.Rect.Width) * tileWidthCalc;
                     int y0 = 0;
-                    double y1 = (0 + toolCursor.Rect.Height)*tileHeightCalc;
+                    double y1 = (0 + toolCursor.Rect.Height) * tileHeightCalc;
 
                     cursor.Clear();
 
                     if (!dragging)
                     {
-                        cursor.DrawRectangle(x0, y0, (int) x1 + 4, (int) y1 + 4, toolCursor.BorderColor);
-                        cursor.DrawRectangle(x0 + 1, y0 + 1, (int) x1 + 3, (int) y1 + 3, toolCursor.BorderColor);
+                        cursor.DrawRectangle(x0, y0, (int)x1 + 4, (int)y1 + 4, toolCursor.BorderColor);
+                        cursor.DrawRectangle(x0 + 1, y0 + 1, (int)x1 + 3, (int)y1 + 3, toolCursor.BorderColor);
 
                         if (toolCursor.FillColor != null && x0 >= 0 && y0 >= 0)
                         {
-                            cursor.FillRectangle(x0 + 2, y0 + 2, (int) x1 + 2, (int) y1 + 2, toolCursor.FillColor);
+                            cursor.FillRectangle(x0 + 2, y0 + 2, (int)x1 + 2, (int)y1 + 2, toolCursor.FillColor);
                         }
                     }
 
@@ -801,24 +798,32 @@ namespace Micropolis.ViewModels
                                 {
                                     _buffer.Set(x, y, cell);
 
-                                    byte[] img = tileImages.GetTileImage(cell);
-                                    int shiftedX = 0;
-                                    int shiftedY = 0;
-                                    if (_imageCursor.RenderTransform is TranslateTransform)
-                                    {
-                                        shiftedX = x
-                                                   - (int)
-                                                       Math.Ceiling(
-                                                           (_imageCursor.RenderTransform as TranslateTransform).X
-                                                           / TILE_WIDTH);
-                                        shiftedY = y
-                                                   - (int)
-                                                       Math.Ceiling(
-                                                           (_imageCursor.RenderTransform as TranslateTransform).Y
-                                                           / TILE_HEIGHT);
-                                    }
+                                    byte[] byteImg = tileImages.GetTileImage(cell);
+                                    WriteableBitmap img = new WriteableBitmap(TILE_WIDTH, TILE_HEIGHT);
 
-                                    DrawTile(_cursorStream, shiftedX, shiftedY, (shakeStep != 0 ? GetShakeModifier(y) : 0), img, (int)_imageCursor.Width);
+                                    img.FromByteArray(byteImg);
+
+                                    using (img.GetBitmapContext(ReadWriteMode.ReadOnly))
+                                    {
+                                        int shiftedX = 0;
+                                        int shiftedY = 0;
+                                        if (_imageCursor.RenderTransform is TranslateTransform)
+                                        {
+                                            shiftedX = x
+                                                       - (int)
+                                                           Math.Ceiling(
+                                                               (_imageCursor.RenderTransform as TranslateTransform).X
+                                                               / TILE_WIDTH);
+                                            shiftedY = y
+                                                       - (int)
+                                                           Math.Ceiling(
+                                                               (_imageCursor.RenderTransform as TranslateTransform).Y
+                                                               / TILE_HEIGHT);
+                                        }
+                                        cursor.DrawInto(img,
+                                            shiftedX * TILE_WIDTH + (shakeStep != 0 ? GetShakeModifier(y) : 0),
+                                            shiftedY * TILE_HEIGHT);
+                                    }
                                 }
                             }
                         }
