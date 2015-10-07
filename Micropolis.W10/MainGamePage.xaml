@@ -215,40 +215,40 @@
                                     <Button.Flyout>
                                         <MenuFlyout>
                                             <ToggleMenuFlyoutItem Text="Super Fast" Command="{Binding SpeedSuperFastCommand}"
-                                                      IsChecked="{Binding IsSpeedSuperFast}" />
+                                                      IsChecked="{Binding IsSpeedSuperFast, Mode=TwoWay}" />
                                             <ToggleMenuFlyoutItem Text="Fast" Command="{Binding SpeedFastCommand}"
-                                                      IsChecked="{Binding IsSpeedFast}" />
+                                                      IsChecked="{Binding IsSpeedFast, Mode=TwoWay}" />
                                             <ToggleMenuFlyoutItem Text="Normal" Command="{Binding SpeedNormalCommand}"
-                                                      IsChecked="{Binding IsSpeedNormal}" />
+                                                      IsChecked="{Binding IsSpeedNormal, Mode=TwoWay}" />
                                             <ToggleMenuFlyoutItem Text="Slow" Command="{Binding SpeedSlowCommand}"
-                                                      IsChecked="{Binding IsSpeedSlow}" />
+                                                      IsChecked="{Binding IsSpeedSlow, Mode=TwoWay}" />
                                             <ToggleMenuFlyoutItem Text="Pause" Command="{Binding SpeedPauseCommand}"
-                                                      IsChecked="{Binding IsSpeedPause}" />
+                                                      IsChecked="{Binding IsSpeedPause, Mode=TwoWay}" />
                                         </MenuFlyout>
                                     </Button.Flyout>
                                 </Button>
                                 <Button x:Name="SpeedPauseButton"
-                            Background="{Binding IsSpeedPause, Converter={StaticResource SpeedButtonToBackgroundConverter}}"
+                            Background="{Binding IsSpeedPause, Mode=TwoWay, Converter={StaticResource SpeedButtonToBackgroundConverter}}"
                             Style="{StaticResource BarButtonStyle}" Command="{Binding SpeedPauseCommand}">
                                     <Image Source="/Assets/resources/UIButtons/Pause-Icon.png" />
                                 </Button>
                                 <Button x:Name="SpeedSlowButton"
-                            Background="{Binding IsSpeedSlow, Converter={StaticResource SpeedButtonToBackgroundConverter}}"
+                            Background="{Binding IsSpeedSlow, Mode=TwoWay, Converter={StaticResource SpeedButtonToBackgroundConverter}}"
                             Style="{StaticResource BarButtonStyle}" Command="{Binding SpeedSlowCommand}">
                                     <Image Source="/Assets/resources/UIButtons/Slow-Icon.png" />
                                 </Button>
                                 <Button x:Name="SpeedNormalButton"
-                            Background="{Binding IsSpeedNormal, Converter={StaticResource SpeedButtonToBackgroundConverter}}"
+                            Background="{Binding IsSpeedNormal, Mode=TwoWay, Converter={StaticResource SpeedButtonToBackgroundConverter}}"
                             Style="{StaticResource BarButtonStyle}" Command="{Binding SpeedNormalCommand}">
                                     <Image Source="/Assets/resources/UIButtons/Normal-Icon.png" />
                                 </Button>
                                 <Button x:Name="SpeedFastButton"
-                            Background="{Binding IsSpeedFast, Converter={StaticResource SpeedButtonToBackgroundConverter}}"
+                            Background="{Binding IsSpeedFast, Mode=TwoWay, Converter={StaticResource SpeedButtonToBackgroundConverter}}"
                             Style="{StaticResource BarButtonStyle}" Command="{Binding SpeedFastCommand}">
                                     <Image Source="/Assets/resources/UIButtons/Fast-Icon.png" />
                                 </Button>
                                 <Button x:Name="SpeedSuperFastButton"
-                            Background="{Binding IsSpeedSuperFast, Converter={StaticResource SpeedButtonToBackgroundConverter}}"
+                            Background="{Binding IsSpeedSuperFast, Mode=TwoWay, Converter={StaticResource SpeedButtonToBackgroundConverter}}"
                             Style="{StaticResource BarButtonStyle}" Command="{Binding SpeedSuperFastCommand}">
                                     <Image Source="/Assets/resources/UIButtons/SuperFast-Icon.png" />
                                 </Button>
