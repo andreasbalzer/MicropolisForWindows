@@ -20,7 +20,7 @@ namespace Micropolis.ViewModels
 {
     public class MicropolisDrawingAreaViewModel : IMapListener
     {
-        private static readonly int DEFAULT_TILE_SIZE = 32;
+        private static readonly int DEFAULT_TILE_SIZE = 16;
 
         /// <summary>
         ///     Earthquake shake steps
