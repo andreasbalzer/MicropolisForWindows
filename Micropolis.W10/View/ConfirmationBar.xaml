@@ -35,9 +35,9 @@
         <Button Grid.Column="0" Content="✔" Background="Green" Click="Confirm_OnClick" Grid.Row="0" />
         <Button Grid.Column="1" Content="✘" Background="Red" Click="Decline_OnClick" Grid.Row="0" HorizontalAlignment="Right" />
 
-        <RepeatButton Grid.Column="0" Content="⏫" Background="Black" Click="Up_OnClick" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" />
-        <RepeatButton Grid.Column="0" Content="⏪" Background="Black" Click="Left_OnClick" Grid.Row="2" />
-        <RepeatButton Grid.Column="1" Content="⏩" Background="Black" Click="Right_OnClick" Grid.Row="2" HorizontalAlignment="Right" />
-        <RepeatButton Grid.Column="0" Content="⏬" Background="Black" Click="Down_OnClick" Grid.Row="3" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" />
+        <RepeatButton Grid.Column="0" Content="⏫" Background="Black" Foreground="White" Click="Up_OnClick" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" />
+        <RepeatButton Grid.Column="0" Content="⏪" Background="Black" Foreground="White" Click="Left_OnClick" Grid.Row="2" />
+        <RepeatButton Grid.Column="1" Content="⏩" Background="Black" Foreground="White" Click="Right_OnClick" Grid.Row="2" HorizontalAlignment="Right" />
+        <RepeatButton Grid.Column="0" Content="⏬" Background="Black" Foreground="White" Click="Down_OnClick" Grid.Row="3" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" />
     </Grid>
 </UserControl>
