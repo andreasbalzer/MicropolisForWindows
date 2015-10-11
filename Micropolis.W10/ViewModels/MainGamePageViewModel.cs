@@ -2733,7 +2733,7 @@ namespace Micropolis.ViewModels
                 var tr = _toolStroke.Apply();
                 ShowToolResult(loc, tr);
 
-                _drawingAreaViewModel.RepaintNow(true);
+                _drawingAreaViewModel.RepaintNow();
                 _drawingAreaViewModel.SetToolPreview(null);
                 _toolStroke = null;
             }

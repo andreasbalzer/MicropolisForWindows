@@ -30,7 +30,6 @@ namespace Micropolis.ViewModels
         private readonly int FRAMES_PER_SECOND = 24;
         private readonly GraphicsBuffer _buffer;
         private readonly CoreDispatcher _dispatcher;
-        private readonly Image _imageCursor;
         private readonly Image _imageOutput;
         private readonly Grid _layoutRoot;
         private readonly Grid _sPToRender;
@@ -56,13 +55,11 @@ namespace Micropolis.ViewModels
         private bool blink;
         private DispatcherTimer blinkTimer;
         private bool blinkUnpoweredZones = true;
-        private WriteableBitmap cursor;
         private int dragX, dragY;
         private bool dragging;
         private long lastRepaintTicks;
         private Engine.Micropolis m;
         private bool needsBlinking;
-        private bool repaintCursorNow;
         private bool repaintNow;
         private int shakeStep;
 
@@ -76,7 +73,6 @@ namespace Micropolis.ViewModels
             _buffer = new GraphicsBuffer();
             _layoutRoot = layoutRoot;
             _imageOutput = imageOutput;
-            _imageCursor = imageCursor;
 
             _sPToRender = stackPanelToRender;
             _textBlockToRender = textBlockToRender;
@@ -179,13 +175,8 @@ namespace Micropolis.ViewModels
                 {
                     repaintNow = false;
                     PaintComponentInView();
-                    //paintCursor(); // does only need to be drawn when cursor has not been visible or when type of tool changed
                 }
-                if (repaintCursorNow)
-                {
-                    repaintCursorNow = false;
-                    PaintCursor();
-                }
+
                 lastRepaintTicks = DateTime.Now.Ticks;
             }
         }
@@ -197,7 +188,7 @@ namespace Micropolis.ViewModels
             var paintY = (int) (_mainPage.VerticalMapOffset/_mainPage.ZoomFactor/TILE_HEIGHT);
             int paintXMax = (int) _mainPage.MapWidth/TILE_WIDTH;
             int paintYMax = (int) _mainPage.MapHeight/TILE_HEIGHT;
-            PaintComponent(false, paintX, paintY, paintXMax, paintYMax);
+            PaintComponent(paintX, paintY, paintXMax, paintYMax);
         }
 
         private bool UndrawnTilesInView()
@@ -432,9 +423,9 @@ namespace Micropolis.ViewModels
         ///     Immediately repaints the drawing area.
         ///     This does not wait for the FPS timer, so dont call it regularly!
         /// </summary>
-        internal void RepaintNow(bool paintTool = false)
+        internal void RepaintNow()
         {
-            PaintComponent(paintTool);
+            PaintComponent();
         }
 
         /// <summary>
@@ -468,19 +459,17 @@ namespace Micropolis.ViewModels
         {
             _buffer.Reset();
             repaintNow = true;
-            repaintCursorNow = true;
         }
 
 
         /// <summary>
         ///     Paints the map component (does the actual drawing)
         /// </summary>
-        /// <param name="paintTool">whether to draw the tool</param>
         /// <param name="paintX">smallest X in map to draw to</param>
         /// <param name="paintY">smallest Y in map to draw to</param>
         /// <param name="paintWidth">width of the draw rectangle to draw to</param>
         /// <param name="paintHeight">height of the draw rectangle to draw to</param>
-        private void PaintComponent(bool paintTool = false, int paintX = 0, int paintY = 0,
+        private void PaintComponent(int paintX = 0, int paintY = 0,
             int paintWidth = int.MaxValue/2,
             int paintHeight = int.MaxValue/2)
         {
@@ -506,7 +495,6 @@ namespace Micropolis.ViewModels
 
             if (imageNotCreated || imageHasDifferentsize)
             {
-                cursor = new WriteableBitmap(10*TILE_WIDTH + 4, 10*TILE_HEIGHT + 4);
                 Image = new WriteableBitmap(width*TILE_WIDTH, height*TILE_HEIGHT);
                 _imageStream = WindowsRuntimeBufferExtensions.AsStream(this.Image.PixelBuffer);
 
@@ -514,10 +502,6 @@ namespace Micropolis.ViewModels
                 {
                     _imageOutput.Height = height*TILE_HEIGHT;
                     _imageOutput.Width = width*TILE_WIDTH;
-
-                    _imageCursor.Height = height*TILE_HEIGHT;
-                    _imageCursor.Width = width*TILE_WIDTH;
-                    _imageCursor.Stretch = Stretch.None;
                 });
 
                 repaintNow = true;
@@ -547,7 +531,7 @@ namespace Micropolis.ViewModels
                         _buffer.Set(x, y, -1);
                     }
 
-                    if (toolPreview != null && paintTool)
+                    if (toolPreview != null)
                     {
                         int c = toolPreview.GetTile(x, y);
                         if (c != TileConstants.CLEAR)
@@ -574,16 +558,129 @@ namespace Micropolis.ViewModels
                     DrawSprite(sprite);
                 }
             }
+
+            if (toolCursor != null)
+            {
+                int x0 = toolCursor.Rect.X * TILE_WIDTH;
+                int x1 = (toolCursor.Rect.X + toolCursor.Rect.Width) * TILE_WIDTH;
+                int y0 = toolCursor.Rect.Y * TILE_HEIGHT;
+                int y1 = (toolCursor.Rect.Y + toolCursor.Rect.Height) * TILE_HEIGHT;
+
+                /*
+                DrawLine(_imageStream, (int)x0 - 1, (int)y0 - 1, (int)x0 - 1, (int)y1 - 1, Colors.Black);
+                DrawLine(_imageStream, (int)x0 - 1, (int)y0 - 1, (int)x1 - 1, (int)y0 - 1, Colors.Black);
+                DrawLine(_imageStream, (int)x1 + 3, (int)y0 - 3, (int)x1 + 3, (int)y1 + 3, Colors.Black);
+                DrawLine(_imageStream, (int)x0 - 3, (int)y1 + 3, (int)x1 + 3, (int)y1 + 3, Colors.Black);
+
+                DrawLine(_imageStream, (int)x0 - 4, (int)y0 - 4, (int)x1 + 3, (int)y0 - 4, Colors.White);
+                DrawLine(_imageStream, (int)x0 - 4, (int)y0 - 4, (int)x0 - 4, (int)y1 + 3, Colors.White);
+                DrawLine(_imageStream, (int)x1, (int)y0 - 1, (int)x1, (int)y1, Colors.White);
+                DrawLine(_imageStream, (int)x0 - 1, (int)y1, (int)x1, (int)y1, Colors.White);*/
+
+                DrawRectangle(_imageStream, (int)x0 - 2, (int)y0 - 2, (int)x1 + 2, (int)y1 + 2, toolCursor.BorderColor);
+                DrawRectangle(_imageStream, (int)x0 - 1, (int)y0 - 1, (int)x1 + 1, (int)y1 + 1, toolCursor.BorderColor);
+
+                if (toolCursor.FillColor != null && x0 >= 0 && y0 >= 0)
+                {
+                    FillRectangle(_imageStream, (int)x0, (int)y0, (int)x1, (int)y1, toolCursor.FillColor);
+                }
+
+                // now we need to set our buffer contents to empty, so we'll draw the tiles next time again
+                int yy = (toolCursor.Rect.Y >= 0 ? toolCursor.Rect.Y : 0);
+                int xx = (toolCursor.Rect.X >= 0 ? toolCursor.Rect.X : 0);
+                int minyy = yy - 5 > 0 ? yy - 5 : yy;
+                int minxx = xx - 5 > 0 ? xx - 5 : xx;
+                int maxyya = yy + 5 < maxY ? yy + 5 : yy;
+                int maxxxa = xx + 5 < maxX ? xx + 5 : xx;
+
+                int maxyyb = maxyya + toolCursor.Rect.Height < maxY ? maxyya + toolCursor.Rect.Height : maxyya;
+                int maxxxb = maxxxa + toolCursor.Rect.Width < maxX ? maxxxa + toolCursor.Rect.Width : maxxxa;
+
+                for (var o = minyy; o < maxyyb; o++)
+                {
+                    for (int i = minxx; i < maxxxb; i++)
+                    {
+                        _buffer.Set(i, o, -1);
+                    }
+                }
+            }
             
             Image.Invalidate();
 
             if (imageNotCreated || imageHasDifferentsize)
             {
                 _imageOutput.Source = Image;
-                _imageCursor.Source = cursor;
             }
         }
 
+        private void FillRectangle(Stream _imageStream, int xStart, int yStart, int xEnd, int yEnd, Color color)
+        {
+            var startInStream = xStart * 4 + yStart * (int)_imageOutput.Width * 4;
+            _imageStream.Seek(startInStream, SeekOrigin.Begin);
+
+            for (int y = yStart; y < yEnd; y++)
+            {
+                for (int x = xStart; x < xEnd; x++)
+                {
+                    byte[] backgroundPixel = new byte[4];
+                    _imageStream.Read(backgroundPixel, 0, 4);
+                    Color background = Color.FromArgb(backgroundPixel[3], backgroundPixel[2], backgroundPixel[1], backgroundPixel[0]);
+                    Color newColor = BlendColors(background, color);
+                    byte[] pixelToWrite = new byte[4] { newColor.B, newColor.G, newColor.R, newColor.A };
+                    _imageStream.Seek(-4, SeekOrigin.Current);
+                    _imageStream.Write(pixelToWrite, 0, pixelToWrite.Length);
+                }
+
+                _imageStream.Seek(((int)_imageOutput.Width - (xEnd - xStart)) * 4, SeekOrigin.Current);
+            }
+
+        }
+
+        private Color BlendColors(Color background, Color foreground)
+        {
+            Color r = new Color();
+            r.A = (byte)(255);
+            r.R = (byte)((foreground.R * foreground.A / 255) + (background.R * background.A * (255 - foreground.A) / (255 * 255)));
+            r.G = (byte)((foreground.G * foreground.A / 255) + (background.G * background.A * (255 - foreground.A) / (255 * 255)));
+            r.B = (byte)((foreground.B * foreground.A / 255) + (background.B * background.A * (255 - foreground.A) / (255 * 255)));
+
+
+            return r;
+        }
+
+        private void DrawRectangle(Stream _imageStream, int xStart, int yStart, int xEnd, int yEnd, Color color)
+        {
+            DrawLine(_imageStream, xStart, yStart, xStart, yEnd, color);
+            DrawLine(_imageStream, xEnd, yStart, xEnd, yEnd, color);
+            DrawLine(_imageStream, xStart, yStart, xEnd, yStart, color);
+            DrawLine(_imageStream, xStart, yEnd, xEnd, yEnd, color);
+        }
+
+        private void DrawLine(Stream _imageStream, int xStart, int yStart, int xEnd, int yEnd, Color color)
+        {
+            var startInStream = xStart * 4 + yStart * (int)_imageOutput.Width * 4;
+
+            byte[] pixelToWrite = new byte[4] { color.B, color.G, color.R, color.A };
+
+            bool horizontalLine = xStart != xEnd;
+            if (horizontalLine)
+            {
+                _imageStream.Seek(startInStream, SeekOrigin.Begin);
+                for (int x = xStart; x < xEnd; x++)
+                {
+                    _imageStream.Write(pixelToWrite, 0, pixelToWrite.Length);
+                }
+            }
+            else
+            {
+                _imageStream.Seek(startInStream, SeekOrigin.Begin);
+                for (int y = yStart; y < yEnd; y++)
+                {
+                    _imageStream.Write(pixelToWrite, 0, pixelToWrite.Length);
+                    _imageStream.Seek(((int)_imageOutput.Width - 1) * 4, SeekOrigin.Current);
+                }
+            }
+        }
 
         private void DrawTile(Stream output, int x, int y, int shake, byte[] tilePixelEncoded, int width)
         {
@@ -698,141 +795,7 @@ namespace Micropolis.ViewModels
             }
         }
 
-        /// <summary>
-        ///     Queries cursor to be repainted next tick.
-        /// </summary>
-        public void RepaintCursor()
-        {
-            repaintCursorNow = true;
-        }
-
-        /// <summary>
-        ///     Paints the cursor.
-        /// </summary>
-        private void PaintCursor()
-        {
-
-            TranslateTransform exTr = null;
-
-            if (!(_imageCursor.RenderTransform is MatrixTransform))
-            {
-                exTr = (TranslateTransform)_imageCursor.RenderTransform;
-            }
-
-            if (toolCursor == null || toolCursor.Rect.Height == 0)
-            {
-                _imageCursor.Visibility = Visibility.Collapsed;
-            }
-            else
-            {
-                _imageCursor.Visibility = Visibility.Visible;
-            }
-
-            bool positionNeedsToBeUpdated = exTr == null || (exTr.X != toolCursorPosition.X || exTr.Y != toolCursorPosition.Y);
-            if (positionNeedsToBeUpdated)
-            {
-                var transTrans = new TranslateTransform { X = toolCursorPosition.X, Y = toolCursorPosition.Y };
-                _imageCursor.RenderTransform = transTrans;
-            }
-
-            if (toolPreview != null)
-            {
-                if (cursor.PixelWidth != (toolPreview.GetBounds().Width + 10) * TILE_WIDTH ||
-                    cursor.PixelHeight != (toolPreview.GetBounds().Height + 10) * TILE_HEIGHT)
-                {
-                    cursor = cursor.Resize((toolPreview.GetBounds().Width + 10) * TILE_WIDTH,
-                        (toolPreview.GetBounds().Height + 10) * TILE_HEIGHT,
-                        WriteableBitmapExtensions.Interpolation.Bilinear);
-                    _imageCursor.Source = cursor;
-                }
-            }
-
-            using (cursor.GetBitmapContext())
-            {
-                if (toolCursor != null)
-                {
-                    double tileHeightCalc = TILE_HEIGHT;
-                    double tileWidthCalc = TILE_WIDTH;
-
-                    int width = m.GetWidth();
-                    int height = m.GetHeight();
-
-                    int x0 = 0;
-                    double x1 = (0 + toolCursor.Rect.Width) * tileWidthCalc;
-                    int y0 = 0;
-                    double y1 = (0 + toolCursor.Rect.Height) * tileHeightCalc;
-
-                    cursor.Clear();
-
-                    if (!dragging)
-                    {
-                        cursor.DrawRectangle(x0, y0, (int)x1 + 4, (int)y1 + 4, toolCursor.BorderColor);
-                        cursor.DrawRectangle(x0 + 1, y0 + 1, (int)x1 + 3, (int)y1 + 3, toolCursor.BorderColor);
-
-                        if (toolCursor.FillColor != null && x0 >= 0 && y0 >= 0)
-                        {
-                            cursor.FillRectangle(x0 + 2, y0 + 2, (int)x1 + 2, (int)y1 + 2, toolCursor.FillColor);
-                        }
-                    }
-
-                    if (toolPreview != null)
-                    {
-                        int cell = -1;
-
-                        for (int row = 0; row < toolPreview.GetHeight(); row++)
-                        {
-                            for (int col = 0; col < toolPreview.GetWidth(); col++)
-                            {
-                                int x = col + toolPreview.GetBounds().X;
-                                int y = row + toolPreview.GetBounds().Y;
-
-                                cell = _buffer.Get(x, y);
-                                int c = toolPreview.GetTile(x, y);
-                                if (c != TileConstants.CLEAR)
-                                {
-                                    cell = c;
-                                    _buffer.Set(x, y, -1);
-                                }
-                                bool needsUpdate = cell != _buffer.Get(x, y);
-                                if (needsUpdate)
-                                {
-                                    _buffer.Set(x, y, cell);
-
-                                    byte[] byteImg = tileImages.GetTileImage(cell);
-                                    WriteableBitmap img = new WriteableBitmap(TILE_WIDTH, TILE_HEIGHT);
-
-                                    img.FromByteArray(byteImg);
-
-                                    using (img.GetBitmapContext(ReadWriteMode.ReadOnly))
-                                    {
-                                        int shiftedX = 0;
-                                        int shiftedY = 0;
-                                        if (_imageCursor.RenderTransform is TranslateTransform)
-                                        {
-                                            shiftedX = x
-                                                       - (int)
-                                                           Math.Ceiling(
-                                                               (_imageCursor.RenderTransform as TranslateTransform).X
-                                                               / TILE_WIDTH);
-                                            shiftedY = y
-                                                       - (int)
-                                                           Math.Ceiling(
-                                                               (_imageCursor.RenderTransform as TranslateTransform).Y
-                                                               / TILE_HEIGHT);
-                                        }
-                                        cursor.DrawInto(img,
-                                            shiftedX * TILE_WIDTH + (shakeStep != 0 ? GetShakeModifier(y) : 0),
-                                            shiftedY * TILE_HEIGHT);
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            cursor.Invalidate();
-        }
-
+     
         /// <summary>
         ///     Sets the tool cursor
         /// </summary>
@@ -870,12 +833,12 @@ namespace Micropolis.ViewModels
 
             if (toolCursor != null)
             {
-                RepaintCursor();
+                Repaint();
             }
             toolCursor = newCursor;
             if (toolCursor != null)
             {
-                RepaintCursor();
+                Repaint();
             }
         }
 
@@ -895,7 +858,8 @@ namespace Micropolis.ViewModels
             {
                 CityRect b = toolPreview.GetBounds();
             }
-            RepaintCursor();
+
+            Repaint();
         }
 
         /// <summary>
@@ -1051,7 +1015,7 @@ namespace Micropolis.ViewModels
                 yend = (int)_imageOutput.Height - 1;
             }
 
-            PaintComponent(false, xstart, ystart, xend, yend);
+            PaintComponent(xstart, ystart, xend, yend);
 
             WriteableBitmap clonedImg = Image.Crop(xstart, ystart, width, height);
 
