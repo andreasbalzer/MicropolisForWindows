@@ -631,7 +631,7 @@
 
                             <ScrollViewer x:Name="DrawingAreaScroll" HorizontalScrollBarVisibility="Auto"
                               VerticalScrollBarVisibility="Auto" HorizontalScrollMode="Auto" VerticalScrollMode="Auto"
-                              MinZoomFactor="0.3" MaxZoomFactor="1" SizeChanged="DrawingAreaScroll_OnSizeChanged"
+                              MinZoomFactor="0.2" MaxZoomFactor="1.2" SizeChanged="DrawingAreaScroll_OnSizeChanged"
                               ViewChanged="DrawingAreaScroll_OnViewChanged" ZoomMode="Enabled">
                                 <local:MicropolisDrawingArea x:Name="DrawingArea" VerticalAlignment="Top" x:FieldModifier="public"
                                                  HorizontalAlignment="Left" />
