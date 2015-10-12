@@ -1432,17 +1432,17 @@ namespace Micropolis.ViewModels
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="KeyRoutedEventArgs" /> instance containing the event data.</param>
-        public void DrawingArea_KeyDown(object sender, KeyRoutedEventArgs e)
+        public void DrawingArea_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == VirtualKey.Add)
+            if (e.VirtualKey == VirtualKey.Add)
             {
                 DoZoom(1);
             }
-            if (e.Key == VirtualKey.Subtract)
+            if (e.VirtualKey == VirtualKey.Subtract)
             {
                 DoZoom(-1);
             }
-            if (e.Key == VirtualKey.Escape)
+            if (e.VirtualKey == VirtualKey.Escape)
             {
                 OnEscapePressed();
             }
@@ -1680,7 +1680,7 @@ namespace Micropolis.ViewModels
 
             _notificationPanelViewModel.SetUpAfterBasicInit(this);
 
-            _drawingArea.KeyDown += DrawingArea_KeyDown;
+            CoreWindow.GetForCurrentThread().KeyDown += DrawingArea_KeyDown;
             _drawingArea.PointerPressed += DrawingArea_PointerPressed;
             _drawingArea.PointerReleased += DrawingArea_PointerReleased;
             _drawingArea.PointerMoved += DrawingArea_PointerMoved;
