@@ -2775,8 +2775,8 @@ namespace Micropolis.ViewModels
 			return;*/
             // Bug: do
 
-            var posX = (int) ((ev.GetCurrentPoint(target).Position.X/zoomFactor + DrawingAreaScrollHorizontalOffset));
-            var posY = (int) ((ev.GetCurrentPoint(target).Position.Y/zoomFactor + DrawingAreaScrollVerticalOffset));
+            var posX = (int) ((ev.GetCurrentPoint(target).Position.X + DrawingAreaScrollHorizontalOffset)/ zoomFactor);
+            var posY = (int) ((ev.GetCurrentPoint(target).Position.Y + DrawingAreaScrollVerticalOffset)/ zoomFactor);
 
             var loc = _drawingAreaViewModel.GetCityLocation(posX, posY);
 
