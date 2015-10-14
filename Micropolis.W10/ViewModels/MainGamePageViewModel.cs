@@ -1668,7 +1668,7 @@ namespace Micropolis.ViewModels
             MenuOverlaysHeaderFlyoutItems.Add(MakeMapStateMenuItem("menu.overlays.FIRE_OVERLAY", MapState.FIRE_OVERLAY));
             MenuOverlaysHeaderFlyoutItems.Add(MakeMapStateMenuItem("menu.overlays.POLICE_OVERLAY",
                 MapState.POLICE_OVERLAY));
-
+            
             _mapViewViewModel.SetUpAfterBasicInit(engine);
             _mapViewViewModel.ConnectView(_drawingAreaViewModel, _drawingAreaScroll);
 
@@ -3288,10 +3288,11 @@ namespace Micropolis.ViewModels
             Uri iconUrl = null;
             if (Strings.ContainsKey(k))
             {
-                var iconName = "ms-appx:///resources/" + Strings.GetString(k);
+                var iconName = "ms-appx:///Assets/resources/" + Strings.GetString(k);
                 iconUrl = new Uri(iconName, UriKind.RelativeOrAbsolute);
 
                 var folder = Package.Current.InstalledLocation;
+                folder = await folder.GetFolderAsync("Assets");
                 folder = await folder.GetFolderAsync("resources");
 
                 var file =
