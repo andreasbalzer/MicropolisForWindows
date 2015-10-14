@@ -264,7 +264,7 @@
                                     </Grid>
                                     <Button.Flyout>
                                         <Flyout>
-                                            <Grid>
+                                            <Grid Height="65">
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="Auto" />
                                                     <ColumnDefinition Width="Auto" />
