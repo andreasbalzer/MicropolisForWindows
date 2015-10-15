@@ -615,6 +615,26 @@ namespace Micropolis.ViewModels
 
         private void FillRectangle(Stream _imageStream, int xStart, int yStart, int xEnd, int yEnd, Color color)
         {
+            if (xStart < 0)
+            {
+                xStart = 0;
+            }
+
+            if (xEnd > _imageOutput.Width)
+            {
+                xEnd = (int)_imageOutput.Width - 1;
+            }
+
+            if (yStart < 0)
+            {
+                yStart = 0;
+            }
+
+            if (yEnd > _imageOutput.Height)
+            {
+                yEnd = (int)_imageOutput.Height - 1;
+            }
+
             var startInStream = xStart * 4 + yStart * (int)_imageOutput.Width * 4;
             _imageStream.Seek(startInStream, SeekOrigin.Begin);
 
@@ -658,6 +678,26 @@ namespace Micropolis.ViewModels
 
         private void DrawLine(Stream _imageStream, int xStart, int yStart, int xEnd, int yEnd, Color color)
         {
+            if (xStart < 0)
+            {
+                xStart = 0;
+            }
+
+            if (xEnd > _imageOutput.Width)
+            {
+                xEnd = (int)_imageOutput.Width - 1;
+            }
+
+            if (yStart < 0)
+            {
+                yStart = 0;
+            }
+
+            if (yEnd > _imageOutput.Height)
+            {
+                yEnd = (int)_imageOutput.Height - 1;
+            }
+
             var startInStream = xStart * 4 + yStart * (int)_imageOutput.Width * 4;
 
             byte[] pixelToWrite = new byte[4] { color.B, color.G, color.R, color.A };
@@ -665,6 +705,10 @@ namespace Micropolis.ViewModels
             bool horizontalLine = xStart != xEnd;
             if (horizontalLine)
             {
+                if (startInStream > _imageStream.Length)
+                {
+                    return;
+                }
                 _imageStream.Seek(startInStream, SeekOrigin.Begin);
                 for (int x = xStart; x < xEnd; x++)
                 {
@@ -673,18 +717,27 @@ namespace Micropolis.ViewModels
             }
             else
             {
+                if (startInStream > _imageStream.Length)
+                {
+                    return;
+                }
                 _imageStream.Seek(startInStream, SeekOrigin.Begin);
                 for (int y = yStart; y < yEnd; y++)
                 {
                     _imageStream.Write(pixelToWrite, 0, pixelToWrite.Length);
-                    _imageStream.Seek(((int)_imageOutput.Width - 1) * 4, SeekOrigin.Current);
+                    int position = ((int)_imageOutput.Width - 1) * 4;
+                    if (position > _imageStream.Length)
+                    {
+                        return;
+                    }
+                    _imageStream.Seek(position, SeekOrigin.Current);
                 }
             }
         }
 
         private void DrawTile(Stream output, int x, int y, int shake, byte[] tilePixelEncoded, int width)
         {
-            if (x < 0 || y < 0)
+            if (x < 0 || y < 0 || x > _mainPage.MapWidth / TILE_WIDTH || y > _mainPage.MapHeight / TILE_HEIGHT)
             {
                 return;
             }
