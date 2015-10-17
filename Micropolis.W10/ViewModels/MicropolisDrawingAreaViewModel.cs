@@ -580,7 +580,7 @@ namespace Micropolis.ViewModels
                 DrawRectangle(_imageStream, (int)x0 - 2, (int)y0 - 2, (int)x1 + 2, (int)y1 + 2, toolCursor.BorderColor);
                 DrawRectangle(_imageStream, (int)x0 - 1, (int)y0 - 1, (int)x1 + 1, (int)y1 + 1, toolCursor.BorderColor);
 
-                if (toolCursor.FillColor != null && x0 >= 0 && y0 >= 0)
+                if (toolCursor.FillColor != null)
                 {
                     FillRectangle(_imageStream, (int)x0, (int)y0, (int)x1, (int)y1, toolCursor.FillColor);
                 }
@@ -593,8 +593,8 @@ namespace Micropolis.ViewModels
                 int maxyya = yy + 5 < maxY ? yy + 5 : yy;
                 int maxxxa = xx + 5 < maxX ? xx + 5 : xx;
 
-                int maxyyb = maxyya + toolCursor.Rect.Height < maxY ? maxyya + toolCursor.Rect.Height : maxyya;
-                int maxxxb = maxxxa + toolCursor.Rect.Width < maxX ? maxxxa + toolCursor.Rect.Width : maxxxa;
+                int maxyyb = maxyya + toolCursor.Rect.Height < maxY ? maxyya + toolCursor.Rect.Height : maxY;
+                int maxxxb = maxxxa + toolCursor.Rect.Width < maxX ? maxxxa + toolCursor.Rect.Width : maxX;
 
                 for (var o = minyy; o < maxyyb; o++)
                 {
@@ -620,7 +620,7 @@ namespace Micropolis.ViewModels
                 xStart = 0;
             }
 
-            if (xEnd > _imageOutput.Width)
+            if (xEnd > _imageOutput.Width -1)
             {
                 xEnd = (int)_imageOutput.Width - 1;
             }
@@ -630,7 +630,7 @@ namespace Micropolis.ViewModels
                 yStart = 0;
             }
 
-            if (yEnd > _imageOutput.Height)
+            if (yEnd > _imageOutput.Height - 1)
             {
                 yEnd = (int)_imageOutput.Height - 1;
             }
@@ -678,33 +678,28 @@ namespace Micropolis.ViewModels
 
         private void DrawLine(Stream _imageStream, int xStart, int yStart, int xEnd, int yEnd, Color color)
         {
-            if (xStart < 0)
-            {
-                xStart = 0;
-            }
-
-            if (xEnd > _imageOutput.Width)
-            {
-                xEnd = (int)_imageOutput.Width - 1;
-            }
-
-            if (yStart < 0)
-            {
-                yStart = 0;
-            }
-
-            if (yEnd > _imageOutput.Height)
-            {
-                yEnd = (int)_imageOutput.Height - 1;
-            }
-
-            var startInStream = xStart * 4 + yStart * (int)_imageOutput.Width * 4;
-
             byte[] pixelToWrite = new byte[4] { color.B, color.G, color.R, color.A };
 
             bool horizontalLine = xStart != xEnd;
             if (horizontalLine)
             {
+                if (xStart < 0)
+                {
+                    xStart = 0;
+                }
+
+                if (xEnd > _imageOutput.Width)
+                {
+                    xEnd = (int)_imageOutput.Width - 1;
+                }
+
+                if (yStart < 0 || yEnd > _imageOutput.Height)
+                {
+                    return;
+                }
+
+                var startInStream = xStart * 4 + yStart * (int)_imageOutput.Width * 4;
+
                 if (startInStream > _imageStream.Length)
                 {
                     return;
@@ -717,6 +712,23 @@ namespace Micropolis.ViewModels
             }
             else
             {
+                if (xStart < 0 || xEnd > _imageOutput.Width)
+                {
+                    return;
+                }
+
+                if (yStart < 0)
+                {
+                    yStart = 0;
+                }
+
+                if (yEnd > _imageOutput.Height)
+                {
+                    yEnd = (int)_imageOutput.Height - 1;
+                }
+
+                var startInStream = xStart * 4 + yStart * (int)_imageOutput.Width * 4;
+
                 if (startInStream > _imageStream.Length)
                 {
                     return;
