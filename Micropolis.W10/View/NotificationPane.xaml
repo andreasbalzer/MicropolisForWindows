@@ -35,7 +35,9 @@
             <TextBlock x:Name="headerLbl" Text="{Binding HeaderTextBlockText}" FontWeight="SemiBold" FontSize="14" Margin="12,6" Foreground="#2B2B2B"/>
         </StackPanel>
         <StackPanel Orientation="Vertical" Grid.Row="1">
-            <Image x:Name="ImageOutput" Height="200" Width="200" Margin="5" Source="{Binding MapImage}"/>
+            <ScrollViewer x:Name="DrawingAreaScrollViewer" Height="160" Width="160" HorizontalScrollMode="Disabled" VerticalScrollMode="Disabled" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" ZoomMode="Disabled">
+                <local:MicropolisDrawingArea x:Name="DrawingArea" Margin="5" />
+            </ScrollViewer>
             <Grid x:Name="infoPane" Margin="5" Visibility="{Binding InfoPaneIsVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />

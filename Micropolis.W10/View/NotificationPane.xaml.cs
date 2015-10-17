@@ -37,10 +37,9 @@ namespace Micropolis
         public NotificationPane()
         {
             InitializeComponent();
-            _viewModel=new NotificationPaneViewModel();
+            _viewModel=new NotificationPaneViewModel(DrawingArea.ViewModel, DrawingAreaScrollViewer);
             this.DataContext = _viewModel;
         }
-
       
     }
 }

@@ -67,6 +67,8 @@ namespace Micropolis.ViewModels
         private ToolCursor toolCursor;
         private ToolPreview toolPreview;
 
+        public Rect Clip { get; set; }
+
         public MicropolisDrawingAreaViewModel(Grid layoutRoot, Image imageOutput, Image imageCursor,
             Grid stackPanelToRender, TextBlock textBlockToRender, CoreDispatcher dispatcher)
         {
@@ -473,10 +475,41 @@ namespace Micropolis.ViewModels
             int paintWidth = int.MaxValue/2,
             int paintHeight = int.MaxValue/2)
         {
-            needsBlinking = false;
-
             int width = m.GetWidth();
             int height = m.GetHeight();
+
+            if (Clip != default(Rect))
+            {
+                paintX = (int)Clip.X / TILE_WIDTH;
+                paintY = (int)Clip.Y / TILE_HEIGHT;
+                paintWidth = (int)Clip.Width / TILE_WIDTH + paintX;
+                paintHeight = (int)Clip.Height / TILE_HEIGHT + paintY;
+
+                if (paintX < 0)
+                {
+                    paintWidth += (0 - paintX);
+                    paintX = 0;
+                }
+
+                if (paintY < 0)
+                {
+                    paintHeight += (0 - paintY);
+                    paintY = 0;
+                }
+
+                if (paintX + paintWidth > width)
+                {
+                    paintX = paintX + paintWidth - width;
+                    paintWidth = width;
+                }
+
+                if (paintHeight > height)
+                {
+                    paintY = paintY + paintHeight - height;
+                    paintHeight = height;
+                }
+            }
+            needsBlinking = false;
 
             paintWidth = Math.Min(paintWidth, width);
             paintHeight = Math.Min(paintHeight, height);

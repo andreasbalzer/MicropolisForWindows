@@ -16,16 +16,18 @@ namespace Micropolis.ViewModels
 {
     public class NotificationPaneViewModel : BindableBase
     {
-        public NotificationPaneViewModel()
+        public NotificationPaneViewModel(MicropolisDrawingAreaViewModel drawingAreaViewModel, ScrollViewer drawingAreaScrollViewer)
         {
             Messages=new ObservableCollection<string>();
+            _drawingAreaViewModel = drawingAreaViewModel;
+            _drawingAreaScrollViewer = drawingAreaScrollViewer;
             try { 
             _telemetry = new TelemetryClient();
             }
             catch (Exception) { }
         }
 
-        private static readonly Size VIEWPORT_SIZE = new Size(160, 160);
+        private static readonly Size VIEWPORT_SIZE = new Size(180, 180);
         private static readonly SolidColorBrush QUERY_COLOR = new SolidColorBrush(Color.FromArgb(255, 255, 165, 0));
         private MainGamePageViewModel _mainPageViewModel;
 
@@ -37,7 +39,10 @@ namespace Micropolis.ViewModels
         {
             _mainPageViewModel = mainPageViewModel;
             DismissButtonText = Strings.GetString("notification.dismiss");
-            DismissCommand = new DelegateCommand(() => { OnDismissClicked(); }); 
+            DismissCommand = new DelegateCommand(() => { OnDismissClicked(); });
+
+            _drawingAreaViewModel.SetUpAfterBasicInit(_mainPageViewModel.Engine, _mainPageViewModel);
+            _drawingAreaViewModel.RepaintNow();
         }
 
         private string _dismissButtonText;
@@ -60,22 +65,29 @@ namespace Micropolis.ViewModels
             _mainPageViewModel.HideNotificationPanel();
         }
 
-        private WriteableBitmap _mapImage;
-        public WriteableBitmap MapImage { get { return _mapImage; } set { SetProperty(ref _mapImage, value); } }
+        private MicropolisDrawingAreaViewModel _drawingAreaViewModel;
 
-        /// <summary>
-        /// Sets the picture of the panel.
-        /// </summary>
-        /// <param name="xpos">xpos in map</param>
-        /// <param name="ypos">ypos in map</param>
-        private void SetPicture(int xpos, int ypos)
+        private ScrollViewer _drawingAreaScrollViewer;
+
+        void SetPicture(Engine.Micropolis engine, int xpos, int ypos)
         {
-            Size sz = VIEWPORT_SIZE;
+            _drawingAreaViewModel.SetEngine(engine);
+            Rect r = _drawingAreaViewModel.GetTileBoundsAsRect(xpos, ypos);
 
-            MapImage = _mainPageViewModel.GetLandscapeFromDrawingArea(xpos, ypos, sz);
+            _drawingAreaViewModel.Clip = new Rect(r.X + r.Width / 2 - VIEWPORT_SIZE.Width / 2,
+                                                    r.Y + r.Height / 2 - VIEWPORT_SIZE.Height / 2,
+                                                    VIEWPORT_SIZE.Width,
+                                                    VIEWPORT_SIZE.Height
+                                                    );
+            _drawingAreaViewModel.RepaintNow();
+            App.MainPageReference.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+            {
+                _drawingAreaScrollViewer.ScrollToHorizontalOffset(r.X - (VIEWPORT_SIZE.Width / 2));
+                _drawingAreaScrollViewer.ScrollToVerticalOffset(r.Y - (VIEWPORT_SIZE.Height / 2));
+            });
 
-            
         }
+
 
         /// <summary>
         /// Shows the specified message for the specified map coordinates.
@@ -90,7 +102,7 @@ namespace Micropolis.ViewModels
             }
             catch (Exception) { }
 
-            SetPicture(xpos, ypos);
+            SetPicture(_mainPageViewModel.Engine, xpos, ypos);
 
             if (InfoPaneIsVisible == true)
             {
@@ -145,7 +157,7 @@ namespace Micropolis.ViewModels
             String pollutionStr = Strings.GetString("status." + zone.Pollution);
             String growthRateStr = Strings.GetString("status." + zone.GrowthRate);
 
-            SetPicture(xpos, ypos);
+            SetPicture(_mainPageViewModel.Engine, xpos, ypos);
             InfoPaneIsVisible = true;
 
             T1TextBlockText = Strings.GetString("notification.zone_lbl");
