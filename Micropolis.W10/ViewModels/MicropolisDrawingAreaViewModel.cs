@@ -621,10 +621,10 @@ namespace Micropolis.ViewModels
                 // now we need to set our buffer contents to empty, so we'll draw the tiles next time again
                 int yy = (toolCursor.Rect.Y >= 0 ? toolCursor.Rect.Y : 0);
                 int xx = (toolCursor.Rect.X >= 0 ? toolCursor.Rect.X : 0);
-                int minyy = yy - 5 > 0 ? yy - 5 : yy;
-                int minxx = xx - 5 > 0 ? xx - 5 : xx;
-                int maxyya = yy + 5 < maxY ? yy + 5 : yy;
-                int maxxxa = xx + 5 < maxX ? xx + 5 : xx;
+                int minyy = yy - 5 > 0 ? yy - 5 : 0;
+                int minxx = xx - 5 > 0 ? xx - 5 : 0;
+                int maxyya = yy + 5 < maxY ? yy + 5 : maxY;
+                int maxxxa = xx + 5 < maxX ? xx + 5 : maxX;
 
                 int maxyyb = maxyya + toolCursor.Rect.Height < maxY ? maxyya + toolCursor.Rect.Height : maxY;
                 int maxxxb = maxxxa + toolCursor.Rect.Width < maxX ? maxxxa + toolCursor.Rect.Width : maxX;
