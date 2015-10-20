@@ -63,6 +63,7 @@ namespace Micropolis.ViewModels
             catch (Exception) { }
 
             _mainPageViewModel.HideNotificationPanel();
+            ImageIsVisible = true;
         }
 
         private MicropolisDrawingAreaViewModel _drawingAreaViewModel;
@@ -97,12 +98,28 @@ namespace Micropolis.ViewModels
         /// <param name="ypos">ypos in map</param>
         public void ShowMessage(MicropolisMessage msg, int xpos, int ypos)
         {
-            try { 
-            _telemetry.TrackEvent("NotificationPaneMessageShown"+msg.Name);
+            SetPicture(_mainPageViewModel.Engine, xpos, ypos);
+            ShowMessage(msg, false);
+        }
+
+        /// <summary>
+        /// Shows the specified message for the specified map coordinates.
+        /// </summary>
+        /// <param name="msg">message to show</param>
+        /// <param name="xpos">xpos in map</param>
+        /// <param name="ypos">ypos in map</param>
+        public void ShowMessage(MicropolisMessage msg, bool hideImage = true)
+        {
+            try
+            {
+                _telemetry.TrackEvent("NotificationPaneMessageShown" + msg.Name);
             }
             catch (Exception) { }
 
-            SetPicture(_mainPageViewModel.Engine, xpos, ypos);
+            if (hideImage)
+            {
+                ImageIsVisible = false;
+            }
 
             if (InfoPaneIsVisible == true)
             {
@@ -118,7 +135,7 @@ namespace Micropolis.ViewModels
             {
                 Messages.Add(message);
             }
-            
+
             DetailPaneIsVisible = true;
         }
 
@@ -214,6 +231,10 @@ namespace Micropolis.ViewModels
 
         private string _growthRateStrTextBlockText;
         private TelemetryClient _telemetry;
+        private bool _imageIsVisible = true;
+
         public string GrowthRateStrTextBlockText { get { return _growthRateStrTextBlockText; } set { SetProperty(ref _growthRateStrTextBlockText, value); } }
+
+        public bool ImageIsVisible { get { return _imageIsVisible; } set { SetProperty(ref _imageIsVisible, value); } }
     }
 }

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Windows.Storage;
 using Engine.Controller;
+using Engine.Model.Enums;
 
 namespace Engine
 {
@@ -27,6 +28,13 @@ namespace Engine
     /// </summary>
     public class Micropolis
     {
+
+        public int ScoreWait { get; set; }
+        public Scenario ScoreType { get; set; }
+        public int DisasterWait { get; set; }
+        public Scenario DisasterEvent { get; set; }
+        public Scenario Scenario { get; set; }
+
         /// <summary>
         ///     The random number generator used in the game
         /// </summary>
@@ -738,6 +746,11 @@ namespace Engine
         /// <param name="height">The height.</param>
         public Micropolis(int width, int height)
         {
+            ScoreType = Scenarios.Items[ScenarioENUM.SC_NONE];
+            ScoreWait = 0;
+            DisasterWait = 1;
+            DisasterEvent = Scenarios.Items[ScenarioENUM.SC_NONE];
+            Scenario = Scenarios.Items[ScenarioENUM.SC_NONE];
             Budget = new CityBudget(this);
             Prng = DEFAULT_PRNG;
             Evaluation = new CityEval(this);
@@ -1445,6 +1458,11 @@ namespace Engine
             if (FloodCnt > 0)
             {
                 FloodCnt--;
+            }
+
+            if (DisasterEvent != Scenarios.Items[ScenarioENUM.SC_NONE])
+            {
+                ScenarioDisaster();
             }
 
             int[] disChance = {480, 240, 60};
@@ -2598,6 +2616,11 @@ namespace Engine
             await MapLoader.Load(file, this);
         }
 
+        public async Task LoadScenario(ScenarioENUM scenario)
+        {
+            await MapLoader.LoadScenario(scenario, this);
+        }
+
         /// <summary>
         ///     Loads the stream.
         /// </summary>
@@ -2866,6 +2889,87 @@ namespace Engine
                     }
                 }
             }
+        }
+
+
+        /// <summary>
+        /// Let disasters of the scenario happen.
+        /// </summary>
+        private void ScenarioDisaster()
+        {
+            if (DisasterEvent == Scenarios.Items[ScenarioENUM.SC_SAN_FRANCISCO]) {
+                if (DisasterWait == 1)
+                {
+                    MakeEarthquake();
+                }
+            }
+
+            if (DisasterEvent == Scenarios.Items[ScenarioENUM.SC_HAMBURG])
+            {
+                if (DisasterWait % 10 == 0)
+                {
+                    MakeFireBombs();
+                }
+            }
+            if (DisasterEvent == Scenarios.Items[ScenarioENUM.SC_TOKYO])
+            {
+                if (DisasterWait == 1)
+                {
+                    MakeMonster();
+                }
+            }
+            if (DisasterEvent == Scenarios.Items[ScenarioENUM.SC_BOSTON])
+            {
+                if (DisasterWait == 1)
+                {
+                    MakeMeltdown();
+                }
+            }
+            if (DisasterEvent == Scenarios.Items[ScenarioENUM.SC_RIO])
+            {
+                if ((DisasterWait % 24) == 0)
+                {
+                    MakeFlood();
+                }
+            }
+      
+
+            if (DisasterWait > 0)
+            {
+                DisasterWait--;
+            }
+            else
+            {
+                DisasterEvent = Scenarios.Items[ScenarioENUM.SC_NONE];
+            }
+        }
+
+
+        /// <summary>
+        /// Let a fire bomb explode at a random location
+        /// </summary>
+        private void FireBomb()
+        {
+            int crashX = Prng.Next(Map.Length - 1);
+            int crashY = Prng.Next(Map[0].Length - 1);
+            MakeExplosion(crashX, crashY);
+            SendMessageAt(MicropolisMessages.FIREBOMBING_REPORT, crashX, crashY);
+        }
+
+        /// <summary>
+        /// Throw several bombs onto the city.
+        /// </summary>
+        private void MakeFireBombs()
+        {
+            int count = 2 + (Prng.Next(16) & 1);
+
+            while (count > 0)
+            {
+                FireBomb();
+                count--;
+            }
+
+            // TODO: Schedule periodic fire bombs over time, every few ticks.
         }
 
 
@@ -3150,7 +3254,16 @@ namespace Engine
 
         private void DoMessages()
         {
-            //MORE (scenario stuff)
+            // Running a scenario, and waiting it to 'end' so we can give a score
+            if (Scenario != Scenarios.Items[ScenarioENUM.SC_NONE] && ScoreType != Scenarios.Items[ScenarioENUM.SC_NONE] && ScoreWait > 0)
+            {
+                ScoreWait--;
+                if (ScoreWait == 0)
+                {
+                    DoScenarioScore(ScoreType);
+                }
+            }
+
 
             CheckGrowth();
 
@@ -3284,6 +3397,92 @@ namespace Engine
                     break;
                     //nothing
             }
+        }
+
+        /// <summary>
+        /// Compute score for each scenario
+        /// </summary>
+        /// <remarks>Parameter type may not be SC_NONE</remarks>
+        /// <param name="type">Scenario used</param>
+        private void DoScenarioScore(Scenario type)
+        {
+            MicropolisMessage z = MicropolisMessages.SCENARIO_LOST;     /* you lose */
+
+            if (type == Scenarios.Items[ScenarioENUM.SC_DULLSVILLE])
+            {
+                if (Evaluation.CityClass >= CC_METROPOLIS)
+                {
+                    z = MicropolisMessages.SCENARIO_WON;
+                }
+            }
+
+            if (type == Scenarios.Items[ScenarioENUM.SC_SAN_FRANCISCO])
+            {
+                if (Evaluation.CityClass >= CC_METROPOLIS)
+                {
+                    z = MicropolisMessages.SCENARIO_WON;
+                }
+            }
+
+            if (type == Scenarios.Items[ScenarioENUM.SC_HAMBURG])
+            {
+                if (Evaluation.CityClass >= CC_METROPOLIS)
+                {
+                    z = MicropolisMessages.SCENARIO_WON;
+                }
+            }
+
+            if (type == Scenarios.Items[ScenarioENUM.SC_BERN])
+            {
+                if (TrafficAverage < 80)
+                {
+                    z = MicropolisMessages.SCENARIO_WON;
+                }
+            }
+
+            if (type == Scenarios.Items[ScenarioENUM.SC_TOKYO])
+            {
+                if (Evaluation.CityScore > 500)
+                {
+                    z = MicropolisMessages.SCENARIO_WON;
+                }
+            }
+
+            if (type == Scenarios.Items[ScenarioENUM.SC_DETROIT])
+            {
+                if (CrimeAverage < 60)
+                {
+                    z = MicropolisMessages.SCENARIO_WON;
+                }
+            }
+
+            if (type == Scenarios.Items[ScenarioENUM.SC_BOSTON])
+            {
+                if (Evaluation.CityScore > 500)
+                {
+                    z = MicropolisMessages.SCENARIO_WON;
+                }
+            }
+
+            if (type == Scenarios.Items[ScenarioENUM.SC_RIO])
+            {
+                if (Evaluation.CityScore > 500)
+                {
+                    z = MicropolisMessages.SCENARIO_WON;
+                }
+            }
+            
+            SendMessage(z);
+
+            if (z == MicropolisMessages.SCENARIO_LOST)
+            {
+                DoLoseGame();
+            }
+        }
+
+        private void DoLoseGame()
+        {
+            //ToDo: freeze game and go to main menu
         }
 
         private void clearMes()
@@ -3532,5 +3731,35 @@ namespace Engine
         }
 
         #endregion
+
+        // Disaster delay table for each scenario
+        public static List<int> DisasterWaitTable = new List<int>
+        {
+            0,          // No scenario (free playing)
+            2,          // Dullsville (boredom)
+            10,         // San francisco (earth quake)
+            4 * 10,     // Hamburg (fire bombs)
+            20,         // Bern (traffic)
+            3,          // Tokyo (scary monster)
+            5,          // Detroit (crime)
+            5,          // Boston (nuclear meltdown)
+            2 * 48,     // Rio (flooding)
+        };
+
+        // Time to wait before score calculation for each scenario
+        public static List<int> ScoreWaitTable = new List<int>
+        {
+            0,          // No scenario (free playing)
+            30 * 48,    // Dullsville (boredom)
+            5 * 48,     // San francisco (earth quake)
+            5 * 48,     // Hamburg (fire bombs)
+            10 * 48,    // Bern (traffic)
+            5 * 48,     // Tokyo (scary monster)
+            10 * 48,    // Detroit (crime)
+            5 * 48,     // Boston (nuclear meltdown)
+            10 * 48,    // Rio (flooding)
+        };
+
+        private readonly int CC_METROPOLIS = 4;
     }
 }

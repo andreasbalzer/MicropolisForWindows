@@ -16,6 +16,8 @@ using Microsoft.ApplicationInsights;
 using System.Collections.Generic;
 using Micropolis.Controller;
 using Windows.Storage.Pickers;
+using Engine.Model.Enums;
+using Engine.Libs;
 
 #if WINDOWS_PHONE_APP
 using Windows.Media.SpeechRecognition;
@@ -43,6 +45,7 @@ namespace Micropolis.ViewModels
         private readonly BitmapImage _whiteHeader;
         private string _citiesHubSectionHeaderText;
         private string _citiesHubSectionNarrowHeaderText;
+        private string _scenariosHubSectionHeaderText;
         private string _generalHubSectionHeaderText;
         private ImageSource _hubHeaderImageSource;
         private string _loadGameButtonText;
@@ -131,10 +134,12 @@ namespace Micropolis.ViewModels
             }
 
             Cities = new ObservableCollection<City>();
+            Scenarios = new ObservableCollection<City>();
 
             UnsavedGameButtonText = Strings.GetString("UnsavedGameButton");
             UnsavedGameMessageText = Strings.GetString("UnsavedGameMessage");
             CitiesHubSectionHeaderText = Strings.GetString("CitiesHubSection");
+            ScenariosHubSectionHeaderText = Strings.GetString("ScenariosHubSection");
             GeneralHubSectionHeaderText = Strings.GetString("GeneralHubSection");
             LoadGameButtonText = Strings.GetString("LoadGameButton");
             StartNewGameButtonText = Strings.GetString("StartNewGameButton");
@@ -166,6 +171,7 @@ namespace Micropolis.ViewModels
 
             CheckForPreviousGame();
             LoadCities();
+            LoadScenarios();
 
             var blackLogoUri = new Uri("ms-appx:///Assets/Logo/LogoBlack800.png", UriKind.RelativeOrAbsolute);
             _blackHeader = new BitmapImage(blackLogoUri);
@@ -386,6 +392,13 @@ namespace Micropolis.ViewModels
             set { SetProperty(ref _citiesHubSectionHeaderText, value); }
         }
 
+
+        public string ScenariosHubSectionHeaderText
+        {
+            get { return _scenariosHubSectionHeaderText; }
+            set { SetProperty(ref _scenariosHubSectionHeaderText, value); }
+        }
+
         public string GeneralHubSectionHeaderText
         {
             get { return _generalHubSectionHeaderText; }
@@ -399,6 +412,7 @@ namespace Micropolis.ViewModels
         }
 
         public ObservableCollection<City> Cities { get; set; }
+        public ObservableCollection<City> Scenarios { get; set; }
 
         public void RegisterNewCityDialogViewModel(NewCityDialogViewModel newCityDialogViewModel)
         {
@@ -511,6 +525,41 @@ namespace Micropolis.ViewModels
             }
         }
 
+
+        private async Task LoadScenarios()
+        {
+            var installFolder = Package.Current.InstalledLocation;
+            var cityFolder = await installFolder.GetFolderAsync("Assets");
+            cityFolder = await cityFolder.GetFolderAsync("resources");
+            cityFolder = await cityFolder.GetFolderAsync("scenarios");
+
+            var localFolder = ApplicationData.Current.LocalFolder;
+            var cityThumbs = await localFolder.GetFolderAsync("cityThumbs");
+
+            foreach (Scenario scenario in Engine.Model.Enums.Scenarios.Items.Values)
+            {
+                if (scenario == Engine.Model.Enums.Scenarios.Items[ScenarioENUM.SC_NONE])
+                {
+                    continue;
+                }
+                StorageFile file = await LoadFiles.GetPackagedFile("Assets/resources/scenarios", scenario.FileName);
+                var newCity = new City();
+                newCity.FilePath = file.Path;
+                newCity.Title = Strings.GetString("scenario." + scenario.Name);
+
+                var fileName = file.Name + ".png";
+
+                var iconUri = new Uri(cityThumbs.Path + "/" + fileName, UriKind.Absolute);
+
+                if (await cityThumbs.TryGetItemAsync(fileName) == null)
+                {
+                    iconUri = new Uri(cityFolder.Path + "/unknown.png", UriKind.Absolute);
+                }
+                newCity.ImageSource = new BitmapImage(iconUri);
+                Scenarios.Add(newCity);
+            }
+        }
+
         public async Task LoadGameFile(string title)
         {
             try
@@ -527,6 +576,31 @@ namespace Micropolis.ViewModels
             ((ISupportsAppCommands) Application.Current).AppCommands.Add(new AppCommand(AppCommands.LOADFILEASNEWCITY,
                 file));
             App.MainMenuReference.Frame.Navigate(typeof (MainGamePage));
+        }
+
+        public async Task LoadScenarioGameFile(string title)
+        {
+            try
+            {
+                _telemetry.TrackEvent("MainMenuLoadScenarioGameFile" + title);
+            }
+            catch (Exception)
+            {
+            }
+
+            ScenarioENUM scenario = ScenarioENUM.SC_NONE;
+            foreach (Scenario currentScenario in Engine.Model.Enums.Scenarios.Items.Values)
+            {
+                if (Strings.GetString("scenario." + currentScenario.Name) == title)
+                {
+                    scenario = currentScenario.Type;
+                    break;
+                }
+            }
+
+                ((ISupportsAppCommands)Application.Current).AppCommands.Add(new AppCommand(AppCommands.LOADSCENARIOASNEWCITY,
+                scenario));
+            App.MainMenuReference.Frame.Navigate(typeof(MainGamePage));
         }
 
         public void UpdateLogoColor(Point position)

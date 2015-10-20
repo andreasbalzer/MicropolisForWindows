@@ -39,6 +39,11 @@
         /// <summary>
         /// Update game.
         /// </summary>
-        UPDATEDVERSION
+        UPDATEDVERSION,
+
+        /// <summary>
+        /// Loads a scenario file but forgets about its origin so save does not overwrite that file
+        /// </summary>
+        LOADSCENARIOASNEWCITY
     }
 }

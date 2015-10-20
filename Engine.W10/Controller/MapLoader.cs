@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Engine.Libs;
+using Engine.Model.Enums;
+using System;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -37,7 +39,7 @@ namespace Engine.Controller
             dis.Dispose();
 
             engine.CheckPowerMap();
-
+            engine.Scenario = Scenarios.Items[ScenarioENUM.SC_NONE];
             engine.FireWholeMapChanged();
             engine.FireDemandChanged();
             engine.FireFundsChanged();
@@ -171,6 +173,112 @@ namespace Engine.Controller
             engine.ResCap = false;
             engine.ComCap = false;
             engine.IndCap = false;
+
+            if (engine.Scenario != Scenarios.Items[ScenarioENUM.SC_NONE])
+            {
+                engine.DisasterEvent = engine.Scenario;
+                engine.DisasterWait = Micropolis.DisasterWaitTable[engine.DisasterEvent.ID];
+                engine.ScoreType = engine.DisasterEvent;
+                engine.ScoreWait = Micropolis.ScoreWaitTable[engine.DisasterEvent.ID];
+            }
+            else
+            {
+                engine.DisasterEvent = Scenarios.Items[ScenarioENUM.SC_NONE];
+                engine.DisasterWait = 0;
+                engine.ScoreType = Scenarios.Items[ScenarioENUM.SC_NONE];
+                engine.ScoreWait = 0;
+            }
+        }
+
+        /// <summary>
+        /// Load a scenario.
+        /// </summary>
+        /// <remarks>
+        /// s cannot be SC_NONE
+        /// </remarks>
+        /// <param name="s">Senario to load</param>
+        public static async Task LoadScenario(ScenarioENUM s, Micropolis engine)
+        {
+            string fname = "";
+            engine.SetGameLevel(GameLevel.MIN_LEVEL);
+
+
+            switch (s)
+            {
+                case ScenarioENUM.SC_DULLSVILLE:
+                    engine.Scenario = Scenarios.Items[ScenarioENUM.SC_DULLSVILLE];
+                    fname = engine.Scenario.FileName;
+                    await LoadScenarioFile(fname, engine);
+                    engine.CityTime = ((1900 - 1900) * 48) + 2;
+                    engine.SetFunds(5000);
+                    break;
+                case ScenarioENUM.SC_SAN_FRANCISCO:
+                    engine.Scenario = Scenarios.Items[ScenarioENUM.SC_SAN_FRANCISCO];
+                    fname = engine.Scenario.FileName;
+                    await LoadScenarioFile(fname, engine);
+                    engine.CityTime = ((1906 - 1900) * 48) + 2;
+                    engine.SetFunds(20000);
+                    break;
+                case ScenarioENUM.SC_HAMBURG:
+                    engine.Scenario = Scenarios.Items[ScenarioENUM.SC_HAMBURG];
+                    fname = engine.Scenario.FileName;
+                    await LoadScenarioFile(fname, engine);
+                    engine.CityTime = ((1944 - 1900) * 48) + 2;
+                    engine.SetFunds(20000);
+                    break;
+                case ScenarioENUM.SC_BERN:
+                    engine.Scenario = Scenarios.Items[ScenarioENUM.SC_BERN];
+                    fname = engine.Scenario.FileName;
+                    await LoadScenarioFile(fname, engine);
+                    engine.CityTime = ((1965 - 1900) * 48) + 2;
+                    engine.SetFunds(20000);
+                    break;
+                case ScenarioENUM.SC_TOKYO:
+                    engine.Scenario = Scenarios.Items[ScenarioENUM.SC_TOKYO];
+                    fname = engine.Scenario.FileName;
+                    await LoadScenarioFile(fname, engine);
+                    engine.CityTime = ((1957 - 1900) * 48) + 2;
+                    engine.SetFunds(20000);
+                    break;
+                case ScenarioENUM.SC_DETROIT:
+                    engine.Scenario = Scenarios.Items[ScenarioENUM.SC_DETROIT];
+                    fname = engine.Scenario.FileName;
+                    await LoadScenarioFile(fname, engine);
+                    engine.CityTime = ((1972 - 1900) * 48) + 2;
+                    engine.SetFunds(20000);
+                    break;
+                case ScenarioENUM.SC_BOSTON:
+                    engine.Scenario = Scenarios.Items[ScenarioENUM.SC_BOSTON];
+                    fname = engine.Scenario.FileName;
+                    await LoadScenarioFile(fname, engine);
+                    engine.CityTime = ((2010 - 1900) * 48) + 2;
+                    engine.SetFunds(20000);
+                    break;
+                case ScenarioENUM.SC_RIO:
+                    engine.Scenario = Scenarios.Items[ScenarioENUM.SC_RIO];
+                    fname = engine.Scenario.FileName;
+                    await LoadScenarioFile(fname, engine);
+                    engine.CityTime = ((2047 - 1900) * 48) + 2;
+                    engine.SetFunds(20000);
+                    break;
+                default:
+                    engine.Scenario = Scenarios.Items[ScenarioENUM.SC_DULLSVILLE];
+                    fname = engine.Scenario.FileName;
+                    await LoadScenarioFile(fname, engine);
+                    engine.CityTime = ((1900 - 1900) * 48) + 2;
+                    engine.SetFunds(5000);
+                    break;
+            }
+            
+            //setCleanCityName(name); 
+            engine.SetSpeed(Speeds.Speed["NORMAL"]);
+            engine.CityTax = 7;
+        } 
+
+        private static async Task LoadScenarioFile(string fname, Micropolis engine)
+        {
+            StorageFile file = await LoadFiles.GetPackagedFile("Assets/resources/scenarios", fname);
+            await Load(file, engine);
         }
     }
 }

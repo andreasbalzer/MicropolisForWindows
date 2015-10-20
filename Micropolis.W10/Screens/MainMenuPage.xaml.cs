@@ -145,6 +145,21 @@ namespace Micropolis.Screens
             _viewModel.LoadGameFile(title);
         }
 
+        private async void ScenariosButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            var button = (Button)sender;
+            var textBlock = (TextBlock)((StackPanel)((Grid)button.Content).Children[1]).Children[0];
+            var title = textBlock.Text;
+
+            try
+            {
+                _telemetry.TrackEvent("MainMenuLaunchScenario" + title);
+            }
+            catch (Exception) { }
+
+            _viewModel.LoadScenarioGameFile(title);
+        }
+
         private void NewCityDialogPane_OnLoaded(object sender, RoutedEventArgs e)
         {
             if (sender is NewCityDialog)

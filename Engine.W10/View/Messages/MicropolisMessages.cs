@@ -128,6 +128,20 @@
 
         // Added by Jason
         public static MicropolisMessage NO_NUCLEAR_PLANTS = new MicropolisMessage("NO_NUCLEAR_PLANTS");
+
+        public static MicropolisMessage SCENARIO_LOST = new MicropolisMessage("SCENARIO_LOST");
+        public static MicropolisMessage SCENARIO_WON = new MicropolisMessage("SCENARIO_WON");
+
+        public static MicropolisMessage SCENARIO_DULLSVILLE = new MicropolisMessage("SCENARIO_DULLSVILLE"); ///< 50: Dullsville scenario. 
+        public static MicropolisMessage SCENARIO_SAN_FRANCISCO = new MicropolisMessage("SCENARIO_SAN_FRANCISCO"); ///< San Francisco scenario. 
+        public static MicropolisMessage SCENARIO_HAMBURG = new MicropolisMessage("SCENARIO_HAMBURG"); ///< Hamburg scenario. 
+        public static MicropolisMessage SCENARIO_BERN = new MicropolisMessage("SCENARIO_BERN"); ///< Bern scenario. 
+        public static MicropolisMessage SCENARIO_TOKYO = new MicropolisMessage("SCENARIO_TOKYO"); ///< Tokyo scenario. 
+        public static MicropolisMessage SCENARIO_DETROIT = new MicropolisMessage("SCENARIO_DETROIT"); ///< 55: Detroit scenario. 
+        public static MicropolisMessage SCENARIO_BOSTON = new MicropolisMessage("SCENARIO_BOSTON"); ///< Boston scenario. 
+        public static MicropolisMessage SCENARIO_RIO_DE_JANEIRO = new MicropolisMessage("SCENARIO_RIO_DE_JANEIRO"); ///< 57: Rio de Janeiro scenario. 
+
+
         // ReSharper restore InconsistentNaming
         /// <summary>
         ///     Initializes the <see cref="MicropolisMessages" /> class.
@@ -154,6 +168,19 @@
             COPTER_CRASH_REPORT.UseNotificationPane = true;
             PLANECRASH_REPORT.UseNotificationPane = true;
             MONSTER_REPORT.UseNotificationPane = true;
+
+            SCENARIO_WON.UseNotificationPane = true;
+            SCENARIO_LOST.UseNotificationPane = true;
+
+            SCENARIO_DULLSVILLE.UseNotificationPane = true;
+            SCENARIO_SAN_FRANCISCO.UseNotificationPane = true;
+            SCENARIO_HAMBURG.UseNotificationPane = true;
+            SCENARIO_BERN.UseNotificationPane = true;
+            SCENARIO_TOKYO.UseNotificationPane = true;
+            SCENARIO_DETROIT.UseNotificationPane = true;
+            SCENARIO_BOSTON.UseNotificationPane = true;
+            SCENARIO_RIO_DE_JANEIRO.UseNotificationPane = true;
+
         }
     }
 }

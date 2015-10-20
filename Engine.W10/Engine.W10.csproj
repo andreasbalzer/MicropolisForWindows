@@ -142,6 +142,8 @@
     <Compile Include="Model\Enums\CreateIsland.cs" />
     <Compile Include="Model\Enums\Disaster.cs" />
     <Compile Include="Model\Enums\MapState.cs" />
+    <Compile Include="Model\Enums\Scenario.cs" />
+    <Compile Include="Model\Enums\Scenarios.cs" />
     <Compile Include="Model\Enums\ToolResult.cs" />
     <Compile Include="Model\Enums\ZoneType.cs" />
     <Compile Include="Model\States\BudgetNumbers.cs" />

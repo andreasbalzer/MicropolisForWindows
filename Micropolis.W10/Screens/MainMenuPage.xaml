@@ -361,6 +361,43 @@
                                 </DataTemplate>
                             </HubSection.ContentTemplate>
                         </HubSection>
+                        <HubSection x:Name="ScenariosPanelWide" VerticalContentAlignment="Stretch">
+                            <HubSection.Header>
+                                <TextBlock x:Uid="ScenariosHeader" x:Name="ScenariosHubSectionWideHeader" TextLineBounds="TrimToBaseline"
+                               OpticalMarginAlignment="TrimSideBearings" Text="{Binding ScenariosHubSectionHeaderText}"
+                               Foreground="Black" />
+                            </HubSection.Header>
+                            <HubSection.ContentTemplate>
+                                <DataTemplate>
+                                    <ItemsControl ItemsSource="{Binding Path=Scenarios}"
+                                      VerticalContentAlignment="Stretch">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Button Click="ScenariosButtonBase_OnClick" Style="{StaticResource TileButtonStyle}">
+                                                    <Grid Width="140" Height="140">
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition Height="*" />
+                                                            <RowDefinition Height="Auto" />
+                                                        </Grid.RowDefinitions>
+
+                                                        <Image Grid.Row="0" Source="{Binding ImageSource}" Stretch="Fill" />
+                                                        <StackPanel Grid.Row="1" Background="Green" Height="25"
+                                                        HorizontalAlignment="Stretch">
+                                                            <TextBlock Text="{Binding Title}" Height="20" Foreground="White" />
+                                                        </StackPanel>
+                                                    </Grid>
+                                                </Button>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                        <ItemsControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <WrapGrid Orientation="Vertical" MaximumRowsOrColumns="4" />
+                                            </ItemsPanelTemplate>
+                                        </ItemsControl.ItemsPanel>
+                                    </ItemsControl>
+                                </DataTemplate>
+                            </HubSection.ContentTemplate>
+                        </HubSection>
                         <HubSection x:Name="CityPanelWide" VerticalContentAlignment="Stretch">
                             <HubSection.Header>
                                 <TextBlock x:Uid="CitiesHeader" x:Name="CitiesHubSectionWideHeader" TextLineBounds="TrimToBaseline"

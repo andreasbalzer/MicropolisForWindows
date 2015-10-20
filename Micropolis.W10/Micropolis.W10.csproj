@@ -122,6 +122,14 @@
     <Content Include="Assets\resources\UIButtons\Pause-Icon.png" />
     <Content Include="Assets\resources\UIButtons\Slow-Icon.png" />
     <Content Include="Assets\resources\UIButtons\SuperFast-Icon.png" />
+    <Content Include="Assets\resources\scenarios\snro.111" />
+    <Content Include="Assets\resources\scenarios\snro.222" />
+    <Content Include="Assets\resources\scenarios\snro.333" />
+    <Content Include="Assets\resources\scenarios\snro.444" />
+    <Content Include="Assets\resources\scenarios\snro.555" />
+    <Content Include="Assets\resources\scenarios\snro.666" />
+    <Content Include="Assets\resources\scenarios\snro.777" />
+    <Content Include="Assets\resources\scenarios\snro.888" />
     <None Include="Micropolis.W10_StoreKey.pfx" />
     <None Include="project.json" />
     <Content Include="Assets\resources\cities\about.cty" />

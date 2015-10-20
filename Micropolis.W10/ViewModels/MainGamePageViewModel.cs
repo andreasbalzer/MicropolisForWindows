@@ -34,6 +34,7 @@ using Engine;
 using Micropolis.Common;
 using Micropolis.Model.Entities;
 using Microsoft.ApplicationInsights;
+using Engine.Model.Enums;
 
 namespace Micropolis.ViewModels
 {
@@ -1051,6 +1052,23 @@ namespace Micropolis.ViewModels
             }
         }
 
+
+        /// <summary>
+        ///     Shows a city message and if required launches the NotificationPanel.
+        /// </summary>
+        /// <param name="m">The message to be displayed.</param>
+        public void CityMessage(MicropolisMessage m)
+        {
+            //_messagesPane.ViewModel.AppendCityMessage(m);
+
+            if (m.UseNotificationPane)
+            {
+                _notificationPanelViewModel.ShowMessage(m);
+                ShowNotificationPanel();
+            }
+        }
+
+
         /// <summary>
         ///     Fired whenever the mayor's money changes.
         /// </summary>
@@ -1332,9 +1350,13 @@ namespace Micropolis.ViewModels
 
             var loadCityAsNewAndDelteCommand =
               currentApp.AppCommands.FirstOrDefault(s => s.Instruction == AppCommands.LOADFILEASNEWCITYANDDELETE);
-
-
+            
             var loadCityAsNewAndDelete = loadCityAsNewAndDelteCommand != null;
+
+            var loadScenarioAsNewCommand =
+                currentApp.AppCommands.FirstOrDefault(s => s.Instruction == AppCommands.LOADSCENARIOASNEWCITY);
+
+            var loadScenarioAsNew = loadScenarioAsNewCommand != null; // loadScenarioCommand present?
 
             if (loadCity)
             {
@@ -1349,6 +1371,7 @@ namespace Micropolis.ViewModels
                 {
                     SetEngine(loadCityCommand.Engine);
                 }
+                
                 if (loadCityCommand.Difficulty != -1)
                 {
                     OnDifficultyClicked(loadCityCommand.Difficulty);
@@ -1368,11 +1391,18 @@ namespace Micropolis.ViewModels
                 {
                     SetEngine(loadCityAsNewCommand.Engine);
                 }
+
                 if (loadCityAsNewCommand.Difficulty != -1)
                 {
                     OnDifficultyClicked(loadCityAsNewCommand.Difficulty);
                 }
 
+            }
+            else if (loadScenarioAsNew)
+            {
+                var scenario = (ScenarioENUM)loadScenarioAsNewCommand.Scenario;
+                currentApp.AppCommands.Remove(loadScenarioAsNewCommand);
+                LoadScenarioGameFile(scenario);
             }
             else if (loadCityAsNewAndDelete)
             {
@@ -1425,6 +1455,50 @@ namespace Micropolis.ViewModels
                     }
                 });
             }
+        }
+
+        /// <summary>
+        ///     Loads the game file.
+        /// </summary>
+        /// <param name="file">The file to be loaded.</param>
+        private void LoadScenarioGameFile(ScenarioENUM scenario)
+        {
+                var newEngine = new Engine.Micropolis();
+                newEngine.LoadScenario(scenario).ContinueWith(a =>
+                {
+                    App.MainPageReference.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                    {
+                        SetEngine(newEngine);
+                        MakeClean();
+                        switch (scenario)
+                        {
+                            case ScenarioENUM.SC_BERN:
+                                CityMessage(MicropolisMessages.SCENARIO_BERN);
+                                break;
+                            case ScenarioENUM.SC_BOSTON:
+                                CityMessage(MicropolisMessages.SCENARIO_BOSTON);
+                                break;
+                            case ScenarioENUM.SC_DETROIT:
+                                CityMessage(MicropolisMessages.SCENARIO_DETROIT);
+                                break;
+                            case ScenarioENUM.SC_DULLSVILLE:
+                                CityMessage(MicropolisMessages.SCENARIO_DULLSVILLE);
+                                break;
+                            case ScenarioENUM.SC_HAMBURG:
+                                CityMessage(MicropolisMessages.SCENARIO_HAMBURG);
+                                break;
+                            case ScenarioENUM.SC_RIO:
+                                CityMessage(MicropolisMessages.SCENARIO_RIO_DE_JANEIRO);
+                                break;
+                            case ScenarioENUM.SC_SAN_FRANCISCO:
+                                CityMessage(MicropolisMessages.SCENARIO_SAN_FRANCISCO);
+                                break;
+                            case ScenarioENUM.SC_TOKYO:
+                                CityMessage(MicropolisMessages.SCENARIO_TOKYO);
+                                break;
+                        }
+                    });
+                });
         }
 
         /// <summary>

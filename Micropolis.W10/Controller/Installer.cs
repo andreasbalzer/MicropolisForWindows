@@ -46,6 +46,10 @@
                 cityFolder = await cityFolder.GetFolderAsync("resources");
                 cityFolder = await cityFolder.GetFolderAsync("cities");
 
+                StorageFolder scenarioFolder = await installFolder.GetFolderAsync("Assets");
+                scenarioFolder = await scenarioFolder.GetFolderAsync("resources");
+                scenarioFolder = await scenarioFolder.GetFolderAsync("scenarios");
+
                 ThreadCancellation.CheckCancellation(cancelToken);
 
 
@@ -60,6 +64,11 @@
                             {
                                 await App.LoadPageReference.ThumbRender.RenderAndSaveToDisk(file);
                             }
+                        }
+
+                        foreach (StorageFile file in await scenarioFolder.GetFilesAsync())
+                        {
+                           await App.LoadPageReference.ThumbRender.RenderAndSaveToDisk(file);
                         }
                         completionSource.SetResult(true);
                     }).AsTask();

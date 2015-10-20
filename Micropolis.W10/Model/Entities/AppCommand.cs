@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Engine.Model.Enums;
+using System;
 using Windows.Storage;
 
 namespace Micropolis.Model.Entities
@@ -61,6 +62,14 @@ namespace Micropolis.Model.Entities
             Difficulty = -1;
             Engine = null;
         }
+
+        public AppCommand(AppCommands instruction, ScenarioENUM scenario)
+        {
+            Instruction = instruction;
+            Scenario = scenario;
+        }
+
+        public ScenarioENUM Scenario { get; set; }
 
         /// <summary>
         /// The instruction to execute
