@@ -56,6 +56,8 @@ namespace Micropolis.ViewModels
         private string _autoBulldozeCheckBoxText;
         private string _budgetButtonText;
         private bool _confirmBarIsVisible;
+        private bool _autoGoCheckBoxIsChecked;
+        private string _autoGoCheckBoxText;
 
         private string _hamburgerHomeText;
         private string _hamburgerNewText;
@@ -76,6 +78,7 @@ namespace Micropolis.ViewModels
         private DelegateCommand _settingsCommand;
         private DelegateCommand _licenseCommand;
         private DelegateCommand _aboutCommand;
+        private DelegateCommand _autoGoCommand;
 
         public string HamburgerHomeText { get { return _hamburgerHomeText; } set { SetProperty(ref _hamburgerHomeText, value); } }
         public string HamburgerNewText { get { return _hamburgerNewText; } set { SetProperty(ref _hamburgerNewText, value); } }
@@ -88,6 +91,12 @@ namespace Micropolis.ViewModels
         public string HamburgerSettingsText { get { return _hamburgerSettingsText; } set { SetProperty(ref _hamburgerSettingsText, value); } }
         public string HamburgerLicenseText { get { return _hamburgerLicenseText; } set { SetProperty(ref _hamburgerLicenseText, value); } }
         public string HamburgerRatingText { get { return _hamburgerRatingText; } set { SetProperty(ref _hamburgerRatingText, value); } }
+
+        public DelegateCommand AutoGoCommand
+        {
+            get { return _autoGoCommand; }
+            set { SetProperty(ref _autoGoCommand, value); }
+        }
 
         public DelegateCommand HelpCommand
         {
@@ -345,6 +354,7 @@ namespace Micropolis.ViewModels
             AutoBulldozeCommand = new DelegateCommand(AutoBulldozeCheckBox_Click);
             DisastersCommand = new DelegateCommand(DisastersCheckBox_Click);
             SoundCommand = new DelegateCommand(SoundCheckBox_Click);
+            AutoGoCommand = new DelegateCommand(AutoGoCheckBox_Click);
 
             NewCommand = new DelegateCommand(NewButton_Click);
             LoadCommand = new DelegateCommand(LoadButton_Click);
@@ -803,6 +813,13 @@ namespace Micropolis.ViewModels
             set { SetProperty(ref _soundCheckBoxText, value); }
         }
 
+        public string AutoGoCheckBoxText
+        {
+            get { return _autoGoCheckBoxText; }
+
+            set { SetProperty(ref _autoGoCheckBoxText, value); }
+        }
+
         public string DisasterButtonText
         {
             get { return _disasterButtonText; }
@@ -931,6 +948,12 @@ namespace Micropolis.ViewModels
             set { SetProperty(ref _soundCheckBoxIsChecked, value); }
         }
 
+        public bool AutoGoCheckBoxIsChecked
+        {
+            get { return _autoGoCheckBoxIsChecked; }
+            set { SetProperty(ref _autoGoCheckBoxIsChecked, value); }
+        }
+
         public bool EvaluationPaneIsVisible
         {
             get { return _evaluationPaneIsVisible; }
@@ -1048,6 +1071,12 @@ namespace Micropolis.ViewModels
             if (m.UseNotificationPane && p != null)
             {
                 _notificationPanelViewModel.ShowMessage(m, p.X, p.Y);
+
+                if (Engine.AutoGo && p != null)
+                {
+                    Centering(p);
+                }
+
                 ShowNotificationPanel();
             }
         }
@@ -2184,12 +2213,42 @@ namespace Micropolis.ViewModels
             OnSoundClicked();
         }
 
-        /// <summary>
-        ///     Handles the Click event of the ZoomInButton control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="RoutedEventArgs" /> instance containing the event data.</param>
-        public void ZoomInButton_Click()
+        public void AutoGoCheckBox_Click()
+        {
+            try
+            {
+                _telemetry.TrackEvent("MainGameAutoGoCheckBoxClicked");
+            }
+            catch (Exception e) { }
+
+            OnAutoGoClicked();
+        }
+
+        public void Centering(CityLocation loc)
+       	{
+            var d = new Size(_drawingAreaScroll.ViewportWidth, _drawingAreaScroll.ViewportHeight);
+            
+            var mapSize = new Size(_drawingAreaScroll.ScrollableWidth + _drawingAreaScroll.ViewportWidth,
+                _drawingAreaScroll.ScrollableHeight + _drawingAreaScroll.ViewportHeight);
+
+            Point np = new Point(
+                loc.X * _drawingAreaViewModel.GetTileSize() * _drawingAreaScroll.ZoomFactor - d.Width / 2,
+                loc.Y * _drawingAreaViewModel.GetTileSize() * _drawingAreaScroll.ZoomFactor - d.Height / 2
+             );
+
+            np.X = Math.Max(0, Math.Min(np.X, mapSize.Width - d.Width));
+            np.Y = Math.Max(0, Math.Min(np.Y, mapSize.Height - d.Height));
+
+            _drawingAreaScroll.ChangeView(np.X, np.Y, _drawingAreaScroll.ZoomFactor);
+        }
+
+
+    /// <summary>
+    ///     Handles the Click event of the ZoomInButton control.
+    /// </summary>
+    /// <param name="sender">The source of the event.</param>
+    /// <param name="e">The <see cref="RoutedEventArgs" /> instance containing the event data.</param>
+    public void ZoomInButton_Click()
         {
             try
             {
@@ -2373,6 +2432,7 @@ namespace Micropolis.ViewModels
             AutoBulldozeCheckBoxText = Strings.GetString("menu.options.auto_bulldoze");
             DisastersCheckBoxText = Strings.GetString("menu.options.disasters");
             SoundCheckBoxText = Strings.GetString("menu.options.sound");
+            AutoGoCheckBoxText = Strings.GetString("menu.options.autoGo");
 
             DisasterButtonText = Strings.GetString("menu.disasters");
             MonsterButtonText = Strings.GetString("menu.disasters.MONSTER");
@@ -2435,6 +2495,12 @@ namespace Micropolis.ViewModels
             _isDoSounds = !_isDoSounds;
             Prefs.PutBoolean(SOUNDS_PREF, _isDoSounds);
             ReloadOptions();
+        }
+
+        private void OnAutoGoClicked()
+        {
+            _isDirty1 = true;
+            Engine.ToggleAutoGo();
         }
 
         /// <summary>
@@ -3197,6 +3263,7 @@ namespace Micropolis.ViewModels
             AutoBulldozeCheckBoxIsChecked = (Engine.AutoBulldoze);
             DisastersCheckBoxIsChecked = (!Engine.NoDisasters);
             SoundCheckBoxIsChecked = (_isDoSounds);
+            AutoGoCheckBoxIsChecked = Engine.AutoGo;
 
             IsSpeedFast = Engine.SimSpeed == Speeds.Speed["FAST"];
             IsSpeedSuperFast = Engine.SimSpeed == Speeds.Speed["SUPER_FAST"];

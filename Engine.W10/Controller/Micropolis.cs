@@ -101,7 +101,7 @@ namespace Engine
         /// </summary>
         public bool AutoBulldoze = true;
 
-        public bool AutoGo;
+        public bool AutoGo = true;
 
         /// <summary>
         ///     The center mass x
@@ -2722,6 +2722,15 @@ namespace Engine
         public void ToggleAutoBulldoze()
         {
             AutoBulldoze = !AutoBulldoze;
+            FireOptionsChanged();
+        }
+
+        /// <summary>
+        /// Toggles the automatic go.
+        /// </summary>
+        public void ToggleAutoGo()
+        {
+            AutoGo = !AutoGo;
             FireOptionsChanged();
         }
 

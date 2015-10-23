@@ -78,6 +78,9 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </StackPanel>
-        <Button x:Name="dismissBtn" Style="{StaticResource WhiteButtonStyle}" Margin="0,6,0,0" Grid.Row="2" Content="{Binding DismissButtonText}" Command="{Binding DismissCommand}" />
+        <StackPanel Orientation="Vertical" Grid.Row="2" Margin="0,6,0,0">
+            <Button x:Name="goBtn" Style="{StaticResource WhiteButtonStyle}" Content="{Binding GoButtonText}" Command="{Binding GoCommand}" Visibility="{Binding GoButtonIsVisible, Converter={StaticResource BooleanToVisibilityConverter}, Mode=TwoWay}" />
+            <Button x:Name="dismissBtn" Style="{StaticResource WhiteButtonStyle}" Content="{Binding DismissButtonText}" Command="{Binding DismissCommand}" />
+        </StackPanel>
     </Grid>
 </UserControl>

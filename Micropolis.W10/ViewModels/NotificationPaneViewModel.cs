@@ -41,15 +41,22 @@ namespace Micropolis.ViewModels
             DismissButtonText = Strings.GetString("notification.dismiss");
             DismissCommand = new DelegateCommand(() => { OnDismissClicked(); });
 
+            GoButtonText = Strings.GetString("notification.go_btn");
+            GoCommand = new DelegateCommand(() => { OnGoClicked(); });
+
             _drawingAreaViewModel.SetUpAfterBasicInit(_mainPageViewModel.Engine, _mainPageViewModel);
             _drawingAreaViewModel.RepaintNow();
         }
 
         private string _dismissButtonText;
+        private string _goButtonText;
         public string DismissButtonText { get { return _dismissButtonText; } set { SetProperty(ref _dismissButtonText, value); } }
+        public string GoButtonText { get { return _goButtonText; } set { SetProperty(ref _goButtonText, value); } }
 
         private DelegateCommand _dismissCommand;
+        private DelegateCommand _goCommand;
         public DelegateCommand DismissCommand { get { return _dismissCommand; } set { SetProperty(ref _dismissCommand, value); } }
+        public DelegateCommand GoCommand { get { return _goCommand; } set { SetProperty(ref _goCommand, value); } }
 
 
         /// <summary>
@@ -64,6 +71,25 @@ namespace Micropolis.ViewModels
 
             _mainPageViewModel.HideNotificationPanel();
             ImageIsVisible = true;
+            _location = null;
+        }
+
+
+        /// <summary>
+        /// Called when user clicked the go button to navigate to the source of notification on the map.
+        /// </summary>
+        private void OnGoClicked()
+        {
+            try
+            {
+                _telemetry.TrackEvent("NotificationPaneGoClicked");
+            }
+            catch (Exception) { }
+
+            if (_location != null)
+            {
+                _mainPageViewModel.Centering(_location);
+            }
         }
 
         private MicropolisDrawingAreaViewModel _drawingAreaViewModel;
@@ -98,6 +124,8 @@ namespace Micropolis.ViewModels
         /// <param name="ypos">ypos in map</param>
         public void ShowMessage(MicropolisMessage msg, int xpos, int ypos)
         {
+            GoButtonIsVisible = true;
+            _location = new CityLocation(xpos, ypos);
             SetPicture(_mainPageViewModel.Engine, xpos, ypos);
             ShowMessage(msg, false);
         }
@@ -148,6 +176,9 @@ namespace Micropolis.ViewModels
         private bool _infoPaneIsVisible;
         public bool InfoPaneIsVisible { get { return _infoPaneIsVisible; } set { SetProperty(ref _infoPaneIsVisible, value); } }
 
+        private bool _goButtonIsVisible;
+        public bool GoButtonIsVisible { get { return _goButtonIsVisible; } set { SetProperty(ref _goButtonIsVisible, value); } }
+
 
         private bool _detailPaneIsVisible;
         public bool DetailPaneIsVisible { get { return _detailPaneIsVisible; } set { SetProperty(ref _detailPaneIsVisible, value); } }
@@ -176,6 +207,7 @@ namespace Micropolis.ViewModels
 
             SetPicture(_mainPageViewModel.Engine, xpos, ypos);
             InfoPaneIsVisible = true;
+            GoButtonIsVisible = false;
 
             T1TextBlockText = Strings.GetString("notification.zone_lbl");
             BuildStrTextBlockText = buildingStr;
@@ -232,6 +264,7 @@ namespace Micropolis.ViewModels
         private string _growthRateStrTextBlockText;
         private TelemetryClient _telemetry;
         private bool _imageIsVisible = true;
+        private CityLocation _location;
 
         public string GrowthRateStrTextBlockText { get { return _growthRateStrTextBlockText; } set { SetProperty(ref _growthRateStrTextBlockText, value); } }
 

@@ -530,6 +530,9 @@
                                         <ToggleMenuFlyoutItem x:Name="SoundSmallCheckBox" Text="{Binding SoundCheckBoxText}"
                                                   Command="{Binding SoundCommand}"
                                                   IsChecked="{Binding SoundCheckBoxIsChecked, Mode=TwoWay}" />
+                                        <ToggleMenuFlyoutItem x:Name="AutoGoSmallCheckBox" Text="{Binding AutoGoCheckBoxText}"
+                                                  Command="{Binding AutoGoCommand}"
+                                                  IsChecked="{Binding AutoGoCheckBoxIsChecked, Mode=TwoWay}" />
                                     </MenuFlyout>
                                 </Button.Flyout>
                             </Button>
@@ -550,6 +553,9 @@
                                         <ToggleMenuFlyoutItem x:Name="SoundCheckBox" Text="{Binding SoundCheckBoxText}"
                                                   Command="{Binding SoundCommand}"
                                                   IsChecked="{Binding SoundCheckBoxIsChecked, Mode=TwoWay}" />
+                                        <ToggleMenuFlyoutItem x:Name="AutoGoCheckBox" Text="{Binding AutoGoCheckBoxText}"
+                                                  Command="{Binding AutoGoCommand}"
+                                                  IsChecked="{Binding AutoGoCheckBoxIsChecked, Mode=TwoWay}" />
                                     </MenuFlyout>
                                 </Button.Flyout>
                             </Button>
