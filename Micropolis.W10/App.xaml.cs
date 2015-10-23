@@ -83,7 +83,7 @@ namespace Micropolis
             catch (Exception) { }
 
             AppCommands = new List<AppCommand>();
-            CheckVersion();
+            CheckVersion().Wait();
             Suspending += OnSuspending;
             UnhandledException += App_UnhandledException;
             Resuming += App_Resuming;
@@ -147,7 +147,7 @@ namespace Micropolis
         /// <summary>
         ///     Checks for previously installed game versions and updates the game to the current version.
         /// </summary>
-        private void CheckVersion()
+        private async Task CheckVersion()
         {
             if (ApplicationData.Current.RoamingSettings.Values.ContainsKey("Version"))
             {
@@ -162,10 +162,30 @@ namespace Micropolis
                     }
                     catch (Exception) { }
                 }
+
+                bool isVersion101 = versionStored == "1.01";
+                if (isVersion100)
+                {
+                    StorageFolder localFolder = ApplicationData.Current.LocalFolder;
+                    IStorageItem cityThumbs = await localFolder.TryGetItemAsync("cityThumbs");
+                    if (cityThumbs != null)
+                    {
+                        var installFile = await ((StorageFolder)cityThumbs).TryGetItemAsync("installComplete.txt");
+                        if (installFile != null)
+                        {
+                            await installFile.DeleteAsync();
+                        }
+                    }
+                    try
+                    {
+                        _telemetry.TrackEvent("AppUpdatedFrom1.01");
+                    }
+                    catch (Exception) { }
+                }
             }
             // ToDo: add version checks for new version
 
-            Prefs.PutString("Version", "1.01");
+            Prefs.PutString("Version", "1.02");
 
         }
 
