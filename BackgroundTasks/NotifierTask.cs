@@ -44,6 +44,18 @@ namespace BackgroundTasks
             
             // Send your toast notification.
             ToastNotificationManager.CreateToastNotifier().Show(toast);
+
+            UnregisterTask();
+        }
+
+        private static void UnregisterTask()
+        {
+            var taskRegistered = false;
+
+            foreach (var curTask in BackgroundTaskRegistration.AllTasks)
+            {
+                curTask.Value.Unregister(true);
+            }
         }
 
     }
