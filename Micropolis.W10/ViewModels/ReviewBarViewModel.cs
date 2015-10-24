@@ -148,9 +148,11 @@ namespace Micropolis.ViewModels
             {
                 FeedbackIsVisible = true;
 
+                Postpone();
+                return; // disable dialogs for now.
+
                 var dlg = new MessageDialog(Strings.GetString("feedback.rateMessageText"));
                 dlg.Commands.Add(new UICommand(Strings.GetString("feedback.rateText"), null, "rate"));
-                //dlg.Commands.Add(new UICommand(SendFeedbackText, null, "feedback"));
                 dlg.Commands.Add(new UICommand(Strings.GetString("feedback.cancel"), null, "cancel"));
 
                 var result = "";
